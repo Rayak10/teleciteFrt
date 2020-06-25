@@ -13,33 +13,31 @@ export class EmployeService {
   constructor(private http: HttpClient) { }
 
   findAllEmployes(){
-    return this.http.get(AppSettings.APP_URL+"/telecite/emlpoyes/")
+    return this.http.get<Employe>(AppSettings.APP_URL+"/emlpoyes/")
   }
-  findEmployesActivesOrNot(){
-
+  findEmployesActivesOrNot(active:boolean){
+return this.http.get<Employe>(AppSettings.APP_URL+"/emlpoyes/AllActives/"+active)
   }  
 
   findEmployeById(idEmploye:number){
-    return this.http.get(AppSettings.APP_URL+"/telecite/emlpoyes/"+idEmploye)
+    return this.http.get<Employe>(AppSettings.APP_URL+"/emlpoyes/"+idEmploye)
 
   }
 
   createEmploye(employe:Employe){
-    return this.http.post(AppSettings.APP_URL+"/telecite/emlpoyes/",employe)
+    return this.http.post<Employe>(AppSettings.APP_URL+"/emlpoyes/",employe)
   }
 
   login(email:string,password:string){
-    let param =new HttpParams();
-    param.append("email",email)
-    param.append("password",password)
-    return this.http.post(AppSettings.APP_URL+"/telecite/emlpoyes/login",param)
+    return this.http.post<Employe>(AppSettings.APP_URL + "/emlpoyes/login?email=" + email + "&password=" + password, null);
   }
   
-  deleteEmploye(){
+  deleteEmploye(idEmploye:number){
+    return this.http.get<Employe>(AppSettings.APP_URL+"/emlpoyes/"+idEmploye)
     
   }
 
-  employeActif(){
-
+  employeActif(idEmploye:number,isActive:boolean){
+return this.http.get<Employe>(AppSettings.APP_URL+"/emlpoyes/active/"+idEmploye+"/"+isActive)
   }
 }
