@@ -13,10 +13,10 @@ export class EmployeService {
   constructor(private http: HttpClient) { }
 
   findAllEmployes(){
-    return this.http.get<Employe>(AppSettings.APP_URL+"/emlpoyes/")
+    return this.http.get<Employe[]>(AppSettings.APP_URL+"/emlpoyes/")
   }
   findEmployesActivesOrNot(active:boolean){
-return this.http.get<Employe>(AppSettings.APP_URL+"/emlpoyes/AllActives/"+active)
+return this.http.get<Employe[]>(AppSettings.APP_URL+"/emlpoyes/AllActives/"+active)
   }  
 
   findEmployeById(idEmploye:number){

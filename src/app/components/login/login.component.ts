@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
     this.employeservice.login(this.login.value, this.password.value)
       .pipe()
       .subscribe(data => {
-        localStorage.setItem('currentUser', JSON.stringify(data));
+        localStorage.setItem('currentEmploye', JSON.stringify(data));
         this.router.navigate(['/gestionComptes']);
       }, error => {
         if(error.status === 404) {
