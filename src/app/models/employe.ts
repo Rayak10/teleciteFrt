@@ -2,11 +2,11 @@ export class Employe{
     idEmploye: number;
     matricule: string;
 	nomEmploye:string;
-	PrenomEmploye:string;
+	prenomEmploye:string;
     dateNaissance:Date;
     email:string;
 	password:string;
-	dateEmbauche;
+	dateEmbauche:Date;
 	salaire:number;
 	post:string;
 	role:string;

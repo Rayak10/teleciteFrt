@@ -3,6 +3,7 @@ import { EmployeService } from 'src/app/services/employe/employe.service';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Employe } from 'src/app/models/employe';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-gestion-comptes',
@@ -12,7 +13,7 @@ import { Employe } from 'src/app/models/employe';
 export class GestionComptesComponent implements OnInit {
   employe:Employe=new Employe();
   submitted = false;
-  employes: Employe[];
+  employes: Observable<Employe[]>;
   errorMessage: string;
   successMessage: string;
   logo:string =' ../../assets/telecite.webp ';
@@ -22,7 +23,7 @@ export class GestionComptesComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.findAllEmploye();
+    this.reloadData();
   }
   newEmployee(): void {
     this.submitted = false;
@@ -31,30 +32,20 @@ export class GestionComptesComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     this.save(); 
+       this.reloadData();
+       this.gotoList();
+        
       
+ 
   }
   save() {
     this.employeservice.createEmploye(this.employe)
       .subscribe(data => console.log(data), error => console.log(error));
     this.employe= new Employe();
-    
-
+this.gotoList();
   }
   
-  gotoList() {
-    this.router.navigate(['/gestionComptes']);
-  }
-  findAllEmploye() {
-    this.employeservice.findAllEmployes()
-      .pipe()
-      .subscribe(data => {
-        console.log(data);
-        this.employes = data;
-      }, error => {
-        console.log(error);
-      });
-  }
-
+  
   checkEmploye() {
     if (localStorage.getItem('currentEmploye') === undefined || localStorage.getItem('currentEmploye') === null) {
       console.log("employe is invalid, redirection");
@@ -62,5 +53,32 @@ export class GestionComptesComponent implements OnInit {
       return;
     }
     this.employe = JSON.parse(localStorage.getItem('currentEmploye'));
+  }
+reloadData(){
+  this.employes= this.employeservice.findAllEmployes();
+  
+}
+
+  deleteEmploye(id:number){
+    this.employeservice.deleteEmploye(id)
+    .subscribe(
+    data=>{
+      console.log(data);
+      
+     this.reloadData();
+     
+    },
+    error=>console.log(error));
+    
+  }
+
+  employeDetails(id:number){
+    this.router.navigate(['details',id]);
+  }
+  updateEmploye(id:number){
+    this.router.navigate(['update',id]);
+  }
+  gotoList(){
+    this.router.navigate(['gestionComptes']);
   }
 }

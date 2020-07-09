@@ -1,0 +1,40 @@
+<h2>Les information de l'employé</h2>
+<hr/>
+<div >
+        <div>
+            <b>Nom:</b><label>{{employe.nomEmploye}}</label>
+        </div>
+        <div>
+            <b>Prenom:</b><label>{{employe.prenomEmploye}}</label>
+        </div>
+        <div>
+            <b>Matricule:</b><label>{{employe.matricule}}</label>
+        </div>
+
+        <div>
+            <b>Date naissance:</b><label>{{employe.dateNaissance}}</label>
+        </div>
+
+        <div>
+            <b>E-mail:</b><label>{{employe.email}}</label>
+        </div>
+       
+        <div>
+            <b>Date d'embauche:</b><label>{{employe.dateEmbauche}}</label>
+        </div>
+        <div>
+            <b>Post:</b><label>{{employe.post}}</label>
+        </div>
+        <div>
+            <b>Role:</b><label>{{employe.role}}</label>
+        </div>
+        <div>
+            <b>Salaire:</b><label>{{employe.salaire}}</label>
+        </div>
+        <div>
+            <b>Etat:</b><label>{{employe.active}}</label>
+        </div>
+</div>
+<br>
+<br>
+<button (click)="list()" class=" btn btn primary">Retour au list des employées</button>

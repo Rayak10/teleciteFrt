@@ -92,9 +92,8 @@
 <link href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css" rel="stylesheet" media="screen">
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" type="text/css" rel="stylesheet">
 
-<span class="help-block">cc</span> 
-<span class="help-block">cc</span> 
-
+<hr/>
+<hr/>
 <!-- FORM  -->	    
 	   <div class="col-md-16">	       
      
@@ -183,16 +182,11 @@
   <div class="col-md-4">
   <div class="radio">
     <label for="client-status-0">
-      <input type="radio" required [(ngModel)]="employe.active" name="client-status" id="client-status-0" value="active" checked="checked">
+      <input type="radio" required [(ngModel)]="employe.active" name="client-status" id="client-status-1" value="active" checked="checked">
       Active
     </label>
 	</div>
-  <div class="radio">
-    <label>
-      <input type="radio" required [(ngModel)]="employe.active" name="client-status" id="client-status-1" value="inactive">
-      Inactive
-    </label>
-	</div>
+  
   </div>
   <label class="col-md-2 control-label">Confirmation mot de passe :</label>
   <div class="col-md-4">
@@ -235,25 +229,26 @@
     <table class="table table-bordered table-condensed table-hover">
         <thead>
             <tr>
-                <td>Nom</td>
-                <td>Prenom</td>
+                <th>Nom</th>
+                <th>Prenom</th>
                 <th>Email</th>
                 <th>Status</th>
                 <th>Actions</th>
             </tr>
                 
         </thead>
-        <tbody id="form-list-client-body"  *ngFor="let emp of employes">
+        <tbody id="form-list-employes-body"  *ngFor="let employe of employes | async">
             <tr>
-                <td>{{emp.nomEmploye}}</td>
-                <td>{{emp.prenomEmploye}}</td>
-                <td>{{emp.email}}</td>
-                <td>{{emp.active}}</td>
+                <td>{{employe.nomEmploye}}</td>
+                <td>{{employe.prenomEmploye}}</td>
+                <td>{{employe.email}}</td>
+                <td>{{employe.active}}</td>
                 
                 <td>
-                    <a title="view this user" class="btn btn-default btn-sm "> <i class="glyphicon glyphicon-eye-open text-primary"></i> </a>
-                    <a title="edit this user" class="btn btn-default btn-sm "> <i class="glyphicon glyphicon-edit text-primary"></i> </a>
-                    <a title="delete this user" class="btn btn-default btn-sm "> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
+                  
+                    <a title="les détails de l'employé" class="btn btn-default btn-sm "(click)="employeDetails(employe.idEmploye)"> <i class="glyphicon glyphicon-eye-open text-primary"  ></i> </a> 
+                    <a title="modifier ces informations" class="btn btn-default btn-sm "(click)="updateEmploye(employe.idEmploye)"> <i class="glyphicon glyphicon-edit text-primary"></i> </a>
+                    <a title="supprimer " class="btn btn-default btn-sm " (click)="deleteEmploye(employe.idEmploye)"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
                     
                    
                 </td>
