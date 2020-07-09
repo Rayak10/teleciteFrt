@@ -1,0 +1,37 @@
+<hr/>
+<hr/>
+<legend  class="navbar-brand titre"  > Les informations du projet</legend>
+<hr/>
+<div >
+        <div>
+            <b>Nom projet:</b><label>{{projet.nomProjet}}</label>
+        </div>
+        <div>
+            <b>Théme:</b><label>{{projet.theme}}</label>
+        </div>
+        <div>
+            <b>Matricule:</b><label>{{projet.description}}</label>
+        </div>
+
+        <div>
+            <b>Date naissance:</b><label>{{projet.descriptionTechnique}}</label>
+        </div>
+
+        <div>
+            <b>E-mail:</b><label>{{projet.dateDebut}}</label>
+        </div>
+       
+        <div>
+            <b>Date d'embauche:</b><label>{{projet.dateFin}}</label>
+        </div>
+      
+</div>
+<br>
+<br>
+<!-- Button -->
+<div class="form-group">
+    <label class="col-md-0 control-label" for="btn-save"></label>
+    <div class="col-md-0">
+     <button id="btn-save"  (click)="list()" name="btn-save" class="btn btn-success">Retour au liste des projets</button>
+    </div>
+</div>

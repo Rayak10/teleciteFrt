@@ -3,6 +3,7 @@ import { Employe } from 'src/app/models/employe';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeService } from 'src/app/services/employe/employe.service';
 import { error } from 'protractor';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-employe-updat',
@@ -13,7 +14,7 @@ export class EmployeUpdatComponent implements OnInit {
 
   id:number;
   employe:Employe;
-  
+  employes: Observable<Employe[]>;
 
   constructor(private employeservice:EmployeService,private route: ActivatedRoute, private router: Router) { }
   
@@ -37,12 +38,18 @@ updateEmploye(){
   
     this.employe=new Employe();
     this.gotoList();
+    this.reloadData();
+   
 }
 onSubmit(){
   this.updateEmploye();
 }
 gotoList(){
   this.router.navigate(['gestionComptes']);
+}
+reloadData(){
+  this.employes= this.employeservice.findAllEmployes();
+  
 }
 
 }

@@ -1,0 +1,65 @@
+<hr/>
+<hr/>
+<!-- FORM  -->	    
+	   <div class="col-md-16">	       
+     
+<fieldset>
+
+<!-- Form Name -->
+
+<legend  class="navbar-brand titre"  > Changer les informations</legend>
+<form (ngSubmit)="onSubmit()">
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-2 control-label" >Nom de projet:</label>  
+  <div class="col-md-4">
+  <input id="projet-name" required [(ngModel)]="projet.nomProjet" name="projet-name" type="text" placeholder="tapez le nom du projet" class="form-control input-md" >
+  <span class="help-block"></span>  
+  </div>
+  <label class="col-md-2 control-label" >Théme :</label>  
+  <div class="col-md-4">
+  <input id="projet-theme"required [(ngModel)]="projet.theme" name="projet-theme" type="text" placeholder="tapez le théme du projet" class="form-control input-md">
+  <span class="help-block"></span>  
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-md-2 control-label" >Description générale :</label>  
+  <div class="col-md-4">
+  <input id="projet-description"required [(ngModel)]="projet.description" name="projet-description" type="text" placeholder="tapez une description générale" class="form-control input-md">
+  <span class="help-block"></span>  
+  </div>
+  <label class="col-md-2 control-label" >Description technique :</label>  
+  <div class="col-md-4">
+  <input id="projet-description-thechnique"  required [(ngModel)]="projet.descriptionTechnique" name="projet-description-thechnique" type="text" placeholder="tapez une description technique " class="form-control input-md">
+  <span class="help-block"></span>  
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-md-2 control-label">Date début projet :</label>  
+  <div class="col-md-4">
+  <input id="projet-dateDeb" required [(ngModel)]="projet.dateDebut" name="projet-dateDeb" type="text" placeholder="tapez la date début du projet" class="form-control input-md">
+  <span class="help-block"></span>  
+  </div>
+  <label class="col-md-2 control-label">Date fin projet :</label>  
+  <div class="col-md-4">
+  <input id="projet-dateFin" required [(ngModel)]="projet.dateFin" name="projet-dateFin" type="text" placeholder="tapez la date fin du projet" class="form-control input-md">
+  <span class="help-block"></span>  
+  </div>
+</div>
+
+
+<!-- Button -->
+<div class="form-group">
+    <label class="col-md-11 control-label" for="btn-save"></label>
+    <div class="col-md-0">
+     <button id="btn-save" name="btn-save" type="submit" class="btn btn-success">Modifier</button>
+    </div>
+</div>
+</form>
+</fieldset>
+
+
+
+	   </div> 
+        
+    

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { AppSettings } from 'src/app/settings/app.settings';
 import { Employe } from 'src/app/models/employe';
-import { Observable } from 'rxjs';
+import { Observable ,Subject} from 'rxjs';
 
 
 
@@ -41,8 +41,15 @@ return this.http.get<Employe[]>(AppSettings.APP_URL+"/employes/AllActives/"+acti
     return this.http.delete(AppSettings.APP_URL+"/employes/"+idEmploye)
     
   }
-
+  private listners=new Subject<any>();
+   listen():Observable<any>{
+     return this.listners.asObservable();
+   }
+   filter(filterBy: String){
+     this.listners.next(filterBy);
+   }
   employeActif(idEmploye:number,isActive:boolean){
 return this.http.get<Employe>(AppSettings.APP_URL+"/employes/active/"+idEmploye+"/"+isActive)
   }
+
 }

@@ -11,13 +11,19 @@ import { GestionComptesComponent } from './components/gestion-comptes/gestion-co
 
 import { EmployeDetailleComponent } from './components/employe-detaille/employe-detaille.component';
 import { EmployeUpdatComponent } from './components/employe-updat/employe-updat.component';
+import { GestionProjetComponent } from './components/gestion-projet/gestion-projet.component';
+import { ProjetUpdateComponent } from './components/projet-update/projet-update.component';
+import { ProjetDetailleComponent } from './components/projet-detaille/projet-detaille.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     GestionComptesComponent,
     EmployeUpdatComponent,
-    EmployeDetailleComponent
+    EmployeDetailleComponent,
+    GestionProjetComponent,
+    ProjetUpdateComponent,
+    ProjetDetailleComponent
   ],
   imports: [
     BrowserModule,

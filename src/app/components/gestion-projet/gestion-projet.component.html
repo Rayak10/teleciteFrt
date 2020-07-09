@@ -1,0 +1,115 @@
+
+<hr/>
+<hr/>
+<!-- FORM  -->	    
+	   <div class="col-md-16">	       
+     
+<fieldset>
+
+<!-- Form Name -->
+
+<legend  class="navbar-brand titre"  > Gestion des projets</legend>
+<form (ngSubmit)="onSubmit()">
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-2 control-label" >Nom de projet:</label>  
+  <div class="col-md-4">
+  <input id="projet-name" required [(ngModel)]="projet.nomProjet" name="projet-name" type="text" placeholder="tapez le nom du projet" class="form-control input-md" >
+  <span class="help-block"></span>  
+  </div>
+  <label class="col-md-2 control-label" >Théme :</label>  
+  <div class="col-md-4">
+  <input id="projet-theme"required [(ngModel)]="projet.theme" name="projet-theme" type="text" placeholder="tapez le théme du projet" class="form-control input-md">
+  <span class="help-block"></span>  
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-md-2 control-label" >Description générale :</label>  
+  <div class="col-md-4">
+  <input id="projet-description"required [(ngModel)]="projet.description" name="projet-description" type="text" placeholder="tapez une description générale" class="form-control input-md">
+  <span class="help-block"></span>  
+  </div>
+  <label class="col-md-2 control-label" >Description technique :</label>  
+  <div class="col-md-4">
+  <input id="projet-description-thechnique"  required [(ngModel)]="projet.descriptionTechnique" name="projet-description-thechnique" type="text" placeholder="tapez une description technique " class="form-control input-md">
+  <span class="help-block"></span>  
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-md-2 control-label">Date début projet :</label>  
+  <div class="col-md-4">
+  <input id="projet-dateDeb" required [(ngModel)]="projet.dateDebut" name="projet-dateDeb" type="text" placeholder="tapez la date début du projet" class="form-control input-md">
+  <span class="help-block"></span>  
+  </div>
+  <label class="col-md-2 control-label">Date fin projet :</label>  
+  <div class="col-md-4">
+  <input id="projet-dateFin" required [(ngModel)]="projet.dateFin" name="projet-dateFin" type="text" placeholder="tapez la date fin du projet" class="form-control input-md">
+  <span class="help-block"></span>  
+  </div>
+</div>
+
+
+<!-- Button -->
+<div class="form-group">
+    <label class="col-md-11 control-label" for="btn-save"></label>
+    <div class="col-md-0">
+     <button id="btn-save" name="btn-save" type="submit" class="btn btn-success">Enregistrer</button>
+    </div>
+</div>
+</form>
+</fieldset>
+
+
+
+	   </div> 
+	    
+
+
+
+<!-- LIST -->
+<div class=col-md-12 >
+    
+    <form id="form-list-employe" >
+            <legend class="navbar-brand titre">Liste des projets</legend>
+    
+   <!-- <div class="pull-right">
+        <a class="btn btn-default-btn-xs btn-primary"><i class="glyphicon glyphicon-refresh"></i> Refresh</a>
+        <a class="btn btn-default-btn-xs btn-success"><i class="glyphicon glyphicon-plus"></i> New</a>
+    </div>-->
+    <table class="table table-bordered table-condensed table-hover">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Théme</th>
+                <th>Date Début</th>
+                <th>Date Fin</th>
+                <th>Actions</th>
+            </tr>
+                
+        </thead>
+        <tbody id="form-list-projets-body"  *ngFor="let projet of projets | async">
+            <tr>
+                <td>{{projet.nomProjet}}</td>
+                <td>{{projet.theme}}</td>
+                <td>{{projet.dateDebut}}</td>
+                <td>{{projet.dateFin}}</td>
+                
+                <td>
+                  
+                    <a title="les détails du projet" class="btn btn-default btn-sm "(click)="projetDetails(projet.idProjet)"> <i class="glyphicon glyphicon-eye-open text-primary"  ></i> </a> 
+                    <a title="modifier le  projet" class="btn btn-default btn-sm "(click)="updateProjet(projet.idProjet)"> <i class="glyphicon glyphicon-edit text-primary"></i> </a>
+                    <a title="supprimer le projet " class="btn btn-default btn-sm " (click)="deleteProjet(projet.idProjet)"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
+                    
+                   
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </form>
+
+    
+</div>
+
+
+<br> 
+

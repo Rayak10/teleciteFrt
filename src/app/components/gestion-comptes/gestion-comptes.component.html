@@ -1,96 +1,3 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-
-<nav class="[ navbar navbar-fixed-top ][ navbar-bootsnipp animate ]" role="navigation">
-    	<div class="[ container ]">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="[ navbar-header ]">
-				<button type="button" class="[ navbar-toggle ]" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-					<span class="[ sr-only ]">Toggle navigation</span>
-					<span class="[ icon-bar ]"></span>
-					<span class="[ icon-bar ]"></span>
-					<span class="[ icon-bar ]"></span>
-				</button>
-				<div class="[ animbrand ]">
-          <img  width="100" height="70" bind-src="logo">
-					<a class="[ navbar-brand ][ animate ]"  href="http://localhost:4200/gestionComptes">Telecite</a>
-				</div>
-			</div>
-
-			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="[ collapse navbar-collapse ]" id="bs-example-navbar-collapse-1">
-				<ul class="[ nav navbar-nav navbar-right ]">
-					<li class="[ visible-xs ]">
-						<form action="http://bootsnipp.com/search" method="GET" role="search">
-							<div class="[ input-group ]">
-								<input type="text" class="[ form-control ]" name="q" placeholder="Search for snippets">
-								<span class="[ input-group-btn ]">
-									<button class="[ btn btn-primary ]" type="submit"><span class="[ glyphicon glyphicon-search ]"></span></button>
-									<button class="[ btn btn-danger ]" type="reset"><span class="[ glyphicon glyphicon-remove ]"></span></button>
-								</span>
-							</div>
-						</form>
-					</li>
-					<li><a href="#" class="[ animate ]">About</a></li>
-					<li>
-						<a href="#" class="[ dropdown-toggle ][ animate ]" data-toggle="dropdown">Resources <span class="[ caret ]"></span></a>
-						<ul class="[ dropdown-menu ]" role="menu">
-							<li><a href="#" class="[ animate ]">Blog <span class="[ pull-right glyphicon glyphicon-pencil ]"></span></a></li>
-							<li><a href="#" class="[ animate ]">List of resources <span class="[ pull-right glyphicon glyphicon-align-justify ]"></span></a></li>
-							<li><a href="#" class="[ animate ]">Download Bootstrap <span class="[ pull-right glyphicon glyphicon-cloud-download ]"></span></a></li>
-							<li class="[ dropdown-header ]">Bootstrap Templates</li>
-							<li><a href="#" class="[ animate ]">Browse Templates <span class="[ pull-right glyphicon glyphicon-shopping-cart ]"></span></a></li>
-							<li class="[ dropdown-header ]">Builders</li>
-							<li><a href="#" class="[ animate ]">Form Builder <span class="[ pull-right glyphicon glyphicon-tasks ]"></span></a></li>
-							<li><a href="#" class="[ animate ]">Button Builder <span class="[ pull-right glyphicon glyphicon-edit ]"></span></a></li>
-						</ul>
-					</li>
-					<li class="[ dropdown ]">
-						<a href="#" class="[ dropdown-toggle ][ animate ]" data-toggle="dropdown">Snippets <span class="[ caret ]"></span></a>
-						<ul class="[ dropdown-menu ]" role="menu">
-							<li><a href="#" class="[ animate ]">Featured <span class="[ pull-right glyphicon glyphicon-star ]"></span></a></li>
-							<li><a href="#" class="[ animate ]">Tags  <span class="[ pull-right glyphicon glyphicon-tags ]"></span></a></li>
-							<li class="[ dropdown-header ]">By Bootstrap Version</li>
-							<li><a href="#" class="[ animate ]">3.2.0</a></li>
-							<li><a href="#" class="[ animate ]">3.1.0</a></li>
-							<li><a href="#" class="[ animate ]">3.0.3</a></li>
-							<li><a href="#" class="[ animate ]">3.0.1</a></li>
-							<li><a href="#" class="[ animate ]">3.0.0</a></li>
-							<li><a href="#" class="[ animate ]">2.3.2</a></li>
-						</ul>
-					</li>
-					<li><a class="animate" href="#register">Register</a></li>
-					<li><a class="animate" href="#login">Login</a></li>
-                    <li class="[ hidden-xs ]"><a href="#toggle-search" class="[ animate ]"><span class="[ glyphicon glyphicon-search ]"></span></a></li>
-				</ul>
-			</div>
-		</div>
-		<div class="[ bootsnipp-search animate ]">
-			<div class="[ container ]">
-				<form action="http://bootsnipp.com/search" method="GET" role="search">
-					<div class="[ input-group ]">
-						<input type="text" class="[ form-control ]" name="q" placeholder="Search for snippets and hit enter">
-						<span class="[ input-group-btn ]">
-							<button class="[ btn btn-danger ]" type="reset"><span class="[ glyphicon glyphicon-remove ]"></span></button>
-						</span>
-					</div>
-				</form>
-			</div>
-		</div>
-	</nav>
-
-<div class="container">
-	<div class="row">
-	    
-	    
-<link href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css" rel="stylesheet" media="screen">
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" type="text/css" rel="stylesheet">
 
 <hr/>
 <hr/>
@@ -182,11 +89,16 @@
   <div class="col-md-4">
   <div class="radio">
     <label for="client-status-0">
-      <input type="radio" required [(ngModel)]="employe.active" name="client-status" id="client-status-1" value="active" checked="checked">
+      <input type="radio" required [(ngModel)]="employe.active" name="client-status1" id="client-status-0" value="true" checked="checked">
       Active
     </label>
 	</div>
-  
+  <div class="radio">
+    <label>
+      <input type="radio" required [(ngModel)]="employe.active" name="client-status2" id="client-status-1" value="false">
+      Inactive
+    </label>
+	</div>
   </div>
   <label class="col-md-2 control-label">Confirmation mot de passe :</label>
   <div class="col-md-4">
@@ -201,10 +113,10 @@
 
 <!-- Button -->
 <div class="form-group">
-  <label class="col-md-5 control-label" for="btn-save"></label>
-  <div class="col-md-5">
-    <button id="btn-save" name="btn-save" type="submit" class="btn btn-success">Créer</button>
-  </div>
+    <label class="col-md-5 control-label" for="btn-save"></label>
+    <div class="col-md-5">
+     <button id="btn-save" name="btn-save" type="submit" class="btn btn-success">Créer</button>
+    </div>
 </div>
 </form>
 </fieldset>
@@ -248,7 +160,7 @@
                   
                     <a title="les détails de l'employé" class="btn btn-default btn-sm "(click)="employeDetails(employe.idEmploye)"> <i class="glyphicon glyphicon-eye-open text-primary"  ></i> </a> 
                     <a title="modifier ces informations" class="btn btn-default btn-sm "(click)="updateEmploye(employe.idEmploye)"> <i class="glyphicon glyphicon-edit text-primary"></i> </a>
-                    <a title="supprimer " class="btn btn-default btn-sm " (click)="deleteEmploye(employe.idEmploye)"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
+                    <a title="supprimer " class="btn btn-default btn-sm " (click)="deleteEmploye(employe.idEmploye)"ng-change="gotoList()"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
                     
                    
                 </td>
@@ -263,91 +175,3 @@
 
 <br> 
 
-<!-- view 
-
-<div class="col-md-12">
-    
-    <legend>View client</legend>
-    
-    <div >
-        
-              <div class2=" col-md-9 col-lg-9 "> 
-                  <table class="table table-user-information">
-                    <tbody>
-                      <tr>
-                        <td>Name:</td>
-                        <td>Andre Silva</td>
-                      </tr>
-                      <tr>
-                        <td>Email</td>
-                        <td><a href="mailto:info@support.com">info@support.com</a></td>
-                      </tr>
-                    </tbody>
-                  </table>
-            </div>
-        
-        
-    </div>
-            <div class="panel with-nav-tabs panel-default">
-                <div class="panel-heading">
-                        <ul class="nav nav-tabs">
-                            <li class="active"><a href="#tab1default" data-toggle="tab">Default 1</a></li>
-                            <li><a href="#tab2default" data-toggle="tab">Default 2</a></li>
-                            
-                            <li><a href="#tab3default" data-toggle="tab">Default 3</a></li>
-                            <!--
-                            <li class="dropdown">
-                                <a href="#" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#tab4default" data-toggle="tab">Default 4</a></li>
-                                    <li><a href="#tab5default" data-toggle="tab">Default 5</a></li>
-                                </ul>
-                            </li>
-                           
-                        </ul>
-                </div>
-                <div class="panel-body">
-                    <div class="tab-content">
-                        <div class="tab-pane fade in active" id="tab1default">Default 1</div>
-                        <div class="tab-pane fade" id="tab2default">Default 2</div>
-                        <div class="tab-pane fade" id="tab3default">Default 3</div>
-                        <!--
-                        <div class="tab-pane fade" id="tab4default">Default 4</div>
-                        <div class="tab-pane fade" id="tab5default">Default 5</div>
-                        
-                    </div>
-                </div>
-            </div>
-
-</div>
-	    
-	    
-	</div>
-</div>
- -->
-<script>
-   $(function() { 
-
-$('a[href="#toggle-search"], .navbar-bootsnipp .bootsnipp-search .input-group-btn > .btn[type="reset"]').on('click', function(event) {
-event.preventDefault();
-$('.navbar-bootsnipp .bootsnipp-search .input-group > input').val('');
-$('.navbar-bootsnipp .bootsnipp-search').toggleClass('open');
-$('a[href="#toggle-search"]').closest('li').toggleClass('active');
-
-if ($('.navbar-bootsnipp .bootsnipp-search').hasClass('open')) {
-  /* I think .focus dosen't like css animations, set timeout to make sure input gets focus */
-  setTimeout(function() { 
-    $('.navbar-bootsnipp .bootsnipp-search .form-control').focus();
-  }, 100);
-}			
-});
-
-$(document).on('keyup', function(event) {
-if (event.which == 27 && $('.navbar-bootsnipp .bootsnipp-search').hasClass('open')) {
-  $('a[href="#toggle-search"]').trigger('click');
-}
-});
-
-});
-
-</script>
