@@ -12,7 +12,7 @@ import { ProjetDetailleComponent } from './components/projet-detaille/projet-det
 
 const routes: Routes = [
  
-  {path: 'login', component: LoginComponent},
+  {path: '', component: LoginComponent},
   {path: 'gestionComptes', component: GestionComptesComponent},
   {path: 'update/:id', component: EmployeUpdatComponent},
   {path: 'details/:id', component: EmployeDetailleComponent},

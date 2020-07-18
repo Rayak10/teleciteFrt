@@ -17,6 +17,7 @@ export class GestionComptesComponent implements OnInit {
   errorMessage: string;
   successMessage: string;
   mySubscription: any;
+  
   constructor(private employeservice:EmployeService,private formBuilder: FormBuilder, private router: Router) {
   this.employeservice.listen().subscribe((m:any)=>{
     console.log(m);
@@ -27,8 +28,7 @@ export class GestionComptesComponent implements OnInit {
 
   ngOnInit() {
     this.reloadData();
-    
-this.router.routeReuseStrategy.shouldReuseRoute = function () {
+    this.router.routeReuseStrategy.shouldReuseRoute = function () {
   return false;
 };
 this.mySubscription = this.router.events.subscribe((event) => {
@@ -75,8 +75,8 @@ reloadData(){
 }
 
   deleteEmploye(id:number){
-    this.employeservice.deleteEmploye(id)
-    .subscribe(
+    let resp=this.employeservice.deleteEmploye(id);
+    resp.subscribe(
     data=>{
       console.log(data);
       
@@ -98,4 +98,11 @@ reloadData(){
   gotoList(){
     this.router.navigate(['gestionComptes']);
   }
+
+
+
+  setDefaultValues() {
+    this.employe.active = true;
+   
+ }
 }
