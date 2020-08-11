@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { AppSettings } from 'src/app/settings/app.settings';
 import { Employe } from 'src/app/models/employe';
+import { Bureau } from 'src/app/models/bureau';
+
 import { Observable ,Subject} from 'rxjs';
 
 
@@ -15,6 +17,9 @@ export class EmployeService {
 
   findAllEmployes(){
     return this.http.get<Employe[]>(AppSettings.APP_URL+"/employes/")
+  }
+  findAllBureaux():Observable<any>{
+    return this.http.get<Bureau[]>(AppSettings.APP_URL+"/bureaux/")
   }
   findEmployesActivesOrNot(active:boolean){
 return this.http.get<Employe[]>(AppSettings.APP_URL+"/employes/AllActives/"+active)

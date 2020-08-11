@@ -4,6 +4,11 @@ import { FormBuilder } from '@angular/forms';
 import { Router, NavigationEnd } from '@angular/router';
 import { Employe } from 'src/app/models/employe';
 import { Observable } from 'rxjs';
+import { Bureau } from 'src/app/models/bureau';
+import { BureauService } from 'src/app/services/bureau/bureau.service';
+import { DepartementService } from 'src/app/services/departement/departement.service';
+import { basename } from 'path';
+import { Departement } from 'src/app/models/departement';
 
 @Component({
   selector: 'app-gestion-comptes',
@@ -12,22 +17,35 @@ import { Observable } from 'rxjs';
 })
 export class GestionComptesComponent implements OnInit {
   employe:Employe=new Employe();
+
   submitted = false;
   employes: Observable<Employe[]>;
   errorMessage: string;
   successMessage: string;
-  mySubscription: any;
-  
-  constructor(private employeservice:EmployeService,private formBuilder: FormBuilder, private router: Router) {
-  this.employeservice.listen().subscribe((m:any)=>{
-    console.log(m);
-    this.reloadData();
-    
-  })
-   }
-
+  mySubscription: any; 
+  bureau:Bureau;
+  departement:Departement;
+  bureauArray = [];
+  departementArray = [];
+  selectedDepartementId:number;
+  selectedBureauId: number;
+  constructor(private employeservice:EmployeService,private departementservice:DepartementService,private bureauservice:BureauService,private formBuilder: FormBuilder, private router: Router) {}
+  public listBureauItems:Array<String>=[];
+  public listdepItems:Array<String>=[];
   ngOnInit() {
     this.reloadData();
+    //this.dropDownBureauRefresh();
+   // this.dropDownDepRefresh();
+    this.bureauservice.findAllBureaux().subscribe(
+      data => {console.log("data from find all bureau:"+JSON.stringify(data));   
+      
+                  this.bureauArray.push(...data);}
+    );
+    this.departementservice.findAllDepartements().subscribe(
+      data => {console.log("data from find all dep:"+JSON.stringify(data));  
+      
+                  this.departementArray.push(...data);}
+    );
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
   return false;
 };
@@ -47,17 +65,47 @@ this.mySubscription = this.router.events.subscribe((event) => {
   onSubmit() {
     this.submitted = true;
     this.save(); 
-       this.reloadData();
-       this.gotoList();
+      this.reloadData();
+     this.gotoList();
         
-      
+     
  
   }
+
+dropDownBureauRefresh(){
+this.bureauservice.findAllBureaux().subscribe(data=>{
+ console.log(data);
+  data.forEach(element => {
+    this.listBureauItems.push(element["nomBureau"]);
+    
+  });
+})
+
+  }; 
+
+
+  dropDownDepRefresh(){
+    this.departementservice.findAllDepartements().subscribe(data=>{
+     console.log(data);
+      data.forEach(element => {
+        this.listdepItems.push(element["nomDepartement"]);
+        
+      });
+    })
+    
+      }; 
+    
+
+
   save() {
     this.employeservice.createEmploye(this.employe)
       .subscribe(data => console.log(data), error => console.log(error));
     this.employe= new Employe();
-this.gotoList();
+this.employe.bureau.idBureau=this.selectedBureauId;
+this.employe.departement.idDepartement=this.selectedDepartementId;
+//this.gotoList();
+console.log(JSON.stringify(this.employe));
+
   }
   
   
@@ -105,4 +153,12 @@ reloadData(){
     this.employe.active = true;
    
  }
+ 
+ onChange(event){
+   
+  this.employe.bureau = {idBureau:this.selectedBureauId,nomBureau:''};
+  this.employe.departement = {idDepartement:this.selectedDepartementId,nomDepartement:''};
+}
+
+
 }

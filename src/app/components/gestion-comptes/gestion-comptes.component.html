@@ -54,7 +54,6 @@
       <input id="employe-matricule" required [(ngModel)]="employe.matricule" name="employe-matricule" class="form-control" placeholder="tappez matricule employé" type="double">
     </div>
     <p class="help-block"></p>
-  
   <label class="col-md-2 control-label">Salaire :</label>
   <div class="col-md-4">
     <div class="input-group">
@@ -64,6 +63,49 @@
     <p class="help-block"></p>
   </div>
 </div>
+<!--  -->
+
+
+
+
+
+
+<div class="form-group">
+  <label class="col-md-2 control-label">Bureau :</label>
+  <div class="col-md-4">
+    <select required
+     type="text" 
+     class="form-control "
+      id="field_bureau"
+        name="bureau" [(ngModel)]="selectedBureauId"
+        (change)="onChange($event)">
+      <option  *ngFor="let b of bureauArray" [value]="b.idBureau">
+        {{b.nomBureau}}
+      </option>
+    </select>
+    <p class="help-block">{{bureau | json}}</p>
+
+    </div>
+
+    <label class="col-md-2 control-label">Departement :</label>
+    <div class="col-md-4">
+      <select required
+       type="text" 
+       class="form-control "
+        id="field_bureau"
+          name="bureau" [(ngModel)]="selectedDepartementId"
+          (change)="onChange($event)">
+        <option  *ngFor="let b of departementArray" [value]="b.idDepartement">
+          {{b.nomDepartement}}
+        </option>
+      </select>
+      <p class="help-block">{{departement | json}}</p>
+  
+</div></div>
+
+
+
+
 <div class="form-group">
 <label class="col-md-2 control-label">Email :</label>
   <div class="col-md-4">
@@ -108,14 +150,12 @@
     </div>
     
   </div>
-</div>
-
-
+   </div>
 <!-- Button -->
 <div class="form-group">
     <label class="col-md-5 control-label" for="btn-save"></label>
     <div class="col-md-5">
-     <button id="btn-save" name="btn-save" type="submit" class="btn btn-success">Créer</button>
+     <button id="btn-save" name="btn-save" type="submit" class="btn btn-success" >Créer</button>
     </div>
 </div>
 </form>
@@ -124,7 +164,6 @@
 
 
 	   </div> 
-	    
 
 
 

@@ -1,3 +1,6 @@
+import { Bureau } from './bureau';
+import { Departement } from './departement';
+
 export class Employe{
     idEmploye: number;
     matricule: string;
@@ -11,5 +14,6 @@ export class Employe{
 	post:string;
 	role:string;
 	active:boolean;
-      
+	bureau: Bureau=new Bureau();
+	departement: Departement=new Departement();
 }
