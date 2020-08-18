@@ -114,8 +114,10 @@ this.bureauservice.findAllBureaux().subscribe(data=>{
     this.employe= new Employe();
 this.employe.bureau.idBureau=this.selectedBureauId;
 this.employe.departement.idDepartement=this.selectedDepartementId;
+this.employe.equipe.idEquipe=this.selectedEquipeId;
+
 //this.gotoList();
-console.log(JSON.stringify(this.employe.dateNaissance));
+console.log(JSON.stringify(this.employe.equipe));
 
   }
   
@@ -170,6 +172,7 @@ reloadData(){
   this.employe.bureau = {idBureau:this.selectedBureauId,nomBureau:''};
   this.employe.departement = {idDepartement:this.selectedDepartementId,nomDepartement:''};
   this.employe.equipe = {idEquipe:this.selectedEquipeId,nomEquipe:'',specialite:''};
+  console.log(JSON.stringify(this.employe.equipe.idEquipe));
 
 }
 

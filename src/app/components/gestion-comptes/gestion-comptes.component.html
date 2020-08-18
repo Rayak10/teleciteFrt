@@ -26,13 +26,15 @@
 <div class="form-group">
   <label class="col-md-2 control-label" >Date naissance :</label>  
   <div class="col-md-4">
-    <input  bsDatepicker
+    <input  
     name="employe-date-naissance"
     placeholder = "Selectionner la date naissance"
     [(ngModel)]="employe.dateNaissance"
     autocomplete="off" 
- class="form-control"
-      >
+    class="form-control"
+    bsDatepicker
+    bsDatepicker
+    [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
  
   <span class="help-block"></span>  
   </div>  
@@ -46,7 +48,8 @@
     [(ngModel)]="employe.dateEmbauche"    
     autocomplete="off"
     class="form-control"
-     bsDatepicker >
+     bsDatepicker
+     [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" >
      
   <span class="help-block"></span>  
   </div>
@@ -160,6 +163,21 @@
     </div>
     
   </div>
+  <label class="col-md-2 control-label">Equipe :</label>
+  <div class="col-md-4">
+    <select required
+     type="text" 
+     class="form-control "
+      id="field_bureau"
+        name="equipe" [(ngModel)]="selectedEquipeId"
+        (change)="onChange($event)">
+      <option  *ngFor="let e of equipeArray" [value]="e.idEquipe">
+        {{e.nomEquipe}}
+      </option>
+    </select>
+    <p class="help-block">{{equipe | json}}</p>
+
+    </div>
    </div>
 <!-- Button -->
 <div class="form-group">
