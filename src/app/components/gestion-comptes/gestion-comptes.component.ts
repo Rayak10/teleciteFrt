@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeService } from 'src/app/services/employe/employe.service';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { Router, NavigationEnd } from '@angular/router';
 import { Employe } from 'src/app/models/employe';
 import { Observable } from 'rxjs';
 import { Bureau } from 'src/app/models/bureau';
 import { BureauService } from 'src/app/services/bureau/bureau.service';
 import { DepartementService } from 'src/app/services/departement/departement.service';
-import { basename } from 'path';
 import { Departement } from 'src/app/models/departement';
+import { EquipeService } from 'src/app/services/equipe/equipe.service';
+import { Equipe } from 'src/app/models/equipe';
 
 @Component({
   selector: 'app-gestion-comptes',
@@ -17,19 +18,24 @@ import { Departement } from 'src/app/models/departement';
 })
 export class GestionComptesComponent implements OnInit {
   employe:Employe=new Employe();
-
   submitted = false;
   employes: Observable<Employe[]>;
   errorMessage: string;
   successMessage: string;
   mySubscription: any; 
   bureau:Bureau;
+  equipe:Equipe;
   departement:Departement;
   bureauArray = [];
   departementArray = [];
+  equipeArray= [];
   selectedDepartementId:number;
+  selectedEquipeId:number;
   selectedBureauId: number;
-  constructor(private employeservice:EmployeService,private departementservice:DepartementService,private bureauservice:BureauService,private formBuilder: FormBuilder, private router: Router) {}
+  
+ 
+  
+  constructor(private employeservice:EmployeService,private departementservice:DepartementService,private equipeservice:EquipeService,private bureauservice:BureauService,private formBuilder: FormBuilder, private router: Router) {}
   public listBureauItems:Array<String>=[];
   public listdepItems:Array<String>=[];
   ngOnInit() {
@@ -40,6 +46,11 @@ export class GestionComptesComponent implements OnInit {
       data => {console.log("data from find all bureau:"+JSON.stringify(data));   
       
                   this.bureauArray.push(...data);}
+    );
+    this.equipeservice.findAllEquipe().subscribe(
+      data => {console.log("data from find all Equipe:"+JSON.stringify(data));   
+      
+                  this.equipeArray.push(...data);}
     );
     this.departementservice.findAllDepartements().subscribe(
       data => {console.log("data from find all dep:"+JSON.stringify(data));  
@@ -104,7 +115,7 @@ this.bureauservice.findAllBureaux().subscribe(data=>{
 this.employe.bureau.idBureau=this.selectedBureauId;
 this.employe.departement.idDepartement=this.selectedDepartementId;
 //this.gotoList();
-console.log(JSON.stringify(this.employe));
+console.log(JSON.stringify(this.employe.dateNaissance));
 
   }
   
@@ -158,6 +169,8 @@ reloadData(){
    
   this.employe.bureau = {idBureau:this.selectedBureauId,nomBureau:''};
   this.employe.departement = {idDepartement:this.selectedDepartementId,nomDepartement:''};
+  this.employe.equipe = {idEquipe:this.selectedEquipeId,nomEquipe:'',specialite:''};
+
 }
 
 

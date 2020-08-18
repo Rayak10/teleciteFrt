@@ -12,6 +12,9 @@ import { EmployeUpdatComponent } from './components/employe-updat/employe-updat.
 import { GestionProjetComponent } from './components/gestion-projet/gestion-projet.component';
 import { ProjetUpdateComponent } from './components/projet-update/projet-update.component';
 import { ProjetDetailleComponent } from './components/projet-detaille/projet-detaille.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +32,9 @@ import { ProjetDetailleComponent } from './components/projet-detaille/projet-det
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    
+    BsDatepickerModule.forRoot(),
+    BrowserAnimationsModule
+
 
   ],
   providers: [],

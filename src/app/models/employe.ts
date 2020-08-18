@@ -1,5 +1,6 @@
 import { Bureau } from './bureau';
 import { Departement } from './departement';
+import { Equipe } from './equipe';
 
 export class Employe{
     idEmploye: number;
@@ -16,4 +17,5 @@ export class Employe{
 	active:boolean;
 	bureau: Bureau=new Bureau();
 	departement: Departement=new Departement();
+	equipe: Equipe=new Equipe();
 }

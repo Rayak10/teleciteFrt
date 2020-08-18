@@ -14,31 +14,48 @@
 <div class="form-group">
   <label class="col-md-2 control-label" >Nom :</label>  
   <div class="col-md-4">
-  <input id="client-name" required [(ngModel)]="employe.nomEmploye" name="employe-name" type="text" placeholder="tapez le nom de l'employé" class="form-control input-md" >
+  <input id="client-name" required [(ngModel)]="employe.nomEmploye" autocomplete="off" name="employe-name" type="text" placeholder="tapez le nom de l'employé" class="form-control input-md" >
   <span class="help-block"></span>  
   </div>
   <label class="col-md-2 control-label" >Prenom :</label>  
   <div class="col-md-4">
-  <input id="employe-prenom"required [(ngModel)]="employe.prenomEmploye" name="employe-prenom" type="text" placeholder="tapez le prenom de l'employé" class="form-control input-md">
+  <input id="employe-prenom"required [(ngModel)]="employe.prenomEmploye" autocomplete="off" name="employe-prenom" type="text" placeholder="tapez le prenom de l'employé" class="form-control input-md">
   <span class="help-block"></span>  
   </div>
 </div>
 <div class="form-group">
   <label class="col-md-2 control-label" >Date naissance :</label>  
   <div class="col-md-4">
-  <input id="employe-date-naissance"required [(ngModel)]="employe.dateNaissance" name="employe-date-naissance" type="text" placeholder="tapez la date de naissance" class="form-control input-md">
+    <input  bsDatepicker
+    name="employe-date-naissance"
+    placeholder = "Selectionner la date naissance"
+    [(ngModel)]="employe.dateNaissance"
+    autocomplete="off" 
+ class="form-control"
+      >
+ 
   <span class="help-block"></span>  
-  </div>
+  </div>  
+  
+
   <label class="col-md-2 control-label" >Date d'embauche :</label>  
   <div class="col-md-4">
-  <input id="employe-date-embauche"  required [(ngModel)]="employe.dateEmbauche" name="employe-date-embauche" type="text" placeholder="tapez la date d'embauche" class="form-control input-md">
+    <input  
+    name="employe-date-embauche"
+    placeholder = "Selectionner la date embauche "
+    [(ngModel)]="employe.dateEmbauche"    
+    autocomplete="off"
+    class="form-control"
+     bsDatepicker >
+     
   <span class="help-block"></span>  
   </div>
+  
 </div>
 <div class="form-group">
   <label class="col-md-2 control-label">Post :</label>  
   <div class="col-md-4">
-  <input id="employe-post" required [(ngModel)]="employe.post" name="employe-post" type="text" placeholder="tapez lepost de l'employe" class="form-control input-md">
+  <input id="employe-post" required [(ngModel)]="employe.post"  name="employe-post" type="text" placeholder="tapez lepost de l'employe" class="form-control input-md">
   <span class="help-block"></span>  
   </div>
   <label class="col-md-2 control-label">Role :</label>  
@@ -51,25 +68,18 @@
   <label class="col-md-2 control-label">Matricule :</label>
   <div class="col-md-4">
     
-      <input id="employe-matricule" required [(ngModel)]="employe.matricule" name="employe-matricule" class="form-control" placeholder="tappez matricule employé" type="double">
+      <input id="employe-matricule" required [(ngModel)]="employe.matricule"  name="employe-matricule" class="form-control" placeholder="tappez matricule employé" type="double">
     </div>
     <p class="help-block"></p>
   <label class="col-md-2 control-label">Salaire :</label>
   <div class="col-md-4">
     <div class="input-group">
       <span class="input-group-addon">TN</span>
-      <input id="employe-salaire"required [(ngModel)]="employe.salaire" name="employe-salaire" class="form-control" placeholder="tappez salaire en dinare" type="double">
+      <input id="employe-salaire"required [(ngModel)]="employe.salaire" autocomplete="off" name="employe-salaire" class="form-control" placeholder="tappez salaire en dinare" type="double">
     </div>
     <p class="help-block"></p>
   </div>
 </div>
-<!--  -->
-
-
-
-
-
-
 <div class="form-group">
   <label class="col-md-2 control-label">Bureau :</label>
   <div class="col-md-4">
@@ -111,7 +121,7 @@
   <div class="col-md-4">
     <div class="input-group">
       <span class="input-group-addon">@</span>
-      <input id="employe-email"required [(ngModel)]="employe.email" name="employe-email" class="form-control" placeholder="tonnom@tondomain.tn" type="text">
+      <input id="employe-email"required [(ngModel)]="employe.email"  name="employe-email" class="form-control" placeholder="tonnom@tondomain.tn" type="text">
     </div>
     
   </div>
@@ -119,7 +129,7 @@
   <div class="col-md-4">
     <div class="input-group">
       <span class="input-group-addon">*</span>
-      <input id="employe-password"required [(ngModel)]="employe.password" name="employe-password" class="form-control" placeholder="tapez mot de passe" type="text">
+      <input id="employe-password"required [(ngModel)]="employe.password" autocomplete="off" name="employe-password" class="form-control" placeholder="tapez mot de passe" type="text">
     </div>
     
   </div>
