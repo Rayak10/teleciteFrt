@@ -2,7 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { EmployeService } from 'src/app/services/employe/employe.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Employe } from 'src/app/models/employe';
-
+import { Bureau } from 'src/app/models/bureau';
+import { BureauService } from 'src/app/services/bureau/bureau.service';
+import { DepartementService } from 'src/app/services/departement/departement.service';
+import { Departement } from 'src/app/models/departement';
+import { EquipeService } from 'src/app/services/equipe/equipe.service';
+import { Equipe } from 'src/app/models/equipe';
 @Component({
   selector: 'app-employe-detaille',
   templateUrl: './employe-detaille.component.html',
@@ -11,7 +16,13 @@ import { Employe } from 'src/app/models/employe';
 export class EmployeDetailleComponent implements OnInit {
 id:number;
 employe:Employe;
-  constructor(private employeservice:EmployeService,private route: ActivatedRoute, private router: Router) {}
+bureau:Bureau;
+  equipe:Equipe;
+  departement:Departement;
+  bureauArray = [];
+  departementArray = [];
+  equipeArray= [];
+  constructor(private employeservice:EmployeService,private route: ActivatedRoute, private router: Router,private departementservice:DepartementService,private equipeservice:EquipeService,private bureauservice:BureauService) {}
 
   ngOnInit() {
     this.employe=new Employe();
@@ -23,7 +34,28 @@ employe:Employe;
       console.log(data)
       this.employe=data;
     }, error=>console.log(error));
+
     
+    this.bureau=new Bureau();
+    this.bureauservice.findEmployeBureau(this.id)
+    .subscribe(data=>{
+      console.log(data)
+      this.bureau=data;
+    }, error=>console.log(error));
+
+    this.equipe=new Equipe();
+    this.equipeservice.findEmployeEquipe(this.id)
+    .subscribe(data=>{
+      console.log(data)
+      this.equipe=data;
+    }, error=>console.log(error));
+
+    this.departement=new Departement();
+    this.departementservice.findEmployeDepartement(this.id)
+    .subscribe(data=>{
+      console.log(data)
+      this.departement=data;
+    }, error=>console.log(error));
   }
   detailsEmploye(){
     this.employeservice.findEmployeById(this.id)

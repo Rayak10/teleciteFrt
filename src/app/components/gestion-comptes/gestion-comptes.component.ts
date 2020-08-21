@@ -36,8 +36,8 @@ export class GestionComptesComponent implements OnInit {
  
   
   constructor(private employeservice:EmployeService,private departementservice:DepartementService,private equipeservice:EquipeService,private bureauservice:BureauService,private formBuilder: FormBuilder, private router: Router) {}
-  public listBureauItems:Array<String>=[];
-  public listdepItems:Array<String>=[];
+  //public listBureauItems:Array<String>=[];
+  //public listdepItems:Array<String>=[];
   ngOnInit() {
     this.reloadData();
     //this.dropDownBureauRefresh();
@@ -83,7 +83,7 @@ this.mySubscription = this.router.events.subscribe((event) => {
  
   }
 
-dropDownBureauRefresh(){
+/*dropDownBureauRefresh(){
 this.bureauservice.findAllBureaux().subscribe(data=>{
  console.log(data);
   data.forEach(element => {
@@ -106,7 +106,7 @@ this.bureauservice.findAllBureaux().subscribe(data=>{
     
       }; 
     
-
+*/
 
   save() {
     this.employeservice.createEmploye(this.employe)

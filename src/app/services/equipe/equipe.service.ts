@@ -20,6 +20,10 @@ export class EquipeService {
     return this.http.get<Equipe>(AppSettings.APP_URL+"/equipes/"+idEquipe)
 
   }
+  findEmployeEquipe(idEmloye:number){
+    return this.http.get<Equipe>(AppSettings.APP_URL+"/equipes/employeEquipe/"+idEmloye)
+
+  }
 
   createEquipe(bureau:Bureau){
     return this.http.post<Equipe>(AppSettings.APP_URL+"/equipes/",bureau)

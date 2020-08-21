@@ -19,6 +19,10 @@ export class BureauService {
     return this.http.get<Bureau>(AppSettings.APP_URL+"/bureaux/"+idBureau)
 
   }
+  findEmployeBureau(idEmloye:number){
+    return this.http.get<Bureau>(AppSettings.APP_URL+"/bureaux/employeBureau/"+idEmloye)
+
+  }
 
   createBureau(bureau:Bureau){
     return this.http.post<Bureau>(AppSettings.APP_URL+"/bureaux/",bureau)

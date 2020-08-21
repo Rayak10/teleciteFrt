@@ -14,7 +14,10 @@ export class DepartementService {
   findAllDepartements(){ 
     return this.http.get<Departement[]>(AppSettings.APP_URL+"/departements/")
   }
+  findEmployeDepartement(idEmloye:number){
+    return this.http.get<Departement>(AppSettings.APP_URL+"/departements/employeDepartement/"+idEmloye)
 
+  }
 
   findDepartementById(idDepartement:number){
     return this.http.get<Departement>(AppSettings.APP_URL+"/departements/"+idDepartement)
