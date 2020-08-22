@@ -29,14 +29,34 @@
 <div class="form-group">
   <label class="col-md-2 control-label" >Date naissance :</label>  
   <div class="col-md-4">
-  <input id="employe-date-naissance"required [(ngModel)]="employe.dateNaissance" name="employe-date-naissance" type="text" placeholder="tapez la date de naissance" class="form-control input-md">
+    <input  
+    name="employe-date-naissance"
+    placeholder = "Selectionner la date naissance"
+    [(ngModel)]="employe.dateNaissance"
+    autocomplete="off" 
+    class="form-control"
+    bsDatepicker
+    bsDatepicker
+    [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
+ 
   <span class="help-block"></span>  
-  </div>
+  </div>  
+  
+
   <label class="col-md-2 control-label" >Date d'embauche :</label>  
   <div class="col-md-4">
-  <input id="employe-date-embauche"  required [(ngModel)]="employe.dateEmbauche" name="employe-date-embauche" type="text" placeholder="tapez la date d'embauche" class="form-control input-md">
+    <input  
+    name="employe-date-embauche"
+    placeholder = "Selectionner la date embauche "
+    [(ngModel)]="employe.dateEmbauche"    
+    autocomplete="off"
+    class="form-control"
+     bsDatepicker
+     [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" >
+     
   <span class="help-block"></span>  
   </div>
+  
 </div>
 <div class="form-group">
   <label class="col-md-2 control-label">Post :</label>  
@@ -67,6 +87,40 @@
     <p class="help-block"></p>
   </div>
 </div>
+<div class="form-group">
+  <label class="col-md-2 control-label">Bureau :</label>
+  <div class="col-md-4">
+    <select 
+    type="text" 
+    class="form-control "
+     id="field_bureau"
+       name="bureau" [(ngModel)]="employe.bureau.idBureau"
+       >
+     <option  *ngFor="let b of bureauArray" [value]="b.idBureau">
+       {{b.nomBureau}}
+     
+     </option>
+   </select>
+    <p class="help-block">{{employe.bureau.idBureau}}</p>
+
+    </div>
+
+    <label class="col-md-2 control-label">Departement :</label>
+    <div class="col-md-4">
+      <select 
+       type="text" 
+       class="form-control "
+        id="field_departement"
+          name="departement" [(ngModel)]="employe.departement.idDepartement"
+          >
+        <option  *ngFor="let b of departementArray" [value]="b.idDepartement">
+          {{b.nomDepartement}}
+        </option>
+      </select>
+      <p class="help-block">{{employe.departement.idDepartement}}</p>
+  
+</div></div>
+
 <div class="form-group">
 <label class="col-md-2 control-label">Email :</label>
   <div class="col-md-4">
@@ -114,6 +168,23 @@
 </div>
 
 
+<div class="form-group">
+  <label class="col-md-2 control-label">Equipe :</label>
+  <div class="col-md-4">
+    <select required
+     type="text" 
+     class="form-control "
+      id="field-equipe"
+        name="equipe" [(ngModel)]="employe.equipe.idEquipe"
+        >
+      <option  *ngFor="let e of equipeArray" [value]="e.idEquipe">
+        {{e.nomEquipe}}
+      
+      </option>
+    </select>
+    <p class="help-block">{{employe.equipe.idEquipe}}</p>
+    </div>
+  </div>
 <!-- Button -->
 <div class="form-group">
   <label class="col-md-3 control-label" for="btn-save"></label>

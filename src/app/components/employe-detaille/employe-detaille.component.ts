@@ -36,26 +36,6 @@ bureau:Bureau;
     }, error=>console.log(error));
 
     
-    this.bureau=new Bureau();
-    this.bureauservice.findEmployeBureau(this.id)
-    .subscribe(data=>{
-      console.log(data)
-      this.bureau=data;
-    }, error=>console.log(error));
-
-    this.equipe=new Equipe();
-    this.equipeservice.findEmployeEquipe(this.id)
-    .subscribe(data=>{
-      console.log(data)
-      this.equipe=data;
-    }, error=>console.log(error));
-
-    this.departement=new Departement();
-    this.departementservice.findEmployeDepartement(this.id)
-    .subscribe(data=>{
-      console.log(data)
-      this.departement=data;
-    }, error=>console.log(error));
   }
   detailsEmploye(){
     this.employeservice.findEmployeById(this.id)
@@ -64,7 +44,7 @@ bureau:Bureau;
       this.employe=new Employe();
     
   }
-
+  
   list(){
     this.router.navigate(['gestionComptes']);
   }

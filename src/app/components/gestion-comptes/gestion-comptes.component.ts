@@ -57,6 +57,9 @@ export class GestionComptesComponent implements OnInit {
       
                   this.departementArray.push(...data);}
     );
+    this.employe.departement=null;
+    this.employe.bureau=null;
+    this.employe.equipe=null;
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
   return false;
 };
@@ -109,15 +112,11 @@ this.bureauservice.findAllBureaux().subscribe(data=>{
 */
 
   save() {
+    console.log("employe: "+JSON.stringify(this.employe));
     this.employeservice.createEmploye(this.employe)
       .subscribe(data => console.log(data), error => console.log(error));
-    this.employe= new Employe();
-this.employe.bureau.idBureau=this.selectedBureauId;
-this.employe.departement.idDepartement=this.selectedDepartementId;
-this.employe.equipe.idEquipe=this.selectedEquipeId;
-
 //this.gotoList();
-console.log(JSON.stringify(this.employe.equipe));
+
 
   }
   
@@ -167,14 +166,20 @@ reloadData(){
    
  }
  
- onChange(event){
+ onChangeBureau(event){
    
   this.employe.bureau = {idBureau:this.selectedBureauId,nomBureau:''};
+  //console.log(JSON.stringify(this.employe.bureau.idBureau));
+ 
+}
+onChangeDepartement(event){
   this.employe.departement = {idDepartement:this.selectedDepartementId,nomDepartement:''};
+  //console.log(JSON.stringify(this.employe.departement.idDepartement));
+}
+onChangeEquipe(event){
+   
   this.employe.equipe = {idEquipe:this.selectedEquipeId,nomEquipe:'',specialite:''};
-  console.log(JSON.stringify(this.employe.equipe.idEquipe));
+ // console.log(JSON.stringify(this.employe.equipe.idEquipe));
 
 }
-
-
 }

@@ -36,13 +36,13 @@
             <b>Etat :</b><label>{{employe.active}}</label>
         </div>
         <div>
-            <b>Bureau :</b><label>{{bureau.nomBureau}}</label>
+            <b>Bureau :</b><label *ngIf="employe.bureau!=null">{{employe.bureau.nomBureau}}</label>
         </div>
         <div>
-            <b>Departement :</b><label>{{departement.nomDepartement}}</label>
+            <b>Departement :</b><label *ngIf="employe.departement!=null">{{employe.departement.nomDepartement}}</label>
         </div>
         <div>
-            <b>Equipe :</b><label>{{equipe.nomEquipe}}</label>
+            <b>Equipe :</b><label *ngIf="employe.equipe!=null">{{employe.equipe.nomEquipe}}</label>
         </div>
 </div>
 <br>

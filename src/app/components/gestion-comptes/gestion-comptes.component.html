@@ -33,7 +33,6 @@
     autocomplete="off" 
     class="form-control"
     bsDatepicker
-    bsDatepicker
     [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
  
   <span class="help-block"></span>  
@@ -91,7 +90,7 @@
      class="form-control "
       id="field_bureau"
         name="bureau" [(ngModel)]="selectedBureauId"
-        (change)="onChange($event)">
+        (change)="onChangeBureau($event)">
       <option  *ngFor="let b of bureauArray" [value]="b.idBureau">
         {{b.nomBureau}}
       </option>
@@ -107,7 +106,7 @@
        class="form-control "
         id="field_bureau"
           name="bureau" [(ngModel)]="selectedDepartementId"
-          (change)="onChange($event)">
+          (change)="onChangeDepartement($event)">
         <option  *ngFor="let b of departementArray" [value]="b.idDepartement">
           {{b.nomDepartement}}
         </option>
@@ -174,7 +173,7 @@
      class="form-control "
       id="field_bureau"
         name="equipe" [(ngModel)]="selectedEquipeId"
-        (change)="onChange($event)">
+        (change)="onChangeEquipe($event)">
       <option  *ngFor="let e of equipeArray" [value]="e.idEquipe">
         {{e.nomEquipe}}
       </option>
