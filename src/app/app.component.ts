@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +9,12 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'telecite';
   logo:string =' ../../assets/telecite.webp ';
+  constructor(private router:Router) { }
+
+  gestionComptes(){
+    this.router.navigate(['gestionComptes']);
+  }
+  gestionProjet(){
+    this.router.navigate(['gestionProjets']);
+  }
 }

@@ -10,6 +10,7 @@ import { Departement } from 'src/app/models/departement';
 import { DepartementService } from 'src/app/services/departement/departement.service';
 import { EquipeService } from 'src/app/services/equipe/equipe.service';
 import { BureauService } from 'src/app/services/bureau/bureau.service';
+import {TIME_ZONE_OFFSET} from '../../settings/app.settings';
 
 @Component({
   selector: 'app-employe-updat',
@@ -32,6 +33,7 @@ export class EmployeUpdatComponent implements OnInit {
   selectedDepartementId:number;
   selectedEquipeId:number;
   selectedBureauId: number;
+  offset: number =new Date().getTimezoneOffset() * 60 * 1000;
   
   constructor(private employeservice:EmployeService,private route: ActivatedRoute, private router: Router,private departementservice:DepartementService,private equipeservice:EquipeService,private bureauservice:BureauService) { }
   
@@ -40,6 +42,11 @@ export class EmployeUpdatComponent implements OnInit {
     this.employe=new Employe();
     
     this.id=this.route.snapshot.params['id'];
+    this.employeservice.findEmployeById(this.id)
+    .subscribe(data=>{
+      console.log(data)
+      this.employe=data;
+      
  this.bureauservice.findAllBureaux().subscribe(
       data => {console.log("data from find all bureau:"+JSON.stringify(data));   
       
@@ -55,10 +62,7 @@ export class EmployeUpdatComponent implements OnInit {
       
                   this.departementArray.push(...data);}
     );
-    this.employeservice.findEmployeById(this.id)
-    .subscribe(data=>{
-      console.log(data)
-      this.employe=data;
+ 
       
       if (this.employe.bureau== null){
         this.employe.bureau=new Bureau();
@@ -75,7 +79,11 @@ export class EmployeUpdatComponent implements OnInit {
         this.employe.equipe.idEquipe  = null;
       }
 
-      console.log("employe: "+JSON.stringify(this.employe))
+      this.employe.dateEmbauche = new Date(new Date(this.employe.dateEmbauche))
+      this.employe.dateNaissance = new Date(new Date(this.employe.dateNaissance));
+
+
+      console.log("employeUpdate: "+JSON.stringify(this.employe))
     }, error=>console.log(error));
     
   }
@@ -83,16 +91,6 @@ export class EmployeUpdatComponent implements OnInit {
 
 updateEmploye(){
 
-
-  //this.employe=new Employe();
- // this.employe.bureau.idBureau=this.modifedBureau;
-  //console.log(JSON.stringify(this.modifedBureau));
-
-  //this.employe.departement.idDepartement=this.modifedDepartement;
-  //console.log(JSON.stringify(this.modifedDepartement));
-
- // this.employe.equipe.idEquipe=this.modifedEquipe;
- // console.log(JSON.stringify(this.modifedEquipe));
 
   this.employeservice.updateEmploye(this.id , this.employe )
   .subscribe(data=> console.log(data),error=>console.log(error)),
@@ -113,45 +111,7 @@ reloadData(){
   this.employes= this.employeservice.findAllEmployes();
   
 }
-/*onChange(event){
-   
-  this.employe.bureau = {idBureau:this.selectedBureauId,nomBureau:''};
-  this.employe.departement = {idDepartement:this.selectedDepartementId,nomDepartement:''};
-  this.employe.equipe = {idEquipe:this.selectedEquipeId,nomEquipe:'',specialite:''};
-
-  console.log(JSON.stringify(this.employe.equipe.idEquipe));
-  console.log(JSON.stringify(this.employe.bureau.idBureau));
-  console.log(JSON.stringify(this.employe.departement.idDepartement));
-
-}*/
-onBureauSelected(val:any){
-this.customFunction1(val)
-}
-ondepartementSelected(val:any){
-  this.customFunction2(val)
-  }
-  onEquipeSelected(val:any){
-    this.customFunction3(val)
-    }
-customFunction1(val:any){
-  this.employe.bureau.idBureau=val;
 
 
-}
-customFunction2(val:any){
-
-  this.employe.departement.idDepartement=val;
-
-
-  
-
-}
-customFunction3(val:any){
-
-  this.employe.equipe.idEquipe=val;
-
-  
-
-}
 
 }

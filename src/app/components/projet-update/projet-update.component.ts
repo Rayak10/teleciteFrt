@@ -3,6 +3,8 @@ import { Projet } from 'src/app/models/projet';
 import { ProjetService } from 'src/app/services/projet/projet.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { EquipeService } from 'src/app/services/equipe/equipe.service';
+import {TIME_ZONE_OFFSET} from '../../settings/app.settings';
 
 @Component({
   selector: 'app-projet-update',
@@ -13,9 +15,12 @@ export class ProjetUpdateComponent implements OnInit {
   id:number;
   projet:Projet;
   projets: Observable<Projet[]>;
-  constructor(private projetservice:ProjetService,private route: ActivatedRoute, private router: Router) { }
+  equipeArray= [];
+ 
+  offset: number =new Date().getTimezoneOffset() * 60 * 1000;
+  constructor(private projetservice:ProjetService,private route: ActivatedRoute, private router: Router,private equipeservice:EquipeService) { }
   
-
+  
   ngOnInit() {
     
     this.projet=new Projet();
@@ -26,16 +31,27 @@ export class ProjetUpdateComponent implements OnInit {
     .subscribe(data=>{
       console.log(data)
       this.projet=data;
-    }, error=>console.log(error));
-    
-  }
+   
 
+    this.equipeservice.findAllEquipe().subscribe(
+      data => {console.log("data from find all Equipe:"+JSON.stringify(data));   
+      
+                  this.equipeArray.push(...data);}
+                  );
+
+                  this.projet.dateDebut = new Date(new Date(this.projet.dateDebut));
+                  this.projet.dateFin = new Date(new Date(this.projet.dateFin));
+            
+      console.log("projetUpdate: "+JSON.stringify(this.projet))
+    }, error=>console.log(error));
+    } 
+  
 updateProjet(){
   this.projetservice.updateProjet(this.id , this.projet )
   .subscribe(data=> console.log(data),error=>console.log(error)),
   
     this.projet=new Projet();
-    
+  
     this.gotoList();
     this.reloadData();
 }
@@ -48,5 +64,6 @@ gotoList(){
 reloadData(){
   this.projets=this.projetservice.findAllProjets();
 }
+
 
 }

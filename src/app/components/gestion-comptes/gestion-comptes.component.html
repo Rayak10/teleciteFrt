@@ -2,7 +2,7 @@
 <hr/>
 <hr/>
 <!-- FORM  -->	    
-	   <div class="col-md-16">	       
+	   <div class="col-md-12">	       
      
 <fieldset>
 
@@ -119,59 +119,12 @@
 
 
 <div class="form-group">
-<label class="col-md-2 control-label">Email :</label>
-  <div class="col-md-4">
-    <div class="input-group">
-      <span class="input-group-addon">@</span>
-      <input id="employe-email"required [(ngModel)]="employe.email"  name="employe-email" class="form-control" placeholder="tonnom@tondomain.tn" type="text">
-    </div>
-    
-  </div>
-  <label class="col-md-2 control-label">Mot de passe :</label>
-  <div class="col-md-4">
-    <div class="input-group">
-      <span class="input-group-addon">*</span>
-      <input id="employe-password"required [(ngModel)]="employe.password" autocomplete="off" name="employe-password" class="form-control" placeholder="tapez mot de passe" type="text">
-    </div>
-    
-  </div>
-</div>
-
-<!-- Multiple Radios -->
-<div class="form-group">
-  <label class="col-md-2 control-label">Client status :</label>
-  <div class="col-md-4">
-  <div class="radio">
-    <label for="client-status-0">
-      <input type="radio" required [(ngModel)]="employe.active" name="client-status1" id="client-status-0" value="true" checked="checked">
-      Active
-    </label>
-	</div>
-  <div class="radio">
-    <label>
-      <input type="radio" required [(ngModel)]="employe.active" name="client-status2" id="client-status-1" value="false">
-      Inactive
-    </label>
-	</div>
-  </div>
-  <label class="col-md-2 control-label">Confirmation mot de passe :</label>
-  <div class="col-md-4">
-    <div class="input-group">
-      <span class="input-group-addon">*</span>
-      <input id="employe-confirmationpassword" name="employe-confirmationpassword" class="form-control" placeholder="confirmez mot de passe" type="text">
-    </div>
-    
-  </div>
-</div>
-
-
-  <div class="form-group">
   <label class="col-md-2 control-label">Equipe :</label>
   <div class="col-md-4">
     <select required
      type="text" 
      class="form-control "
-      id="field_bureau"
+      id="field_equipe"
         name="equipe" [(ngModel)]="selectedEquipeId"
         (change)="onChangeEquipe($event)">
       <option  *ngFor="let e of equipeArray" [value]="e.idEquipe">
@@ -180,6 +133,59 @@
     </select>
     <p class="help-block">{{equipe | json}}</p>
     </div>
+    
+  <label class="col-md-2 control-label">Email :</label>
+  <div class="col-md-4">
+    <div class="input-group">
+      <span class="input-group-addon">@</span>
+      <input id="employe-email"required [(ngModel)]="employe.email"  name="employe-email" autocomplete="off"class="form-control" placeholder="tonnom@tondomain.tn" type="email">
+    </div>
+    
+  </div>
+   
+  
+</div>
+
+<!-- Multiple Radios -->
+<div class="form-group">
+ 
+ 
+  <label class="col-md-2 control-label">Client status :</label>
+  <div class="col-md-4">
+  <div class="radio">
+    <label for="client-status-0">
+      <input type="radio" required [(ngModel)]="employe.active" name="client-status1" id="client-status-0" value="true" checked="checked">
+      Active
+    </label>
+  </div>
+  <div class="radio">
+    <label>
+      <input type="radio" required [(ngModel)]="employe.active" name="client-status2" id="client-status-1" value="false">
+      Inactive
+    </label>
+  </div>
+  </div>
+  <label class="col-md-2 control-label">Mot de passe :</label>
+  <div class="col-md-4">
+    <div class="input-group">
+      <span class="input-group-addon">*</span>
+      <input   type="password" autocomplete="off" id="employe-password"required [(ngModel)]="employe.password" autocomplete="off" name="employe-password" class="form-control" placeholder="tapez mot de passe" >
+    </div>
+    
+  </div>
+  <label class="col-md-2 control-label">Confirmation mot de passe :</label>
+  <div class="col-md-4">
+    <div class="input-group">
+      <span class="input-group-addon"> * </span>
+      <input   type="password" id="employe-confirmationpassword" autocomplete="off" name="employe-confirmationpassword" class="form-control" placeholder="confirmez mot de passe" >
+    </div>
+    
+  </div>
+</div>
+
+
+  <div class="form-group">
+ 
   </div>
 
 <!-- Button -->

@@ -7,10 +7,10 @@ export class Employe{
     matricule: string;
 	nomEmploye:string;
 	prenomEmploye:string;
-    dateNaissance:Date;
+    dateNaissance:Date= new Date();
     email:string;
 	password:string;
-	dateEmbauche:Date;
+	dateEmbauche:Date = new Date();
 	salaire:number;
 	post:string;
 	role:string;

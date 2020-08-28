@@ -32,7 +32,8 @@ export class GestionComptesComponent implements OnInit {
   selectedDepartementId:number;
   selectedEquipeId:number;
   selectedBureauId: number;
-  
+  offset: number =new Date().getTimezoneOffset() * 60 * 1000;
+
  
   
   constructor(private employeservice:EmployeService,private departementservice:DepartementService,private equipeservice:EquipeService,private bureauservice:BureauService,private formBuilder: FormBuilder, private router: Router) {}
@@ -113,6 +114,8 @@ this.bureauservice.findAllBureaux().subscribe(data=>{
 
   save() {
     console.log("employe: "+JSON.stringify(this.employe));
+    this.employe.dateNaissance = new Date(new Date(this.employe.dateNaissance).getTime() - this.offset);
+    this.employe.dateEmbauche = new Date(new Date(this.employe.dateEmbauche).getTime() - this.offset);
     this.employeservice.createEmploye(this.employe)
       .subscribe(data => console.log(data), error => console.log(error));
 //this.gotoList();

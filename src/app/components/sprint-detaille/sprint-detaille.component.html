@@ -1,0 +1,38 @@
+<hr/>
+<hr/>
+<legend  class="navbar-brand titre"  > Les informations du sprint</legend>
+<hr/>
+<div >
+        <div>
+            <b>Nom sprint  :</b><label>{{sprint.nomSprint}}</label>
+        </div>
+        <div>
+            <b>Date debut  :</b><label>{{sprint.dateDebut}}</label>
+        </div>
+        <div>
+            <b>Date fin  :</b><label>{{sprint.dateFin}}</label>
+        </div>
+
+        <div>
+            <b>Description   :</b><label>{{sprint.descriptionSprint}}</label>
+        </div>
+
+        
+        <div>
+            <b>Etat :</b><label>{{sprint.etatSprint}}</label>
+        </div>
+      
+        <div>
+            <b>Nom Projet :</b><label>{{sprint.projet.nomProjet}}</label>
+        </div>
+       
+      
+<br>
+<br>
+<!-- Button -->
+<div class="form-group">
+    <label class="col-md-0 control-label" for="btn-save"></label>
+    <div class="col-md-0">
+     <button id="btn-save"  (click)="list()" name="btn-save" class="btn btn-success">Retour au liste des projets</button>
+    </div>
+</div>

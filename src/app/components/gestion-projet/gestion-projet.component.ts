@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { ProjetService } from 'src/app/services/projet/projet.service';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { EquipeService } from 'src/app/services/equipe/equipe.service';
+import { Equipe } from 'src/app/models/equipe';
 
 @Component({
   selector: 'app-gestion-projet',
@@ -16,9 +18,19 @@ export class GestionProjetComponent implements OnInit {
   projets: Observable<Projet[]>;
   errorMessage: string;
   successMessage: string;
-  constructor(private projetservice:ProjetService,private formBuilder:FormBuilder,private router:Router) { }
+  equipeArray= [];
+  selectedEquipeId:number;
+equipe:Equipe;
+offset: number =new Date().getTimezoneOffset() * 60 * 1000;
+
+  constructor(private projetservice:ProjetService,private equipeservice:EquipeService,private formBuilder:FormBuilder,private router:Router) { }
 
   ngOnInit() {
+    this.equipeservice.findAllEquipe().subscribe(
+      data => {console.log("data from find all Equipe:"+JSON.stringify(data));   
+      
+                  this.equipeArray.push(...data);}
+    );
     this.reloadData();
   }
   newProjet(): void {
@@ -32,12 +44,17 @@ export class GestionProjetComponent implements OnInit {
        this.gotoList();
   }
   save() {
+    console.log("projet: "+JSON.stringify(this.projet));
+    this.projet.dateDebut = new Date(new Date(this.projet.dateDebut).getTime() - this.offset);
+    this.projet.dateFin = new Date(new Date(this.projet.dateFin).getTime() - this.offset);
     this.projetservice.createProjet(this.projet)
       .subscribe(data => console.log(data), error => console.log(error));
     this.projet= new Projet();
+    
+   
 this.gotoList();
-  }
-  reloadData(){
+  }  
+reloadData(){
     this.projets= this.projetservice.findAllProjets();
     
   }
@@ -62,5 +79,10 @@ this.gotoList();
     },
     error=>console.log(error));
     
+  }
+  onChangeEquipe(event){
+   
+    this.projet.equipe = {idEquipe:this.selectedEquipeId,nomEquipe:'',specialite:''};
+    console.log(JSON.stringify(this.projet.equipe.idEquipe));  
   }
 }

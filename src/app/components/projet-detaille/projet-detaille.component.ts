@@ -19,24 +19,23 @@ projet:Projet;
     this.projet=new Projet();
     
     this.id=this.route.snapshot.params['id'];
-
     this.projetservice.findProjetById(this.id)
     .subscribe(data=>{
       console.log(data)
       this.projet=data;
     }, error=>console.log(error));
-    
   }
   detailsProjet(){
     this.projetservice.findProjetById(this.id)
-    .subscribe(data=> console.log(data),error=>console.log(error)),
-    
+    .subscribe(data=> console.log(data)
+    ,error=>console.log(error)),
+
       this.projet=new Projet();
     
   }
 
   list(){
-    this.router.navigate(['gestionProjets']);
+    this.router.navigate(['gestionSprints']);
   }
 
 }
