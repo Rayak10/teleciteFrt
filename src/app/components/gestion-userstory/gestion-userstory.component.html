@@ -1,0 +1,108 @@
+<hr/>
+<hr/>
+<!-- FORM  -->	    
+	   <div class="col-md-16">	       
+     
+<fieldset>
+
+<!-- Form Name -->
+
+<legend  class="navbar-brand titre"  > Gestion des user stories</legend>
+<form (ngSubmit)="onSubmit()">
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" >User storie :</label>  
+  <div class="col-md-12">
+  <input id="sprint-name" required [(ngModel)]="userstory.libelleUserStory" name="userstory-name" type="text" placeholder="En tant que...... je veux ....." class="form-control input-md" >
+  <span class="help-block"></span>  
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-2 control-label">Priorité :</label>
+  <div class="col-md-4">
+    <input id="userstory-name" required [(ngModel)]="userstory.priorite" name="priorite-name" type="number" placeholder="choisir un nembre sur 5" class="form-control input-md" >
+    <p class="help-block"></p>
+    </div>
+  <label class="col-md-2 control-label" >Complexité  :</label>  
+  <div class="col-md-4">
+    <input id="complexite-name" required [(ngModel)]="userstory.complexite" name="complexite-name" type="number" placeholder="choisir un nembre sur 5" class="form-control input-md" >
+  <span class="help-block"></span>  
+  </div>
+</div>
+  <label class="col-md-2 control-label">Sprint :</label>
+  <div class="col-md-4">
+    <select required
+     type="text" 
+     class="form-control "
+      id="field_sprint"
+        name="sprint" [(ngModel)]="selectedSprintId"
+        (change)="onChange($event)">
+      <option  *ngFor="let s of sprintArray" [value]="s.idSprint">
+        {{s.nomSprint}}
+      </option>
+    </select>
+    <p class="help-block"></p>
+    </div>
+<!-- Button -->
+
+    <label class="col-md-4 control-label" for="btn-save"></label>
+    <div class="col col-lg-2">
+     <button id="btn-save" name="btn-save" type="submit" class="btn btn-success">Enregistrer</button>
+    </div>
+</form>
+</fieldset>
+	   </div> 
+	    
+
+
+
+<!-- LIST -->
+<div class=col-md-12 >
+    
+    <form id="form-list-sprintsProjet" >
+            <legend class="navbar-brand titre">Liste des UserStory du Sprints</legend>
+    
+   <!-- <div class="pull-right">
+        <a class="btn btn-default-btn-xs btn-primary"><i class="glyphicon glyphicon-refresh"></i> Refresh</a>
+        <a class="btn btn-default-btn-xs btn-success"><i class="glyphicon glyphicon-plus"></i> New</a>
+    </div> -->
+    <table class="table table-bordered table-condensed table-hover">
+        <thead>
+            <tr>
+                <th>UserStory</th>
+                <th>Priorite</th>
+                <th>Complexite</th>
+                <th>Sprint</th>
+                <th>Projet</th>
+                <th>Actions</th>
+            </tr>
+                
+        </thead>
+        <tbody id="form-list-projets-body"  *ngFor="let sprint of sprints | async">
+            <tr>
+                <td>{{userstory.libelleUserStory}}</td>
+                <td>{{userstory.priorite}}</td>
+                <td>{{sprint.complexite}}</td>
+                <td>{{userstory.sprint.nomSprint}}</td>
+                <td>{{userstory.sprint.projet.nomProjet}}</td>
+
+                <td>
+                  
+                    <a title="les détails du projet" class="btn btn-default btn-sm "(click)="sprintDetails(sprint.idSprint)"> <i class="glyphicon glyphicon-eye-open text-primary"  ></i> </a> 
+                    <a title="modifier le  projet" class="btn btn-default btn-sm "(click)="updateSprint(sprint.idSprint)"> <i class="glyphicon glyphicon-edit text-primary"></i> </a>
+                    <a title="supprimer le projet " class="btn btn-default btn-sm " (click)="deleteSprints(sprint.idSprint)"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
+                    
+                   
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </form>
+
+    
+</div>
+
+
+<br> 
+

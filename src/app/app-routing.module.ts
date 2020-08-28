@@ -9,6 +9,8 @@ import { ProjetUpdateComponent } from './components/projet-update/projet-update.
 import { ProjetDetailleComponent } from './components/projet-detaille/projet-detaille.component';
 import { GestionSprintsComponent } from './components/gestion-sprints/gestion-sprints.component';
 import { SprintDetailleComponent } from './components/sprint-detaille/sprint-detaille.component';
+import { SprintUpdateComponent } from './components/sprint-update/sprint-update.component';
+import { GestionUserstoryComponent } from './components/gestion-userstory/gestion-userstory.component';
 
 
 
@@ -23,6 +25,8 @@ const routes: Routes = [
   {path: 'projets/details/:id',component :ProjetDetailleComponent },
   {path: 'gestionSprints',component :GestionSprintsComponent },
   {path: 'sprints/details/:id',component :SprintDetailleComponent },
+  {path: 'sprints/update/:id',component :SprintUpdateComponent },
+  {path: 'gestionUserstory', component: GestionUserstoryComponent},
 
 
 

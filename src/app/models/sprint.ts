@@ -4,7 +4,7 @@ export class Sprint{
     
     
     
-        idProjet:number;
+        idSprint:number;
         nomSprint:string;
         numeroSprint:number;
         dateDebut:Date=new Date();

@@ -4,7 +4,6 @@ import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Sprint } from 'src/app/models/sprint';
 import { Observable } from 'rxjs';
-import { Projet } from 'src/app/models/projet';
 import { ProjetService } from 'src/app/services/projet/projet.service';
 
 @Component({
@@ -26,7 +25,7 @@ export class GestionSprintsComponent implements OnInit {
   constructor(private sprintservice:SprintService,private projetservice:ProjetService,private formBuilder:FormBuilder,private router:Router) { }
 
   ngOnInit() {
-this.etatArray=["To do","Doing","Done"]
+this.etatArray=["Non terminé","Terminé"]
 this.projetservice.findAllProjets().subscribe(
   data => {console.log("data from find all projet:"+JSON.stringify(data));   
   
@@ -35,7 +34,7 @@ this.projetservice.findAllProjets().subscribe(
 this.reloadData();
 }
     
-newProjet(): void {
+newSprint(): void {
   this.submitted = false;
   this.sprint= new Sprint();
 }

@@ -16,6 +16,8 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GestionSprintsComponent } from './components/gestion-sprints/gestion-sprints.component';
 import { SprintDetailleComponent } from './components/sprint-detaille/sprint-detaille.component';
+import { SprintUpdateComponent } from './components/sprint-update/sprint-update.component';
+import { GestionUserstoryComponent } from './components/gestion-userstory/gestion-userstory.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { SprintDetailleComponent } from './components/sprint-detaille/sprint-det
     ProjetUpdateComponent,
     ProjetDetailleComponent,
     GestionSprintsComponent,
-    SprintDetailleComponent
+    SprintDetailleComponent,
+    SprintUpdateComponent,
+    GestionUserstoryComponent
   ],
   imports: [
     BrowserModule,
