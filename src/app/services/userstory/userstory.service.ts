@@ -14,7 +14,7 @@ export class UserstoryService {
     return this.http.get<Userstory[]>(AppSettings.APP_URL+"/userStorys/")
   }
   findUserstoryById(idUserStory:number){
-    return this.http.get<Sprint>(AppSettings.APP_URL+"/userStorys/"+idUserStory)
+    return this.http.get<Userstory>(AppSettings.APP_URL+"/userStorys/"+idUserStory)
 
   }
   findAllStoriessprint(idSprint:number){

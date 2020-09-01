@@ -59,10 +59,10 @@ reloadData(){
   
 }
 userstoryDetails(id:number){
-  this.router.navigate(['sprints/details',id]);
+  this.router.navigate(['userstory/details',id]);
 }
 updateUserstory(id:number){
-  this.router.navigate(['sprints/update',id]);
+  this.router.navigate(['userstory/update',id]);
 }
 gotoList(){
   this.router.navigate(['gestionUserstory']);

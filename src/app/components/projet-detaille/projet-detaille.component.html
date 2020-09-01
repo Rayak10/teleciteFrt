@@ -30,6 +30,52 @@
 </div>
 <br>
 <br>
+<!-- LIST -->
+<div class=col-md-12 >
+    
+    <form id="form-list-sprintsProjet" >
+            <legend class="navbar-brand titre">Liste des sprints de projet</legend>
+    
+   <!-- <div class="pull-right">
+        <a class="btn btn-default-btn-xs btn-primary"><i class="glyphicon glyphicon-refresh"></i> Refresh</a>
+        <a class="btn btn-default-btn-xs btn-success"><i class="glyphicon glyphicon-plus"></i> New</a>
+    </div>-->
+    <table class="table table-bordered table-condensed table-hover">
+        <thead>
+            <tr>
+                <th>Nom sprint</th>
+                <th>Date Début</th>
+                <th>Date Fin</th>
+                <th>Statut</th>
+                <th>Actions</th>
+            </tr>
+                
+        </thead>
+        <tbody id="form-list-projets-body"  *ngFor="let sprint of sprints | async">
+            <tr>
+                <td>{{sprint.nomSprint}}</td>
+                <td>{{sprint.dateDebut}}</td>
+                <td>{{sprint.dateFin}}</td>
+                <td>{{sprint.etatSprint}}</td>
+
+                <td>
+                  
+                    <a title="les détails du projet" class="btn btn-default btn-sm "(click)="sprintDetails(sprint.idSprint)"> <i class="glyphicon glyphicon-eye-open text-primary"  ></i> </a> 
+                    <a title="modifier le  projet" class="btn btn-default btn-sm "(click)="updateSprint(sprint.idSprint)"> <i class="glyphicon glyphicon-edit text-primary"></i> </a>
+                    <a title="supprimer le projet " class="btn btn-default btn-sm " (click)="deleteSprints(sprint.idSprint)"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
+                    
+                   
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </form>
+
+    
+</div>
+
+
+<br> 
 <!-- Button -->
 <div class="form-group">
     <label class="col-md-0 control-label" for="btn-save"></label>

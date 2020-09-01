@@ -18,6 +18,7 @@ import { GestionSprintsComponent } from './components/gestion-sprints/gestion-sp
 import { SprintDetailleComponent } from './components/sprint-detaille/sprint-detaille.component';
 import { SprintUpdateComponent } from './components/sprint-update/sprint-update.component';
 import { GestionUserstoryComponent } from './components/gestion-userstory/gestion-userstory.component';
+import { UserstoryUpdateComponent } from './components/userstory-update/userstory-update.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { GestionUserstoryComponent } from './components/gestion-userstory/gestio
     GestionSprintsComponent,
     SprintDetailleComponent,
     SprintUpdateComponent,
-    GestionUserstoryComponent
+    GestionUserstoryComponent,
+    UserstoryUpdateComponent
   ],
   imports: [
     BrowserModule,

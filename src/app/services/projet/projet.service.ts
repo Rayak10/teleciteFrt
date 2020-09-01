@@ -17,6 +17,10 @@ export class ProjetService {
     return this.http.get<Projet>(AppSettings.APP_URL+"/projets/"+idProjet)
 
   }
+  findProjetSprint(idSprint:number){
+    return this.http.get<Projet>(AppSettings.APP_URL+"/projets/sprintProjet"+idSprint)
+
+  }
 
   createProjet(projet:Projet){
     return this.http.post<Projet>(AppSettings.APP_URL+"/projets/",projet)

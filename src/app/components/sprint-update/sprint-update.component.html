@@ -78,15 +78,18 @@
     </div>
 <!-- Button -->
 
-    <label class="col-md-4 control-label" for="btn-save"></label>
-    <div class="col col-lg-2">
-     <button id="btn-save" name="btn-save" type="submit" class="btn btn-success">Modifier</button>
-    </div>
+    
 </form>
 </fieldset>
+</div> 
 
-
-
-	   </div> 
+<label class="col-md-2 control-label" for="btn-save"></label>
+    <div class="col col-lg-2">
+     <button id="btn-save" name="btn-save" (click)="projetDetails(sprint.projet.idProjet)" class="btn btn-success">Modifier et retour au liste sprints projet</button>
+    </div>
+    <label class="col-md-4 control-label" for="btn-save"></label>
+    <div class="col col-lg-2">
+     <button id="btn-save" name="btn-save"  (click)="gotoList()"  class="btn btn-success">Modifier et retour au liste sprints</button>
+    </div>
 	    
 

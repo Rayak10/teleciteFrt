@@ -56,7 +56,8 @@ this.gotoList();
   }  
 reloadData(){
     this.projets= this.projetservice.findAllProjets();
-    
+    console.log("projetsssssssssssssssssssssssssssssss: "+JSON.stringify(this.projets));
+
   }
   projetDetails(id:number){
     this.router.navigate(['projets/details',id]);

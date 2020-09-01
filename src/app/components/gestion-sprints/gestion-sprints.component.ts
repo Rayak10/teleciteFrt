@@ -56,7 +56,7 @@ save() {
 this.gotoList();
 }  
 reloadData(){
-  this.sprints= this.sprintservice.findAllSprint();
+  this.sprints= this.sprintservice.findAllSprintOrderByProjet();
   
 }
 sprintDetails(id:number){
@@ -83,7 +83,7 @@ deleteSprints(id:number){
 }
 onChange(event){
  
-  this.sprint.projet = {idProjet:this.selectedProjetId,nomProjet:'',theme:'',description:'',descriptionTechnique:'',dateDebut:null,dateFin:null,equipe:null};
+  this.sprint.projet = {idProjet:this.selectedProjetId,dateDebut:null,dateFin:null,descriptionTechnique:'',equipe:null,description:'',nomProjet:'',theme:'',sprints:[]};
   console.log(JSON.stringify(this.sprint.projet.idProjet));  
 }
 }

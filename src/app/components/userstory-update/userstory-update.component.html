@@ -1,0 +1,58 @@
+<hr/>
+<hr/>
+<!-- FORM  -->	    
+	   <div class="col-md-16">	       
+     
+<fieldset>
+
+<!-- Form Name -->
+
+<legend  class="navbar-brand titre"  >Changer les informations</legend>
+<form (ngSubmit)="onSubmit()">
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" >User storie :</label>  
+  <div class="col-md-12">
+  <input id="sprint-name" required [(ngModel)]="userstory.libelleUserStory" name="userstory-name" type="text" placeholder="En tant que...... je veux ....." class="form-control input-md" >
+  <span class="help-block"></span>  
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-2 control-label">Priorité :</label>
+  <div class="col-md-4">
+    <input id="userstory-name" required [(ngModel)]="userstory.priorite" name="priorite-name" type="number" placeholder="choisir un nembre sur 5" class="form-control input-md" >
+    <p class="help-block"></p>
+    </div>
+  <label class="col-md-2 control-label" >Complexité  :</label>  
+  <div class="col-md-4">
+    <input id="complexite-name" required [(ngModel)]="userstory.complexite" name="complexite-name" type="number" placeholder="choisir un nembre sur 5" class="form-control input-md" >
+  <span class="help-block"></span>  
+  </div>
+</div>
+  <label class="col-md-2 control-label">Sprint :</label>
+  <div class="col-md-4">
+    <select required
+     type="text" 
+     class="form-control "
+      id="field_sprint"
+        name="sprint" [(ngModel)]="userstory.sprint.idSprint"
+        >
+      <option  *ngFor="let sprint of sprintArray" [value]="sprint.idSprint">
+        {{sprint.nomSprint}}
+      </option>
+    </select>
+    <p class="help-block"> </p>
+    </div>
+<!-- Button -->
+
+    <label class="col-md-4 control-label" for="btn-save"></label>
+    <div class="col col-lg-2">
+     <button id="btn-save" name="btn-save" type="submit" class="btn btn-success">Modifier</button>
+    </div>
+</form>
+</fieldset>
+	   </div> 
+	    
+
+

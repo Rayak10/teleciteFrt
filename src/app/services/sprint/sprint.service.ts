@@ -13,12 +13,15 @@ export class SprintService {
   findAllSprint(){
     return this.http.get<Sprint[]>(AppSettings.APP_URL+"/sprints/")
   }
+  findAllSprintOrderByProjet(){
+    return this.http.get<Sprint[]>(AppSettings.APP_URL+"/sprints/projets/")
+  }
   findSprintById(idSprint:number){
     return this.http.get<Sprint>(AppSettings.APP_URL+"/sprints/"+idSprint)
 
   }
   findSprintsByProjet(idProjet:number){
-    return this.http.get<Sprint>(AppSettings.APP_URL+"/sprints/all/"+idProjet)
+    return this.http.get<Sprint[]>(AppSettings.APP_URL+"/sprints/projet/"+idProjet)
 
   }
   findByEtatSprint(etatSprint:String ){

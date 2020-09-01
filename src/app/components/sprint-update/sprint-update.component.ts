@@ -53,14 +53,19 @@ updateSprint(){
   
     this.sprint=new Sprint();
   
-    this.gotoList();
     this.reloadData();
 }
 onSubmit(){
   this.updateSprint();
 }
 gotoList(){
+  this.updateSprint();
   this.router.navigate(['gestionSprints']);
+}
+projetDetails(id:number){
+  this.updateSprint();
+
+  this.router.navigate(['projets/details',id]);
 }
 reloadData(){
   this.sprints=this.sprintservice.findAllSprint();

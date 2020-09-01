@@ -1,4 +1,6 @@
 import { Equipe } from './equipe';
+import { Observable } from 'rxjs';
+import { Sprint } from './sprint';
 
 export class Projet{
     
@@ -10,7 +12,6 @@ descriptionTechnique:string;
 dateDebut:Date=new Date();
 dateFin :Date = new Date();
 equipe: Equipe=new Equipe();
-
-
+sprints:Sprint[];
 
 }
