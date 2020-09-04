@@ -9,7 +9,7 @@
 <!-- Form Name -->
 
 <legend  class="navbar-brand titre"  > Gestion des projets</legend>
-<form (ngSubmit)="onSubmit()">
+<form #getprojetForm="ngForm"(ngSubmit)="onSubmit(getprojetForm)">
 <!-- Text input-->
 <div class="form-group">
   <label class="col-md-2 control-label" >Nom de projet:</label>  

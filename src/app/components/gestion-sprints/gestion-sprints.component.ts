@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SprintService } from 'src/app/services/sprint/sprint.service';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Sprint } from 'src/app/models/sprint';
 import { Observable } from 'rxjs';
@@ -38,9 +38,10 @@ newSprint(): void {
   this.submitted = false;
   this.sprint= new Sprint();
 }
-onSubmit() {
+onSubmit(getSprintForm:NgForm) {
   this.submitted = true;
   this.save(); 
+  getSprintForm.reset();
      this.reloadData();
      this.gotoList();
 }

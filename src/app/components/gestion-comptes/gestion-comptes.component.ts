@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeService } from 'src/app/services/employe/employe.service';
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, NgForm } from '@angular/forms';
 import { Router, NavigationEnd } from '@angular/router';
 import { Employe } from 'src/app/models/employe';
 import { Observable } from 'rxjs';
@@ -77,10 +77,10 @@ this.mySubscription = this.router.events.subscribe((event) => {
     this.submitted = false;
     this.employe= new Employe();
   }
-  onSubmit() {
+  onSubmit(getCompteForm:NgForm) {
     this.submitted = true;
     this.save(); 
-      this.reloadData();
+    getCompteForm.reset();
      this.gotoList();
         
      

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Projet } from 'src/app/models/projet';
 import { Observable } from 'rxjs';
 import { ProjetService } from 'src/app/services/projet/projet.service';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EquipeService } from 'src/app/services/equipe/equipe.service';
 import { Equipe } from 'src/app/models/equipe';
@@ -37,9 +37,11 @@ offset: number =new Date().getTimezoneOffset() * 60 * 1000;
     this.submitted = false;
     this.projet= new Projet();
   }
-  onSubmit() {
+  onSubmit(gestProjet:NgForm) {
     this.submitted = true;
     this.save(); 
+    gestProjet.reset();
+
        this.reloadData();
        this.gotoList();
   }

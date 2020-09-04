@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Userstory } from 'src/app/models/userStory';
 import { Observable } from 'rxjs';
 import { ProjetService } from 'src/app/services/projet/projet.service';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Sprint } from 'src/app/models/sprint';
 import { UserstoryService } from 'src/app/services/userstory/userstory.service';
 import { SprintService } from 'src/app/services/sprint/sprint.service';
+import { Projet } from 'src/app/models/projet';
 
 @Component({
   selector: 'app-gestion-userstory',
@@ -19,17 +20,22 @@ export class GestionUserstoryComponent implements OnInit {
   userstorys: Observable<Userstory[]>;
   errorMessage: string;
   successMessage: string;
-  sprintArray= [];
-  selectedSprintId:number;
+  projetArray= [];
+  storysArray= [];
 
-  constructor(private userstoryservice:UserstoryService,private sprintservice:SprintService,private formBuilder:FormBuilder,private router:Router) { }
+  selectedSprintId:number;
+  selectedProjetId:any;
+  projet:Projet;
+  sprint:Observable<Sprint>;
+  val:number;
+  constructor(private userstoryservice:UserstoryService,private projetservice:ProjetService,private sprintservice:SprintService,private formBuilder:FormBuilder,private router:Router) { }
 
   ngOnInit() {
 
-this.sprintservice.findAllSprint().subscribe(
-  data => {console.log("data from find all sprints:"+JSON.stringify(data));   
+this.projetservice.findAllProjets().subscribe(
+  data => {console.log("data from find all projets:"+JSON.stringify(data));   
   
-              this.sprintArray.push(...data);}
+              this.projetArray.push(...data);}
 );
 this.reloadData();
 }
@@ -38,9 +44,10 @@ newUserstory(): void {
   this.submitted = false;
   this.userstory= new Userstory();
 }
-onSubmit() {
+onSubmit(userstorieForm:NgForm) {
   this.submitted = true;
   this.save(); 
+  userstorieForm.reset();
      this.reloadData();
      this.gotoList();
 }
@@ -49,6 +56,7 @@ save() {
  
   this.userstoryservice.createUserStory(this.userstory)
     .subscribe(data => console.log(data), error => console.log(error));
+    
   this.userstory= new Userstory();
   
  
@@ -80,9 +88,20 @@ deleteUserstory(id:number){
   error=>console.log(error));
   
 }
+
+
 onChange(event){
- 
-  this.userstory.sprint = {idSprint:this.selectedSprintId,nomSprint:'',numeroSprint:null,dateDebut:null,dateFin:null,etatSprint:'',descriptionSprint:'',projet:null};
-  console.log(JSON.stringify(this.userstory.sprint.idSprint));  
+   
+  console.log("id projettttttt: "+JSON.stringify(this.selectedProjetId));
+  this.sprintservice.findSprintBlByProjet(this.selectedProjetId).subscribe(
+    response =>{
+      this.userstory.sprint = response;
+    },
+    error => alert('problem!!!')
+  );
+  console.log('traiment');
+  this.userstorys=this.userstoryservice.findAllUserstoryByProjet(this.selectedProjetId) 
 }
 }
+
+

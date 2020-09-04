@@ -30,20 +30,15 @@
   <span class="help-block"></span>  
   </div>
 </div>
-  <label class="col-md-2 control-label">Sprint :</label>
-  <div class="col-md-4">
-    <select required
-     type="text" 
-     class="form-control "
-      id="field_sprint"
-        name="sprint" [(ngModel)]="userstory.sprint.idSprint"
-        >
-      <option  *ngFor="let sprint of sprintArray" [value]="sprint.idSprint">
-        {{sprint.nomSprint}}
-      </option>
-    </select>
-    <p class="help-block"> </p>
-    </div>
+<div class="form-group">
+  <label class="col-md-4 control-label" >Backlog Produit de projet :</label>  
+  <div class="col-md-12">
+    <input id="sprintuser-name" required [(ngModel)]="userstory.sprint.projet.nomProjet"disabled="disabled" name="sprintuser-name" type="text" placeholder="" class="form-control input-md" >
+    <span class="help-block"></span>  
+  </div>
+</div>
+
+  
 <!-- Button -->
 
     <label class="col-md-4 control-label" for="btn-save"></label>

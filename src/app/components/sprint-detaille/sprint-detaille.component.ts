@@ -26,7 +26,10 @@ sprint:Sprint;
   }
   
   
-
+  projetDetails(id:number){
+  
+    this.router.navigate(['projets/details',id]);
+  }
   list(){
     this.router.navigate(['gestionSprints']);
   }

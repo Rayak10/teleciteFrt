@@ -8,7 +8,7 @@
 <!-- Form Name -->
 
 <legend  class="navbar-brand titre"  > Gestion des sprints</legend>
-<form (ngSubmit)="onSubmit()">
+<form #getSprintForm="ngForm" (ngSubmit)="onSubmit(getSprintForm)">
 <!-- Text input-->
 <div class="form-group">
   <label class="col-md-2 control-label" >Nom de Sprint :</label>  

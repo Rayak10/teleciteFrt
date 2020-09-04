@@ -9,7 +9,7 @@
 <!-- Form Name -->
 
 <legend  class="navbar-brand titre"  > Gestion des employés</legend>
-<form (ngSubmit)="onSubmit()">
+<form #getCompteForm="ngForm"(ngSubmit)="onSubmit(getCompteForm)">
 <!-- Text input-->
 <div class="form-group">
   <label class="col-md-2 control-label" >Nom :</label>  

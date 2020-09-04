@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Sprint } from 'src/app/models/sprint';
 import { AppSettings } from 'src/app/settings/app.settings';
 import { Userstory } from 'src/app/models/userStory';
 
@@ -12,6 +11,9 @@ export class UserstoryService {
 
   findAllUserstory(){
     return this.http.get<Userstory[]>(AppSettings.APP_URL+"/userStorys/")
+  }
+  findAllUserstoryByProjet(idProjet:number){
+    return this.http.get<Userstory[]>(AppSettings.APP_URL+"/userStorys/userstorysProjet/"+idProjet)
   }
   findUserstoryById(idUserStory:number){
     return this.http.get<Userstory>(AppSettings.APP_URL+"/userStorys/"+idUserStory)

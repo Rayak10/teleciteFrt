@@ -8,7 +8,7 @@
 <!-- Form Name -->
 
 <legend  class="navbar-brand titre"  > Gestion des user stories</legend>
-<form (ngSubmit)="onSubmit()">
+<form #userstoryForm="ngForm" (ngSubmit)="onSubmit(userstoryForm)">
 <!-- Text input-->
 <div class="form-group">
   <label class="col-md-4 control-label" >User storie :</label>  
@@ -30,16 +30,16 @@
   <span class="help-block"></span>  
   </div>
 </div>
-  <label class="col-md-2 control-label">Sprint :</label>
+  <label class="col-md-2 control-label">Projet :</label>
   <div class="col-md-4">
     <select required
      type="text" 
      class="form-control "
-      id="field_sprint"
-        name="sprint" [(ngModel)]="selectedSprintId"
+      id="field_projet"
+        name="projet" [(ngModel)]="selectedProjetId"
         (change)="onChange($event)">
-      <option  *ngFor="let s of sprintArray" [value]="s.idSprint">
-        {{s.nomSprint}}
+      <option  *ngFor="let p of projetArray" [value]="p.idProjet">
+        {{p.nomProjet}}
       </option>
     </select>
     <p class="help-block"></p>
@@ -57,16 +57,12 @@
 
 
 
-<!-- LIST -->
+<!--LIST-->
 <div class=col-md-12 >
     
     <form id="form-list-sprintsProjet" >
             <legend class="navbar-brand titre">Liste des UserStory</legend>
-    
-   <!-- <div class="pull-right">
-        <a class="btn btn-default-btn-xs btn-primary"><i class="glyphicon glyphicon-refresh"></i> Refresh</a>
-        <a class="btn btn-default-btn-xs btn-success"><i class="glyphicon glyphicon-plus"></i> New</a>
-    </div> -->
+  
     <table class="table table-bordered table-condensed table-hover">
         <thead>
             <tr>
@@ -106,3 +102,4 @@
 
 <br> 
 
+ 

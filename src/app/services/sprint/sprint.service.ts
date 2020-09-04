@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AppSettings } from 'src/app/settings/app.settings';
 import { Sprint } from 'src/app/models/sprint';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class SprintService {
     return this.http.get<Sprint[]>(AppSettings.APP_URL+"/sprints/")
   }
   findAllSprintOrderByProjet(){
-    return this.http.get<Sprint[]>(AppSettings.APP_URL+"/sprints/projets/")
+    return this.http.get<Sprint[]>(AppSettings.APP_URL+"/sprints/orderByprojets/")
   }
   findSprintById(idSprint:number){
     return this.http.get<Sprint>(AppSettings.APP_URL+"/sprints/"+idSprint)
@@ -22,6 +23,10 @@ export class SprintService {
   }
   findSprintsByProjet(idProjet:number){
     return this.http.get<Sprint[]>(AppSettings.APP_URL+"/sprints/projet/"+idProjet)
+
+  }
+  findSprintBlByProjet(idProjet:number): Observable<Sprint>{
+    return this.http.get<Sprint>(AppSettings.APP_URL+"/sprints/backProduit/"+idProjet)
 
   }
   findByEtatSprint(etatSprint:String ){
