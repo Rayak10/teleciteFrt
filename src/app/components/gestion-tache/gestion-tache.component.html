@@ -1,0 +1,112 @@
+<hr/>
+<hr/>
+
+<!-- FORM  -->	    
+	   <div class="container">	       
+     
+<fieldset>
+
+<!-- Form Name -->
+
+<legend  class="navbar-brand titre"  > Gestion des taches </legend>
+<form #tacheForm="ngForm" (ngSubmit)="onSubmit(tacheForm)">
+<!-- Text input-->
+<div class="row">
+  <div class="col col-md-2">
+
+<label class="control-label">description tache :</label>
+</div>
+<div class="col col-md-8">
+    <textarea id="tache-name"  rows="2" cols="12" required [(ngModel)]="tache.descriptionTache" name="tache-name" type="text" placeholder="En tant que...... je veux .....à fin de .....  ." class="form-control input-md"></textarea>
+
+    <p class="help-block"></p>
+    </div>
+
+</div>
+
+<div class="row">
+  <div class="col col-md-2">
+
+  <label class=" control-label">Durée tache :</label>
+</div>
+<div class="col col-md-3">
+
+    <input id="tache-name" required [(ngModel)]="tache.dureeTache" name="duree-name" type="number" placeholder="Nembre des jours." class="form-control input-md" >
+    <p class="help-block"></p>
+    </div>
+  
+    <div class="col col-md-2">
+      <label class="control-label" >Etat tache  :</label>  
+    </div>
+    <div class="col col-md-3">
+
+        <select required
+        type="text" 
+        class="form-control "
+         id="field_tache"
+           name="tacheEta" [(ngModel)]="tache.etatTache">
+         <option *ngFor='let etat of etatArray'> {{etat}} </option>
+         
+       </select>  <span class="help-block"></span>  
+  </div>
+</div>
+<hr>
+<!-- Button -->
+<div class="row">
+    <div class="col align-self-start">
+      <label class="col-md-5.5 control-label" for="btn-save"></label>
+    </div>
+    <div class="col align-self-center">
+      <label class="col-md-5 control-label" for="btn-save"></label>
+    </div>
+    
+    <div class="col col-md-1">
+      <button id="btn-save" name="btn-save" type="submit" class="btn btn-success">Enregistrer</button>
+    </div>
+  </div>
+
+
+
+</form>
+</fieldset>
+	  
+</div> 
+<!--LIST-->
+<div class=col-md-12 >
+    
+    <form id="form-list-tache" >
+            <legend class="navbar-brand titre">Liste taches de user story</legend>
+  
+    <table class="table table-bordered table-condensed table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Tâche</th>
+                <th scope="col">Durée</th>
+                <th scope="col">Etat</th>
+           <th scope="col">Projet</th>
+                <th scope="col">Actions</th>
+            </tr>
+                
+        </thead>
+        <tbody id="form-list-projets-body"  *ngFor="let tache of taches|async">
+            <tr>
+                <td>{{tache.descriptionTache}}</td>
+                <td>{{tache.dureeTache}}</td>
+                <td>{{tache.etatTache}}</td>
+                <td>{{tache.userStory.sprint.projet.nomProjet}}</td>
+
+                <td>
+                  
+                    <a title="les détails du projet" class="btn btn-default btn-sm "(click)="userstoryDetails(userstory.idUserStory)"> <i class="glyphicon glyphicon-eye-open text-primary"  ></i> </a> 
+                    <a title="modifier le  projet" class="btn btn-default btn-sm "(click)="updateUserstory(userstory.idUserStory)"> <i class="glyphicon glyphicon-edit text-primary"></i> </a>
+                    <a title="supprimer le projet " class="btn btn-default btn-sm " (click)="deleteUserstory(userstory.idUserStory)"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
+                    
+                   
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </form>
+
+    
+</div>

@@ -12,6 +12,8 @@ import { SprintDetailleComponent } from './components/sprint-detaille/sprint-det
 import { SprintUpdateComponent } from './components/sprint-update/sprint-update.component';
 import { GestionUserstoryComponent } from './components/gestion-userstory/gestion-userstory.component';
 import { UserstoryUpdateComponent } from './components/userstory-update/userstory-update.component';
+import { UserstoryDetailleComponent } from './components/userstory-detaille/userstory-detaille.component';
+import { GestionTacheComponent } from './components/gestion-tache/gestion-tache.component';
 
 
 
@@ -29,6 +31,8 @@ const routes: Routes = [
   {path: 'sprints/update/:id',component :SprintUpdateComponent },
   {path: 'gestionUserstory', component: GestionUserstoryComponent},
   {path: 'userstory/update/:id', component: UserstoryUpdateComponent},
+  {path: 'userstory/details/:id',component :UserstoryDetailleComponent},
+  {path: 'gestionTaches/:id', component: GestionTacheComponent},
 
 
 

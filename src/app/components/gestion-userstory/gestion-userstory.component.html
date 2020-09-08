@@ -1,7 +1,8 @@
 <hr/>
 <hr/>
+
 <!-- FORM  -->	    
-	   <div class="col-md-16">	       
+	   <div class="container">	       
      
 <fieldset>
 
@@ -10,31 +11,15 @@
 <legend  class="navbar-brand titre"  > Gestion des user stories</legend>
 <form #userstoryForm="ngForm" (ngSubmit)="onSubmit(userstoryForm)">
 <!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" >User storie :</label>  
-  <div class="col-md-12">
-  <input id="sprint-name" required [(ngModel)]="userstory.libelleUserStory" name="userstory-name" type="text" placeholder="En tant que...... je veux .....à fin de ....." class="form-control input-md" >
-  <span class="help-block"></span>  
-  </div>
-</div>
+<div class="row">
+  <div class="col col-md-2">
 
-<div class="form-group">
-  <label class="col-md-2 control-label">Priorité :</label>
-  <div class="col-md-4">
-    <input id="userstory-name" required [(ngModel)]="userstory.priorite" name="priorite-name" type="number" placeholder="choisir un nembre sur 5" class="form-control input-md" >
-    <p class="help-block"></p>
-    </div>
-  <label class="col-md-2 control-label" >Complexité  :</label>  
-  <div class="col-md-4">
-    <input id="complexite-name" required [(ngModel)]="userstory.complexite" name="complexite-name" type="number" placeholder="choisir un nembre sur 5" class="form-control input-md" >
-  <span class="help-block"></span>  
-  </div>
+<label class="control-label">Projet :</label>
 </div>
-  <label class="col-md-2 control-label">Projet :</label>
-  <div class="col-md-4">
+<div class="col col-md-3">
     <select required
      type="text" 
-     class="form-control "
+     class=" form-control "
       id="field_projet"
         name="projet" [(ngModel)]="selectedProjetId"
         (change)="onChange($event)">
@@ -44,34 +29,79 @@
     </select>
     <p class="help-block"></p>
     </div>
-<!-- Button -->
 
-    <label class="col-md-4 control-label" for="btn-save"></label>
-    <div class="col col-lg-2">
-     <button id="btn-save" name="btn-save" type="submit" class="btn btn-success">Enregistrer</button>
+    <div class="col col-md-2">
+
+  <label class="control-label" >User storie :</label>  
+</div>
+  <div class="col col-md-4">
+    <textarea id="sprint-name"  rows="3" cols="25" required [(ngModel)]="userstory.libelleUserStory" name="userstory-name" type="text" placeholder="En tant que...... je veux .....à fin de ....." class="form-control input-md"></textarea>
+
+  <span class="help-block"></span>  
+  </div>
+</div>
+
+<div class="row">
+  <div class="col col-md-2">
+
+  <label class=" control-label">Priorité :</label>
+</div>
+<div class="col col-md-3">
+
+    <input id="userstory-name" required [(ngModel)]="userstory.priorite" name="priorite-name" type="number" placeholder="choisir un nembre sur 5" class="form-control input-md" >
+    <p class="help-block"></p>
     </div>
+  
+    <div class="col col-md-2">
+      <label class="control-label" >Complexité  :</label>  
+    </div>
+    <div class="col col-md-4">
+
+    <input id="complexite-name" required [(ngModel)]="userstory.complexite" name="complexite-name" type="number" placeholder="choisir un nembre sur 5" class="form-control input-md" >
+  <span class="help-block"></span>  
+  </div>
+</div>
+<hr>
+<!-- Button -->
+<div class="row">
+    <div class="col align-self-start">
+      <label class="col-md-5.5 control-label" for="btn-save"></label>
+    </div>
+    <div class="col align-self-center">
+      <label class="col-md-5 control-label" for="btn-save"></label>
+    </div>
+    
+    <div class="col col-md-1">
+      <button id="btn-save" name="btn-save" type="submit" class="btn btn-success">Enregistrer</button>
+    </div>
+  </div>
+
+
+
 </form>
 </fieldset>
-	   </div> 
-	    
+	  
+</div> 
+  
 
 
 
 <!--LIST-->
 <div class=col-md-12 >
     
-    <form id="form-list-sprintsProjet" >
+    <form id="form-list-userStoryProjet" >
             <legend class="navbar-brand titre">Liste des UserStory</legend>
   
     <table class="table table-bordered table-condensed table-hover">
         <thead>
             <tr>
-                <th>UserStory</th>
-                <th>Priorite</th>
-                <th>Complexite</th>
-                <th>Sprint</th>
-                <th>Projet</th>
-                <th>Actions</th>
+                <th scope="col">UserStory</th>
+                <th scope="col">Priorite</th>
+                <th scope="col">Complexite</th>
+                <th scope="col">Sprint</th>
+                <th scope="col">Projet</th>
+                <th scope="col"> tâches </th>
+                <th scope="col">Actions</th>
             </tr>
                 
         </thead>
@@ -82,7 +112,10 @@
                 <td>{{userstory.complexite}}</td>
                 <td>{{userstory.sprint.nomSprint}}</td>
                 <td>{{userstory.sprint.projet.nomProjet}}</td>
-
+                <td>
+                  
+                  <a title="ajouter les tâches pour un user Story" class="btn btn-default btn-sm "(click)="gestionTaches(userstory.idUserStory)"><i class="fas fa-tasks"></i> </a> 
+                </td>
                 <td>
                   
                     <a title="les détails du projet" class="btn btn-default btn-sm "(click)="userstoryDetails(userstory.idUserStory)"> <i class="glyphicon glyphicon-eye-open text-primary"  ></i> </a> 
@@ -99,7 +132,3 @@
     
 </div>
 
-
-<br> 
-
- 

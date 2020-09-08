@@ -40,3 +40,40 @@
         <button id="btn-save"  (click)="list()" name="btn-save" class="btn btn-success">Retour au liste des Sprints</button>
     </div>
 </div>
+    
+    <form id="form-list-sprintsProjet" >
+            <legend class="navbar-brand titre">Liste des UserStorys du sprint</legend>
+    
+                
+              
+                <table class="table table-bordered table-condensed table-hover">
+                    <thead>
+                        <tr>
+                            <th>UserStory</th>
+                            <th>Priorite</th>
+                            <th>Complexite</th>
+                            <th>Projet</th>
+                            <th>Sprint</th>
+                            <th>Actions</th>
+                        </tr>
+                            
+                    </thead>
+                    <tbody id="form-list-projets-body"  *ngFor="let userstory of userstorys | async">
+                        <tr>
+                            <td>{{userstory.libelleUserStory}}</td>
+                            <td>{{userstory.priorite}}</td>
+                            <td>{{userstory.complexite}}</td>
+                            <td>{{userstory.sprint.projet.nomProjet}}</td>
+                            <td>{{userstory.sprint.nomSprint}}</td>
+                            <td>
+                              
+                                <a title="les détails du projet" class="btn btn-default btn-sm "(click)="userstoryDetails(userstory.idUserStory)"> <i class="glyphicon glyphicon-eye-open text-primary"  ></i> </a> 
+                                <a title="modifier le  projet" class="btn btn-default btn-sm "(click)="updateUserstory(userstory.idUserStory)"> <i class="glyphicon glyphicon-edit text-primary"></i> </a>
+                                <a title="supprimer le projet " class="btn btn-default btn-sm " (click)="deleteUserstory(userstory.idUserStory)"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
+                                
+                               
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                </form>

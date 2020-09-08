@@ -1,0 +1,37 @@
+<hr/>
+<hr/>
+<legend  class="navbar-brand titre"  > Les informations du UserStory</legend>
+<hr/>
+<div >
+        <div>
+            <b>UserStory  :</b><label>{{userstory.libelleUserStory}}</label>
+        </div>
+        <div>
+            <b>Complexité   :</b><label>{{userstory.complexite}}</label>
+        </div>
+        <div>
+            <b>Priorité :</b><label>{{userstory.priorite}}</label>
+        </div>
+
+        <div>
+            <b>Sprint  :</b><label>{{userstory.sprint.nomSprint}}</label>
+        </div>
+        <div>
+            <b>projet  :</b><label>{{userstory.sprint.projet.nomProjet}}</label>
+        </div>
+      
+       
+      
+<br>
+<br>
+<!-- Button -->
+<label class="col-md-2 control-label" for="btn-save"></label>
+<div class="col col-lg-2">
+    <button id="btn-save" name="btn-save" (click)="sprintDetails(userstory.sprint.idSprint)" class="btn btn-success">Retour au detail Sprint</button>
+    </div>
+<div class="form-group">
+    <label class="col-md-4 control-label" for="btn-save"></label>
+    <div class="col col-lg-2">
+        <button id="btn-save"  (click)="list()" name="btn-save" class="btn btn-success">Retour au liste des userstorys </button>
+    </div>
+</div>

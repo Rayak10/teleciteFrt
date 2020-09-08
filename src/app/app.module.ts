@@ -19,6 +19,8 @@ import { SprintDetailleComponent } from './components/sprint-detaille/sprint-det
 import { SprintUpdateComponent } from './components/sprint-update/sprint-update.component';
 import { GestionUserstoryComponent } from './components/gestion-userstory/gestion-userstory.component';
 import { UserstoryUpdateComponent } from './components/userstory-update/userstory-update.component';
+import { UserstoryDetailleComponent } from './components/userstory-detaille/userstory-detaille.component';
+import { GestionTacheComponent } from './components/gestion-tache/gestion-tache.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { UserstoryUpdateComponent } from './components/userstory-update/userstor
     SprintDetailleComponent,
     SprintUpdateComponent,
     GestionUserstoryComponent,
-    UserstoryUpdateComponent
+    UserstoryUpdateComponent,
+    UserstoryDetailleComponent,
+    GestionTacheComponent
   ],
   imports: [
     BrowserModule,

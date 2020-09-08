@@ -28,6 +28,10 @@ export class GestionUserstoryComponent implements OnInit {
   projet:Projet;
   sprint:Observable<Sprint>;
   val:number;
+
+ 
+  
+
   constructor(private userstoryservice:UserstoryService,private projetservice:ProjetService,private sprintservice:SprintService,private formBuilder:FormBuilder,private router:Router) { }
 
   ngOnInit() {
@@ -71,6 +75,9 @@ userstoryDetails(id:number){
 }
 updateUserstory(id:number){
   this.router.navigate(['userstory/update',id]);
+}
+gestionTaches(id:number){
+  this.router.navigate(['gestionTaches',id]);
 }
 gotoList(){
   this.router.navigate(['gestionUserstory']);

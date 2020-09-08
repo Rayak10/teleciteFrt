@@ -20,7 +20,7 @@ export class UserstoryService {
 
   }
   findAllStoriessprint(idSprint:number){
-    return this.http.get<Userstory>(AppSettings.APP_URL+"/userStorys/all/"+idSprint)
+    return this.http.get<Userstory[]>(AppSettings.APP_URL+"/userStorys/sprint/"+idSprint)
 
   }
   
