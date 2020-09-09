@@ -61,6 +61,10 @@ gotoList(){
 reloadData(){
   this.userstorys=this.userstoryservice.findAllUserstory();
 }
+sprintDetails(id:number){
+  
+  this.router.navigate(['sprints/details',id]);
+}
 
 
 }

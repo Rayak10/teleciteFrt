@@ -24,7 +24,10 @@ export class UserstoryService {
 
   }
   
-  
+  findUserstoryTache(idTache:number){
+    return this.http.get<Userstory>(AppSettings.APP_URL+"/userStorys/userstoryTache/"+idTache)
+
+  }
   createUserStory(userStory:Userstory){
     return this.http.post<Userstory>(AppSettings.APP_URL+"/userStorys/",userStory)
   }

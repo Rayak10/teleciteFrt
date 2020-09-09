@@ -40,14 +40,16 @@
 
   
 <!-- Button -->
-
+<label class="col-md-2 control-label" for="btn-save"></label>
+<div class="col col-lg-2">
+    <button id="btn-save" name="btn-save" (click)="sprintDetails(userstory.sprint.idSprint)" class="btn btn-success">Retour au detail Sprint</button>
+    </div>
+<div class="form-group">
     <label class="col-md-4 control-label" for="btn-save"></label>
     <div class="col col-lg-2">
-     <button id="btn-save" name="btn-save" type="submit" class="btn btn-success">Modifier</button>
+        <button id="btn-save"  (click)="list()" name="btn-save" class="btn btn-success">Retour au liste des userstorys </button>
     </div>
-</form>
-</fieldset>
-	   </div> 
+</div>
 	    
 
 

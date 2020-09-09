@@ -78,8 +78,8 @@ save() {
 reloadData(){
   this.taches= this.tacheservice.findAllTacheByUserstory(this.id);  
 }
-userstoryDetails(id:number){
-  this.router.navigate(['userstory/details',id]);
+tacheDetails(id:number){
+  this.router.navigate(['taches/details',id]);
 }
 updateUserstory(id:number){
   this.router.navigate(['userstory/update',id]);
@@ -87,15 +87,15 @@ updateUserstory(id:number){
 gotoList(){
   this.router.navigate(['gestionUserstory']);
 }
-deleteUserstory(id:number){
-  this.userstoryservice.deleteUserStory(id)
+deleteTache(id:number){
+  this.tacheservice.deleteTache(id)
   .subscribe(
   data=>{
     console.log(data);
    
 
    this.reloadData();
-   this.gotoList();
+   //this.gotoList();
   },
   error=>console.log(error));
   

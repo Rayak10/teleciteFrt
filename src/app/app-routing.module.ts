@@ -14,6 +14,7 @@ import { GestionUserstoryComponent } from './components/gestion-userstory/gestio
 import { UserstoryUpdateComponent } from './components/userstory-update/userstory-update.component';
 import { UserstoryDetailleComponent } from './components/userstory-detaille/userstory-detaille.component';
 import { GestionTacheComponent } from './components/gestion-tache/gestion-tache.component';
+import { TacheDetailleComponent } from './components/tache-detaille/tache-detaille.component';
 
 
 
@@ -33,6 +34,7 @@ const routes: Routes = [
   {path: 'userstory/update/:id', component: UserstoryUpdateComponent},
   {path: 'userstory/details/:id',component :UserstoryDetailleComponent},
   {path: 'gestionTaches/:id', component: GestionTacheComponent},
+  {path: 'taches/details/:id',component :TacheDetailleComponent }
 
 
 

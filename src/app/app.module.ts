@@ -21,6 +21,7 @@ import { GestionUserstoryComponent } from './components/gestion-userstory/gestio
 import { UserstoryUpdateComponent } from './components/userstory-update/userstory-update.component';
 import { UserstoryDetailleComponent } from './components/userstory-detaille/userstory-detaille.component';
 import { GestionTacheComponent } from './components/gestion-tache/gestion-tache.component';
+import { TacheDetailleComponent } from './components/tache-detaille/tache-detaille.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { GestionTacheComponent } from './components/gestion-tache/gestion-tache.
     GestionUserstoryComponent,
     UserstoryUpdateComponent,
     UserstoryDetailleComponent,
-    GestionTacheComponent
+    GestionTacheComponent,
+    TacheDetailleComponent
   ],
   imports: [
     BrowserModule,

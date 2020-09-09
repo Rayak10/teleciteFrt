@@ -30,11 +30,26 @@ sprint:Sprint;
     this.reloadData();
 
   }
+  updateUserstory(id:number){
   
+    this.router.navigate(['userstory/update',id]);
+  }
   
-  projetDetails(id:number){
+  userstoryDetails(id:number){
   
-    this.router.navigate(['projets/details',id]);
+    this.router.navigate(['userstory/details',id]);
+  }
+  deleteUserstory(id:number){
+    this.sprintservice.deleteSprint(id)
+    .subscribe(
+    data=>{
+      console.log(data);
+     
+  
+     this.reloadData();
+    },
+    error=>console.log(error));
+    
   }
   list(){
     this.router.navigate(['gestionSprints']);
@@ -43,6 +58,10 @@ sprint:Sprint;
   reloadData(){
     this.userstorys=this.userstoryservice.findAllStoriessprint(this.id);
 
+}
+projetDetails(id:number){
+  
+  this.router.navigate(['projets/details',id]);
 }
 
 }
