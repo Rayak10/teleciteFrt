@@ -40,7 +40,7 @@ sprint:Sprint;
     this.router.navigate(['userstory/details',id]);
   }
   deleteUserstory(id:number){
-    this.sprintservice.deleteSprint(id)
+    this.userstoryservice.deleteUserStory(id)
     .subscribe(
     data=>{
       console.log(data);

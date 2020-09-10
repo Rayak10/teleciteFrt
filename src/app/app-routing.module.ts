@@ -15,6 +15,7 @@ import { UserstoryUpdateComponent } from './components/userstory-update/userstor
 import { UserstoryDetailleComponent } from './components/userstory-detaille/userstory-detaille.component';
 import { GestionTacheComponent } from './components/gestion-tache/gestion-tache.component';
 import { TacheDetailleComponent } from './components/tache-detaille/tache-detaille.component';
+import { TacheUpdateComponent } from './components/tache-update/tache-update.component';
 
 
 
@@ -34,8 +35,8 @@ const routes: Routes = [
   {path: 'userstory/update/:id', component: UserstoryUpdateComponent},
   {path: 'userstory/details/:id',component :UserstoryDetailleComponent},
   {path: 'gestionTaches/:id', component: GestionTacheComponent},
-  {path: 'taches/details/:id',component :TacheDetailleComponent }
-
+  {path: 'taches/details/:id',component :TacheDetailleComponent },
+  {path: 'taches/update/:id',component :TacheUpdateComponent }
 
 
 ];

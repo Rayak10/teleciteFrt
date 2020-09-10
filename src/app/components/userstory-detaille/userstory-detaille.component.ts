@@ -3,6 +3,9 @@ import { Userstory } from 'src/app/models/userStory';
 import { UserstoryService } from 'src/app/services/userstory/userstory.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Sprint } from 'src/app/models/sprint';
+import { Observable } from 'rxjs';
+import { Tache } from 'src/app/models/tache';
+import { TacheService } from 'src/app/services/tache/tache.service';
 
 @Component({
   selector: 'app-userstory-detaille',
@@ -13,7 +16,9 @@ export class UserstoryDetailleComponent implements OnInit {
 
   id:number;
 userstory:Userstory;
-  constructor(private userstoryservice:UserstoryService,private route: ActivatedRoute, private router: Router) {}
+taches: Observable<Tache[]>;
+
+  constructor(private userstoryservice:UserstoryService,private tacheservice:TacheService,private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
     this.userstory=new Userstory();
@@ -23,7 +28,7 @@ userstory:Userstory;
       console.log(data)
       this.userstory=data;
     }, error=>console.log(error));
-  
+    this.taches= this.tacheservice.findAllTacheByUserstory(this.id); 
   }
   sprintDetails(id:number){
   
@@ -37,5 +42,28 @@ userstory:Userstory;
   list(){
     this.router.navigate(['gestionUserstory']);
   }
-
+  tacheDetails(id:number){
+    this.router.navigate(['taches/details',id]);
+  }
+  updateTache(id:number){
+    this.router.navigate(['taches/update',id]);
+  }
+  deleteTache(id:number){
+    this.tacheservice.deleteTache(id)
+    .subscribe(
+    data=>{
+      console.log(data);
+     
+  
+     this.reloadData();
+     //this.gotoList();
+    },
+    error=>console.log(error));
+    
+  }
+  
+  
+  reloadData(){
+    this.taches= this.tacheservice.findAllTacheByUserstory(this.id);  
+  }
 }

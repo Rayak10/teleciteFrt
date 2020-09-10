@@ -81,8 +81,8 @@ reloadData(){
 tacheDetails(id:number){
   this.router.navigate(['taches/details',id]);
 }
-updateUserstory(id:number){
-  this.router.navigate(['userstory/update',id]);
+updateTache(id:number){
+  this.router.navigate(['taches/update',id]);
 }
 gotoList(){
   this.router.navigate(['gestionUserstory']);

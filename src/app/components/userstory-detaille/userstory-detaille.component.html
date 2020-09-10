@@ -35,3 +35,44 @@
         <button id="btn-save"  (click)="list()" name="btn-save" class="btn btn-success">Retour au liste des userstorys </button>
     </div>
 </div>
+<!--LIST-->
+<div class=col-md-12 >
+    
+    <form id="form-list-tache" >
+            <legend class="navbar-brand titre">Liste taches de user story</legend>
+  
+    <table class="table table-bordered table-condensed table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Tâche</th>
+                <th scope="col">Durée</th>
+                <th scope="col">Etat</th>
+           <th scope="col">Projet</th>
+           <th scope="col">Sprint</th>
+
+                <th scope="col">Actions</th>
+            </tr>
+                
+        </thead>
+        <tbody id="form-list-projets-body"  *ngFor="let tache of taches|async">
+            <tr>
+                <td>{{tache.descriptionTache}}</td>
+                <td>{{tache.dureeTache}}</td>
+                <td>{{tache.etatTache}}</td>
+                <td>{{tache.userStory.sprint.projet.nomProjet}}</td>
+                <td>{{tache.userStory.sprint.nomSprint}}</td>
+                <td>
+                  
+                    <a title="les détails du projet" class="btn btn-default btn-sm "(click)="tacheDetails(tache.idTache)"> <i class="glyphicon glyphicon-eye-open text-primary"  ></i> </a> 
+                    <a title="modifier le  projet" class="btn btn-default btn-sm "(click)="updateTache(tache.idTache)"> <i class="glyphicon glyphicon-edit text-primary"></i> </a>
+                    <a title="supprimer le projet " class="btn btn-default btn-sm " (click)="deleteTache(tache.idTache)"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
+                    
+                   
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </form>
+
+    
+</div>

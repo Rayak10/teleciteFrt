@@ -1,0 +1,64 @@
+<hr/>
+<hr/>
+<!-- FORM  -->	    
+	   <div class="col-md-12">	       
+     
+<fieldset>
+
+<!-- Form Name -->
+
+<legend  class="navbar-brand titre"  >Changer les informations</legend>
+<form (ngSubmit)="onSubmit()">
+<!-- Text input-->
+<div class="row">
+    <div class="col col-md-2">
+  
+  <label class="control-label">description tache :</label>
+  </div>
+  <div class="col col-md-8">
+      <textarea id="tache-name"  rows="2" cols="12" required [(ngModel)]="tache.descriptionTache" name="tache-name" type="text" placeholder="En tant que...... je veux .....à fin de .....  ." class="form-control input-md"></textarea>
+  
+      <p class="help-block"></p>
+      </div>
+  
+  </div>
+  
+  <div class="row">
+    <div class="col col-md-2">
+  
+    <label class=" control-label">Durée tache :</label>
+  </div>
+  <div class="col col-md-3">
+  
+      <input id="tache-name" required [(ngModel)]="tache.dureeTache" name="duree-name" type="number" placeholder="Nembre des jours." class="form-control input-md" >
+      <p class="help-block"></p>
+      </div>
+    
+      <div class="col col-md-2">
+        <label class="control-label" >Etat tache  :</label>  
+      </div>
+      <div class="col col-md-3">
+  
+          <select required
+          type="text" 
+          class="form-control "
+           id="field_tache"
+             name="tacheEta" [(ngModel)]="tache.etatTache">
+           <option *ngFor='let etat of etatArray'> {{etat}} </option>
+           
+         </select>  <span class="help-block"></span>  
+    </div>
+  </div>
+  <hr>
+  <!-- Button -->
+  <label class="col-md-2 control-label" for="btn-save"></label>
+<div class="col col-lg-2">
+    <button id="btn-save" name="btn-save" (click)="userstoryDetails(tache.userStory.idUserstory)" class="btn btn-success">Retour au detail UserStory</button>
+    </div>
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="btn-save"></label>
+    <div class="col col-lg-2">
+        <button id="btn-save"  (click)="list()" name="btn-save" class="btn btn-success">Modifier et retour au liste des taches </button>
+    </div>
+</div>
+	    

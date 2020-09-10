@@ -22,6 +22,7 @@ import { UserstoryUpdateComponent } from './components/userstory-update/userstor
 import { UserstoryDetailleComponent } from './components/userstory-detaille/userstory-detaille.component';
 import { GestionTacheComponent } from './components/gestion-tache/gestion-tache.component';
 import { TacheDetailleComponent } from './components/tache-detaille/tache-detaille.component';
+import { TacheUpdateComponent } from './components/tache-update/tache-update.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { TacheDetailleComponent } from './components/tache-detaille/tache-detail
     UserstoryUpdateComponent,
     UserstoryDetailleComponent,
     GestionTacheComponent,
-    TacheDetailleComponent
+    TacheDetailleComponent,
+    TacheUpdateComponent
   ],
   imports: [
     BrowserModule,

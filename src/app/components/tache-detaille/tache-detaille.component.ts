@@ -43,6 +43,8 @@ export class TacheDetailleComponent implements OnInit {
     list(id:number){
       this.router.navigate(['gestionTaches/',this.userstory.idUserStory]);
     }
-  
+    userstoryDetails(){
+      this.router.navigate(['userstory/details',this.userstory.idUserStory]);
+    }
   }
   
