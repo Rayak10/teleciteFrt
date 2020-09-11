@@ -19,12 +19,15 @@ export class GestionSprintsComponent implements OnInit {
   successMessage: string;
   projetArray= [];
   etatArray= [];
+  nomSprint="Backlog produit";
   offset: number =new Date().getTimezoneOffset() * 60 * 1000;
   selectedProjetId:number;
-
+  sprintsProjet:Observable<Sprint[]>;
+  selectedProjetSprintsId:number;
   constructor(private sprintservice:SprintService,private projetservice:ProjetService,private formBuilder:FormBuilder,private router:Router) { }
 
   ngOnInit() {
+   
 this.etatArray=["Non terminé","Terminé"]
 this.projetservice.findAllProjets().subscribe(
   data => {console.log("data from find all projet:"+JSON.stringify(data));   
@@ -58,7 +61,7 @@ this.gotoList();
 }  
 reloadData(){
   this.sprints= this.sprintservice.findAllSprintOrderByProjet();
-  
+ 
 }
 sprintDetails(id:number){
   this.router.navigate(['sprints/details',id]);
@@ -86,5 +89,9 @@ onChange(event){
  
   this.sprint.projet = {idProjet:this.selectedProjetId,dateDebut:null,dateFin:null,descriptionTechnique:'',equipe:null,description:'',nomProjet:'',theme:'',sprints:[]};
   console.log(JSON.stringify(this.sprint.projet.idProjet));  
+}
+onChange1(event){
+ 
+  this.sprintsProjet =this.sprintservice.findSprintsByProjet(this.selectedProjetSprintsId) 
 }
 }

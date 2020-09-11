@@ -22,26 +22,34 @@ export class GestionUserstoryComponent implements OnInit {
   successMessage: string;
   projetArray= [];
   storysArray= [];
-
+  prioriteArray= [];
   selectedSprintId:number;
   selectedProjetId:any;
   projet:Projet;
   sprint:Observable<Sprint>;
-  val:number;
+  selectedPriorite:number;
+  complexiteArray= [];
+  selectedComplexite:number;
+val:any
+  constructor(private userstoryservice:UserstoryService,private projetservice:ProjetService,private sprintservice:SprintService,private formBuilder:FormBuilder,private router:Router) { 
+    this.val=this.selectedProjetId;
 
- 
-  
-
-  constructor(private userstoryservice:UserstoryService,private projetservice:ProjetService,private sprintservice:SprintService,private formBuilder:FormBuilder,private router:Router) { }
+  }
 
   ngOnInit() {
+    this.prioriteArray=[
+      {Id:1,name:"Must have"},
+      {Id:2,name:"Should have"},
+      {Id:3,name:"Could have"},
+      {Id:4,name:"Won't have"}];
 
+this.complexiteArray=[1,2,3,5,8,13,20,40,100]
 this.projetservice.findAllProjets().subscribe(
   data => {console.log("data from find all projets:"+JSON.stringify(data));   
   
               this.projetArray.push(...data);}
 );
-this.reloadData();
+
 }
     
 newUserstory(): void {
@@ -51,9 +59,10 @@ newUserstory(): void {
 onSubmit(userstorieForm:NgForm) {
   this.submitted = true;
   this.save(); 
-  userstorieForm.reset();
-     this.reloadData();
+    this.reloadData();
      this.gotoList();
+     userstorieForm.reset();
+
 }
 save() {
   console.log("userStory: "+JSON.stringify(this.userstory));
@@ -67,7 +76,7 @@ save() {
 this.gotoList();
 }  
 reloadData(){
-  this.userstorys= this.userstoryservice.findAllUserstory();
+  this.userstorys= this.userstoryservice.findAllUserstoryByProjet(this.selectedProjetId);
   
 }
 userstoryDetails(id:number){
@@ -108,6 +117,19 @@ onChange(event){
   );
   console.log('traiment');
   this.userstorys=this.userstoryservice.findAllUserstoryByProjet(this.selectedProjetId) 
+}
+
+onChangePriorite(event){
+   
+  this.userstory.priorite = this.selectedPriorite;
+  //console.log(JSON.stringify(this.employe.bureau.idBureau));
+ 
+}
+onChangeComplexite(event){
+   
+  this.userstory.complexite = this.selectedComplexite;
+  //console.log(JSON.stringify(this.employe.bureau.idBureau));
+ 
 }
 }
 

@@ -8,16 +8,16 @@
 
 <!-- Form Name -->
 
-<legend  class="navbar-brand titre"  > Gestion des taches </legend>
+<legend  class="navbar-brand titre"  > Gestion des tâches </legend>
 <form #tacheForm="ngForm" (ngSubmit)="onSubmit(tacheForm)">
 <!-- Text input-->
 <div class="row">
   <div class="col col-md-2">
 
-<label class="control-label">description tache :</label>
+<label class="control-label">description tâche :</label>
 </div>
 <div class="col col-md-8">
-    <textarea id="tache-name"  rows="2" cols="12" required [(ngModel)]="tache.descriptionTache" name="tache-name" type="text" placeholder="En tant que...... je veux .....à fin de .....  ." class="form-control input-md"></textarea>
+    <textarea id="tache-name"  rows="2" cols="12" required [(ngModel)]="tache.descriptionTache" name="tache-name" type="text" placeholder="ecrire la tâche ." class="form-control input-md"></textarea>
 
     <p class="help-block"></p>
     </div>
@@ -27,7 +27,7 @@
 <div class="row">
   <div class="col col-md-2">
 
-  <label class=" control-label">Durée tache :</label>
+  <label class=" control-label">Durée tâche :</label>
 </div>
 <div class="col col-md-3">
 
@@ -36,7 +36,7 @@
     </div>
   
     <div class="col col-md-2">
-      <label class="control-label" >Etat tache  :</label>  
+      <label class="control-label" >Etat tâche  :</label>  
     </div>
     <div class="col col-md-3">
 
@@ -75,7 +75,7 @@
 <div class=col-md-12 >
     
     <form id="form-list-tache" >
-            <legend class="navbar-brand titre">Liste taches de user story</legend>
+            <legend class="navbar-brand titre">Liste tâches de user story</legend>
   
     <table class="table table-bordered table-condensed table-hover">
         <thead>

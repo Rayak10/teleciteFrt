@@ -98,7 +98,7 @@
 <div class=col-md-12 >
     
     <form id="form-list-sprintsProjet" >
-            <legend class="navbar-brand titre">Liste des sprints de projet</legend>
+            <legend class="navbar-brand titre">Liste des Backlog Produit</legend>
     
    <!-- <div class="pull-right">
         <a class="btn btn-default-btn-xs btn-primary"><i class="glyphicon glyphicon-refresh"></i> Refresh</a>
@@ -107,21 +107,21 @@
     <table class="table table-bordered table-condensed table-hover">
         <thead>
             <tr>
-                <th>Nom sprint</th>
-                <th>Date Début</th>
-                <th>Date Fin</th>
-                <th>Projet</th>
-                <th>Statut</th>
-                <th>Actions</th>
+              <th scope="col">Projet</th>
+                <th scope="col">Backlog Produit</th>                
+                <th scope="col">Statut</th>
+                <th scope="col">Actions</th>
             </tr>
                 
+
+             
+
         </thead>
-        <tbody id="form-list-projets-body"  *ngFor="let sprint of sprints | async">
+        <ng-container *ngFor="let sprint of sprints | async">
+          <tbody id="form-list-projets-body" *ngIf="sprint.nomSprint=='Backlog produit'">
             <tr>
+              <td>{{sprint.projet.nomProjet}}</td>
                 <td>{{sprint.nomSprint}}</td>
-                <td>{{sprint.dateDebut}}</td>
-                <td>{{sprint.dateFin}}</td>
-                <td>{{sprint.projet.nomProjet}}</td>
                 <td>{{sprint.etatSprint}}</td>
 
                 <td>
@@ -134,12 +134,72 @@
                 </td>
             </tr>
         </tbody>
+      </ng-container>
     </table>
     </form>
 
     
 </div>
+<!-- LIST -->
+<div class=col-md-12 >
+    
+  <form id="form-list-sprintsProjet" >
+    <div class="form-group">
+                <legend  class="col-md-3 navbar-brand titre">Liste des sprints du projet : </legend>
+                  <div class="col-md-3">
+            <select required
+             type="text" 
+             class="form-control "
+              id="field_projetSprints"
+                name="projetSprints" [(ngModel)]="selectedProjetSprintsId"
+                (change)="onChange1($event)">
+              <option  *ngFor="let p of projetArray" [value]="p.idProjet">
+                {{p.nomProjet}}
+              </option>
+            </select>
+            <p class="help-block"></p>
+            </div>
+          </div>
 
+ <!-- <div class="pull-right">
+      <a class="btn btn-default-btn-xs btn-primary"><i class="glyphicon glyphicon-refresh"></i> Refresh</a>
+      <a class="btn btn-default-btn-xs btn-success"><i class="glyphicon glyphicon-plus"></i> New</a>
+  </div>-->
+  <table class="table table-bordered table-condensed table-hover">
+      <thead>
+          <tr>
+              <th scope="col">Nom sprint</th>   
+              <th scope="col">Date début</th> 
+              <th scope="col">Date fin</th>              
+              <th scope="col">Statut</th>
+              <th scope="col">Actions</th>
+          </tr>
+              
 
-<br> 
+           
 
+      </thead>
+      <ng-container *ngFor="let sprint of sprintsProjet | async">
+        <tbody id="form-list-projets-body" *ngIf="sprint.nomSprint!='Backlog produit'">
+          <tr>
+              <td>{{sprint.nomSprint}}</td>
+              <td>{{sprint.dateDebut}}</td>
+              <td>{{sprint.dateFin}}</td>
+              <td>{{sprint.etatSprint}}</td>
+
+              <td>
+                
+                  <a title="les détails du projet" class="btn btn-default btn-sm "(click)="sprintDetails(sprint.idSprint)"> <i class="glyphicon glyphicon-eye-open text-primary"  ></i> </a> 
+                  <a title="modifier le  projet" class="btn btn-default btn-sm "(click)="updateSprint(sprint.idSprint)"> <i class="glyphicon glyphicon-edit text-primary"></i> </a>
+                  <a title="supprimer le projet " class="btn btn-default btn-sm " (click)="deleteSprints(sprint.idSprint)"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
+                  
+                 
+              </td>
+          </tr>
+      </tbody>
+    </ng-container>
+  </table>
+  </form>
+
+  
+</div>

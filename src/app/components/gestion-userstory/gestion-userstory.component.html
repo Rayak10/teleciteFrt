@@ -35,7 +35,7 @@
   <label class="control-label" >User storie :</label>  
 </div>
   <div class="col col-md-4">
-    <textarea id="sprint-name"  rows="3" cols="25" required [(ngModel)]="userstory.libelleUserStory" name="userstory-name" type="text" placeholder="En tant que...... je veux .....à fin de ....." class="form-control input-md"></textarea>
+    <textarea id="sprint-name"  rows="2" cols="25" required [(ngModel)]="userstory.libelleUserStory" name="userstory-name" type="text" placeholder="En tant que...... je veux .....à fin de ....." class="form-control input-md"></textarea>
 
   <span class="help-block"></span>  
   </div>
@@ -47,17 +47,35 @@
   <label class=" control-label">Priorité :</label>
 </div>
 <div class="col col-md-3">
-
-    <input id="userstory-name" required [(ngModel)]="userstory.priorite" name="priorite-name" type="number" placeholder="choisir un nembre sur 5" class="form-control input-md" >
-    <p class="help-block"></p>
+  <select required
+     type="text" 
+     class="form-control "
+      id="field_priorite"
+        name="priorite" [(ngModel)]="selectedPriorite"
+        (change)="onChangePriorite($event)">
+      <option  *ngFor="let p of prioriteArray" [value]="p.Id">
+        {{p.name}}
+      </option>
+    </select>
+    <p class="help-block">{{selectedPriorite}}
+    </p>
     </div>
   
     <div class="col col-md-2">
       <label class="control-label" >Complexité  :</label>  
     </div>
     <div class="col col-md-4">
-
-    <input id="complexite-name" required [(ngModel)]="userstory.complexite" name="complexite-name" type="number" placeholder="choisir un nembre sur 5" class="form-control input-md" >
+      <select required
+      type="text" 
+      class="form-control "
+       id="field_complexite"
+         name="complexite" [(ngModel)]="selectedComplexite"
+         (change)="onChangeComplexite($event)">
+       <option  *ngFor="let c of complexiteArray" [value]="c">
+         {{c}}
+       </option>
+     </select>
+   
   <span class="help-block"></span>  
   </div>
 </div>
@@ -90,7 +108,7 @@
 <div class=col-md-12 >
     
     <form id="form-list-userStoryProjet" >
-            <legend class="navbar-brand titre">Liste des UserStory</legend>
+            <legend class="navbar-brand titre">Liste des UserStory du projet :{{userstory.sprint.projet.nomProjet}} </legend>
   
     <table class="table table-bordered table-condensed table-hover">
         <thead>
