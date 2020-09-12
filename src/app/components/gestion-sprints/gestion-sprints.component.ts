@@ -23,7 +23,9 @@ export class GestionSprintsComponent implements OnInit {
   offset: number =new Date().getTimezoneOffset() * 60 * 1000;
   selectedProjetId:number;
   sprintsProjet:Observable<Sprint[]>;
+  sprintsProjetArray: Sprint[] = [];
   selectedProjetSprintsId:number;
+  showBPList: boolean = false;
   constructor(private sprintservice:SprintService,private projetservice:ProjetService,private formBuilder:FormBuilder,private router:Router) { }
 
   ngOnInit() {
@@ -92,6 +94,17 @@ onChange(event){
 }
 onChange1(event){
  
-  this.sprintsProjet =this.sprintservice.findSprintsByProjet(this.selectedProjetSprintsId) 
+  this.sprintsProjet =this.sprintservice.findSprintsByProjet(this.selectedProjetSprintsId);
+  this.sprintservice.findSprintsByProjet(this.selectedProjetSprintsId).subscribe(
+    resp  =>{ this.sprintsProjetArray = resp;
+     this.sprintsProjetArray = this.sprintsProjetArray.filter(x=>x.nomSprint!='Backlog produit');
+    console.log("*****"+(this.sprintsProjetArray.length -1));
+    }
+  );
+}
+
+toggleBPList(){
+  this.showBPList = ! this.showBPList;
+  console.log(this.showBPList+"*****");
 }
 }

@@ -26,5 +26,10 @@ th[scope="col"] {
 }
 
 th[scope="row"] {
-  background-color: #d7d9f2;
+  background-color: #e4eeac;
+}
+table{
+    border: 1px solid rgb(159, 136, 243);
+    border-collapse: collapse;
+    table-layout: fixed;
 }

@@ -98,19 +98,19 @@
 <div class=col-md-12 >
     
     <form id="form-list-sprintsProjet" >
-            <legend class="navbar-brand titre">Liste des Backlog Produit</legend>
+            <legend class=" col-md-12 titre" (click)="toggleBPList()">   Liste des Backlog Produit :</legend>
     
    <!-- <div class="pull-right">
         <a class="btn btn-default-btn-xs btn-primary"><i class="glyphicon glyphicon-refresh"></i> Refresh</a>
         <a class="btn btn-default-btn-xs btn-success"><i class="glyphicon glyphicon-plus"></i> New</a>
     </div>-->
-    <table class="table table-bordered table-condensed table-hover">
+    <table *ngIf="showBPList" class="table table-bordered table-condensed table-hover">
         <thead>
             <tr>
-              <th scope="col">Projet</th>
-                <th scope="col">Backlog Produit</th>                
-                <th scope="col">Statut</th>
-                <th scope="col">Actions</th>
+              <th scope="col" width=25%>Projet</th>
+                <th scope="col" width=25%>Backlog Produit</th>                
+                <th scope="col" width=25%>Statut</th>
+                <th scope="col" width=25%>Actions</th>
             </tr>
                 
 
@@ -145,7 +145,7 @@
     
   <form id="form-list-sprintsProjet" >
     <div class="form-group">
-                <legend  class="col-md-3 navbar-brand titre">Liste des sprints du projet : </legend>
+                <legend  class=" col-md-3 titre">Liste des sprints du projet : </legend>
                   <div class="col-md-3">
             <select required
              type="text" 
@@ -165,23 +165,29 @@
       <a class="btn btn-default-btn-xs btn-primary"><i class="glyphicon glyphicon-refresh"></i> Refresh</a>
       <a class="btn btn-default-btn-xs btn-success"><i class="glyphicon glyphicon-plus"></i> New</a>
   </div>-->
-  <table class="table table-bordered table-condensed table-hover">
+  <table *ngIf="selectedProjetSprintsId" class="table table-bordered table-condensed table-hover">
       <thead>
           <tr>
-              <th scope="col">Nom sprint</th>   
-              <th scope="col">Date début</th> 
-              <th scope="col">Date fin</th>              
-              <th scope="col">Statut</th>
-              <th scope="col">Actions</th>
+            <th scope="col" width=20% >Projet :</th>   
+
+              <th scope="col" width=20%>Nom sprint</th>   
+              <th scope="col" width=20%>Date début</th> 
+              <th scope="col" width=20%>Date fin</th>              
+              <th scope="col" width=10%>Statut</th>
+              <th scope="col" width=10%>Actions</th>
           </tr>
               
 
            
 
       </thead>
-      <ng-container *ngFor="let sprint of sprintsProjet | async">
-        <tbody id="form-list-projets-body" *ngIf="sprint.nomSprint!='Backlog produit'">
-          <tr>
+        <tbody id="form-list-projets-body">
+          <tr>  
+          <td *ngIf="sprintsProjetArray[0]!= undefined" [attr.rowspan]="sprintsProjetArray.length + 1">{{sprintsProjetArray[0].projet.nomProjet}}</td>
+          </tr>
+          <tr *ngFor="let sprint of sprintsProjetArray">
+                     
+
               <td>{{sprint.nomSprint}}</td>
               <td>{{sprint.dateDebut}}</td>
               <td>{{sprint.dateFin}}</td>
@@ -195,9 +201,8 @@
                   
                  
               </td>
-          </tr>
-      </tbody>
-    </ng-container>
+  </tr>
+    </tbody>
   </table>
   </form>
 
