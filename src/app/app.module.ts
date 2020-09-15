@@ -23,6 +23,9 @@ import { UserstoryDetailleComponent } from './components/userstory-detaille/user
 import { GestionTacheComponent } from './components/gestion-tache/gestion-tache.component';
 import { TacheDetailleComponent } from './components/tache-detaille/tache-detaille.component';
 import { TacheUpdateComponent } from './components/tache-update/tache-update.component';
+import { GestionReunionComponent } from './components/gestion-reunion/gestion-reunion.component';
+import { ReunionUpdateComponent } from './components/reunion-update/reunion-update.component';
+import { ReunionDetailleComponent } from './components/reunion-detaille/reunion-detaille.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +45,10 @@ import { TacheUpdateComponent } from './components/tache-update/tache-update.com
     UserstoryDetailleComponent,
     GestionTacheComponent,
     TacheDetailleComponent,
-    TacheUpdateComponent
+    TacheUpdateComponent,
+    GestionReunionComponent,
+    ReunionUpdateComponent,
+    ReunionDetailleComponent
   ],
   imports: [
     BrowserModule,

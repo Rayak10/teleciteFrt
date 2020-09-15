@@ -17,9 +17,14 @@ th {
 }
 
 tr:nth-child(even) {
-  background-color: #eee;
+  background-color: rgb(229, 247, 252);
 }
-
+#leg3:hover{
+    color : rgb(196, 199, 240);
+}
+#leg2:hover{
+  color : rgb(196, 199, 240);
+}
 th[scope="col"] {
   background-color:rgb(138, 190, 241);
   color: #fff;

@@ -98,13 +98,13 @@
 <div class=col-md-12 >
     
     <form id="form-list-sprintsProjet" >
-            <legend class=" col-md-12 titre" (click)="toggleBPList()">   Liste des Backlog Produit :</legend>
+            <legend id="leg2" class=" col-md-12 titre" >   Liste des Backlog Produit :</legend>
     
    <!-- <div class="pull-right">
         <a class="btn btn-default-btn-xs btn-primary"><i class="glyphicon glyphicon-refresh"></i> Refresh</a>
         <a class="btn btn-default-btn-xs btn-success"><i class="glyphicon glyphicon-plus"></i> New</a>
     </div>-->
-    <table *ngIf="showBPList" class="table table-bordered table-condensed table-hover">
+    <table id="tab1" class="table table-bordered table-condensed table-hover">
         <thead>
             <tr>
               <th scope="col" width=25%>Projet</th>
@@ -145,7 +145,7 @@
     
   <form id="form-list-sprintsProjet" >
     <div class="form-group">
-                <legend  class=" col-md-3 titre">Liste des sprints du projet : </legend>
+                <legend id="leg3" class=" col-md-3 titre">Liste des sprints du projet : </legend>
                   <div class="col-md-3">
             <select required
              type="text" 
@@ -165,7 +165,7 @@
       <a class="btn btn-default-btn-xs btn-primary"><i class="glyphicon glyphicon-refresh"></i> Refresh</a>
       <a class="btn btn-default-btn-xs btn-success"><i class="glyphicon glyphicon-plus"></i> New</a>
   </div>-->
-  <table *ngIf="selectedProjetSprintsId" class="table table-bordered table-condensed table-hover">
+  <table id="tab2" *ngIf="selectedProjetSprintsId" class="table table-bordered table-condensed table-hover">
       <thead>
           <tr>
             <th scope="col" width=20% >Projet :</th>   

@@ -1,0 +1,86 @@
+<hr/>
+<hr/>
+<!-- FORM  -->	    
+	   <div class="col-md-16">	       
+     
+<fieldset>
+
+<!-- Form Name -->
+
+<legend  class="navbar-brand titre"  > Gestion des reunions </legend>
+<form #getReunionForm="ngForm" (ngSubmit)="onSubmit(getReunionForm)">
+<!-- Text input-->
+<div class="form-group">
+    <label class="col-md-2 control-label">Type réunion :</label>
+  <div class="col-md-4">
+    <select required
+     type="text" 
+     class="form-control "
+      id="field_reunion"
+        name="reunion" [(ngModel)]="selectedReunionId"
+        (change)="onChange($event)">
+      <option  *ngFor="let t of typeArray" >
+        {{t}}
+      </option>
+    </select>
+    <p class="help-block"></p>
+    </div>
+  <label class="col-md-2 control-label" >Nom de réunion :</label>  
+  <div class="col-md-4">
+  <input id="reunion-name" required [(ngModel)]="reunion.nomReunion" name="reunion-name" type="text" placeholder="tapez le nom du reunion" class="form-control input-md" >
+  <span class="help-block"></span>  
+  </div>
+  <label class="col-md-2 control-label">Contexte du réunion :</label>
+  <div class="col-md-4">
+    <textarea id="reunion-description"required [(ngModel)]="reunion.descriptionReunion" name="reunion-description" type="text" placeholder="tapez une description pour cette réunion ..." class="form-control input-md"></textarea>
+
+    <p class="help-block"></p>
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-md-2 control-label">Date début réunion :</label>  
+    <div class="col-md-4">
+      <input  
+      name="reunion-date-debut"
+      placeholder = "Selectionner la date début"
+      [(ngModel)]="reunion.dateDebut"
+      class="form-control"
+      bsDatepicker
+      [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
+   
+    <span class="help-block"></span>  
+    </div>  
+    <label class="col-md-2 control-label">Date fin sprint :</label>  
+    <div class="col-md-4">
+      <input  
+      name="reunion-date-fin"
+      placeholder = "Selectionner la date fin"
+      [(ngModel)]="reunion.dateFin"
+      class="form-control"
+      bsDatepicker
+      [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
+   
+    <span class="help-block"></span>  
+    </div>  
+  </div>
+  <div class="col-md-4">
+  <span class="help-block"></span>  
+  </div>
+  
+    
+    <hr>
+<!-- Button -->
+
+    <label class="col-md-4 control-label" for="btn-save"></label>
+    <div class="col col-lg-2">
+     <button id="btn-save" name="btn-save" type="submit" class="btn btn-success">Enregistrer</button>
+    </div>
+</form>
+</fieldset>
+
+
+
+	   </div> 
+	    
+
+
