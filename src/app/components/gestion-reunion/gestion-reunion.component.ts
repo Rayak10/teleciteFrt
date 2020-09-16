@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, NgForm } from '@angular/forms';
+import { FormBuilder, FormControl, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Sprint } from 'src/app/models/sprint';
-import { ProjetService } from 'src/app/services/projet/projet.service';
-import { SprintService } from 'src/app/services/sprint/sprint.service';
 import * as $ from 'jquery' ;
 import { Reunion } from 'src/app/models/Reunion';
 import { ReunionService } from 'src/app/services/reunion/reunion.service';
+import {NgbTimeStruct} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-gestion-reunion',
@@ -24,14 +22,58 @@ export class GestionReunionComponent implements OnInit {
   offset: number =new Date().getTimezoneOffset() * 60 * 1000;
   selectedReunionId:number;
   showBPList: boolean = false;
+  ctrl1:any
+  ctrl2:any
+  h1:any;
+  h2:any;
+  time1:any;
+  time2:any;
+
   constructor(private runionservice:ReunionService,private formBuilder:FormBuilder,private router:Router) { }
 
   ngOnInit()  {
+    this.time1 = {hour: 0, minute: 0};
+    this.time2 = {hour: 0, minute: 0};
+    this.ctrl2= new FormControl('', (control: FormControl) => {
+      const value2 = control.value;
+      this.h2=value2.hour;
+
+      if ( ((this.h2)-(this.h1))==0) {
+        return  {probleme: true};;
+      }
+      if ((value2.hour > 19 ) ){ 
+        return {tooLate: true};
+      }
+     
+      if ( (this.h2)-(this.h1)<0) {
+        return {probleme: true};
+      }
+      
+      
+      return null;
+
+    });
+   
+    this.ctrl1= new FormControl('', (control: FormControl) => {
+      const value1 = control.value;
+  this.h1=value1.hour;
+
+      if (!value1) {
+        return null;
+      }
+  
+      if (value1.hour < 9) {
+        return {tooEarly: true};
+      }
+      if (value1.hour > 17) {
+        return {tooLate: true};
+      }
+
+      return null;
+    });
+   
     
-   
-   
-   
-    
+  
     
   
 this.typeArray=["Réunion administratif","Reunion Scrum"]

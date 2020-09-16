@@ -1,7 +1,8 @@
 <hr/>
 <hr/>
+
 <!-- FORM  -->	    
-	   <div class="col-md-16">	       
+	   <div class="container">	       
      
 <fieldset>
 
@@ -10,8 +11,8 @@
 <legend  class="navbar-brand titre"  > Gestion des reunions </legend>
 <form #getReunionForm="ngForm" (ngSubmit)="onSubmit(getReunionForm)">
 <!-- Text input-->
-<div class="form-group">
-    <label class="col-md-2 control-label">Type réunion :</label>
+<div class="row">
+  <label class="col-md-2 control-label">Type réunion :</label>
   <div class="col-md-4">
     <select required
      type="text" 
@@ -25,20 +26,31 @@
     </select>
     <p class="help-block"></p>
     </div>
-  <label class="col-md-2 control-label" >Nom de réunion :</label>  
+    <div class="col col-md-2">
+  <label class="control-label" >Nom de réunion :</label> 
+    </div>
   <div class="col-md-4">
   <input id="reunion-name" required [(ngModel)]="reunion.nomReunion" name="reunion-name" type="text" placeholder="tapez le nom du reunion" class="form-control input-md" >
   <span class="help-block"></span>  
   </div>
-  <label class="col-md-2 control-label">Contexte du réunion :</label>
+</div>
+
+
+
+
+<div class="row">
+  <div class="col col-md-2">
+  <label class=" control-label">Contexte du réunion :</label>
+</div>
+
   <div class="col-md-4">
-    <textarea id="reunion-description"required [(ngModel)]="reunion.descriptionReunion" name="reunion-description" type="text" placeholder="tapez une description pour cette réunion ..." class="form-control input-md"></textarea>
+    <textarea id="reunion-description" rows="2" cols="12" required [(ngModel)]="reunion.descriptionReunion" name="reunion-description" type="text" placeholder="tapez une description pour cette réunion ..." class="form-control input-md"></textarea>
 
     <p class="help-block"></p>
     </div>
-</div>
-<div class="form-group">
-    <label class="col-md-2 control-label">Date début réunion :</label>  
+    <div class="col col-md-2">
+  <label class="control-label">Date début réunion :</label>  
+    </div>
     <div class="col-md-4">
       <input  
       name="reunion-date-debut"
@@ -50,7 +62,18 @@
    
     <span class="help-block"></span>  
     </div>  
-    <label class="col-md-2 control-label">Date fin sprint :</label>  
+</div>
+
+
+<div class="row">
+ 
+  <div class="col col-md-6">
+    
+    </div>
+    
+  <div class="col col-md-2">
+    <label class="control-label">Date fin réunion :</label>
+  </div>  
     <div class="col-md-4">
       <input  
       name="reunion-date-fin"
@@ -63,9 +86,48 @@
     <span class="help-block"></span>  
     </div>  
   </div>
-  <div class="col-md-4">
-  <span class="help-block"></span>  
+
+
+  <div class="row">
+    <div class="col col-md-2">
+      <label class="control-label">Heure début :</label> 
+    </div>
+      
+    <div class="col-md-4">
+      <ngb-timepicker [formControl]="ctrl1" [(ngModel)]="time1" required></ngb-timepicker>
+      <div *ngIf="ctrl1.valid" class="small form-text text-success">Bon choix</div>
+      <div *ngIf="ctrl1.errors" class="small form-text text-danger">
+        <div *ngIf="ctrl1.errors['required']">Sélectionnez l'heure début</div>
+        <div *ngIf="ctrl1.errors['tooLate']">C'est un peu trop tard</div>
+        <div *ngIf="ctrl1.errors['tooEarly']">C'est un peu trop tôt</div>
+      </div>
+     </div>
+     <div class="col col-md-2">
+      <label class="control-label">Heure fin :</label> 
+      </div>
+      
+     <div class="col col-md-4">
+      <ngb-timepicker [formControl]="ctrl2" [(ngModel)]="time2" required></ngb-timepicker>
+      <div *ngIf="ctrl2.valid" class="small form-text text-success">Bon choix</div>
+      <div *ngIf="ctrl2.errors" class="small form-text text-danger">
+        <div *ngIf="ctrl2.errors['required']">Sélectionnez l'heure début</div>
+        <div *ngIf="ctrl2.errors['tooLate']">C'est un peu trop tard</div>
+        <div *ngIf="ctrl2.errors['probleme']">Verifier l'heure fin de reunion  </div>
+      </div>
+     </div>
   </div>
+<!--<div class="form-group">
+  <ngb-timepicker [formControl]="ctrl" required></ngb-timepicker>
+  <div *ngIf="ctrl.valid" class="small form-text text-success">Bon choix</div>
+  <div *ngIf="ctrl.errors" class="small form-text text-danger">
+    <div *ngIf="ctrl.errors['required']">Sélectionnez l'heure </div>
+    <div *ngIf="ctrl.errors['tooLate']">C'est un peu trop tard</div>
+    <div *ngIf="ctrl.errors['tooEarly']">C'est un peu trop tôt
+    </div>
+  </div>
+</div>
+-->
+
   
     
     <hr>
@@ -77,10 +139,15 @@
     </div>
 </form>
 </fieldset>
+     </div> 
+     
 
 
 
-	   </div> 
-	    
 
+
+
+     
+     
+     
 

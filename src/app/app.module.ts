@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './components/login/login.component';
@@ -26,6 +25,7 @@ import { TacheUpdateComponent } from './components/tache-update/tache-update.com
 import { GestionReunionComponent } from './components/gestion-reunion/gestion-reunion.component';
 import { ReunionUpdateComponent } from './components/reunion-update/reunion-update.component';
 import { ReunionDetailleComponent } from './components/reunion-detaille/reunion-detaille.component';
+import { NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -57,9 +57,9 @@ import { ReunionDetailleComponent } from './components/reunion-detaille/reunion-
     FormsModule,
     HttpClientModule,
     BsDatepickerModule.forRoot(),
-    BrowserAnimationsModule
-
-
+    BrowserAnimationsModule,
+    NgbTimepickerModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
