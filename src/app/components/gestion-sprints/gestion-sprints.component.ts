@@ -99,9 +99,9 @@ deleteSprints(id:number){
   error=>console.log(error));
   
 }
-onChange(event){
+onChange(projet){
  
-  this.sprint.projet = {idProjet:this.selectedProjetId,dateDebut:null,dateFin:null,descriptionTechnique:'',equipe:null,description:'',nomProjet:'',theme:'',sprints:[]};
+  this.sprint.projet = this.projetArray.find(projet=> projet.idProjet ==this.selectedProjetId);//^ {idProjet:,dateDebut:null,dateFin:null,descriptionTechnique:'',equipe:null,description:'',nomProjet:'',theme:'',sprints:[]};
   console.log(JSON.stringify(this.sprint.projet.idProjet));  
 }
 onChange1(event){

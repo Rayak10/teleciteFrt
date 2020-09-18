@@ -25,7 +25,7 @@ import { TacheUpdateComponent } from './components/tache-update/tache-update.com
 import { GestionReunionComponent } from './components/gestion-reunion/gestion-reunion.component';
 import { ReunionUpdateComponent } from './components/reunion-update/reunion-update.component';
 import { ReunionDetailleComponent } from './components/reunion-detaille/reunion-detaille.component';
-import { NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbTimepickerModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -58,7 +58,7 @@ import { NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
     HttpClientModule,
     BsDatepickerModule.forRoot(),
     BrowserAnimationsModule,
-    NgbTimepickerModule
+    NgbTimepickerModule,
     
   ],
   providers: [],

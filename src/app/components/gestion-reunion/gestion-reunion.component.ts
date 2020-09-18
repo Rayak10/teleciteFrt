@@ -1,16 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Type } from '@angular/core';
 import { FormBuilder, FormControl, NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { provideRoutes, Router } from '@angular/router';
+import { Observable, timer } from 'rxjs';
 import * as $ from 'jquery' ;
-import { Reunion } from 'src/app/models/Reunion';
+import { Reunion} from 'src/app/models/Reunion';
 import { ReunionService } from 'src/app/services/reunion/reunion.service';
-import {NgbTimeStruct} from '@ng-bootstrap/ng-bootstrap';
+import { EquipeService } from 'src/app/services/equipe/equipe.service';
+import { DepartementService } from 'src/app/services/departement/departement.service';
+import { TypeReunion } from 'src/app/models/typeReunion';
+import { NgbTimeStruct,NgbTimepickerConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgbTime } from '@ng-bootstrap/ng-bootstrap/timepicker/ngb-time';
+import { Time } from '@angular/common';
 
 @Component({
   selector: 'app-gestion-reunion',
   templateUrl: './gestion-reunion.component.html',
-  styleUrls: ['./gestion-reunion.component.css']
+  styleUrls: ['./gestion-reunion.component.css'],
+  providers: [NgbTimepickerConfig]
 })
 export class GestionReunionComponent implements OnInit {
   reunion:Reunion=new Reunion();
@@ -21,27 +27,48 @@ export class GestionReunionComponent implements OnInit {
   typeArray= [];
   offset: number =new Date().getTimezoneOffset() * 60 * 1000;
   selectedReunionId:number;
-  showBPList: boolean = false;
   ctrl1:any
   ctrl2:any
-  h1:any;
-  h2:any;
-  time1:any;
-  time2:any;
-
-  constructor(private runionservice:ReunionService,private formBuilder:FormBuilder,private router:Router) { }
+  h1:number;
+  h2:number;
+  mnt1:number;
+  mnt2:number;
+  sc1:number;
+  sc2:number;
+  value1:NgbTimeStruct;
+  value2:NgbTimeStruct;
+  heurdeb:NgbTimeStruct;
+  heurfin:NgbTimeStruct;
+  equipeArray= [];
+  hd:string;
+  hf:string;
+  departementArray= [];
+  TypeReunion=TypeReunion;
+  selectedtype:any;
+  selectedEquipeId:number;
+  constructor(config: NgbTimepickerConfig ,private runionservice:ReunionService,private equipeservice:EquipeService,private departementservive:DepartementService,private formBuilder:FormBuilder,private router:Router) {
+    config.seconds = false;
+    config.spinners = true;
+    config.meridian=false;
+   }
 
   ngOnInit()  {
-    this.time1 = {hour: 0, minute: 0};
-    this.time2 = {hour: 0, minute: 0};
+    
+   // this.selectedtype = Object.keys(this.typeReunions);
+   this.heurdeb={hour: 0, minute: 0,second:0};
+   this.heurfin={hour: 0, minute: 0,second:0};
+
+
     this.ctrl2= new FormControl('', (control: FormControl) => {
-      const value2 = control.value;
-      this.h2=value2.hour;
+      this.value2 = control.value;
+      console.log("valeur heur fin:"+JSON.stringify(this.value2)); 
+this.h2=(this.value2.hour);
+this.mnt2=this.value2.minute;
 
       if ( ((this.h2)-(this.h1))==0) {
         return  {probleme: true};;
       }
-      if ((value2.hour > 19 ) ){ 
+      if ((this.value2.hour > 18 ) ){ 
         return {tooLate: true};
       }
      
@@ -55,17 +82,19 @@ export class GestionReunionComponent implements OnInit {
     });
    
     this.ctrl1= new FormControl('', (control: FormControl) => {
-      const value1 = control.value;
-  this.h1=value1.hour;
+      this.value1 = control.value;
+      console.log("valeur heur debut:"+JSON.stringify(this.value1)); 
+      console.log("hhhhhhhhhhheeeeeeeeeeeeeuuuuuuuuuurrr1: "+JSON.stringify(this.value1));
 
-      if (!value1) {
-        return null;
-      }
-  
-      if (value1.hour < 9) {
+    this.h1=this.value1.hour
+    this.mnt1=this.value1.minute
+
+
+
+      if (this.value1.hour< 9) {
         return {tooEarly: true};
       }
-      if (value1.hour > 17) {
+      if (this.value1.hour > 17) {
         return {tooLate: true};
       }
 
@@ -73,7 +102,16 @@ export class GestionReunionComponent implements OnInit {
     });
    
     
-  
+    this.equipeservice.findAllEquipe().subscribe(
+      data => {console.log("data from find all Equipe:"+JSON.stringify(data));   
+      
+                  this.equipeArray.push(...data);}
+    );
+    this.departementservive.findAllDepartements().subscribe(
+      data => {console.log("data from find all departement:"+JSON.stringify(data));   
+      
+                  this.departementArray.push(...data);}
+    );
     
   
 this.typeArray=["Réunion administratif","Reunion Scrum"]
@@ -97,14 +135,20 @@ onSubmit(getReunionForm:NgForm) {
      this.gotoList();
 }
 save() {
-  console.log("reunion: "+JSON.stringify(this.reunion));
   this.reunion.dateDebut = new Date(new Date(this.reunion.dateDebut).getTime() - this.offset);
   this.reunion.dateFin = new Date(new Date(this.reunion.dateFin).getTime() - this.offset);
+this.reunion.heureDeb={hour: this.h1, minute:this.mnt1,second:0};
+// console.log("hhhhhhhhhhheeeeeeeeeeeeeuuuuuuuuuurrr1: "+JSON.stringify((this.value1)));
+
+  this.reunion.heureFin= this.heurfin;
+  //console.log("re.her fin: "+JSON.stringify(this.value2));
+
   this.runionservice.createReunion(this.reunion)
     .subscribe(data => console.log(data), error => console.log(error));
   this.reunion= new Reunion();
   
- 
+   console.log("reunion: "+JSON.stringify(this.reunion));
+
 this.gotoList();
 }  
 reloadData(){
@@ -133,11 +177,24 @@ deleteSprints(id:number){
   error=>console.log(error));
   
 }
-/*onChange(event){
- 
-  this.sprint.projet = {idProjet:this.selectedProjetId,dateDebut:null,dateFin:null,descriptionTechnique:'',equipe:null,description:'',nomProjet:'',theme:'',sprints:[]};
-  console.log(JSON.stringify(this.sprint.projet.idProjet));  
+onChange(event){
+ if(this.selectedtype=="Reunion_Scrum"){
+   this.reunion.type=this.TypeReunion.Reunion_Scrum
+ }
+ if(this.selectedtype=="Reunion_Administratif"){
+   this.reunion.type=this.TypeReunion.Reunion_Administratif
+ }
+
+
 }
+onChange1(event){
+  
+  this.reunion.equipe = {idEquipe:this.selectedEquipeId,nomEquipe:'',specialite:''};
+  console.log(JSON.stringify(this.reunion.equipe.idEquipe)); }
+ 
+ 
+ }
+/*
 onChange1(event){
   $("#leg2").click(function(){
     $("#tab1").toggle("slide");
@@ -158,4 +215,4 @@ onChange1(event){
   this.showBPList = ! this.showBPList;
   console.log(this.showBPList+"*****");
 }*/
-}
+
