@@ -1,6 +1,6 @@
 import { Component, OnInit, Type } from '@angular/core';
-import { FormBuilder, FormControl, NgForm } from '@angular/forms';
-import { provideRoutes, Router } from '@angular/router';
+import { FormBuilder, FormGroup, FormArray, FormControl, Validators,NgForm } from '@angular/forms';
+import {  Router } from '@angular/router';
 import { Observable, timer } from 'rxjs';
 import * as $ from 'jquery' ;
 import { Reunion} from 'src/app/models/Reunion';
@@ -9,8 +9,8 @@ import { EquipeService } from 'src/app/services/equipe/equipe.service';
 import { DepartementService } from 'src/app/services/departement/departement.service';
 import { TypeReunion } from 'src/app/models/typeReunion';
 import { NgbTimeStruct,NgbTimepickerConfig } from '@ng-bootstrap/ng-bootstrap';
-import { NgbTime } from '@ng-bootstrap/ng-bootstrap/timepicker/ngb-time';
-import { Time } from '@angular/common';
+import { EmployeService } from 'src/app/services/employe/employe.service';
+import { Employe } from 'src/app/models/employe';
 
 @Component({
   selector: 'app-gestion-reunion',
@@ -22,7 +22,6 @@ export class GestionReunionComponent implements OnInit {
   reunion:Reunion=new Reunion();
   submitted = false;
   errorMessage: string;
-  reunions: Observable<Reunion[]>;
   successMessage: string;
   typeArray= [];
   offset: number =new Date().getTimezoneOffset() * 60 * 1000;
@@ -42,18 +41,31 @@ export class GestionReunionComponent implements OnInit {
   equipeArray= [];
   hd:string;
   hf:string;
+  employeArray:Observable<Employe[]>;
+  employesdep:Employe[]=[];
   departementArray= [];
   TypeReunion=TypeReunion;
   selectedtype:any;
+  showDep:boolean=false;
+  showEq:boolean=false;
   selectedEquipeId:number;
-  constructor(config: NgbTimepickerConfig ,private runionservice:ReunionService,private equipeservice:EquipeService,private departementservive:DepartementService,private formBuilder:FormBuilder,private router:Router) {
+  selectedDepartementId:number;
+  form: FormGroup;
+  selectedItemsList:Employe[];
+  x:Employe[]=[];
+  checkedIDs:number[];
+  constructor(config: NgbTimepickerConfig ,private runionservice:ReunionService,private employeservice:EmployeService,private equipeservice:EquipeService,private departementservive:DepartementService,private formBuilder:FormBuilder,private router:Router) {
     config.seconds = false;
     config.spinners = true;
     config.meridian=false;
+    this.form=this.formBuilder.group({
+      checkArray:this.formBuilder.array([])
+    })
    }
 
   ngOnInit()  {
-    
+    this.fetchSelectedItems();
+    this.fetchCheckedIDs();
    // this.selectedtype = Object.keys(this.typeReunions);
    this.heurdeb={hour: 0, minute: 0,second:0};
    this.heurfin={hour: 0, minute: 0,second:0};
@@ -80,7 +92,12 @@ this.mnt2=this.value2.minute;
       return null;
 
     });
-   
+    $("#leg1").hide();
+    
+    $("#tab1").hide();
+
+
+
     this.ctrl1= new FormControl('', (control: FormControl) => {
       this.value1 = control.value;
       console.log("valeur heur debut:"+JSON.stringify(this.value1)); 
@@ -112,49 +129,39 @@ this.mnt2=this.value2.minute;
       
                   this.departementArray.push(...data);}
     );
-    
-  
+    console.log("efsef'rttttttttttttttttttttttttttttttttt"+JSON.stringify(this.departementArray)); 
 this.typeArray=["Réunion administratif","Reunion Scrum"]
 /*this.projetservice.findAllProjets().subscribe(
   data => {console.log("data from find all projet:"+JSON.stringify(data));   
   
               this.projetArray.push(...data);}
 );*/
-this.reloadData();
 }
     
 newSprint(): void {
   this.submitted = false;
   this.reunion= new Reunion();
 }
-onSubmit(getReunionForm:NgForm) {
+onSubmit() {
   this.submitted = true;
   this.save(); 
-  getReunionForm.reset();
-     this.reloadData();
      this.gotoList();
 }
 save() {
   this.reunion.dateDebut = new Date(new Date(this.reunion.dateDebut).getTime() - this.offset);
   this.reunion.dateFin = new Date(new Date(this.reunion.dateFin).getTime() - this.offset);
-this.reunion.heureDeb={hour: this.h1, minute:this.mnt1,second:0};
-// console.log("hhhhhhhhhhheeeeeeeeeeeeeuuuuuuuuuurrr1: "+JSON.stringify((this.value1)));
 
-  this.reunion.heureFin= this.heurfin;
-  //console.log("re.her fin: "+JSON.stringify(this.value2));
+console.log("5555555555AAAAAA5A5"+JSON.stringify(this.reunion)); 
 
   this.runionservice.createReunion(this.reunion)
-    .subscribe(data => console.log(data), error => console.log(error));
-  this.reunion= new Reunion();
   
-   console.log("reunion: "+JSON.stringify(this.reunion));
+    .subscribe(data =>{ console.log(data); this.gotoList();
+    } ,error => console.log(error));
+    console.log("5555555555AAAAAA5A5"+JSON.stringify(this.reunion)); 
 
-this.gotoList();
+
 }  
-reloadData(){
-  this.reunions= this.runionservice.findAllReunion();
- 
-}
+
 sprintDetails(id:number){
   this.router.navigate(['sprints/details',id]);
 }
@@ -171,7 +178,6 @@ deleteSprints(id:number){
     console.log(data);
    
 
-   this.reloadData();
    this.gotoList();
   },
   error=>console.log(error));
@@ -180,9 +186,15 @@ deleteSprints(id:number){
 onChange(event){
  if(this.selectedtype=="Reunion_Scrum"){
    this.reunion.type=this.TypeReunion.Reunion_Scrum
+  this.showEq=true;
+  this.showDep=false;
+
  }
  if(this.selectedtype=="Reunion_Administratif"){
    this.reunion.type=this.TypeReunion.Reunion_Administratif
+   this.showDep=true;
+   this.showEq=false;
+
  }
 
 
@@ -192,27 +204,44 @@ onChange1(event){
   this.reunion.equipe = {idEquipe:this.selectedEquipeId,nomEquipe:'',specialite:''};
   console.log(JSON.stringify(this.reunion.equipe.idEquipe)); }
  
- 
- }
-/*
-onChange1(event){
-  $("#leg2").click(function(){
-    $("#tab1").toggle("slide");
+  onChange2(event){
+    $("#leg1").hide(1000);
+    $("#tab1").hide(1500);
+  this.employeArray=this.employeservice.findAllEmployesDepartement(this.selectedDepartementId)
+this.employeservice.findAllEmployesDepartement(this.selectedDepartementId).subscribe(
+
+  resp=>{this.employesdep=resp;
+    console.log(JSON.stringify("qqqqqqqqqqq"+this.employeArray));
+  }
+  
+)
+  $("#field_departement").click(function(){
+    $("#leg1").show(1000);
+    $("#tab1").show(1500);
   });
-  $("#leg3").click(function(){
-    $("#tab2").toggle("slide");
-  });
-  this.sprintsProjet =this.sprintservice.findSprintsByProjet(this.selectedProjetSprintsId);
-  this.sprintservice.findSprintsByProjet(this.selectedProjetSprintsId).subscribe(
-    resp  =>{ this.sprintsProjetArray = resp;
-     this.sprintsProjetArray = this.sprintsProjetArray.filter(x=>x.nomSprint!='Backlog produit');
-    console.log("*****"+(this.sprintsProjetArray.length -1));
-    }
-  );
+  }
+  changeSelection() {
+    this.fetchSelectedItems()
+  } 
+  
+  fetchSelectedItems() {
+    this.selectedItemsList = this.employesdep.filter((value, index) => {
+      return value.isChecked
+      
+    });
+    this.fetchCheckedIDs();
+
+  }
+
+  fetchCheckedIDs() {
+    this.checkedIDs = []
+    this.employesdep.forEach((value, index) => {
+      if (value.isChecked) {
+        this.checkedIDs.push(value.idEmploye);
+        this.reunion.employes=this.checkedIDs;
+        console.log(JSON.stringify("rtrtrdggrgdrgdgrdgdrgdrgrdg"+ this.reunion.employes));
+
+      }
+    });
+  }
 }
-
-/*toggleBPList(){
-  this.showBPList = ! this.showBPList;
-  console.log(this.showBPList+"*****");
-}*/
-

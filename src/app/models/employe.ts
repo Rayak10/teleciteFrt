@@ -1,6 +1,7 @@
 import { Bureau } from './bureau';
 import { Departement } from './departement';
 import { Equipe } from './equipe';
+import { Reunion } from './Reunion';
 
 export class Employe{
     idEmploye: number;
@@ -15,7 +16,9 @@ export class Employe{
 	post:string;
 	role:string;
 	active:boolean;
+	isChecked:boolean;
 	bureau: Bureau=new Bureau();
 	departement: Departement=new Departement();
 	equipe: Equipe=new Equipe();
+	reunions: Reunion[] = [];
 }

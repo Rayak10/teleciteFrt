@@ -58,7 +58,8 @@ import { NgbTimepickerModule} from '@ng-bootstrap/ng-bootstrap';
     HttpClientModule,
     BsDatepickerModule.forRoot(),
     BrowserAnimationsModule,
-    NgbTimepickerModule,
+    NgbTimepickerModule 
+
     
   ],
   providers: [],

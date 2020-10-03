@@ -2,14 +2,11 @@
 <hr/>
 
 <!-- FORM  -->	    
-	   <div class="container">	       
-     
-<fieldset>
+ <div class="container">	  
 
-<!-- Form Name -->
+ <form   (ngSubmit)="onSubmit()" >
 
 <legend  class="navbar-brand titre"  > Gestion des reunions </legend>
-<form #getReunionForm="ngForm" (ngSubmit)="onSubmit(getReunionForm)">
 <!-- Text input-->
 <div class="row">
   <label class="col-md-2 control-label">Type réunion :</label>
@@ -94,7 +91,7 @@
     </div>
       
     <div class="col-md-4">
-      <ngb-timepicker [formControl]="ctrl1" [(ngModel)]="heurdeb" required></ngb-timepicker>
+      <ngb-timepicker [formControl]="ctrl1" [(ngModel)]="reunion.heureDeb" required></ngb-timepicker>
       <div *ngIf="ctrl1.valid" class="small form-text text-success">Bon choix</div>
       <div *ngIf="ctrl1.errors" class="small form-text text-danger">
         <div *ngIf="ctrl1.errors['required']">Sélectionnez l'heure début</div>
@@ -108,7 +105,7 @@
       </div>
       
      <div class="col col-md-4">
-      <ngb-timepicker [formControl]="ctrl2" [(ngModel)]="heurfin" required></ngb-timepicker>
+      <ngb-timepicker [formControl]="ctrl2" [(ngModel)]="reunion.heureFin" required></ngb-timepicker>
       <div *ngIf="ctrl2.valid" class="small form-text text-success">Bon choix</div>
       <div *ngIf="ctrl2.errors" class="small form-text text-danger">
         <div *ngIf="ctrl2.errors['required']">Sélectionnez l'heure fin</div>
@@ -118,7 +115,7 @@
      </div>
   </div>
 
-  <div class="row">
+  <div class="row" *ngIf="showEq">
     <div class="col col-md-2">
   <label class="control-label">Equipe :</label>
     </div>
@@ -138,7 +135,7 @@
     </div>
 
 
-    <div class="row">
+    <div class="row" *ngIf="showDep">
       <div class="col col-md-2">
     <label class="control-label">Departement :</label>
       </div>
@@ -147,8 +144,8 @@
        type="text" 
        class="form-control "
         id="field_departement"
-          name="departement" [(ngModel)]="selectedEquipeId"
-          (change)="onChangeEquipe($event)">
+          name="departement" [(ngModel)]="selectedDepartementId"
+          (change)="onChange2($event)">
         <option  *ngFor="let d of departementArray" [value]="d.idDepartement">
           {{d.nomDepartement}}
         </option>
@@ -156,38 +153,76 @@
       <p class="help-block"></p>
       </div>
       </div>
-<!--<div class="form-group">
-  <ngb-timepicker [formControl]="ctrl" required></ngb-timepicker>
-  <div *ngIf="ctrl.valid" class="small form-text text-success">Bon choix</div>
-  <div *ngIf="ctrl.errors" class="small form-text text-danger">
-    <div *ngIf="ctrl.errors['required']">Sélectionnez l'heure </div>
-    <div *ngIf="ctrl.errors['tooLate']">C'est un peu trop tard</div>
-    <div *ngIf="ctrl.errors['tooEarly']">C'est un peu trop tôt
-    </div>
-  </div>
-</div>
--->
-
-  
+      <label class="col-md-4 control-label" for="btn-save"></label>
+      <div class="col col-lg-2">
+       <button id="btn-save" name="btn-save" type="submit" class="btn btn-success">Enregistrer</button>
+      </div>
+  </form>
+<!--
     
     <hr>
+
+
+
+
+    
+
+<hr>
+-->
+
 <!-- Button -->
 
-    <label class="col-md-4 control-label" for="btn-save"></label>
-    <div class="col col-lg-2">
-     <button id="btn-save" name="btn-save" type="submit" class="btn btn-success">Enregistrer</button>
-    </div>
-</form>
-</fieldset>
-     </div> 
-     
 
-
-
-
-
-
+ 
      
      
-     
+
+      <legend id="leg1" class="navbar-brand titre">Liste des employés de département </legend>
+
+<table id="tab1"  class="table table-bordered table-condensed table-hover">
+  <thead>
+      <tr>
+          <th scope="col" width=20%>Nom</th>
+          <th scope="col" width=20%>Prenom</th>
+          <th scope="col" width=20%>Email</th>
+          <th scope="col" width=20%>Status</th>
+          <th scope="col" width=20%>Actions</th>
+      </tr>
+          
+  </thead>
+  <tbody id="form-list-employes-body"  *ngFor="let item of employesdep">
+      <tr>
+          <td>{{item.nomEmploye}}</td>
+          <td>{{item.prenomEmploye}}</td>
+          <td>{{item.email}}</td>
+          <td>{{item.active}}</td>
+          
+          <td>
+            
+     <input type="checkbox"  [(ngModel)]="item.isChecked"  (change)="changeSelection()">
+             
+          </td>
+      </tr>
+  </tbody>
+</table>
+
+
+
+
+ 
+   <div class="col-md-4">
+     <h4>Object</h4>
+     <code>
+     {{selectedItemsList | json}}
+     </code>
+
+     <h4>Array of IDs</h4>
+     <code>{{checkedIDs}}</code>
+   </div>
+  </div>
+
+   
+
+
+
 

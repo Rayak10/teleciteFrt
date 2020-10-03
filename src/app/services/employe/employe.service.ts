@@ -5,6 +5,7 @@ import { Employe } from 'src/app/models/employe';
 import { Bureau } from 'src/app/models/bureau';
 
 import { Observable ,Subject} from 'rxjs';
+import { Departement } from 'src/app/models/departement';
 
 
 
@@ -18,9 +19,13 @@ export class EmployeService {
   findAllEmployes(){
     return this.http.get<Employe[]>(AppSettings.APP_URL+"/employes/")
   }
+  findAllEmployesDepartement(idDepartement:number){
+    return this.http.get<Employe[]>(AppSettings.APP_URL+"/employes/employesDepartement/"+idDepartement)
+  }
   findAllBureaux():Observable<any>{
     return this.http.get<Bureau[]>(AppSettings.APP_URL+"/bureaux/")
   }
+  
   findEmployesActivesOrNot(active:boolean){
 return this.http.get<Employe[]>(AppSettings.APP_URL+"/employes/AllActives/"+active)
   }  

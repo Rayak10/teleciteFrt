@@ -110,7 +110,7 @@ onChange1(event){
   this.sprintservice.findSprintsByProjet(this.selectedProjetSprintsId).subscribe(
     resp  =>{ this.sprintsProjetArray = resp;
      this.sprintsProjetArray = this.sprintsProjetArray.filter(x=>x.nomSprint!='Backlog produit');
-    console.log("*****"+(this.sprintsProjetArray.length -1));
+    console.log("*****"+(this.sprintsProjetArray));
     }
   );
 }
