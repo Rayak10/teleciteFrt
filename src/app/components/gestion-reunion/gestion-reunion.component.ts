@@ -52,7 +52,6 @@ export class GestionReunionComponent implements OnInit {
   selectedDepartementId:number;
   form: FormGroup;
   selectedItemsList:Employe[];
-  x:Employe[]=[];
   checkedIDs:number[];
   constructor(config: NgbTimepickerConfig ,private runionservice:ReunionService,private employeservice:EmployeService,private equipeservice:EquipeService,private departementservive:DepartementService,private formBuilder:FormBuilder,private router:Router) {
     config.seconds = false;
