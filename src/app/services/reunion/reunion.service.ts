@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Reunion } from 'src/app/models/Reunion';
 import { Tache } from 'src/app/models/tache';
+import { TypeReunion } from 'src/app/models/typeReunion';
 import { AppSettings } from 'src/app/settings/app.settings';
 
 @Injectable({
@@ -18,6 +19,10 @@ export class ReunionService {
   }
   findReunionById(idReunion:number){
     return this.http.get<Reunion>(AppSettings.APP_URL+"/reunions/"+idReunion)
+
+  }
+  findReunionByType(type:TypeReunion){
+    return this.http.get<Reunion[]>(AppSettings.APP_URL+"/reunions/reunionsType/"+type)
 
   }
   /*findAllTachesprint(idSprint:number){

@@ -11,10 +11,13 @@ export class Reunion{
     dateFin:Date= new Date();
     heureDeb:NgbTimeStruct = {hour: 0, minute: 0,second:0};
     heureFin:NgbTimeStruct= {hour: 0, minute: 0,second:0};
+    heurDeb: string;
+    heurFin: string;
     notification:Notification;
     equipe:Equipe;
     type:TypeReunion;
     employes:number[];
+    employeess:Employe[];
 }
 
 

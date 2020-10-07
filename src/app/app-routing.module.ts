@@ -17,6 +17,9 @@ import { GestionTacheComponent } from './components/gestion-tache/gestion-tache.
 import { TacheDetailleComponent } from './components/tache-detaille/tache-detaille.component';
 import { TacheUpdateComponent } from './components/tache-update/tache-update.component';
 import { GestionReunionComponent } from './components/gestion-reunion/gestion-reunion.component';
+import { ReunionDetailleComponent } from './components/reunion-detaille/reunion-detaille.component';
+import { ListReunionsComponent } from './components/list-reunions/list-reunions.component';
+import { ReunionUpdateComponent } from './components/reunion-update/reunion-update.component';
 
 
 
@@ -38,7 +41,10 @@ const routes: Routes = [
   {path: 'gestionTaches/:id', component: GestionTacheComponent},
   {path: 'taches/details/:id',component :TacheDetailleComponent },
   {path: 'taches/update/:id',component :TacheUpdateComponent },
-  {path: 'gestionReunions', component: GestionReunionComponent}
+  {path: 'gestionReunions', component: GestionReunionComponent},
+  {path: 'reunions/details/:id', component: ReunionDetailleComponent},
+  {path: 'reunions/update/:id', component: ReunionUpdateComponent},
+  {path: 'Reunions/list', component: ListReunionsComponent}
 
 
 ];

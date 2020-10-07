@@ -11,6 +11,7 @@ import { TypeReunion } from 'src/app/models/typeReunion';
 import { NgbTimeStruct,NgbTimepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import { EmployeService } from 'src/app/services/employe/employe.service';
 import { Employe } from 'src/app/models/employe';
+import { stringify } from 'querystring';
 
 @Component({
   selector: 'app-gestion-reunion',
@@ -183,18 +184,6 @@ deleteSprints(id:number){
   
 }
 onChange(event){
- if(this.selectedtype=="Reunion_Scrum"){
-   this.reunion.type=this.TypeReunion.Reunion_Scrum
-  this.showEq=true;
-  this.showDep=false;
-
- }
- if(this.selectedtype=="Reunion_Administratif"){
-   this.reunion.type=this.TypeReunion.Reunion_Administratif
-   this.showDep=true;
-   this.showEq=false;
-
- }
 
 
 }

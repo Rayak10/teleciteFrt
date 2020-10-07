@@ -15,9 +15,9 @@
      type="text" 
      class="form-control "
       id="field_reunion"
-        name="reunion" [(ngModel)]="selectedtype"
+        name="reunion" [(ngModel)]="this.reunion.type"
         (change)="onChange($event)">
-      <option *ngFor="let type of TypeReunion.values();" >
+      <option *ngFor="let type of TypeReunion.values();" [value]="type" >
         {{type}}
       </option>
     </select>
@@ -115,7 +115,7 @@
      </div>
   </div>
 
-  <div class="row" *ngIf="showEq">
+  <div class="row" *ngIf="reunion.type=='Reunion_Scrum'">
     <div class="col col-md-2">
   <label class="control-label">Equipe :</label>
     </div>
@@ -135,7 +135,7 @@
     </div>
 
 
-    <div class="row" *ngIf="showDep">
+    <div class="row" *ngIf="reunion.type == 'Reunion_Administratif'">
       <div class="col col-md-2">
     <label class="control-label">Departement :</label>
       </div>

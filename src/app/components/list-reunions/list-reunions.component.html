@@ -1,0 +1,65 @@
+<hr/>
+<hr/>
+<hr/>
+
+<!-- LIST -->
+<div class=col-md-12 >
+    
+    <form id="form-list-reunionadministratif" >
+      <div class="col-md-3">
+            <legend id="leg2" class=" col-md-12 titre" >   Liste des Réunions :</legend>
+      </div>
+            <div class="col-md-3">
+              <select required
+               type="text" 
+               class="form-control "
+                id="field_reunions"
+                  name="reunions" [(ngModel)]="selectedType"
+                  (change)="onChange1($event)">
+                <option  *ngFor="let type of TypeReunion.values()" [value]="type">
+                  {{type}}
+                </option>
+              </select>
+              <p class="help-block"></p>
+              </div>
+              <div> 
+               <a title="ajouter une Réunion " class="btn btn-default btn-sm "(click)="gestionReunions()"><i class="fas fa-calendar-plus  fa-2x lime"></i></a> 
+              </div>
+
+            
+    <table id="tab1" class="table table-bordered table-condensed table-hover">
+        <thead>
+            <tr>
+              <th scope="col" width=25%>Nom reunion</th>
+                <th scope="col" width=25%>Contexte</th>                
+                <th scope="col" width=25%>Date</th>
+                <th scope="col" width=25%>Heure Début</th>
+                <th scope="col" width=25%>Heure fin</th>
+                <th scope="col" width=25%>Actions</th>
+            </tr>
+                
+
+             
+
+        </thead>
+        <ng-container *ngFor="let reunion of reunions | async">
+          <tbody id="form-list-projets-body">
+            <tr>
+              <td>{{reunion.nomReunion}}</td>
+                <td>{{reunion.descriptionReunion}}</td>
+                <td>{{reunion.dateDebut | date :'shortDate'}}</td>
+                <td>{{reunion.heurDeb}}</td>
+                <td>{{reunion.heurFin}}</td>
+                <td>
+                  
+                    <a title="les détailles du reunion" class="btn btn-default btn-sm "(click)="reunionDetails(reunion.idReunion)"> <i class="glyphicon glyphicon-eye-open text-primary"  ></i> </a> 
+                    <a title="modifier la réunion" class="btn btn-default btn-sm "(click)="updateReunion(reunion.idReunion)"> <i class="glyphicon glyphicon-edit text-primary"></i> </a>
+                    <a title="supprimer la réunion " class="btn btn-default btn-sm " (click)="deleteReunion(reunion.idReunion)"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
+                    
+                   
+                </td>
+            </tr>
+        </tbody>
+      </ng-container>
+    </table>
+    </form>

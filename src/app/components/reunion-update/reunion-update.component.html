@@ -1,1 +1,215 @@
-<p>reunion-update works!</p>
+<hr/>
+<hr/>
+
+<!-- FORM  -->	    
+ <div class="container">	  
+
+ <form   (ngSubmit)="onSubmit()" >
+
+<legend  class="navbar-brand titre"  > Gestion des reunions </legend>
+<!-- Text input-->
+<div class="row">
+  <label class="col-md-2 control-label">Type réunion :</label>
+  <div class="col-md-4">
+    <select required
+     type="text" 
+     class="form-control "
+      id="field_reunion"
+        name="reunion" [(ngModel)]="reunion.type"
+        (change)="onChange($event)">
+      <option *ngFor="let type of TypeReunion.values();" >
+        {{type}}
+      </option>
+    </select>
+    <p class="help-block"></p>
+    </div>
+    <div class="col col-md-2">
+  <label class="control-label" >Nom de réunion :</label> 
+    </div>
+  <div class="col-md-4">
+  <input id="reunion-name" required [(ngModel)]="reunion.nomReunion" name="reunion-name" type="text" placeholder="tapez le nom du reunion" class="form-control input-md" >
+  <span class="help-block"></span>  
+  </div>
+</div>
+
+
+
+
+<div class="row">
+  <div class="col col-md-2">
+  <label class=" control-label">Contexte du réunion :</label>
+</div>
+
+  <div class="col-md-4">
+    <textarea id="reunion-description" rows="2" cols="12" required [(ngModel)]="reunion.descriptionReunion" name="reunion-description" type="text" placeholder="tapez une description pour cette réunion ..." class="form-control input-md"></textarea>
+
+    <p class="help-block"></p>
+    </div>
+    <div class="col col-md-2">
+  <label class="control-label">Date début réunion :</label>  
+    </div>
+    <div class="col-md-4">
+      <input  
+      name="reunion-date-debut"
+      placeholder = "Selectionner la date début"
+      [(ngModel)]="reunion.dateDebut"
+      class="form-control"
+      bsDatepicker
+      [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
+   
+    <span class="help-block"></span>  
+    </div>  
+</div>
+
+
+<div class="row">
+ 
+  <div class="col col-md-6">
+    
+    </div>
+    
+  <div class="col col-md-2">
+    <label class="control-label">Date fin réunion :</label>
+  </div>  
+    <div class="col-md-4">
+      <input  
+      name="reunion-date-fin"
+      placeholder = "Selectionner la date fin"
+      [(ngModel)]="reunion.dateFin"
+      class="form-control"
+      bsDatepicker
+      [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
+   
+    <span class="help-block"></span>  
+    </div>  
+  </div>
+
+
+  <div class="row">
+    <div class="col col-md-2">
+      <label class="control-label">Heure début :</label> 
+    </div>
+      
+    <div class="col-md-4">
+      <ngb-timepicker [formControl]="ctrl1" [(ngModel)]="reunion.heureDeb" required></ngb-timepicker>
+      <div *ngIf="ctrl1.valid" class="small form-text text-success">Bon choix</div>
+      <div *ngIf="ctrl1.errors" class="small form-text text-danger">
+        <div *ngIf="ctrl1.errors['required']">Sélectionnez l'heure début</div>
+        <div *ngIf="ctrl1.errors['tooLate']">C'est un peu trop tard</div>
+        <div *ngIf="ctrl1.errors['tooEarly']">C'est un peu trop tôt</div>
+
+      </div>
+     </div>
+     <div class="col col-md-2">
+      <label class="control-label">Heure fin :</label> 
+      </div>
+      
+     <div class="col col-md-4">
+      <ngb-timepicker [formControl]="ctrl2" [(ngModel)]="reunion.heureFin" required></ngb-timepicker>
+      <div *ngIf="ctrl2.valid" class="small form-text text-success">Bon choix</div>
+      <div *ngIf="ctrl2.errors" class="small form-text text-danger">
+        <div *ngIf="ctrl2.errors['required']">Sélectionnez l'heure fin</div>
+        <div *ngIf="ctrl2.errors['tooLate']">C'est un peu trop tard</div>
+        <div *ngIf="ctrl2.errors['probleme']">Verifier l'heure fin de reunion  </div>
+      </div>
+     </div>
+  </div>
+
+  <div class="row" *ngIf="showEq">
+    <div class="col col-md-2">
+  <label class="control-label">Equipe :</label>
+    </div>
+  <div class="col-md-4">
+    <select required
+     type="text" 
+     class="form-control "
+      id="field_equipe"
+        name="equipe" [(ngModel)]="selectedEquipeId"
+        (change)="onChange1($event)">
+      <option  *ngFor="let e of equipeArray" [value]="e.idEquipe">
+        {{e.nomEquipe}}
+      </option>
+    </select>
+    <p class="help-block"></p>
+    </div>
+    </div>
+
+
+    <div class="row" *ngIf="showDep">
+      <div class="col col-md-2">
+    <label class="control-label">Departement :</label>
+      </div>
+    <div class="col-md-4">
+      <select required
+       type="text" 
+       class="form-control "
+        id="field_departement"
+          name="departement" [(ngModel)]="selectedDepartementId"
+          (change)="onChange2($event)">
+        <option  *ngFor="let d of departementArray" [value]="d.idDepartement">
+          {{d.nomDepartement}}
+        </option>
+      </select>
+      <p class="help-block"></p>
+      </div>
+      </div>
+      <div class="col col-lg-2 pull-right">
+       <button id="btn-save" name="btn-save" type="submit" class="btn btn-success">Enregistrer</button>
+      </div>
+  </form>
+<!--
+    
+    <hr>
+
+
+
+
+    
+
+<hr>
+-->
+
+<!-- Button -->
+
+
+ 
+     
+     
+
+      <legend id="leg1" class="navbar-brand titre">Liste des employés de département </legend>
+
+<table id="tab1"  class="table table-bordered table-condensed table-hover">
+  <thead>
+      <tr>
+          <th scope="col" width=20%>Nom</th>
+          <th scope="col" width=20%>Prenom</th>
+          <th scope="col" width=20%>Email</th>
+          <th scope="col" width=20%>Status</th>
+          <th scope="col" width=20%>Actions</th>
+      </tr>
+          
+  </thead>
+  <tbody id="form-list-employes-body"  *ngFor="let item of employesdep">
+      <tr>
+          <td>{{item.nomEmploye}}</td>
+          <td>{{item.prenomEmploye}}</td>
+          <td>{{item.email}}</td>
+          <td>{{item.active}}</td>
+          
+          <td>
+            
+     <input type="checkbox"  [(ngModel)]="item.isChecked"  (change)="changeSelection()">
+             
+          </td>
+      </tr>
+  </tbody>
+</table>
+
+
+
+
+   
+
+
+
+

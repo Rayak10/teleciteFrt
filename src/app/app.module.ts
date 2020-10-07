@@ -26,6 +26,7 @@ import { GestionReunionComponent } from './components/gestion-reunion/gestion-re
 import { ReunionUpdateComponent } from './components/reunion-update/reunion-update.component';
 import { ReunionDetailleComponent } from './components/reunion-detaille/reunion-detaille.component';
 import { NgbTimepickerModule} from '@ng-bootstrap/ng-bootstrap';
+import { ListReunionsComponent } from './components/list-reunions/list-reunions.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { NgbTimepickerModule} from '@ng-bootstrap/ng-bootstrap';
     TacheUpdateComponent,
     GestionReunionComponent,
     ReunionUpdateComponent,
-    ReunionDetailleComponent
+    ReunionDetailleComponent,
+    ListReunionsComponent
   ],
   imports: [
     BrowserModule,
