@@ -5,14 +5,15 @@ import { Observable } from 'rxjs';
 import { Reunion } from 'src/app/models/Reunion';
 import { TypeReunion } from 'src/app/models/typeReunion';
 import { ReunionService } from 'src/app/services/reunion/reunion.service';
-
 @Component({
   selector: 'app-list-reunions',
   templateUrl: './list-reunions.component.html',
   styleUrls: ['./list-reunions.component.css']
 })
-export class ListReunionsComponent implements OnInit {
+
+export class ListReunionsComponent implements OnInit{
   reunions: Observable<Reunion[]>;
+  reunionsSort:Reunion[];
   typeArray= [];
   reunionsObs: Reunion[]=[];
   TypeReunion=TypeReunion;
@@ -20,21 +21,22 @@ reunionAd:TypeReunion.Reunion_Administratif;
 reunion:Reunion;
   selectedType:TypeReunion = TypeReunion.Reunion_Administratif;
   reunionstrie: Observable<Reunion[]>;
-  constructor(private runionservice:ReunionService,private formBuilder:FormBuilder,private router:Router) { }
+ 
+  constructor(private reunionservice:ReunionService,private formBuilder:FormBuilder,private router:Router) { }
 
   ngOnInit() {
     this.typeArray=["Reunion_Scrum","Reunion_Administratif"]
-
+    this.findReunionsByType();
   /*  this.runionservice.findReunionByType(this.selectedType).subscribe(
       data => {console.log("rfgsdfrsssssssfqesr:"+JSON.stringify(data));   
       
                   this.reunionsObs.push(...data);
                   console.log("--------------------------------:"+JSON.stringify(this.reunionsObs));}
     );*/
-    this.reloadData();
+    this.reloadData()
   }
   reloadData(){
-    this.reunions= this.runionservice.findReunionByType(this.selectedType);
+    this.reunions= this.reunionservice.findReunionByType(this.selectedType);
    
   }
 
@@ -42,9 +44,11 @@ reunion:Reunion;
 
     //if(this.selectedType==TypeReunion.Reunion_Scrum){
 
-      console.log("reunionnnnnnnnnnsc"+JSON.stringify(this.selectedType))
-
-      this.reunions = this.runionservice.findReunionByType(this.selectedType);
+     
+      //this.reunions = this.reunionservice.findReunionByType(this.selectedType);
+     
+      this.findReunionsByType();
+      
    //  this.showEq=true;
    //  this.showDep=false;
    
@@ -61,19 +65,27 @@ reunion:Reunion;
    
   
 }
+findReunionsByType(){
+  this.reunionservice.findReunionByType(this.selectedType).subscribe(
+    resp  =>{ this.reunionsSort = resp;
+      console.log("reunionnnnnnnnnnsc"+JSON.stringify(this.reunionsSort ))
 
+    }
+  );
+
+}
 
 deleteReunion(id:number){
-  this.runionservice.deleteReunion(id)
+  this.reunionservice.deleteReunion(id)
   .subscribe(
   data=>{
     console.log(data);
    
+    this.findReunionsByType();
 
-   this.reloadData();
   },
   error=>console.log(error));
-  
+  console.log("selectedtype"+JSON.stringify+this.selectedType)
 }
 
 

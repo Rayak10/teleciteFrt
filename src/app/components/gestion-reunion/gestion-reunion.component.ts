@@ -64,11 +64,12 @@ export class GestionReunionComponent implements OnInit {
    }
 
   ngOnInit()  {
+    this.reunion.heureDeb={hour: 0, minute: 0,second:0};
+   this.reunion.heureFin={hour: 0, minute: 0,second:0};
     this.fetchSelectedItems();
     this.fetchCheckedIDs();
    // this.selectedtype = Object.keys(this.typeReunions);
-   this.heurdeb={hour: 0, minute: 0,second:0};
-   this.heurfin={hour: 0, minute: 0,second:0};
+   
 
 
     this.ctrl2= new FormControl('', (control: FormControl) => {
@@ -155,7 +156,7 @@ console.log("5555555555AAAAAA5A5"+JSON.stringify(this.reunion));
 
   this.runionservice.createReunion(this.reunion)
   
-    .subscribe(data =>{ console.log(data); this.gotoList();
+    .subscribe(data =>{ console.log(data);
     } ,error => console.log(error));
     console.log("5555555555AAAAAA5A5"+JSON.stringify(this.reunion)); 
 
@@ -169,7 +170,7 @@ updateSprint(id:number){
   this.router.navigate(['sprints/update',id]);
 }
 gotoList(){
-  this.router.navigate(['gestionReunions']);
+  this.router.navigate(['Reunions/list']);
 }
 deleteSprints(id:number){
   this.runionservice.deleteReunion(id)
@@ -232,4 +233,5 @@ this.employeservice.findAllEmployesDepartement(this.selectedDepartementId).subsc
       }
     });
   }
+  
 }

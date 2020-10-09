@@ -16,7 +16,7 @@
                 id="field_reunions"
                   name="reunions" [(ngModel)]="selectedType"
                   (change)="onChange1($event)">
-                <option  *ngFor="let type of TypeReunion.values()" [value]="type">
+                <option  *ngFor="let type of TypeReunion.values();" [value]="type">
                   {{type}}
                 </option>
               </select>
@@ -31,18 +31,18 @@
         <thead>
             <tr>
               <th scope="col" width=25%>Nom reunion</th>
-                <th scope="col" width=25%>Contexte</th>                
-                <th scope="col" width=25%>Date</th>
-                <th scope="col" width=25%>Heure Début</th>
-                <th scope="col" width=25%>Heure fin</th>
-                <th scope="col" width=25%>Actions</th>
+                <th scope="col" width=35%>Contexte</th>                
+                <th scope="col" width=10%>Date</th>
+                <th scope="col" width=10%>Heure Début</th>
+                <th scope="col" width=10%>Heure fin</th>
+                <th scope="col" width=10%>Actions</th>
             </tr>
                 
 
              
 
         </thead>
-        <ng-container *ngFor="let reunion of reunions | async">
+        <ng-container *ngFor="let reunion of reunionsSort | reverse">
           <tbody id="form-list-projets-body">
             <tr>
               <td>{{reunion.nomReunion}}</td>

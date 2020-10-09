@@ -9,8 +9,8 @@ export class Reunion{
 	descriptionReunion: string;
     dateDebut:Date= new Date();
     dateFin:Date= new Date();
-    heureDeb:NgbTimeStruct = {hour: 0, minute: 0,second:0};
-    heureFin:NgbTimeStruct= {hour: 0, minute: 0,second:0};
+    heureDeb:NgbTimeStruct ;
+    heureFin:NgbTimeStruct;
     heurDeb: string;
     heurFin: string;
     notification:Notification;

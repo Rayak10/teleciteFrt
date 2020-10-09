@@ -45,7 +45,7 @@ console.log("@@@@@@@@@@@@"+JSON.stringify(this.employeArray))
   }
 
   list(){
-    this.router.navigate(['reunions/list']);
+    this.router.navigate(['Reunions/list']);
   }
   reloadData(){
     this.reunions= this.reunionservice.findAllReunion();
@@ -69,4 +69,5 @@ deleteReunion(id:number){
 reunionDetails(id:number){
   this.router.navigate(['reunions/details',id]);
 }
+
 }

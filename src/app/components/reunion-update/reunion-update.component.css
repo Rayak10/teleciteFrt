@@ -1,0 +1,45 @@
+.titre{
+    color:rgb(95, 176, 228);
+  
+  }
+  
+  td,
+  th {
+    border: 1px solid rgb(190, 190, 190);
+    padding: 10px;
+  }
+  
+  td {
+    text-align: center;
+  }
+  th {
+    text-align: center;
+  }
+  
+  tr:nth-child(even) {
+    background-color: rgb(229, 247, 252);
+  }
+  #leg3:hover{
+      color : rgb(196, 199, 240);
+  }
+  #leg2:hover{
+    color : rgb(196, 199, 240);
+  }
+  th[scope="col"] {
+    background-color:rgb(138, 190, 241);
+    color: #fff;
+  }
+  
+  th[scope="row"] {
+    background-color: #e4eeac;
+  }
+  table{
+      border: 1px solid rgb(159, 136, 243);
+      border-collapse: collapse;
+      table-layout: fixed;
+  }
+  .lime {
+    color: #82c91e;
+}
+.fa {    color: #82c91e;
+}

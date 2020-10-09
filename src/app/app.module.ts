@@ -27,6 +27,7 @@ import { ReunionUpdateComponent } from './components/reunion-update/reunion-upda
 import { ReunionDetailleComponent } from './components/reunion-detaille/reunion-detaille.component';
 import { NgbTimepickerModule} from '@ng-bootstrap/ng-bootstrap';
 import { ListReunionsComponent } from './components/list-reunions/list-reunions.component';
+import { ReversePipe } from './reverse.pipe';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { ListReunionsComponent } from './components/list-reunions/list-reunions.
     GestionReunionComponent,
     ReunionUpdateComponent,
     ReunionDetailleComponent,
-    ListReunionsComponent
+    ListReunionsComponent,
+    ReversePipe
   ],
   imports: [
     BrowserModule,
