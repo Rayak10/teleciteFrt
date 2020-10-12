@@ -47,12 +47,10 @@ export class GestionReunionComponent implements OnInit {
   departementArray= [];
   TypeReunion=TypeReunion;
   selectedtype:any;
-  showDep:boolean=false;
-  showEq:boolean=false;
   selectedEquipeId:number;
   selectedDepartementId:number;
   form: FormGroup;
-  selectedItemsList:Employe[];
+  selectedItemsList:Employe[] = [];
   checkedIDs:number[];
   constructor(config: NgbTimepickerConfig ,private runionservice:ReunionService,private employeservice:EmployeService,private equipeservice:EquipeService,private departementservive:DepartementService,private formBuilder:FormBuilder,private router:Router) {
     config.seconds = false;
@@ -200,6 +198,10 @@ onChange1(event){
 this.employeservice.findAllEmployesDepartement(this.selectedDepartementId).subscribe(
 
   resp=>{this.employesdep=resp;
+   let checkedEmployeesIds = this.selectedItemsList.filter(emp=> emp.departement.idDepartement == this.selectedDepartementId);
+     this.employesdep.forEach(
+       emp=>{ if(checkedEmployeesIds.find(empChecked=>emp.idEmploye == empChecked.idEmploye))
+                 emp.isChecked = true; } );
     console.log(JSON.stringify("qqqqqqqqqqq"+this.employeArray));
   }
   
@@ -214,21 +216,21 @@ this.employeservice.findAllEmployesDepartement(this.selectedDepartementId).subsc
   } 
   
   fetchSelectedItems() {
-    this.selectedItemsList = this.employesdep.filter((value, index) => {
+    this.selectedItemsList = this.selectedItemsList.filter(emp=> emp.departement.idDepartement !=  this.selectedDepartementId)
+    this.selectedItemsList.push(...this.employesdep.filter((value, index) => {
       return value.isChecked
-      
-    });
+    }));
     this.fetchCheckedIDs();
 
   }
 
   fetchCheckedIDs() {
     this.checkedIDs = []
-    this.employesdep.forEach((value, index) => {
+    this.selectedItemsList.forEach((value, index) => {
       if (value.isChecked) {
         this.checkedIDs.push(value.idEmploye);
-        this.reunion.employes=this.checkedIDs;
         console.log(JSON.stringify("rtrtrdggrgdrgdgrdgdrgdrgrdg"+ this.reunion.employes));
+        this.reunion.employes=this.checkedIDs;
 
       }
     });

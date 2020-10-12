@@ -27,7 +27,9 @@ constructor(private reunionservice:ReunionService,private employeservice:Employe
     .subscribe(data=>{
       console.log(data)
       this.reunion=data;
+      
     }, error=>console.log(error));
+
     this.reloadData();
 this.employeArray=this.employeservice.findAllEemployesReunion(this.id)
 console.log("@@@@@@@@@@@@"+JSON.stringify(this.employeArray))

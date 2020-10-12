@@ -17,7 +17,7 @@
       id="field_reunion"
         name="reunion" [(ngModel)]="reunion.type"
         (change)="onChange($event)">
-      <option *ngFor="let type of TypeReunion.values();" >
+      <option *ngFor="let type of TypeReunion.values();"disabled="disabled" >
         {{type}}
       </option>
     </select>
@@ -115,7 +115,7 @@
      </div>
   </div>
 
-  <div class="row" *ngIf="showEq">
+  <div class="row" *ngIf="reunion.type=='Reunion_Scrum'">
     <div class="col col-md-2">
   <label class="control-label">Equipe :</label>
     </div>
@@ -124,7 +124,7 @@
      type="text" 
      class="form-control "
       id="field_equipe"
-        name="equipe" [(ngModel)]="selectedEquipeId"
+        name="equipe" [(ngModel)]="reunion.equipe.idEquipe"
         (change)="onChange1($event)">
       <option  *ngFor="let e of equipeArray" [value]="e.idEquipe">
         {{e.nomEquipe}}
@@ -135,7 +135,7 @@
     </div>
 
 
-    <div class="row" *ngIf="showDep">
+    <div class="row" *ngIf="reunion.type=='Reunion_Administratif'">
       <div class="col col-md-2">
     <label class="control-label">Departement :</label>
       </div>
@@ -154,7 +154,7 @@
       </div>
       </div>
       <div class="col col-lg-2 pull-right">
-       <button id="btn-save" name="btn-save" type="submit" class="btn btn-success">Enregistrer</button>
+       <button id="btn-save" name="btn-save" type="submit" class="btn btn-success">Modifier</button>
       </div>
   </form>
 <!--
@@ -189,7 +189,7 @@
       </tr>
           
   </thead>
-  <tbody id="form-list-employes-body"  *ngFor="let item of employesdep">
+  <tbody id="form-list-employes-body"  *ngFor="let item of   employesdep ">
       <tr>
           <td>{{item.nomEmploye}}</td>
           <td>{{item.prenomEmploye}}</td>

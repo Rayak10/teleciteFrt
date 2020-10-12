@@ -35,7 +35,7 @@ export class ReunionService {
   }
   updateRieunion(idReunion:number,value:any){
    
-   return this.http.put<Reunion>(AppSettings.APP_URL+"/reunions/update/"+idReunion,value)
+   return this.http.put<Reunion>(AppSettings.APP_URL+"/reunions/updateReunion/"+idReunion,value)
   }
   deleteReunion(idReunion:number){
     return this.http.delete(AppSettings.APP_URL+"/reunions/"+idReunion)

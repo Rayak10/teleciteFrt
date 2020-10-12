@@ -42,26 +42,8 @@ reunion:Reunion;
 
   onChange1(event){
 
-    //if(this.selectedType==TypeReunion.Reunion_Scrum){
-
-     
-      //this.reunions = this.reunionservice.findReunionByType(this.selectedType);
-     
       this.findReunionsByType();
       
-   //  this.showEq=true;
-   //  this.showDep=false;
-   
-   /* }
-    if(this.selectedType==TypeReunion.Reunion_Administratif){
-
-      console.log("reunionnnnnnnnnnnnn ad"+JSON.stringify(this.selectedType))
-
-      this.reunionstrie=this.runionservice.findReunionByType(this.selectedType)
-     // this.showDep=true;
-     // this.showEq=false;*/
-   
-  //  }
    
   
 }

@@ -5,11 +5,14 @@ import { Reunion } from 'src/app/models/Reunion';
 import { ReunionService } from 'src/app/services/reunion/reunion.service';
 import { UserstoryService } from 'src/app/services/userstory/userstory.service';
 import { TypeReunion } from 'src/app/models/typeReunion';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup ,FormBuilder} from '@angular/forms';
 import { NgbTimepickerConfig, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
 import { DepartementService } from 'src/app/services/departement/departement.service';
 import { EmployeService } from 'src/app/services/employe/employe.service';
 import { EquipeService } from 'src/app/services/equipe/equipe.service';
+import * as $ from 'jquery' ;
+import { Observable } from 'rxjs';
+import { Employe } from 'src/app/models/employe';
 
 @Component({
   selector: 'app-reunion-update',
@@ -18,8 +21,16 @@ import { EquipeService } from 'src/app/services/equipe/equipe.service';
 })
 export class ReunionUpdateComponent implements OnInit {
   reunion:Reunion;
+  selectedEquipeId:number;
   id:number;
   TypeReunion=TypeReunion;
+  employeArray:Observable<Employe[]>;
+  employesReunion:Observable<Employe[]>;
+  selectedDepartementId:number;
+  employesdep:Employe[]=[];
+  selectedItemsList:Employe[]= [];
+  checkedIDs:number[];
+
   ctrl1:any
   ctrl2:any
   h1:number;
@@ -39,13 +50,21 @@ export class ReunionUpdateComponent implements OnInit {
   intMntD:number;
   intHeurF:number;
   intMntF:number;
-  constructor(private reunionservice:ReunionService,config: NgbTimepickerConfig ,private runionservice:ReunionService,private employeservice:EmployeService,private equipeservice:EquipeService,private departementservive:DepartementService,private route: ActivatedRoute, private router: Router) { }
+  form: FormGroup;
+
+  constructor(private reunionservice:ReunionService,config: NgbTimepickerConfig ,private runionservice:ReunionService,private employeservice:EmployeService,private equipeservice:EquipeService,private departementservive:DepartementService,private route: ActivatedRoute, private router: Router,private formBuilder:FormBuilder) {
+    config.seconds = false;
+    config.spinners = true;
+    config.meridian=false;
+    this.form=this.formBuilder.group({
+      checkArray:this.formBuilder.array([])
+    })
+   }
 
   ngOnInit() {
 
     this.reunion=new Reunion();
    
-
 
     this.id=this.route.snapshot.params['id'];
     this.reunionservice.findReunionById(this.id)
@@ -53,7 +72,12 @@ export class ReunionUpdateComponent implements OnInit {
       console.log(data)
       this.reunion=data;
       console.log("reeeeeeeeeeunion"+JSON.stringify(this.reunion))
-      //console.log("dddddddaaaaaaaaaaaaddddddd"+JSON.stringify( this.reunion.heurDeb))
+
+      this.employesReunion=this.employeservice.findAllEemployesReunion(this.id);
+      this.employesReunion.subscribe(
+       checkedEmp => { this.selectedItemsList = checkedEmp;}  
+      )
+      console.log("dddddddaaaaaaaaaaaaddddddd"+JSON.stringify( this.employesReunion))
       for (let i = 0; i < this.reunion.heurDeb.length; i++) {
         this.intHeurD=(Number(this.reunion.heurDeb.substr(0,2)));
         this.intMntD=(Number(this.reunion.heurDeb.substr(3,2)))
@@ -139,24 +163,77 @@ this.typeArray=["Réunion administratif","Reunion Scrum"]
 
 
   updateReunion(){
-    this.reunionservice.updateRieunion(this.id , this.reunion )
-    .subscribe(data=> console.log(data),error=>console.log(error)),
+    this.reunionservice.createReunion(this.reunion)
+    .subscribe(data=> console.log(data),error=>console.log(error))
     
-      this.reunion=new Reunion();
+      
     
      // this.gotoList();
      // this.reloadData();
   }
+
   onSubmit(){
 
 
 
 
-
+this.updateReunion()
 
 
 
 
   
 }
+
+onChange1(event){
+  
+  this.reunion.equipe = {idEquipe:this.selectedEquipeId,nomEquipe:'',specialite:''};
+  console.log(JSON.stringify(this.reunion.equipe.idEquipe)); }
+ 
+  onChange2(event){
+    $("#leg1").hide(1000);
+    $("#tab1").hide(1500);
+  this.employeArray=this.employeservice.findAllEmployesDepartement(this.selectedDepartementId);
+this.employeservice.findAllEmployesDepartement(this.selectedDepartementId).subscribe(
+
+  resp=>{this.employesdep=resp;
+   let checkedEmployeesIds = this.selectedItemsList.filter(emp=> emp.departement.idDepartement == this.selectedDepartementId);
+
+     this.employesdep.forEach(
+       emp=>{ if(checkedEmployeesIds.find(empChecked=>emp.idEmploye == empChecked.idEmploye))
+                 emp.isChecked = true; } );
+    console.log(JSON.stringify("qqqqqqqqqqq"+this.employeArray));
+  }
+  
+)
+  $("#field_departement").click(function(){
+    $("#leg1").show(1000);
+    $("#tab1").show(1500);
+  });
+  }
+  changeSelection() {
+    this.fetchSelectedItems()
+  } 
+  
+  fetchSelectedItems() {
+    this.selectedItemsList = this.selectedItemsList.filter(emp=> emp.departement.idDepartement !=  this.selectedDepartementId)
+    this.selectedItemsList.push(...this.employesdep.filter((value, index) => {
+      return value.isChecked
+    }));
+    this.fetchCheckedIDs();
+
+  }
+
+  fetchCheckedIDs() {
+    this.checkedIDs = []
+    this.selectedItemsList.forEach((value, index) => {
+      if (value.isChecked) {
+        this.checkedIDs.push(value.idEmploye);
+        console.log(JSON.stringify("rtrtrdggrgdrgdgrdgdrgdrgrdg"+ this.reunion.employes));
+        this.reunion.employes=this.checkedIDs;
+
+      }
+    });
+  }
+  
 }
