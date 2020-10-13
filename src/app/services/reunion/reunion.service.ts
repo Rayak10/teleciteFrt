@@ -21,6 +21,11 @@ export class ReunionService {
     return this.http.get<Reunion>(AppSettings.APP_URL+"/reunions/"+idReunion)
 
   }
+  findReunionDtoById(idReunion:number){
+    return this.http.get<Reunion>(AppSettings.APP_URL+"/reunions/dto/"+idReunion)
+
+  }
+  
   findReunionByType(type:TypeReunion){
     return this.http.get<Reunion[]>(AppSettings.APP_URL+"/reunions/reunionsType/"+type)
 

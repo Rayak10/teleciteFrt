@@ -17,7 +17,6 @@ export class Reunion{
     equipe:Equipe;
     type:TypeReunion;
     employes:number[];
-    employeess:Employe[];
 }
 
 

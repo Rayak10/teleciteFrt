@@ -19,7 +19,7 @@ export class ListReunionsComponent implements OnInit{
   TypeReunion=TypeReunion;
 reunionAd:TypeReunion.Reunion_Administratif;
 reunion:Reunion;
-  selectedType:TypeReunion = TypeReunion.Reunion_Administratif;
+  selectedType:TypeReunion ;
   reunionstrie: Observable<Reunion[]>;
  
   constructor(private reunionservice:ReunionService,private formBuilder:FormBuilder,private router:Router) { }

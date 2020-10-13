@@ -67,11 +67,11 @@ export class ReunionUpdateComponent implements OnInit {
    
 
     this.id=this.route.snapshot.params['id'];
-    this.reunionservice.findReunionById(this.id)
+    this.reunionservice.findReunionDtoById(this.id)
     .subscribe(data=>{
       console.log(data)
       this.reunion=data;
-      console.log("reeeeeeeeeeunion"+JSON.stringify(this.reunion))
+      console.log("xxxxxxxxxxxxxxxxreeeeeeeeeeunionaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"+JSON.stringify(this.reunion.employes))
 
       this.employesReunion=this.employeservice.findAllEemployesReunion(this.id);
       this.employesReunion.subscribe(
@@ -163,7 +163,7 @@ this.typeArray=["Réunion administratif","Reunion Scrum"]
 
 
   updateReunion(){
-    this.reunionservice.createReunion(this.reunion)
+    this.reunionservice.updateRieunion(this.id,this.reunion)
     .subscribe(data=> console.log(data),error=>console.log(error))
     
       
@@ -173,22 +173,19 @@ this.typeArray=["Réunion administratif","Reunion Scrum"]
   }
 
   onSubmit(){
-
-
-
-
 this.updateReunion()
+this.gotoList();
 
-
-
-
-  
 }
-
+gotoList(){
+  this.router.navigate(['Reunions/list']);
+}
 onChange1(event){
   
   this.reunion.equipe = {idEquipe:this.selectedEquipeId,nomEquipe:'',specialite:''};
-  console.log(JSON.stringify(this.reunion.equipe.idEquipe)); }
+  console.log(JSON.stringify(this.reunion.equipe.idEquipe)); 
+}
+
  
   onChange2(event){
     $("#leg1").hide(1000);

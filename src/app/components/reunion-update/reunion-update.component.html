@@ -15,7 +15,7 @@
      type="text" 
      class="form-control "
       id="field_reunion"
-        name="reunion" [(ngModel)]="reunion.type"
+        name="reunion" [(ngModel)]="this.reunion.type"
         (change)="onChange($event)">
       <option *ngFor="let type of TypeReunion.values();"disabled="disabled" >
         {{type}}
@@ -125,7 +125,7 @@
      class="form-control "
       id="field_equipe"
         name="equipe" [(ngModel)]="reunion.equipe.idEquipe"
-        (change)="onChange1($event)">
+        >
       <option  *ngFor="let e of equipeArray" [value]="e.idEquipe">
         {{e.nomEquipe}}
       </option>
@@ -176,9 +176,9 @@
      
      
 
-      <legend id="leg1" class="navbar-brand titre">Liste des employés de département </legend>
+      <legend id="leg1" class="navbar-brand titre"*ngIf="reunion.type=='Reunion_Administratif'">Liste des employés de département </legend>
 
-<table id="tab1"  class="table table-bordered table-condensed table-hover">
+<table id="tab1"  class="table table-bordered table-condensed table-hover"*ngIf="reunion.type=='Reunion_Administratif'">
   <thead>
       <tr>
           <th scope="col" width=20%>Nom</th>
