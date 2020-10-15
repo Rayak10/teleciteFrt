@@ -71,13 +71,15 @@ export class ReunionUpdateComponent implements OnInit {
     .subscribe(data=>{
       console.log(data)
       this.reunion=data;
-      console.log("xxxxxxxxxxxxxxxxreeeeeeeeeeunionaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"+JSON.stringify(this.reunion.employes))
+      console.log(JSON.stringify("rtrtrdggrgdrgdgrdgdrgdrgrdg"+ this.reunion.employes));
 
       this.employesReunion=this.employeservice.findAllEemployesReunion(this.id);
       this.employesReunion.subscribe(
        checkedEmp => { this.selectedItemsList = checkedEmp;}  
       )
-      console.log("dddddddaaaaaaaaaaaaddddddd"+JSON.stringify( this.employesReunion))
+      console.log("dddddddaaaaaaaaaaaad****************dddddd"+JSON.stringify( this.selectedItemsList))
+
+
       for (let i = 0; i < this.reunion.heurDeb.length; i++) {
         this.intHeurD=(Number(this.reunion.heurDeb.substr(0,2)));
         this.intMntD=(Number(this.reunion.heurDeb.substr(3,2)))
@@ -163,6 +165,8 @@ this.typeArray=["Réunion administratif","Reunion Scrum"]
 
 
   updateReunion(){
+    console.log("efsef'rttttttttttttttttttttttttttttttttt"+JSON.stringify(this.reunion.employes)); 
+
     this.reunionservice.updateRieunion(this.id,this.reunion)
     .subscribe(data=> console.log(data),error=>console.log(error))
     
@@ -188,18 +192,19 @@ onChange1(event){
 
  
   onChange2(event){
+   //// this.fetchCheckedIDs()
+
     $("#leg1").hide(1000);
     $("#tab1").hide(1500);
-  this.employeArray=this.employeservice.findAllEmployesDepartement(this.selectedDepartementId);
 this.employeservice.findAllEmployesDepartement(this.selectedDepartementId).subscribe(
 
-  resp=>{this.employesdep=resp;
-   let checkedEmployeesIds = this.selectedItemsList.filter(emp=> emp.departement.idDepartement == this.selectedDepartementId);
-
+  resp=>{
+    this.employesdep=resp;
+    let checkedEmployeesIds = this.selectedItemsList.filter(emp=> emp.departement.idDepartement == this.selectedDepartementId);
      this.employesdep.forEach(
        emp=>{ if(checkedEmployeesIds.find(empChecked=>emp.idEmploye == empChecked.idEmploye))
                  emp.isChecked = true; } );
-    console.log(JSON.stringify("qqqqqqqqqqq"+this.employeArray));
+    console.log(JSON.stringify("qqqqqqqqqqq"+checkedEmployeesIds));
   }
   
 )
@@ -226,11 +231,21 @@ this.employeservice.findAllEmployesDepartement(this.selectedDepartementId).subsc
     this.selectedItemsList.forEach((value, index) => {
       if (value.isChecked) {
         this.checkedIDs.push(value.idEmploye);
-        console.log(JSON.stringify("rtrtrdggrgdrgdgrdgdrgdrgrdg"+ this.reunion.employes));
         this.reunion.employes=this.checkedIDs;
+        console.log(JSON.stringify("rtrtrdggrgdrgdgrdgdrgdrgrdg"+ this.reunion.employes));
 
       }
     });
+  }
+
+  isEmpInReunion(idEmploye: number): boolean {
+    return this.reunion.employes.indexOf(idEmploye) >= 0;
+  }
+
+  changeSelection2(idEmploye: number, event) {
+    let isChecked = event.target.checked;
+    console.log('****ùù*'+ isChecked );
+    isChecked? this.reunion.employes.push(idEmploye): this.reunion.employes.splice( this.reunion.employes.indexOf(idEmploye), 1);
   }
   
 }

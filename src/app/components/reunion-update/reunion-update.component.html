@@ -197,8 +197,10 @@
           <td>{{item.active}}</td>
           
           <td>
+
+            <input type="checkbox"  [checked]="isEmpInReunion(item.idEmploye)"  (change)="changeSelection2(item.idEmploye, $event)" >
             
-     <input type="checkbox"  [(ngModel)]="item.isChecked"  (change)="changeSelection()">
+  <!--   <input type="checkbox"  [(ngModel)]="item.isChecked"  (change)="changeSelection()">-->
              
           </td>
       </tr>
