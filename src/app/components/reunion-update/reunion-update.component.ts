@@ -46,10 +46,6 @@ export class ReunionUpdateComponent implements OnInit {
   typeArray= [];
   heurdeb:NgbTimeStruct;
   heurfin:NgbTimeStruct;
-  intHeurD:number;
-  intMntD:number;
-  intHeurF:number;
-  intMntF:number;
   form: FormGroup;
 
   constructor(private reunionservice:ReunionService,config: NgbTimepickerConfig ,private runionservice:ReunionService,private employeservice:EmployeService,private equipeservice:EquipeService,private departementservive:DepartementService,private route: ActivatedRoute, private router: Router,private formBuilder:FormBuilder) {
@@ -79,23 +75,6 @@ export class ReunionUpdateComponent implements OnInit {
       )
       console.log("dddddddaaaaaaaaaaaad****************dddddd"+JSON.stringify( this.selectedItemsList))
 
-
-      for (let i = 0; i < this.reunion.heurDeb.length; i++) {
-        this.intHeurD=(Number(this.reunion.heurDeb.substr(0,2)));
-        this.intMntD=(Number(this.reunion.heurDeb.substr(3,2)))
-     
-       }
-       console.log("èèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèè"+JSON.stringify( this.intHeurD))
-       console.log("èèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèè"+JSON.stringify( this.intMntD))
-
-       this.reunion.heureDeb={hour:this.intHeurD,minute:this.intMntD,second:0};
- 
-       for (let i = 0; i < this.reunion.heurFin.length; i++) {
-        this.intHeurF=(Number(this.reunion.heurFin.substr(0,2)));
-        this.intMntF=(Number(this.reunion.heurFin.substr(3,2)))
-      
-       }
-       this.reunion.heureFin={hour:this.intHeurF,minute:this.intMntF,second:0};
 
     }, error=>console.log(error));
     

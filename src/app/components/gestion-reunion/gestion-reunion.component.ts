@@ -161,12 +161,7 @@ console.log("5555555555AAAAAA5A5"+JSON.stringify(this.reunion));
 
 }  
 
-sprintDetails(id:number){
-  this.router.navigate(['sprints/details',id]);
-}
-updateSprint(id:number){
-  this.router.navigate(['sprints/update',id]);
-}
+
 gotoList(){
   this.router.navigate(['Reunions/list']);
 }

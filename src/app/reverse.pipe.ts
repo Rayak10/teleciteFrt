@@ -5,8 +5,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ReversePipe implements PipeTransform {
 
-  transform(value) {
-    return value.slice().reverse();
+  transform (values) {
+    if (values) {
+      return values.reverse();
   }
 
+}
 }

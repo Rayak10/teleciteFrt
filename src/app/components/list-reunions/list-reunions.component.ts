@@ -26,14 +26,13 @@ reunion:Reunion;
 
   ngOnInit() {
     this.typeArray=["Reunion_Scrum","Reunion_Administratif"]
-    this.findReunionsByType();
+    
   /*  this.runionservice.findReunionByType(this.selectedType).subscribe(
       data => {console.log("rfgsdfrsssssssfqesr:"+JSON.stringify(data));   
       
                   this.reunionsObs.push(...data);
                   console.log("--------------------------------:"+JSON.stringify(this.reunionsObs));}
     );*/
-    this.reloadData()
   }
   reloadData(){
     this.reunions= this.reunionservice.findReunionByType(this.selectedType);
@@ -51,7 +50,6 @@ findReunionsByType(){
   this.reunionservice.findReunionByType(this.selectedType).subscribe(
     resp  =>{ this.reunionsSort = resp;
       console.log("reunionnnnnnnnnnsc"+JSON.stringify(this.reunionsSort ))
-
     }
   );
 
