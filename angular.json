@@ -64,6 +64,7 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
+            "port":5300,
             "browserTarget": "telecite:build"
           },
           "configurations": {

@@ -1,0 +1,38 @@
+<hr/>
+<hr/>
+<!-- FORM  -->	    
+	   <div class="col-md-12">	       
+     
+<fieldset>
+
+<!-- Form Name -->
+
+<legend  class="navbar-brand titre"  >Changer les informations</legend>
+<form (ngSubmit)="onSubmit()">
+<!-- Text input-->
+<label class="col-md-2 control-label" >Nom d'equipe:</label>  
+<div class="col-md-4">
+<input id="equipe-name" required [(ngModel)]="equipe.nomEquipe" name="equipe-name" type="text" placeholder="tapez le nom d'equipe" class="form-control input-md" >
+<span class="help-block"></span>  
+</div>
+<label class="col-md-2 control-label" >Spécialité :</label>  
+<div class="col-md-4">
+<input id="equipe-theme"required [(ngModel)]="equipe.specialite" name="equipe-specialite" type="text" placeholder="tapez la spécialité du projet" class="form-control input-md">
+<span class="help-block"></span>  
+</div>
+  <!-- Button -->
+
+  
+
+<div class="row">
+    <div class="col align-self-start">
+      <label class="col-md-5.5 control-label" for="btn-save"></label>
+    </div>
+    <div class="col align-self-center">
+      <label class="col-md-4 control-label" for="btn-save"></label>
+    </div>
+    
+    <div class="col col-md-1">
+        <button id="btn-save"  (click)="list()" name="btn-save" class="btn btn-success">Modifier et retour au liste des equipes </button>
+    </div>
+  </div>

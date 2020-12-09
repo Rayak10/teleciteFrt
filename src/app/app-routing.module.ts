@@ -20,6 +20,9 @@ import { GestionReunionComponent } from './components/gestion-reunion/gestion-re
 import { ReunionDetailleComponent } from './components/reunion-detaille/reunion-detaille.component';
 import { ListReunionsComponent } from './components/list-reunions/list-reunions.component';
 import { ReunionUpdateComponent } from './components/reunion-update/reunion-update.component';
+import { GestionEquipeComponent } from './components/gestion-equipe/gestion-equipe.component';
+import { EquipeDetailleComponent } from './components/equipe-detaille/equipe-detaille.component';
+import { EquipeUpdateComponent } from './components/equipe-update/equipe-update.component';
 
 
 
@@ -44,7 +47,12 @@ const routes: Routes = [
   {path: 'gestionReunions', component: GestionReunionComponent},
   {path: 'reunions/details/:id', component: ReunionDetailleComponent},
   {path: 'reunions/update/:id', component: ReunionUpdateComponent},
-  {path: 'Reunions/list', component: ListReunionsComponent}
+  {path: 'Reunions/list', component: ListReunionsComponent},
+  {path: 'gestionEquipes', component: GestionEquipeComponent},
+  {path: 'equipes/details/:id',component :EquipeDetailleComponent },
+  {path: 'equipes/update/:id',component :EquipeUpdateComponent },
+
+
 
 
 ];

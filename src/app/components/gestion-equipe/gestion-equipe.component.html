@@ -1,0 +1,93 @@
+
+<hr/>
+<hr/>
+<!-- FORM  -->	    
+	   <div class="col-md-16">	       
+     
+<fieldset>
+
+<!-- Form Name -->
+
+<legend  class="navbar-brand titre"  > Gestion des equipes</legend>
+<form #getequipeForm="ngForm"(ngSubmit)="onSubmit(getequipeForm)">
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-2 control-label" >Nom d'equipe:</label>  
+  <div class="col-md-4">
+  <input id="equipe-name" required [(ngModel)]="equipe.nomEquipe" name="equipe-name" type="text" placeholder="tapez le nom d'equipe" class="form-control input-md" >
+  <span class="help-block"></span>  
+  </div>
+  <label class="col-md-2 control-label" >Spécialité :</label>  
+  <div class="col-md-4">
+  <input id="equipe-theme"required [(ngModel)]="equipe.specialite" name="equipe-specialite" type="text" placeholder="tapez la spécialité du projet" class="form-control input-md">
+  <span class="help-block"></span>  
+  </div>
+</div>
+<!-- Button -->
+<div class="row">
+    <div class="col align-self-start">
+      <label class="col-md-5.5 control-label" for="btn-save"></label>
+    </div>
+    <div class="col align-self-center">
+      <label class="col-md-5 control-label" for="btn-save"></label>
+    </div>
+    
+    <div class="col col-md-1">
+      <button id="btn-save" name="btn-save" type="submit" class="btn btn-success">Enregistrer</button>
+    </div>
+  </div>
+    
+</form>
+</fieldset>
+
+
+
+	   </div> 
+	    
+
+
+
+<!-- LIST -->
+<div class=col-md-12 >
+    
+    <form id="form-list-equipe" >
+            <legend class="navbar-brand titre">Liste des equipes :</legend>
+    
+   <!-- <div class="pull-right">
+        <a class="btn btn-default-btn-xs btn-primary"><i class="glyphicon glyphicon-refresh"></i> Refresh</a>
+        <a class="btn btn-default-btn-xs btn-success"><i class="glyphicon glyphicon-plus"></i> New</a>
+    </div>-->
+    <table class="table table-bordered table-condensed table-hover">
+        <thead>
+            <tr>
+                <th scope="col" width=30%>Nom</th>
+                <th scope="col" width=30%>Specialité</th>
+                
+                <th scope="col" width=30%>Actions</th>
+            </tr>
+                
+        </thead>
+        <tbody id="form-list-projets-body"  *ngFor="let equipe of equipes | async">
+            <tr>
+                <td>{{equipe.nomEquipe}}</td>
+                <td>{{equipe.specialite}}</td>
+               
+                <td>
+                  
+                    <a title="les détails d'equipe" class="btn btn-default btn-sm "(click)="EquipeDetails(equipe.idEquipe)"> <i class="glyphicon glyphicon-eye-open text-primary"  ></i> </a> 
+                    <a title="modifier l'equipe" class="btn btn-default btn-sm "(click)="updateEquipe(equipe.idEquipe)"> <i class="glyphicon glyphicon-edit text-primary"></i> </a>
+                    <a title="supprimer l'equipe " class="btn btn-default btn-sm " (click)="deleteEquipe(equipe.idEquipe)"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
+                    
+                   
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </form>
+
+    
+</div>
+
+
+<br> 
+

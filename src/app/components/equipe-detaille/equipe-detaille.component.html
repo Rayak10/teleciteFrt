@@ -1,0 +1,66 @@
+<hr/>
+<hr/>
+<legend  class="navbar-brand titre"  > Les informations d'equipe </legend>
+<hr/>
+<div >
+        <div>
+            <b>Nom :</b><label>{{equipe.nomEquipe}}</label>
+        </div>
+        <div>
+            <b>Spécialité :</b><label>{{equipe.specialite}}</label>
+        </div>
+        
+
+      
+</div>
+<br>
+<br>
+<!-- Button -->
+<div class="form-group">
+    <label class="col-md-0 control-label" for="btn-save"></label>
+    <div class="col-md-0">
+     <button id="btn-save"  (click)="list()" name="btn-save" class="btn btn-success">Retour au liste des employées</button>
+    </div>
+</div>
+
+
+<form id="form-list-userstorySprint" >
+    <legend class="navbar-brand titre">Liste des membres equipe</legend>
+
+        
+      
+    <table class="table table-bordered table-condensed table-hover">
+        <thead>
+            <tr>
+                <th scope="col" width=20%>Nom</th>
+                <th scope="col" width=20%>Prenom</th>
+                <th scope="col" width=20%>Email</th>
+                <th scope="col" width=20%>Status</th>
+                <th scope="col" width=20%>Actions</th>
+            </tr>
+                
+        </thead>
+        <tbody id="form-list-employes-body"  *ngFor="let employe of equipemps | async">
+            <tr>
+                <td>{{employe.nomEmploye}}</td>
+                <td>{{employe.prenomEmploye}}</td>
+                <td>{{employe.email}}</td>
+                <td>{{employe.active}}</td>
+                
+                <td>
+                  
+                    <a title="les détails de l'employé" class="btn btn-default btn-sm "(click)="employeDetails(employe.idEmploye)"> <i class="glyphicon glyphicon-eye-open text-primary"  ></i> </a> 
+                  
+                   
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </form>
+
+    
+
+
+
+<br> 
+

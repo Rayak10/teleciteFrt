@@ -28,6 +28,9 @@ import { ReunionDetailleComponent } from './components/reunion-detaille/reunion-
 import { NgbTimepickerModule} from '@ng-bootstrap/ng-bootstrap';
 import { ListReunionsComponent } from './components/list-reunions/list-reunions.component';
 import { ReversePipe } from './reverse.pipe';
+import { GestionEquipeComponent } from './components/gestion-equipe/gestion-equipe.component';
+import { EquipeDetailleComponent } from './components/equipe-detaille/equipe-detaille.component';
+import { EquipeUpdateComponent } from './components/equipe-update/equipe-update.component';
 
 @NgModule({
   declarations: [
@@ -52,17 +55,22 @@ import { ReversePipe } from './reverse.pipe';
     ReunionUpdateComponent,
     ReunionDetailleComponent,
     ListReunionsComponent,
-    ReversePipe
+    ReversePipe,
+    GestionEquipeComponent,
+    EquipeDetailleComponent,
+    EquipeUpdateComponent
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     BsDatepickerModule.forRoot(),
-    BrowserAnimationsModule,
-    NgbTimepickerModule 
+    NgbTimepickerModule
+
 
     
   ],

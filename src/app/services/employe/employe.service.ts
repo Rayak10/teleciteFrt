@@ -22,6 +22,9 @@ export class EmployeService {
   findAllEmployesDepartement(idDepartement:number){
     return this.http.get<Employe[]>(AppSettings.APP_URL+"/employes/employesDepartement/"+idDepartement)
   }
+  findAllEmployesEquipe(idEquipe:number){
+    return this.http.get<Employe[]>(AppSettings.APP_URL+"/employes/employesEquipe/"+idEquipe)
+  }
   findAllEemployesReunion(idReunion:number){
     return this.http.get<Employe[]>(AppSettings.APP_URL+"/employes/employesReunions/"+idReunion)
   }

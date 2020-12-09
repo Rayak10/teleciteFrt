@@ -25,8 +25,8 @@ export class EquipeService {
 
   }
 
-  createEquipe(bureau:Bureau){
-    return this.http.post<Equipe>(AppSettings.APP_URL+"/equipes/",bureau)
+  createEquipe(equipe:Equipe){
+    return this.http.post<Equipe>(AppSettings.APP_URL+"/equipes/",equipe)
   }
   updateEquipe(idEquipe:number,value:any){
    
