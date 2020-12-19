@@ -28,3 +28,26 @@ th[scope="col"] {
 th[scope="row"] {
   background-color: #d7d9f2;
 }
+
+
+
+#profileDisplay { display: block; margin:1px ; border-radius: 50%; border: 2px solid #ddd }
+
+ 
+.topright {
+  position: relative;
+  top: -40px;
+  right: 40px;
+}
+.zoom img{
+  height: 100px; 
+  width: 60%;
+  transition: 1s;
+}
+
+.zoom img:hover{
+  height: 200px; 
+  width: 100%;
+  box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+

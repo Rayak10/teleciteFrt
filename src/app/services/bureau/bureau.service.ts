@@ -12,6 +12,7 @@ export class BureauService {
   
   findAllBureaux(){
     return this.http.get<Bureau[]>(AppSettings.APP_URL+"/bureaux/")
+    
   }
   
 

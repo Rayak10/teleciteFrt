@@ -10,6 +10,9 @@ import { DepartementService } from 'src/app/services/departement/departement.ser
 import { Departement } from 'src/app/models/departement';
 import { EquipeService } from 'src/app/services/equipe/equipe.service';
 import { Equipe } from 'src/app/models/equipe';
+import { assert } from 'console';
+import { RoleMember } from 'src/app/models/roleMember';
+import { RoleService } from 'src/app/services/role/role.service';
 
 @Component({
   selector: 'app-gestion-comptes',
@@ -24,19 +27,21 @@ export class GestionComptesComponent implements OnInit {
   successMessage: string;
   mySubscription: any; 
   bureau:Bureau;
+  role:RoleMember;
   equipe:Equipe;
   departement:Departement;
   bureauArray = [];
+  roleArray = [];
   departementArray = [];
   equipeArray= [];
   selectedDepartementId:number;
   selectedEquipeId:number;
   selectedBureauId: number;
-  offset: number =new Date().getTimezoneOffset() * 60 * 1000;
+  selectedRoleId: number;
 
- 
-  
-  constructor(private employeservice:EmployeService,private departementservice:DepartementService,private equipeservice:EquipeService,private bureauservice:BureauService,private formBuilder: FormBuilder, private router: Router) {}
+  offset: number =new Date().getTimezoneOffset() * 60 * 1000;
+  urllink:String="assets/images/avatar.png";  
+  constructor(private employeservice:EmployeService,private departementservice:DepartementService,private roleservice:RoleService,private equipeservice:EquipeService,private bureauservice:BureauService,private formBuilder: FormBuilder, private router: Router) {}
   //public listBureauItems:Array<String>=[];
   //public listdepItems:Array<String>=[];
   ngOnInit() {
@@ -47,6 +52,11 @@ export class GestionComptesComponent implements OnInit {
       data => {console.log("data from find all bureau:"+JSON.stringify(data));   
       
                   this.bureauArray.push(...data);}
+    );
+    this.roleservice.findAllRoles().subscribe(
+      data => {console.log("data from find all bureau:"+JSON.stringify(data));   
+      
+                  this.roleArray.push(...data);}
     );
     this.equipeservice.findAllEquipe().subscribe(
       data => {console.log("data from find all Equipe:"+JSON.stringify(data));   
@@ -61,6 +71,9 @@ export class GestionComptesComponent implements OnInit {
     this.employe.departement=null;
     this.employe.bureau=null;
     this.employe.equipe=null;
+    this.employe.equipe=null;
+    this.employe.roleMember=null;
+
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
   return false;
 };
@@ -133,6 +146,7 @@ this.bureauservice.findAllBureaux().subscribe(data=>{
     this.employe = JSON.parse(localStorage.getItem('currentEmploye'));
   }
 reloadData(){
+  this.urllink
   this.employes= this.employeservice.findAllEmployes();
   
 }
@@ -175,6 +189,12 @@ reloadData(){
   //console.log(JSON.stringify(this.employe.bureau.idBureau));
  
 }
+onChangeRole(event){
+   
+  this.employe.roleMember = {idRole:this.selectedRoleId,nomRole:''};
+  //console.log(JSON.stringify(this.employe.bureau.idBureau));
+ 
+}
 onChangeDepartement(event){
   this.employe.departement = {idDepartement:this.selectedDepartementId,nomDepartement:''};
   //console.log(JSON.stringify(this.employe.departement.idDepartement));
@@ -185,4 +205,14 @@ onChangeEquipe(event){
  // console.log(JSON.stringify(this.employe.equipe.idEquipe));
 
 }
+OnSelectFile(event){
+  if(event.target.files){
+    var reader = new FileReader()
+    reader.readAsDataURL(event.target.files[0])
+    reader.onload=(event:any)=>{
+      this.urllink=event.target.result
+    }
+  }
+}
+
 }

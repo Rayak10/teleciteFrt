@@ -27,7 +27,7 @@
             <b>Post :</b><label>{{employe.post}}</label>
         </div>
         <div>
-            <b>Role :</b><label>{{employe.role}}</label>
+      <label *ngIf="employe.roleMember!=null">{{employe.roleMember.nomRole}}</label>
         </div>
         <div>
             <b>Salaire :</b><label>{{employe.salaire}}</label>

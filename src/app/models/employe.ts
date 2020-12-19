@@ -2,6 +2,7 @@ import { Bureau } from './bureau';
 import { Departement } from './departement';
 import { Equipe } from './equipe';
 import { Reunion } from './Reunion';
+import { RoleMember } from './roleMember';
 
 export class Employe{
     idEmploye: number;
@@ -18,6 +19,8 @@ export class Employe{
 	active:boolean;
 	isChecked:boolean;
 	bureau: Bureau=new Bureau();
+	roleMember: RoleMember=new RoleMember();
+
 	departement: Departement=new Departement();
 	equipe: Equipe=new Equipe();
 	reunions: Reunion[] = [];
