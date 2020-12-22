@@ -33,6 +33,13 @@ export class EmployeUpdatComponent implements OnInit {
   selectedDepartementId:number;
   selectedEquipeId:number;
   selectedBureauId: number;
+  urllink:any="";  
+  selectedFile: File;
+  retrievedImage: any;
+  public userFile : any =File;
+  message:string;
+    public imagePath;
+
   offset: number =new Date().getTimezoneOffset() * 60 * 1000;
   
   constructor(private employeservice:EmployeService,private route: ActivatedRoute, private router: Router,private departementservice:DepartementService,private equipeservice:EquipeService,private bureauservice:BureauService) { }
@@ -44,9 +51,9 @@ export class EmployeUpdatComponent implements OnInit {
     this.id=this.route.snapshot.params['id'];
     this.employeservice.findEmployeById(this.id)
     .subscribe(data=>{
-      console.log(data)
+      //console.log(data)
       this.employe=data;
-      
+      console.log("employeUpdate: "+JSON.stringify(this.employe.photo))
  this.bureauservice.findAllBureaux().subscribe(
       data => {console.log("data from find all bureau:"+JSON.stringify(data));   
       
@@ -111,7 +118,30 @@ reloadData(){
   this.employes= this.employeservice.findAllEmployes();
   
 }
+OnSelectFile(event){
+  if (event.target.files.length > 0)
+  {
+    const file = event.target.files[0];
+ console.log(file);
 
+    this.userFile=file;
+    console.log(this.userFile);
+    var mineType = event.target.files[0].type;
+    if( mineType.match(/image\/*/) == null){
+      this.message="on supporte que les images";
+      return;
+    }
+  
+  
+    var reader = new FileReader();
+    this.imagePath=file;
+    reader.readAsDataURL(file);
+
+    reader.onload=(event:any)=>{
+      this.urllink=event.target.result;
+    }
+  }
+}
 
 
 }

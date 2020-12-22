@@ -16,14 +16,14 @@
   <label class="control-label" >Nom :</label> 
  </div>
  <div class="col col-md-4">
-  <input id="client-name" required [(ngModel)]="employe.nomEmploye" autocomplete="off" name="employe-name" type="text" placeholder="tapez le nom de l'employé" class="form-control input-md" >
+  <input id="client-name" required [(ngModel)]="employe.nomEmploye" autocomplete="off" name="nomEmploye" type="text" placeholder="tapez le nom de l'employé" class="form-control input-md" >
   <span class="help-block"></span>  
   </div>
   <div class="col col-md-2">
   <label class="control-label" >Prenom :</label>  
 </div>
 <div class="col col-md-4">
-  <input id="employe-prenom"required [(ngModel)]="employe.prenomEmploye" autocomplete="off" name="employe-prenom" type="text" placeholder="tapez le prenom de l'employé" class="form-control input-md">
+  <input id="employe-prenom"required [(ngModel)]="employe.prenomEmploye" autocomplete="off" name="prenomEmploye" type="text" placeholder="tapez le prenom de l'employé" class="form-control input-md">
   <span class="help-block"></span>  
   </div>
 </div>
@@ -34,7 +34,7 @@
   </div>
   <div class="col col-md-4">
     <input  
-    name="employe-date-naissance"
+    name="dateNaissance"
     placeholder = "Selectionner la date naissance"
     [(ngModel)]="employe.dateNaissance"
     autocomplete="off" 
@@ -48,7 +48,7 @@
   </div>
   <div class="col col-md-4">
     <input  
-    name="employe-date-embauche"
+    name="dateEmbauche"
     placeholder = "Selectionner la date embauche "
     [(ngModel)]="employe.dateEmbauche"    
     autocomplete="off"
@@ -64,7 +64,7 @@
   <label class="control-label">Post :</label>  
   </div>
   <div class="col col-md-4">
-    <input id="employe-post" required [(ngModel)]="employe.post"  name="employe-post" type="text" placeholder="tapez lepost de l'employe" class="form-control input-md">
+    <input id="employe-post" required [(ngModel)]="employe.post"  name="post" type="text" placeholder="tapez lepost de l'employe" class="form-control input-md">
   <span class="help-block"></span>  
   </div>
   <div class="col col-md-2">
@@ -91,7 +91,7 @@
   <label class="control-label">Matricule :</label>
   </div>
   <div class="col col-md-4">
-    <input id="employe-matricule" required [(ngModel)]="employe.matricule"  name="employe-matricule" class="form-control" placeholder="tappez matricule employé" type="double">
+    <input id="employe-matricule" required [(ngModel)]="employe.matricule"  name="matricule" class="form-control" placeholder="tappez matricule employé" type="double">
     </div>
     <div class="col col-md-2">
   <label class="control-label">Salaire :</label>
@@ -99,7 +99,7 @@
     <div class="col col-md-4">
       <div class="input-group">
       <span class="input-group-addon">TN</span>
-      <input id="employe-salaire"required [(ngModel)]="employe.salaire" autocomplete="off" name="employe-salaire" class="form-control" placeholder="tappez salaire en dinare" type="double">
+      <input id="employe-salaire"required [(ngModel)]="employe.salaire" autocomplete="off" name="salaire" class="form-control" placeholder="tappez salaire en dinare" type="double">
     </div>
     <p class="help-block"></p>
   </div>
@@ -167,7 +167,7 @@
     <div class="col col-md-4">
       <div class="input-group">
       <span class="input-group-addon">@</span>
-      <input id="employe-email"required [(ngModel)]="employe.email"  name="employe-email" autocomplete="off"class="form-control" placeholder="tonnom@tondomain.tn" type="email">
+      <input id="employe-email"required [(ngModel)]="employe.email"  name="email" autocomplete="off"class="form-control" placeholder="tonnom@tondomain.tn" type="email">
     </div>
     
   </div>
@@ -185,13 +185,13 @@
   <div class="col col-md-4">
     <div class="radio">
     <label for="client-status-0">
-      <input type="radio" required [(ngModel)]="employe.active" name="client-status1" id="client-status-0" value="true" checked="checked">
+      <input type="radio" required [(ngModel)]="employe.active" name="active" id="client-status-0" value="true" checked="checked">
       Active
     </label>
   </div>
   <div class="radio">
     <label>
-      <input type="radio" required [(ngModel)]="employe.active" name="client-status2" id="client-status-1" value="false">
+      <input type="radio" required [(ngModel)]="employe.active" name="active" id="client-status-1" value="false">
       Inactive
     </label>
   </div>
@@ -202,7 +202,7 @@
   <div class="col col-md-4">
     <div class="input-group">
       <span class="input-group-addon">*</span>
-      <input   type="password" autocomplete="off" id="employe-password"required [(ngModel)]="employe.password" autocomplete="off" name="employe-password" class="form-control" placeholder="tapez mot de passe" >
+      <input   type="password" autocomplete="off" id="employe-password"required [(ngModel)]="employe.password" name="password" autocomplete="off"  class="form-control" placeholder="tapez mot de passe" >
     </div>
   </div>
   <div class="col col-md-2">
@@ -211,7 +211,7 @@
   <div class="col col-md-4">
     <div class="input-group">
       <span class="input-group-addon"> * </span>
-      <input   type="password" id="employe-confirmationpassword" autocomplete="off" name="employe-confirmationpassword" class="form-control" placeholder="confirmez mot de passe" >
+      <input   type="password" id="employe-confirmationpassword" autocomplete="off" name="password" class="form-control" placeholder="confirmez mot de passe" >
     </div>
     
   </div>
@@ -224,6 +224,7 @@
  
 <!-- Button -->
 <div class="row">
+  
   <div class="col col-md-2">
   <label class="control-label">Photo :</label>
   </div>
@@ -231,10 +232,12 @@
     <input type="file" class="btn btn-success btn-sm"  (change)="OnSelectFile($event)"> 
 </div>
 <div class="col col-md-2 zoom">
-  <img class="topright" [src]="urllink" id="profileDisplay">
+  <img class="topright" [src]="urllink" name="photo" id="profileDisplay">
 </div>
-    <div class="col-md-4">
-     <button id="btn-save" name="btn-save" type="submit" class="btn btn-success" >Créer</button>
+<label class="col-md-4 control-label" for="btn-save"></label>
+
+    <div class="col-md-1">
+     <button id="btn-save" name="btn-save" class="btn btn-success" (click)="save(getCompteForm)">Créer</button>
     </div>
 </div>
 </form>

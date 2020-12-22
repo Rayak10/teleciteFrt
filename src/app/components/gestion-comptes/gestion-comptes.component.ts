@@ -13,6 +13,7 @@ import { Equipe } from 'src/app/models/equipe';
 import { assert } from 'console';
 import { RoleMember } from 'src/app/models/roleMember';
 import { RoleService } from 'src/app/services/role/role.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-gestion-comptes',
@@ -38,10 +39,15 @@ export class GestionComptesComponent implements OnInit {
   selectedEquipeId:number;
   selectedBureauId: number;
   selectedRoleId: number;
-
+  public imagePath;
   offset: number =new Date().getTimezoneOffset() * 60 * 1000;
-  urllink:String="assets/images/avatar.png";  
-  constructor(private employeservice:EmployeService,private departementservice:DepartementService,private roleservice:RoleService,private equipeservice:EquipeService,private bureauservice:BureauService,private formBuilder: FormBuilder, private router: Router) {}
+
+  urllink:any="assets/images/avatar.png";  
+  selectedFile: File;
+  retrievedImage: any;
+  public userFile : any =File;
+  message:string;
+  constructor(private employeservice:EmployeService,private departementservice:DepartementService,private roleservice:RoleService,private equipeservice:EquipeService,private bureauservice:BureauService,private formBuilder: FormBuilder, private router: Router,private httpClient:HttpClient) {}
   //public listBureauItems:Array<String>=[];
   //public listdepItems:Array<String>=[];
   ngOnInit() {
@@ -92,7 +98,6 @@ this.mySubscription = this.router.events.subscribe((event) => {
   }
   onSubmit(getCompteForm:NgForm) {
     this.submitted = true;
-    this.save(); 
     getCompteForm.reset();
      this.gotoList();
         
@@ -125,12 +130,25 @@ this.bureauservice.findAllBureaux().subscribe(data=>{
     
 */
 
-  save() {
-    console.log("employe: "+JSON.stringify(this.employe));
-    this.employe.dateNaissance = new Date(new Date(this.employe.dateNaissance).getTime() - this.offset);
-    this.employe.dateEmbauche = new Date(new Date(this.employe.dateEmbauche).getTime() - this.offset);
-    this.employeservice.createEmploye(this.employe)
-      .subscribe(data => console.log(data), error => console.log(error));
+  save(getCompteForm:NgForm) {
+    const  employe = getCompteForm.value;
+    var formData = new FormData();
+    formData.append('employee',JSON.stringify(employe))  ;
+    console.log("gggggggggggggggggg"+employe)
+     console.log("rrrrrrrrrrrrrrrrrrrrrrr"+JSON.stringify(employe));
+
+    formData.append('file',this.userFile);
+
+    this.employeservice.saveEmployeProfile(formData).subscribe((Response)=>{
+      console.log(Response);
+    })
+
+    //FormData API provides methods and properties to allow us easily prepare form data to be sent with POST HTTP requests.
+   // this.employe.dateNaissance = new Date(new Date(this.employe.dateNaissance).getTime() - this.offset);
+   // this.employe.dateEmbauche = new Date(new Date(this.employe.dateEmbauche).getTime() - this.offset);
+
+    //this.employeservice.createEmploye(this.employe)
+    //  .subscribe(data => console.log(data), error => console.log(error));
 //this.gotoList();
 
 
@@ -206,11 +224,26 @@ onChangeEquipe(event){
 
 }
 OnSelectFile(event){
-  if(event.target.files){
-    var reader = new FileReader()
-    reader.readAsDataURL(event.target.files[0])
+  if (event.target.files.length > 0)
+  {
+    const file = event.target.files[0];
+ console.log(file);
+
+    this.userFile=file;
+    console.log(this.userFile);
+    var mineType = event.target.files[0].type;
+    if( mineType.match(/image\/*/) == null){
+      this.message="on supporte que les images";
+      return;
+    }
+  
+  
+    var reader = new FileReader();
+    this.imagePath=file;
+    reader.readAsDataURL(file);
+
     reader.onload=(event:any)=>{
-      this.urllink=event.target.result
+      this.urllink=event.target.result;
     }
   }
 }

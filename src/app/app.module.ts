@@ -31,6 +31,7 @@ import { ReversePipe } from './reverse.pipe';
 import { GestionEquipeComponent } from './components/gestion-equipe/gestion-equipe.component';
 import { EquipeDetailleComponent } from './components/equipe-detaille/equipe-detaille.component';
 import { EquipeUpdateComponent } from './components/equipe-update/equipe-update.component';
+import { EmployeService } from './services/employe/employe.service';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,9 @@ import { EquipeUpdateComponent } from './components/equipe-update/equipe-update.
 
     
   ],
-  providers: [],
+  providers: [
+    EmployeService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

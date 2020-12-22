@@ -48,5 +48,8 @@ bureau:Bureau;
   list(){
     this.router.navigate(['gestionComptes']);
   }
+  getImage(){
+    
+  }
 
 }

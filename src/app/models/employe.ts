@@ -17,6 +17,8 @@ export class Employe{
 	post:string;
 	role:string;
 	active:boolean;
+	photo:any;
+	 fileName:string;
 	isChecked:boolean;
 	bureau: Bureau=new Bureau();
 	roleMember: RoleMember=new RoleMember();

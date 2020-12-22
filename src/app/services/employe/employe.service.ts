@@ -6,6 +6,7 @@ import { Bureau } from 'src/app/models/bureau';
 
 import { Observable ,Subject} from 'rxjs';
 import { Departement } from 'src/app/models/departement';
+import { FormGroup } from '@angular/forms';
 
 
 
@@ -13,6 +14,7 @@ import { Departement } from 'src/app/models/departement';
   providedIn: 'root'
 })
 export class EmployeService {
+  public dataForm:  FormGroup; 
 
   constructor(private http: HttpClient) { }
 
@@ -30,6 +32,9 @@ export class EmployeService {
   }
   findAllBureaux():Observable<any>{
     return this.http.get<Bureau[]>(AppSettings.APP_URL+"/bureaux/")
+  }
+  saveEmployeProfile(formData: FormData): Observable<any> {
+    return this.http.post(AppSettings.APP_URL+"/employes/saveEmployeProfile", formData);
   }
   
   findEmployesActivesOrNot(active:boolean){
