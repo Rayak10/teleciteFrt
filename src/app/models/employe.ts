@@ -15,13 +15,12 @@ export class Employe{
 	dateEmbauche:Date = new Date();
 	salaire:number;
 	post:string;
-	role:string;
 	active:boolean;
 	photo:any;
 	 fileName:string;
 	isChecked:boolean;
 	bureau: Bureau=new Bureau();
-	roleMember: RoleMember=new RoleMember();
+	role: RoleMember=new RoleMember();
 
 	departement: Departement=new Departement();
 	equipe: Equipe=new Equipe();

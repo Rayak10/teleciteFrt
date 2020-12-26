@@ -10,7 +10,6 @@ import { DepartementService } from 'src/app/services/departement/departement.ser
 import { Departement } from 'src/app/models/departement';
 import { EquipeService } from 'src/app/services/equipe/equipe.service';
 import { Equipe } from 'src/app/models/equipe';
-import { assert } from 'console';
 import { RoleMember } from 'src/app/models/roleMember';
 import { RoleService } from 'src/app/services/role/role.service';
 import { HttpClient } from '@angular/common/http';
@@ -42,10 +41,10 @@ export class GestionComptesComponent implements OnInit {
   public imagePath;
   offset: number =new Date().getTimezoneOffset() * 60 * 1000;
 
-  urllink:any="assets/images/avatar.png";  
+  urllink:any="../../assets/telecite.webp";  
   selectedFile: File;
   retrievedImage: any;
-  public userFile : any =File;
+  public userFile : any =null;
   message:string;
   constructor(private employeservice:EmployeService,private departementservice:DepartementService,private roleservice:RoleService,private equipeservice:EquipeService,private bureauservice:BureauService,private formBuilder: FormBuilder, private router: Router,private httpClient:HttpClient) {}
   //public listBureauItems:Array<String>=[];
@@ -78,7 +77,7 @@ export class GestionComptesComponent implements OnInit {
     this.employe.bureau=null;
     this.employe.equipe=null;
     this.employe.equipe=null;
-    this.employe.roleMember=null;
+    this.employe.role=null;
 
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
   return false;
@@ -131,25 +130,26 @@ this.bureauservice.findAllBureaux().subscribe(data=>{
 */
 
   save(getCompteForm:NgForm) {
-    const  employe = getCompteForm.value;
     var formData = new FormData();
-    formData.append('employee',JSON.stringify(employe))  ;
-    console.log("gggggggggggggggggg"+employe)
-     console.log("rrrrrrrrrrrrrrrrrrrrrrr"+JSON.stringify(employe));
 
+    if(this.userFile==null){
+      this.employe.dateNaissance = new Date(new Date(this.employe.dateNaissance).getTime() - this.offset);
+    this.employe.dateEmbauche = new Date(new Date(this.employe.dateEmbauche).getTime() - this.offset);
+    this.employeservice.createEmploye(this.employe)
+      .subscribe(data => console.log(data), error => console.log(error));
+    }
+    else{
+    formData.append('employee',JSON.stringify(this.employe))  ;
+  
     formData.append('file',this.userFile);
 
     this.employeservice.saveEmployeProfile(formData).subscribe((Response)=>{
       console.log(Response);
     })
+  }
 
-    //FormData API provides methods and properties to allow us easily prepare form data to be sent with POST HTTP requests.
-   // this.employe.dateNaissance = new Date(new Date(this.employe.dateNaissance).getTime() - this.offset);
-   // this.employe.dateEmbauche = new Date(new Date(this.employe.dateEmbauche).getTime() - this.offset);
-
-    //this.employeservice.createEmploye(this.employe)
-    //  .subscribe(data => console.log(data), error => console.log(error));
-//this.gotoList();
+   
+this.gotoList();
 
 
   }
@@ -209,7 +209,7 @@ reloadData(){
 }
 onChangeRole(event){
    
-  this.employe.roleMember = {idRole:this.selectedRoleId,nomRole:''};
+  this.employe.role = {idRole:this.selectedRoleId,nomRole:''};
   //console.log(JSON.stringify(this.employe.bureau.idBureau));
  
 }

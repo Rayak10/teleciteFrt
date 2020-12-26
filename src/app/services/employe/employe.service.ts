@@ -36,7 +36,9 @@ export class EmployeService {
   saveEmployeProfile(formData: FormData): Observable<any> {
     return this.http.post(AppSettings.APP_URL+"/employes/saveEmployeProfile", formData);
   }
-  
+  updateEmployeProfile(formData: FormData): Observable<any> {
+    return this.http.put(AppSettings.APP_URL+"/employes/updateProfile", formData);
+  }
   findEmployesActivesOrNot(active:boolean){
 return this.http.get<Employe[]>(AppSettings.APP_URL+"/employes/AllActives/"+active)
   }  

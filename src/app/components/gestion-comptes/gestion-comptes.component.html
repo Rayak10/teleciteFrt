@@ -185,7 +185,7 @@
   <div class="col col-md-4">
     <div class="radio">
     <label for="client-status-0">
-      <input type="radio" required [(ngModel)]="employe.active" name="active" id="client-status-0" value="true" checked="checked">
+      <input type="radio" required [(ngModel)]="employe.active" name="active" id="client-status-0" value="true" checked>
       Active
     </label>
   </div>
@@ -232,7 +232,7 @@
     <input type="file" class="btn btn-success btn-sm"  (change)="OnSelectFile($event)"> 
 </div>
 <div class="col col-md-2 zoom">
-  <img class="topright" [src]="urllink" name="photo" id="profileDisplay">
+  <img class="topright"  [src]="urllink" name="photo" id="profileDisplay">
 </div>
 <label class="col-md-4 control-label" for="btn-save"></label>
 

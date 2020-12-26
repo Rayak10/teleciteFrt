@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Console } from 'console';
 import { Reunion } from 'src/app/models/Reunion';
 import { ReunionService } from 'src/app/services/reunion/reunion.service';
-import { UserstoryService } from 'src/app/services/userstory/userstory.service';
 import { TypeReunion } from 'src/app/models/typeReunion';
 import { FormControl, FormGroup ,FormBuilder} from '@angular/forms';
 import { NgbTimepickerConfig, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';

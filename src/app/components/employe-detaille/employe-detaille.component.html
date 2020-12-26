@@ -1,56 +1,229 @@
 <hr/>
 <hr/>
-<legend  class="navbar-brand titre"  > Les informations de l'employé</legend>
-<hr/>
-<div >
-        <div>
-            <b>Nom :</b><label>{{employe.nomEmploye}}</label>
-        </div>
-        <div>
-            <b>Prenom :</b><label>{{employe.prenomEmploye}}</label>
-        </div>
-        <div>
-            <b>Matricule :</b><label>{{employe.matricule}}</label>
-        </div>
-
-        <div>
-            <b>Date naissance :</b><label>{{employe.dateNaissance}}</label>
-        </div>
-
-        <div>
-            <b>Date d'embauche :</b><label>{{employe.dateEmbauche}}</label>
-        </div>
-        <div>
-            <b>E-mail :</b><label>{{employe.email}}</label>
-        </div>
-        <div>
-            <b>Post :</b><label>{{employe.post}}</label>
-        </div>
-        <div>
-      <label *ngIf="employe.roleMember!=null">{{employe.roleMember.nomRole}}</label>
-        </div>
-        <div>
-            <b>Salaire :</b><label>{{employe.salaire}}</label>
-        </div>
-        <div>
-            <b>Etat :</b><label>{{employe.active}}</label>
-        </div>
-        <div>
-            <b>Bureau :</b><label *ngIf="employe.bureau!=null">{{employe.bureau.nomBureau}}</label>
-        </div>
-        <div>
-            <b>Departement :</b><label *ngIf="employe.departement!=null">{{employe.departement.nomDepartement}}</label>
-        </div>
-        <div>
-            <b>Equipe :</b><label *ngIf="employe.equipe!=null">{{employe.equipe.nomEquipe}}</label>
-        </div>
-</div>
 <br>
 <br>
-<!-- Button -->
-<div class="form-group">
-    <label class="col-md-0 control-label" for="btn-save"></label>
-    <div class="col-md-0">
-     <button id="btn-save"  (click)="list()" name="btn-save" class="btn btn-success">Retour au liste des employées</button>
-    </div>
-</div>
+<div class="container">	       
+    <fieldset>
+        <div class="row">
+            <div class="col col-md-10">
+            <legend  class="navbar-brand titre"  > Les informations de l'employé</legend>
+            <hr/>
+        </div>
+          <div class="col col-md-2 zoom">
+            <img class="topright" *ngIf="employe.photo!=null; else logo" src="http://localhost:8081/telecite/employes/photo/{{employe.idEmploye}}" name="photo" id="profileDisplay">
+         <ng-template #logo>
+          <img class="topright" src="../../assets/telecite.webp" name="photo" id="profileDisplay">
+
+         </ng-template>
+          </div>
+          </div>
+<form>
+        <!-- Text input-->
+        <div class="row">
+          <div class="col col-md-2">
+          <label class="control-label" >Nom :</label> 
+         </div>
+         <div class="col col-md-4">
+          <input id="client-name" disabled required [(ngModel)]="employe.nomEmploye" autocomplete="off" name="nomEmploye" type="text" placeholder="tapez le nom de l'employé" class="form-control input-md" >
+          <span class="help-block"></span>  
+          </div>
+          <div class="col col-md-2">
+          <label class="control-label" >Prenom :</label>  
+        </div>
+        <div class="col col-md-4">
+          <input id="employe-prenom" disabled required [(ngModel)]="employe.prenomEmploye" autocomplete="off" name="prenomEmploye" type="text" placeholder="tapez le prenom de l'employé" class="form-control input-md">
+          <span class="help-block"></span>  
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col col-md-2">
+          <label class="control-label" >Date naissance :</label>  
+          </div>
+          <div class="col col-md-4">
+            <input  
+            name="dateNaissance"
+            placeholder = "Selectionner la date naissance"
+            [(ngModel)]="employe.dateNaissance"
+            autocomplete="off" 
+            class="form-control"
+            bsDatepicker
+            disabled
+            [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
+          <span class="help-block"></span>  
+          </div>  
+          <div class="col col-md-2">
+          <label class="control-label" >Date d'embauche :</label>  
+          </div>
+          <div class="col col-md-4">
+            <input  
+            name="dateEmbauche"
+            placeholder = "Selectionner la date embauche "
+            [(ngModel)]="employe.dateEmbauche"    
+            autocomplete="off"
+            class="form-control"
+             bsDatepicker
+             disabled
+             [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" >
+          <span class="help-block"></span>  
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col col-md-2">
+          <label class="control-label">Post :</label>  
+          </div>
+          <div class="col col-md-4">
+            <input id="employe-post" disabled required [(ngModel)]="employe.post"  name="post" type="text" placeholder="tapez lepost de l'employe" class="form-control input-md">
+          <span class="help-block"></span>  
+          </div>
+          <div class="col col-md-2">
+          <label class="control-label">Role :</label> 
+          </div> 
+          <div class="col col-md-4">
+            <select required
+             type="text" 
+             class="form-control "
+              id="field_role"
+              disabled
+                name="role" [(ngModel)]="employe.role.idRole"
+                (change)="onChangeRole($event)">
+              <option  *ngFor="let r of roleArray" [value]="r.idRole">
+                {{r.nomRole}}
+              </option>
+            </select>
+            <p class="help-block">{{role | json}}</p>
+        
+            </div>
+        </div>
+        
+        <div class="row">
+          <div class="col col-md-2">
+          <label class="control-label">Matricule :</label>
+          </div>
+          <div class="col col-md-4">
+            <input id="employe-matricule" disabled required [(ngModel)]="employe.matricule"  name="matricule" class="form-control" placeholder="tappez matricule employé" type="double">
+            </div>
+            <div class="col col-md-2">
+          <label class="control-label">Salaire :</label>
+            </div>
+            <div class="col col-md-4">
+              <div class="input-group">
+              <span class="input-group-addon">TN</span>
+              <input id="employe-salaire" disabled required [(ngModel)]="employe.salaire" autocomplete="off" name="salaire" class="form-control" placeholder="tappez salaire en dinare" type="double">
+            </div>
+            <p class="help-block"></p>
+          </div>
+        </div>
+        
+        <div class="row"> 
+           <div class="col col-md-2">
+              <label class="control-label">Bureau :</label>
+           </div>
+           <div class="col col-md-4">
+            <select required
+             type="text" 
+             class="form-control "
+              id="field_bureau"
+              disabled
+                name="bureau" [(ngModel)]="employe.bureau.idBureau"
+                >
+              <option  *ngFor="let b of bureauArray" [value]="b.idBureau">
+                {{b.nomBureau}}
+              </option>
+            </select>
+            <p class="help-block">{{bureau | json}}</p>
+            </div>
+            <div class="col col-md-2">
+              <label class="control-label">Departement :</label>
+            </div>
+            <div class="col col-md-4">
+              <select required
+               type="text" 
+               class="form-control "
+                id="field_departement"
+                  name="departement" 
+                  disabled
+                  [(ngModel)]="employe.departement.idDepartement"
+                  >
+                <option  *ngFor="let b of departementArray" [value]="b.idDepartement">
+                  {{b.nomDepartement}}
+                </option>
+              </select>
+              <p class="help-block">{{departement | json}}</p>
+        </div>
+        </div>
+        
+        
+        
+        
+        <div class="row"> 
+          <div class="col col-md-2">
+          <label class="control-label">Equipe :</label>
+          </div>
+          <div class="col col-md-4">
+            <select required
+             type="text" 
+             class="form-control "
+              id="field_equipe"
+              disabled
+                name="equipe" [(ngModel)]="employe.equipe.idEquipe"
+              >
+              <option  *ngFor="let e of equipeArray" [value]="e.idEquipe">
+                {{e.nomEquipe}}
+              </option>
+            </select>
+            <p class="help-block">{{equipe | json}}</p>
+            </div>
+            <div class="col col-md-2">
+        
+          <label class="control-label">Email :</label>
+            </div>
+            <div class="col col-md-4">
+              <div class="input-group">
+              <span class="input-group-addon">@</span>
+              <input id="employe-email" disabled required [(ngModel)]="employe.email"  name="email" autocomplete="off"class="form-control" placeholder="tonnom@tondomain.tn" type="email">
+            </div>
+            
+          </div>
+           
+          
+        </div>
+        
+        <div class="row"> 
+         
+          <div class="col col-md-2">
+        
+          <label class="control-label">Client status :</label>
+          </div>
+          <div class="col col-md-4">
+            <select required
+       type="text" 
+       class="form-control "
+        id="field_active"
+        name="active"
+         [(ngModel)]="defaultChoice"
+         disabled
+         (change)="onEtatSelected($event)">
+         
+        <option *ngFor='let etat of etatArray' [value]="etat.idEtat"> {{etat.nomEtat}}</option>
+      </select>
+      <p class="help-block"></p>
+          </div>
+          <div class="col col-md-5">
+            <label class="control-label">  </label>
+
+          </div>
+          <div class="col-md-1">
+            <button id="btn-retour" name="btn-retour" class="btn btn-success" (click)="gotoList()">Retour</button>
+           </div>
+        </div>
+        
+    </form>
+</fieldset>
+</div> 
+
+        
+        
+         
+        

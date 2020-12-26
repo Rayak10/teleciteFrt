@@ -32,6 +32,7 @@ import { GestionEquipeComponent } from './components/gestion-equipe/gestion-equi
 import { EquipeDetailleComponent } from './components/equipe-detaille/equipe-detaille.component';
 import { EquipeUpdateComponent } from './components/equipe-update/equipe-update.component';
 import { EmployeService } from './services/employe/employe.service';
+import { MatRadioButton, MatRadioModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -64,13 +65,14 @@ import { EmployeService } from './services/employe/employe.service';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    FormsModule,
     BrowserAnimationsModule,
+    MatRadioModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     BsDatepickerModule.forRoot(),
-    NgbTimepickerModule
+    NgbTimepickerModule,
 
 
     
