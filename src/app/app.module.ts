@@ -32,7 +32,12 @@ import { GestionEquipeComponent } from './components/gestion-equipe/gestion-equi
 import { EquipeDetailleComponent } from './components/equipe-detaille/equipe-detaille.component';
 import { EquipeUpdateComponent } from './components/equipe-update/equipe-update.component';
 import { EmployeService } from './services/employe/employe.service';
-import { MatRadioButton, MatRadioModule } from '@angular/material';
+import {MatRadioModule} from '@angular/material';
+import { AffectationRessourcesComponent } from './components/affectation-ressources/affectation-ressources.component';
+import {MatSelectModule} from '@angular/material/select';
+import {MatIconModule} from '@angular/material/icon';
+import {MatTableModule} from '@angular/material/table';
+
 
 @NgModule({
   declarations: [
@@ -60,7 +65,8 @@ import { MatRadioButton, MatRadioModule } from '@angular/material';
     ReversePipe,
     GestionEquipeComponent,
     EquipeDetailleComponent,
-    EquipeUpdateComponent
+    EquipeUpdateComponent,
+    AffectationRessourcesComponent
     
   ],
   imports: [
@@ -73,6 +79,9 @@ import { MatRadioButton, MatRadioModule } from '@angular/material';
     HttpClientModule,
     BsDatepickerModule.forRoot(),
     NgbTimepickerModule,
+    MatSelectModule,
+    MatTableModule,
+    MatIconModule,
 
 
     

@@ -28,6 +28,7 @@ export class ReunionUpdateComponent implements OnInit {
   employesdep:Employe[]=[];
   selectedItemsList:Employe[]= [];
   checkedIDs:number[];
+  offset: number =new Date().getTimezoneOffset() * 60 * 1000;
 
   ctrl1:any
   ctrl2:any
@@ -143,7 +144,8 @@ this.typeArray=["Réunion administratif","Reunion Scrum"]
 
   updateReunion(){
     console.log("efsef'rttttttttttttttttttttttttttttttttt"+JSON.stringify(this.reunion.employes)); 
-
+    this.reunion.dateDebut = new Date(new Date(this.reunion.dateDebut).getTime() - this.offset);
+    this.reunion.dateFin = new Date(new Date(this.reunion.dateFin).getTime() - this.offset);
     this.reunionservice.updateRieunion(this.id,this.reunion)
     .subscribe(data=> console.log(data),error=>console.log(error))
     

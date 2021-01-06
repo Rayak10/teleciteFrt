@@ -1,0 +1,14 @@
+.titre{
+    color:rgb(95, 176, 228);
+  
+  }
+  table{
+    width: 100%;
+  }
+  .mat-select-panel {
+    background: rgb(0, 153, 255);
+    
+}
+::ng-deep .placeholdercolor::mat-select-placeholder {   
+  color: red; 
+}

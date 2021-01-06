@@ -17,6 +17,10 @@ export class ProjetService {
     return this.http.get<Projet>(AppSettings.APP_URL+"/projets/"+idProjet)
 
   }
+  findAllprojetByEmploye(idEmploye:number){
+    return this.http.get<Projet[]>(AppSettings.APP_URL+"/projets/projetsEmploye/"+idEmploye)
+  }
+  
   findProjetSprint(idSprint:number){
     return this.http.get<Projet>(AppSettings.APP_URL+"/projets/sprintProjet"+idSprint)
 

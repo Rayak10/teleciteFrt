@@ -1,0 +1,71 @@
+
+<hr/>
+<hr/>
+
+
+
+<!-- FORM  -->	    
+<div class="container">	       
+     
+<fieldset>
+
+<!-- Form Name -->
+
+
+
+<legend  class="navbar-brand titre"  > Affectation ressources</legend>
+<form #AffectationForm="ngForm" (ngSubmit)="onSubmit(AffectationForm)">
+    <h4>Basic mat-select</h4>
+    <mat-form-field appearance="fill">
+      <mat-label>Projets</mat-label>
+      <mat-select  [(ngModel)]="selectedValue" name="projet" (selectionChange)="onChangeProjet($event)">
+        <mat-option *ngFor="let p of projetArray" [value]="p.idProjet">
+          {{p.nomProjet}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+<div>    
+  <legend  class="navbar-brand titre"  > Backlog Produit du projet </legend>
+  
+</div>
+<div>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+         
+      <!-- Position Column -->
+      <ng-container matColumnDef="libelleUserStory">
+        <mat-header-cell *matHeaderCellDef> UserStory </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.libelleUserStory}} </mat-cell>
+      </ng-container>
+    
+      <!-- Name Column -->
+      <ng-container matColumnDef="priorite">
+        <mat-header-cell *matHeaderCellDef> Priorité </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.priorite}} </mat-cell>
+      </ng-container>
+    
+      <!-- Weight Column -->
+      <ng-container matColumnDef="complexite">
+        <mat-header-cell *matHeaderCellDef> Complexité </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.complexite}} </mat-cell>
+      </ng-container>
+    
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>Taches</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+
+         <button mat-icon-button><mat-icon style="color: rgb(90, 169, 235);">launch</mat-icon></button>
+      </mat-cell>
+      </ng-container>
+    
+    
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </table>
+  </div>
+</form>
+</fieldset>
+</div>

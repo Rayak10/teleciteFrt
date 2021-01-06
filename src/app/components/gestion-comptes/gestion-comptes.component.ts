@@ -47,12 +47,10 @@ export class GestionComptesComponent implements OnInit {
   public userFile : any =null;
   message:string;
   constructor(private employeservice:EmployeService,private departementservice:DepartementService,private roleservice:RoleService,private equipeservice:EquipeService,private bureauservice:BureauService,private formBuilder: FormBuilder, private router: Router,private httpClient:HttpClient) {}
-  //public listBureauItems:Array<String>=[];
-  //public listdepItems:Array<String>=[];
+
   ngOnInit() {
     this.reloadData();
-    //this.dropDownBureauRefresh();
-   // this.dropDownDepRefresh();
+  
     this.bureauservice.findAllBureaux().subscribe(
       data => {console.log("data from find all bureau:"+JSON.stringify(data));   
       
@@ -79,17 +77,7 @@ export class GestionComptesComponent implements OnInit {
     this.employe.equipe=null;
     this.employe.role=null;
 
-    this.router.routeReuseStrategy.shouldReuseRoute = function () {
-  return false;
-};
-this.mySubscription = this.router.events.subscribe((event) => {
-  if (event instanceof NavigationEnd) {
-    // Trick the Router into believing it's last link wasn't previously loaded
-    this.router.navigated = false;
   }
-});
-  }
-  
 
   newEmployee(): void {
     this.submitted = false;
@@ -99,39 +87,10 @@ this.mySubscription = this.router.events.subscribe((event) => {
     this.submitted = true;
     getCompteForm.reset();
      this.gotoList();
-        
-     
- 
   }
-
-/*dropDownBureauRefresh(){
-this.bureauservice.findAllBureaux().subscribe(data=>{
- console.log(data);
-  data.forEach(element => {
-    this.listBureauItems.push(element["nomBureau"]);
-    
-  });
-})
-
-  }; 
-
-
-  dropDownDepRefresh(){
-    this.departementservice.findAllDepartements().subscribe(data=>{
-     console.log(data);
-      data.forEach(element => {
-        this.listdepItems.push(element["nomDepartement"]);
-        
-      });
-    })
-    
-      }; 
-    
-*/
 
   save(getCompteForm:NgForm) {
     var formData = new FormData();
-
     if(this.userFile==null){
       this.employe.dateNaissance = new Date(new Date(this.employe.dateNaissance).getTime() - this.offset);
     this.employe.dateEmbauche = new Date(new Date(this.employe.dateEmbauche).getTime() - this.offset);
@@ -140,18 +99,12 @@ this.bureauservice.findAllBureaux().subscribe(data=>{
     }
     else{
     formData.append('employee',JSON.stringify(this.employe))  ;
-  
     formData.append('file',this.userFile);
-
     this.employeservice.saveEmployeProfile(formData).subscribe((Response)=>{
       console.log(Response);
     })
   }
-
-   
 this.gotoList();
-
-
   }
   
   

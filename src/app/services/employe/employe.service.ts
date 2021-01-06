@@ -7,6 +7,7 @@ import { Bureau } from 'src/app/models/bureau';
 import { Observable ,Subject} from 'rxjs';
 import { Departement } from 'src/app/models/departement';
 import { FormGroup } from '@angular/forms';
+import { Authentification } from 'src/app/models/authentification';
 
 
 
@@ -22,7 +23,7 @@ export class EmployeService {
     return this.http.get<Employe[]>(AppSettings.APP_URL+"/employes/")
   }
   findAllEmployesDepartement(idDepartement:number){
-    return this.http.get<Employe[]>(AppSettings.APP_URL+"/employes/employesDepartement/"+idDepartement)
+    return this.http.get<Employe[]>(AppSettings.APP_URL+"/employes/employesdepartement/"+idDepartement)
   }
   findAllEmployesEquipe(idEquipe:number){
     return this.http.get<Employe[]>(AppSettings.APP_URL+"/employes/employesEquipe/"+idEquipe)
@@ -47,6 +48,10 @@ return this.http.get<Employe[]>(AppSettings.APP_URL+"/employes/AllActives/"+acti
     return this.http.get<Employe>(AppSettings.APP_URL+"/employes/"+idEmploye)
 
   }
+  findEmployeByEmail(email:String){
+    return this.http.get<Employe>(AppSettings.APP_URL+"/employes/email/"+email)
+
+  }
 
   createEmploye(employe:Employe){
     return this.http.post<Employe>(AppSettings.APP_URL+"/employes/",employe)
@@ -58,6 +63,9 @@ return this.http.get<Employe[]>(AppSettings.APP_URL+"/employes/AllActives/"+acti
 
   login(email:string,password:string){
     return this.http.post<Employe>(AppSettings.APP_URL + "/employes/login?email=" + email + "&password=" + password, null);
+  }
+  login1(authentification:Authentification){
+    return this.http.post<Authentification>(AppSettings.APP_URL +"/employes/auth",authentification);
   }
   
   deleteEmploye(idEmploye:number){
