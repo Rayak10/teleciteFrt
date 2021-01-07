@@ -37,6 +37,9 @@ import { AffectationRessourcesComponent } from './components/affectation-ressour
 import {MatSelectModule} from '@angular/material/select';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTableModule} from '@angular/material/table';
+import {MatSortModule} from '@angular/material/sort';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatFormFieldModule, MatInputModule } from '@angular/material';
 
 
 @NgModule({
@@ -82,7 +85,10 @@ import {MatTableModule} from '@angular/material/table';
     MatSelectModule,
     MatTableModule,
     MatIconModule,
-
+    MatPaginatorModule,
+    MatSortModule,
+    MatFormFieldModule,
+    MatInputModule,
 
     
   ],

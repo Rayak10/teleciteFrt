@@ -1,14 +1,51 @@
 .titre{
-    color:rgb(95, 176, 228);
-  
-  }
-  table{
-    width: 100%;
-  }
-  .mat-select-panel {
-    background: rgb(0, 153, 255);
-    
+  color:rgb(95, 176, 228);
+
 }
-::ng-deep .placeholdercolor::mat-select-placeholder {   
-  color: red; 
+
+ .hide{
+   display: none;
+ }
+ mat-footer-row mat-footer-cell{
+   justify-content: center;
+   font-style: italic;
+ }
+ ng-container {
+  justify-content: center;
+}
+ .mat-column-libelleUserStory {
+  flex: 3 3 500px;
+}
+ mat-footer-cell{
+  color:rgb(95, 176, 228);
+
+ }
+ mat-option {
+  color:rgb(95, 176, 228);
+
+ }
+
+
+ .search-div{
+  margin: 10px;
+}
+.search-form-field{
+  width: 70%;
+  margin-left: 10px;
+  padding: 5px 10px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+}
+.search-form-field div.mat-form-field-underline{
+  display: none;
+}
+.search-form-field div.mat-form-field.infix{
+  border-top: 0px;
+}
+.search-form-field div.mat-form-field.wrapper{
+  padding-bottom: 0px;
+}
+.search-form-field div.mat-form-field-suffix button{
+  height: 32px;
+  width: 32px;
 }
