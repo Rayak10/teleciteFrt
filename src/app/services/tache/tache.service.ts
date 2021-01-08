@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Userstory } from 'src/app/models/userStory';
 import { AppSettings } from 'src/app/settings/app.settings';
 import { Tache } from 'src/app/models/tache';
+import { Employe } from 'src/app/models/employe';
 
 @Injectable({
   providedIn: 'root'
@@ -20,9 +21,9 @@ export class TacheService {
     return this.http.get<Tache>(AppSettings.APP_URL+"/taches/"+idTache)
 
   }
-  /*findAllTachesprint(idSprint:number){
-    return this.http.get<Tache[]>(AppSettings.APP_URL+"/taches/sprint/"+idSprint)
-  }*/
+  findEmployeTache(idTache:number){
+    return this.http.get<Employe>(AppSettings.APP_URL+"/taches/employeTache"+idTache)
+  }
   
   
   createTache(tache:Tache){

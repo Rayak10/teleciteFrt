@@ -1,0 +1,56 @@
+<div class="row">
+    <div class="col col-md-3">
+  
+  <label class="control-label">description UserStory :</label>
+  </div>
+  <div class="col col-md-8">
+      <textarea id="userStory-name"  rows="2" cols="12" required [(ngModel)]="userstory.libelleUserStory" name="userStory-name" type="text"  class="form-control input-md"></textarea>
+  
+      <p class="help-block"></p>
+      </div>
+  
+  </div>
+
+<div class="mat-elevation-z8">
+    <mat-table [dataSource]="dataSource" matSort>
+
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+         
+      <!-- Position Column -->
+      <ng-container matColumnDef="descriptionTache">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="titre"> descriptionTache </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.descriptionTache}} </mat-cell>
+      </ng-container>
+    
+      <!-- Name Column -->
+      <ng-container matColumnDef="dureeTache">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="titre"> dureeTache </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.dureeTache}} </mat-cell>
+      </ng-container>
+    
+      <!-- Weight Column -->
+      <ng-container matColumnDef="etatTache">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="titre"> etatTache </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.etatTache}} </mat-cell>
+      </ng-container>
+    
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef class="titre">Taches</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            <mat-form-field appearance="fill">
+                <mat-label>{{recivedRow.equipeProjer.nomEquipe}}</mat-label>
+                <mat-select   [(ngModel)]="selectedValue" name="equipe" (selectionChange)="onChangeProjet($event)">
+                  <mat-option *ngFor="let e of employeArray" [value]="e.idEmploye">
+                    {{e.nomEmploye}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>      </mat-cell>
+      </ng-container>
+  
+    
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <mat-paginator [pageSize]="5"></mat-paginator>
+</div>

@@ -15,6 +15,6 @@ export class Tache{
     dateFin : Date;       
     userStory:Userstory=new Userstory();
     employe:Employe=new Employe();
-
+    idEmploye:number;
 
 }

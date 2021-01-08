@@ -24,6 +24,7 @@ import { GestionEquipeComponent } from './components/gestion-equipe/gestion-equi
 import { EquipeDetailleComponent } from './components/equipe-detaille/equipe-detaille.component';
 import { EquipeUpdateComponent } from './components/equipe-update/equipe-update.component';
 import { AffectationRessourcesComponent } from './components/affectation-ressources/affectation-ressources.component';
+import { AffectationTachesComponent } from './components/affectation-taches/affectation-taches.component';
 
 
 
@@ -53,6 +54,8 @@ const routes: Routes = [
   {path: 'equipes/details/:id',component :EquipeDetailleComponent },
   {path: 'equipes/update/:id',component :EquipeUpdateComponent },
   {path: 'affectationRessources/:id',component :AffectationRessourcesComponent },
+  {path: 'affectationTaches/:id',component :AffectationTachesComponent},
+
 
 
   

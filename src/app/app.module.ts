@@ -32,7 +32,7 @@ import { GestionEquipeComponent } from './components/gestion-equipe/gestion-equi
 import { EquipeDetailleComponent } from './components/equipe-detaille/equipe-detaille.component';
 import { EquipeUpdateComponent } from './components/equipe-update/equipe-update.component';
 import { EmployeService } from './services/employe/employe.service';
-import {MatRadioModule} from '@angular/material';
+import {MatDialogModule, MatRadioModule} from '@angular/material';
 import { AffectationRessourcesComponent } from './components/affectation-ressources/affectation-ressources.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatIconModule} from '@angular/material/icon';
@@ -40,6 +40,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatFormFieldModule, MatInputModule } from '@angular/material';
+import { AffectationTachesComponent } from './components/affectation-taches/affectation-taches.component';
 
 
 @NgModule({
@@ -69,7 +70,8 @@ import { MatFormFieldModule, MatInputModule } from '@angular/material';
     GestionEquipeComponent,
     EquipeDetailleComponent,
     EquipeUpdateComponent,
-    AffectationRessourcesComponent
+    AffectationRessourcesComponent,
+    AffectationTachesComponent
     
   ],
   imports: [
@@ -89,12 +91,14 @@ import { MatFormFieldModule, MatInputModule } from '@angular/material';
     MatSortModule,
     MatFormFieldModule,
     MatInputModule,
+    MatDialogModule,
 
     
   ],
   providers: [
     EmployeService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[AffectationTachesComponent]
 })
 export class AppModule { }

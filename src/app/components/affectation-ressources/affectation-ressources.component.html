@@ -68,7 +68,7 @@
       <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef class="titre">Taches</mat-header-cell>
         <mat-cell *matCellDef="let row">
-         <button mat-icon-button><mat-icon style="color: rgb(90, 169, 235);">launch</mat-icon></button>
+         <button mat-icon-button (click)="onAffect(row)"><mat-icon style="color: rgb(90, 169, 235);">launch</mat-icon></button>
       </mat-cell>
       </ng-container>
     <ng-container matColumnDef="loading">
