@@ -24,16 +24,6 @@ export class EquipeUpdateComponent implements OnInit {
     .subscribe(data=>{
       console.log(data)
       this.equipe=data;
-
-      
-    /*this.sprintservice.findAllSprint().subscribe(
-      data => {console.log("data from find all sprints:"+JSON.stringify(data));   
-      
-                  this.sprintArray.push(...data);}
-                  );*/
-
-                 
-      console.log("tache Update: "+JSON.stringify(this.equipe))
     }, error=>console.log(error));
     } 
   

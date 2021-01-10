@@ -40,7 +40,7 @@
         <mat-cell *matCellDef="let element">
             <mat-form-field appearance="fill">
                 <mat-label>{{recivedRow.equipeProjer.nomEquipe}}</mat-label>
-                <mat-select   [(ngModel)]="selectedValue" name="equipe" (selectionChange)="onChangeProjet($event)">
+                <mat-select   [(ngModel)]="element.idEmploye" name="equipe" (selectionChange)="onChangeProjet($event, element.idTache)">
                   <mat-option *ngFor="let e of employeArray" [value]="e.idEmploye">
                     {{e.nomEmploye}}
                   </mat-option>
@@ -48,7 +48,6 @@
               </mat-form-field>      </mat-cell>
       </ng-container>
   
-    
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>

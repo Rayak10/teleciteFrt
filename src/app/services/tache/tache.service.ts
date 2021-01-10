@@ -33,6 +33,10 @@ export class TacheService {
    
    return this.http.put<Tache>(AppSettings.APP_URL+"/taches/update/"+idTache,value)
   }
+  updateTacheEmploye(idTache:number,idEmploye:number,value:any){
+   
+    return this.http.put<Tache>(AppSettings.APP_URL+"/taches/afectationEmployeTache/"+idTache+"/"+idEmploye,value)
+   }
   deleteTache(idTache:number){
     return this.http.delete(AppSettings.APP_URL+"/taches/"+idTache)
     

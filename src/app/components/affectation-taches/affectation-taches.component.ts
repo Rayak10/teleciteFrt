@@ -5,6 +5,7 @@ import { FormBuilder } from '@angular/forms';
 import { MatSort, MatPaginator, MatTableDataSource, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Employe } from 'src/app/models/employe';
+import { Tache } from 'src/app/models/tache';
 import { Userstory } from 'src/app/models/userStory';
 import { EmployeService } from 'src/app/services/employe/employe.service';
 import { EquipeService } from 'src/app/services/equipe/equipe.service';
@@ -24,7 +25,7 @@ import { TachesUserStory } from './elementTache';
 export class AffectationTachesComponent implements OnInit {
  recivedRow;
  employeArray:Employe[]=[];
-
+tache:Tache=new Tache();
   id:number;
   userstory:Userstory=new Userstory();
 
@@ -46,25 +47,48 @@ export class AffectationTachesComponent implements OnInit {
 
   ngOnInit() {
 
+
     this.userstoryservice.findUserstoryById(this.recivedRow.selectedUserStory.idUserStory)
     .subscribe(data=>{
       this.userstory=data;})
       console.log(JSON.stringify(this.recivedRow.equipeProjer)+'lllllolo');
       this.employeservice.findAllEmployesEquipe(this.recivedRow.equipeProjer.idEquipe).subscribe(
         data => { this.employeArray.push(...data);
-          console.log("ffffffffffff"+JSON.stringify(this.employeArray))
         }
       );
 
     let resp=this.tacheservice.findAllTacheByUserstory(this.recivedRow.selectedUserStory.idUserStory);
    
    
-  resp.subscribe(x  =>this.dataSource.data = x as TachesUserStory[]);
+  resp.subscribe(x  =>{
+    this.dataSource.data =[];
+    this.dataSource.data = x.map(tache => {return {
+      idTache:tache.idTache,
+      descriptionTache : tache.descriptionTache,
+      etatTache: tache.etatTache,
+      dureeTache:tache.dureeTache,
+      dateDebut:tache.dateDebut,
+      dateFin :tache.dateFin,
+      idEmploye: (tache.employe == null) ? null : tache.employe.idEmploye,
+    }  }) as TachesUserStory[];
+      
+
+  });
 
 
     this.dataSource.sort=this.sort;
     this.dataSource.paginator=this.paginator;
   
+  }
+  onChangeProjet(event, idTache){
+    this.tacheservice.findTacheById(idTache)
+    .subscribe(data=>{
+      this.tache=data;                 
+      console.log("tache : "+JSON.stringify(this.tache))
+    }, error=>console.log(error));  
+    this.tacheservice.updateTacheEmploye(idTache,event.value).subscribe(
+      data=> console.log(data),error=>console.log(error))
+ 
   }
   }
 

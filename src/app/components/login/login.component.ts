@@ -6,6 +6,7 @@ import { EmployeService } from 'src/app/services/employe/employe.service';
 import { Authentification } from 'src/app/models/authentification';
 import { Employe } from 'src/app/models/employe';
 import { Observable } from 'rxjs';
+import { AppSettings } from 'src/app/settings/app.settings';
 
 @Component({
   selector: 'app-login',
@@ -45,8 +46,17 @@ employe:Employe=new Employe();
         localStorage.setItem('currentEmploye', JSON.stringify(data));
         this.employeservice.findEmployeByEmail(this.authentification.email)
         .subscribe(data=>{
-          this.employe=data}),
+          console.log("g"+JSON.stringify(data))
+
+          this.employe=data;
+
+          AppSettings.userRole=data.role.nomRole;
+
+        }),
+
+          console.log("roleeeeeeeeeeeeeeeeeeeee"+AppSettings.userRole)
           this.router.navigate(['/affectationRessources/',this.employe.idEmploye]);
+          
       }, error => {
         if(error.status === 404) {
           this.errorMessage = "No user was found with the following Email/Password";
