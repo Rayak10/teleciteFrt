@@ -1,0 +1,53 @@
+<div class="row">
+    <div class="col col-md-3">
+        <label class="control-label">description UserStory :</label>
+    </div>
+    <div class="col col-md-8">
+        <textarea id="userStory-name" rows="2" cols="12" required [(ngModel)]="userstory.libelleUserStory"
+            name="userStory-name" type="text" class="form-control input-md"></textarea>
+        <p class="help-block"></p>
+    </div>
+</div>
+<div class="row titre">
+    <div class="col-md-4 col-sm-4">
+        <h2>Todo</h2>
+        <div class="todo example-list"
+        cdkDropList #todoList="cdkDropList"
+         [cdkDropListData]="todos" 
+         [cdkDropListConnectedTo]="[doingList,doneList]" 
+            (cdkDropListDropped)="drop($event)">
+            <div class="alert alert-danger" *ngFor="let todo of todos" cdkDrag
+            [cdkDragData]="todo">
+                {{todo.descriptionTache}} 
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-4">
+        <h2>Doing</h2>
+        <div
+        class="doing example-list"
+        cdkDropList #doingList="cdkDropList"
+        [cdkDropListData]="doing" 
+        [cdkDropListConnectedTo]="[todoList,doneList]" 
+           (cdkDropListDropped)="drop($event)">
+           <div class="alert alert-info" *ngFor="let todo of doing" cdkDrag
+           [cdkDragData]="todo">
+               {{todo.descriptionTache}} 
+           </div>
+       </div>
+    </div>
+    <div class="col-md-4 col-sm-4">
+        <h2>Done</h2>
+        <div class="done example-list"
+        cdkDropList #doneList="cdkDropList"
+        [cdkDropListData]="done" 
+        [cdkDropListConnectedTo]="[todoList,doingList]" 
+           (cdkDropListDropped)="drop($event)">
+           <div class="alert alert-success" *ngFor="let todo of done" cdkDrag
+           [cdkDragData]="todo">
+               {{todo.descriptionTache}} 
+           </div>
+       </div>
+    </div>
+
+</div>

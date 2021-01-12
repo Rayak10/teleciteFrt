@@ -65,10 +65,18 @@
         <mat-cell *matCellDef="let element"> {{element.complexite}} </mat-cell>
       </ng-container>
     
-      <ng-container matColumnDef="actions">
+      <ng-container matColumnDef="affectation">
         <mat-header-cell *matHeaderCellDef class="titre">Taches</mat-header-cell>
         <mat-cell *matCellDef="let row">
-         <button mat-icon-button (click)="onAffect(row)"><mat-icon style="color: rgb(90, 169, 235);">launch</mat-icon></button>
+         <button mat-icon-button (click)="onAffect(row)"><mat-icon style="color: rgb(90, 169, 235);"><i class="fas fa-tasks"></i>
+         </mat-icon></button>
+      </mat-cell>
+      </ng-container>
+      
+      <ng-container matColumnDef="gerer">
+        <mat-header-cell *matHeaderCellDef class="titre">Gérer</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+         <button mat-icon-button (click)="onGerer(row)"><mat-icon style="color: rgb(90, 169, 235);"><i class="fas fa-highlighter"></i></mat-icon></button>
       </mat-cell>
       </ng-container>
     <ng-container matColumnDef="loading">

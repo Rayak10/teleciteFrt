@@ -17,6 +17,9 @@ export class TacheService {
   findAllTacheByUserstory(idUserStory:number){
     return this.http.get<Tache[]>(AppSettings.APP_URL+"/taches/all/"+idUserStory)
   }
+  findAllTachesStoriesEtat(idUserStory:number,etatTache:String){
+    return this.http.get<Tache[]>(AppSettings.APP_URL+"/taches/allTacheEtatUserStory/"+idUserStory+"/"+etatTache)
+  }
   findTacheById(idTache:number){
     return this.http.get<Tache>(AppSettings.APP_URL+"/taches/"+idTache)
 
@@ -36,6 +39,10 @@ export class TacheService {
   updateTacheEmploye(idTache:number,idEmploye:number,value:any){
    
     return this.http.put<Tache>(AppSettings.APP_URL+"/taches/afectationEmployeTache/"+idTache+"/"+idEmploye,value)
+   }
+   updateEtatTacheEmploye(idTache:number,etatTache:String,value:any){
+   
+    return this.http.put<Tache>(AppSettings.APP_URL+"/taches/etatTacheEmploye/"+idTache+"/"+etatTache,value)
    }
   deleteTache(idTache:number){
     return this.http.delete(AppSettings.APP_URL+"/taches/"+idTache)

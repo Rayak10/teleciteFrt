@@ -25,6 +25,7 @@ import { EquipeDetailleComponent } from './components/equipe-detaille/equipe-det
 import { EquipeUpdateComponent } from './components/equipe-update/equipe-update.component';
 import { AffectationRessourcesComponent } from './components/affectation-ressources/affectation-ressources.component';
 import { AffectationTachesComponent } from './components/affectation-taches/affectation-taches.component';
+import { KanbanBoardComponent } from './components/kanban-board/kanban-board.component';
 
 
 
@@ -55,7 +56,9 @@ const routes: Routes = [
   {path: 'equipes/update/:id',component :EquipeUpdateComponent },
   {path: 'affectationRessources/:id',component :AffectationRessourcesComponent },
   {path: 'affectationTaches/:id',component :AffectationTachesComponent},
+  {path: 'canbanBoeard/:id',component :KanbanBoardComponent},
 
+  
 
 
   

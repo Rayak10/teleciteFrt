@@ -41,6 +41,8 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import { AffectationTachesComponent } from './components/affectation-taches/affectation-taches.component';
+import { KanbanBoardComponent } from './components/kanban-board/kanban-board.component';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 
 @NgModule({
@@ -71,7 +73,8 @@ import { AffectationTachesComponent } from './components/affectation-taches/affe
     EquipeDetailleComponent,
     EquipeUpdateComponent,
     AffectationRessourcesComponent,
-    AffectationTachesComponent
+    AffectationTachesComponent,
+    KanbanBoardComponent
     
   ],
   imports: [
@@ -92,6 +95,7 @@ import { AffectationTachesComponent } from './components/affectation-taches/affe
     MatFormFieldModule,
     MatInputModule,
     MatDialogModule,
+    DragDropModule ,
 
     
   ],
@@ -99,6 +103,6 @@ import { AffectationTachesComponent } from './components/affectation-taches/affe
     EmployeService
   ],
   bootstrap: [AppComponent],
-  entryComponents:[AffectationTachesComponent]
+  entryComponents:[AffectationTachesComponent,KanbanBoardComponent]
 })
 export class AppModule { }

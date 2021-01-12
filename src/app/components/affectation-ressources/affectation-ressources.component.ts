@@ -16,6 +16,7 @@ import { GestionTacheComponent } from '../gestion-tache/gestion-tache.component'
 import { GestionComptesComponent } from '../gestion-comptes/gestion-comptes.component';
 import { AffectationTachesComponent } from '../affectation-taches/affectation-taches.component';
 import { Equipe } from 'src/app/models/equipe';
+import { KanbanBoardComponent } from '../kanban-board/kanban-board.component';
 
 
 @Component({
@@ -35,15 +36,18 @@ export class AffectationRessourcesComponent implements OnInit {
   userstoriesProjet:Observable<Userstory[]>;
   userstoriesProjetArray:Userstory[]=[];
   ELEMENT_DATA:UserstoriesProjets[]=[];
-  displayedColumns: string[] = ['libelleUserStory', 'priorite', 'complexite','actions'];
+  displayedColumns: string[] = ['libelleUserStory', 'priorite', 'complexite','affectation','gerer'];
   @ViewChild(MatSort ,{ static: true } ) sort:MatSort;
   @ViewChild(MatPaginator ,{ static: true } ) paginator:MatPaginator;
   
   dataSource = new MatTableDataSource<UserstoriesProjets>(this.ELEMENT_DATA);
   test:boolean=false;
   searchKey:string;
-  constructor(private dialog:MatDialog,private userstoryservice:UserstoryService,private projetservice:ProjetService,private employeservice:EmployeService,private equipeservice:EquipeService,private formBuilder: FormBuilder, private router: Router,private httpClient:HttpClient,private route: ActivatedRoute) { }
-showDataOfChildComponent;
+  showDataOfChildComponent;
+  constructor(private dialog:MatDialog,private userstoryservice:UserstoryService,
+    private projetservice:ProjetService,private equipeservice:EquipeService,
+    private formBuilder: FormBuilder,
+     private router: Router,private httpClient:HttpClient,private route: ActivatedRoute) { }
   ngOnInit() {
     this.id=this.route.snapshot.params['id'];
     this.equipeservice.findEmployeEquipe(this.id).subscribe(
@@ -55,7 +59,7 @@ showDataOfChildComponent;
       }
     );
   }
-  onChangeProjet(event){
+onChangeProjet(event){
     let resp=this.userstoryservice.findAllUserstoryByProjet(this.selectedValue);
     resp.subscribe(x  =>this.dataSource.data = x as UserstoriesProjets[]);
     
@@ -70,36 +74,39 @@ onRowCliked(row){
   console.log("hhhhh"+this.selectedRow)
 }
 
-      onSearchClear (){
+onSearchClear (){
 
         this.searchKey="";
         this.applyFilter();
       }
-      applyFilter(){
+applyFilter(){
 
         this.dataSource.filter=this.searchKey.trim().toLowerCase();
       }
-      onAffect(row){
+onAffect(row){
         console.log(JSON.stringify(this.equipe)+'lllllolo');
         const dialogRef=this.dialog.open(AffectationTachesComponent,{
-        
-          autoFocus:true,
+        autoFocus:true,
         width:"75%",
-         data:{
+        data:{
            equipeProjer:this.equipe,
            selectedUserStory:row
-
-
-         }
-        }
-        );
-       
-        
+         }});
         dialogRef.afterClosed().subscribe(result=> {
           this.showDataOfChildComponent=result;
           console.log("alooo resultat" +result ) 
         })
+      }
+      onGerer(row){    
+        console.log("ffffffffffff"+JSON.stringify(row)+'lllllolo');
 
+        const dialogRef=this.dialog.open(KanbanBoardComponent,{
+        autoFocus:true,
+        width:"75%",
+        data:{
+           equipeProjer:this.equipe,
+           selectedUserStory:row
+         }});
 
       }
 }      
