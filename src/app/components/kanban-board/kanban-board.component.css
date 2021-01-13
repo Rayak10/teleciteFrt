@@ -17,3 +17,32 @@
     overflow: hidden;
     display: block;
   }
+  .example-list .pic{
+    position: absolute;
+    top:-10;
+    right: -10;
+    padding: 30px 30px;
+
+  }
+  #profileDisplay { display: block; margin:1px ; border-radius: 50%; border: 2px solid #ddd }
+
+ 
+  .topright {
+    position: relative;
+    top: 18px;
+    right: -170px;
+  }
+  .zoom img{
+    height: 40px; 
+    width: 30%;
+    transition: 1s;
+  }
+  .flotte {
+    float:left;
+    }
+  .zoom img:hover{
+    height: 70px; 
+    width: 40%;
+    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+  }
+  

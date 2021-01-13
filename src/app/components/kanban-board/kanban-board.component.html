@@ -11,6 +11,8 @@
 <div class="row titre">
     <div class="col-md-4 col-sm-4">
         <h2>Todo</h2>
+        <div #scrollEl cdk-scrollable style="height:430px; overflow-y:scroll">
+
         <div class="todo example-list"
         cdkDropList #todoList="cdkDropList"
          [cdkDropListData]="todos" 
@@ -19,11 +21,21 @@
             <div class="alert alert-danger" *ngFor="let todo of todos" cdkDrag
             [cdkDragData]="todo">
                 {{todo.descriptionTache}} 
+                <div class="zoom">
+                    <img class="topright" *ngIf="todo.employe.photo!=null; else logo" src="http://localhost:8081/telecite/employes/photo/{{todo.employe.idEmploye}}" name="photo" id="profileDisplay">
+                 <ng-template #logo>
+                  <img class="topright" src="../../assets/telecite.webp" name="photo" id="profileDisplay">
+        
+                 </ng-template>
+                  </div>
             </div>
+        </div>
         </div>
     </div>
     <div class="col-md-4 col-sm-4">
         <h2>Doing</h2>
+        <div #scrollEl cdk-scrollable style="height:430px; overflow-y:scroll">
+
         <div
         class="doing example-list"
         cdkDropList #doingList="cdkDropList"
@@ -33,11 +45,23 @@
            <div class="alert alert-info" *ngFor="let todo of doing" cdkDrag
            [cdkDragData]="todo">
                {{todo.descriptionTache}} 
+
+              <div class="zoom">
+                <img class="topright" *ngIf="todo.employe.photo!=null; else logo" src="http://localhost:8081/telecite/employes/photo/{{todo.employe.idEmploye}}" name="photo" id="profileDisplay">
+             <ng-template #logo>
+              <img class="topright" src="../../assets/telecite.webp" name="photo" id="profileDisplay">
+    
+             </ng-template>
+              </div>
+              
            </div>
        </div>
+        </div>
     </div>
     <div class="col-md-4 col-sm-4">
         <h2>Done</h2>
+        <div #scrollEl cdk-scrollable style="height:430px; overflow-y:scroll">
+
         <div class="done example-list"
         cdkDropList #doneList="cdkDropList"
         [cdkDropListData]="done" 
@@ -46,8 +70,16 @@
            <div class="alert alert-success" *ngFor="let todo of done" cdkDrag
            [cdkDragData]="todo">
                {{todo.descriptionTache}} 
+               <div class="zoom">
+                <img class="topright" *ngIf="todo.employe.photo!=null; else logo" src="http://localhost:8081/telecite/employes/photo/{{todo.employe.idEmploye}}" name="photo" id="profileDisplay">
+             <ng-template #logo>
+              <img class="topright" src="../../assets/telecite.webp" name="photo" id="profileDisplay">
+    
+             </ng-template>
+              </div>
            </div>
        </div>
+        </div>
     </div>
 
 </div>

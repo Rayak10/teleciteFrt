@@ -22,11 +22,12 @@ import { AffectationRessourcesComponent } from '../affectation-ressources/affect
 })
 export class KanbanBoardComponent implements OnInit {
   recivedRow;
+  idEmploye:number;
   userstory:Userstory=new Userstory();
   taches: Observable<Tache[]>;
-  todos:Todo[]=[];
-  doing:Todo[]=[];
-  done:Todo[]=[];
+  todos:Tache[]=[];
+  doing:Tache[]=[];
+  done:Tache[]=[];
   constructor(private tacheservice:TacheService ,private userstoryservice:UserstoryService,private projetservice:ProjetService,private employeservice:EmployeService,private equipeservice:EquipeService,private formBuilder: FormBuilder, private router: Router,private httpClient:HttpClient,private route: ActivatedRoute,
     public dialogRef:MatDialogRef<AffectationRessourcesComponent>,
       @Inject(MAT_DIALOG_DATA) public data: any){
@@ -43,6 +44,8 @@ export class KanbanBoardComponent implements OnInit {
     //this.taches=this.tacheservice.findAllTacheByUserstory(this.recivedRow.selectedUserStory.idUserStory);
     this.tacheservice.findAllTachesStoriesEtat(this.recivedRow.selectedUserStory.idUserStory,"Todo")
     .subscribe(data=>{
+      console.log("tooooooodoooooooooooooo"+JSON.stringify(this.todos));
+
       this.todos=data;  
       console.log("tooooooodoooooooooooooo"+JSON.stringify(this.todos));
                
@@ -50,6 +53,7 @@ export class KanbanBoardComponent implements OnInit {
     this.tacheservice.findAllTachesStoriesEtat(this.recivedRow.selectedUserStory.idUserStory,"Doing")
     .subscribe(data=>{
       this.doing=data;
+      
       console.log("dooooooooooingggggggg"+JSON.stringify(this.doing));
                 
     }, error=>console.log(error)); 

@@ -16,5 +16,5 @@ export class Tache{
     userStory:Userstory=new Userstory();
     employe:Employe=new Employe();
     idEmploye:number;
-
+    
 }
