@@ -25,6 +25,10 @@ export class SprintService {
     return this.http.get<Sprint[]>(AppSettings.APP_URL+"/sprints/projet/"+idProjet)
 
   }
+  projetSprintProgress(idProjet:number){
+    return this.http.get<Sprint[]>(AppSettings.APP_URL+"/sprints/projetSprintProgress/"+idProjet)
+
+  }
   findSprintBlByProjet(idProjet:number): Observable<Sprint>{
     return this.http.get<Sprint>(AppSettings.APP_URL+"/sprints/backProduit/"+idProjet)
 

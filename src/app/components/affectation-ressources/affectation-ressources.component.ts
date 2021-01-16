@@ -102,7 +102,8 @@ onAffect(row){
 
         const dialogRef=this.dialog.open(KanbanBoardComponent,{
         autoFocus:true,
-        width:"75%",
+        height: '1000px',
+        width: '1500px',
         data:{
            equipeProjer:this.equipe,
            selectedUserStory:row

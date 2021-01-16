@@ -103,6 +103,6 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     EmployeService
   ],
   bootstrap: [AppComponent],
-  entryComponents:[AffectationTachesComponent,KanbanBoardComponent]
+  entryComponents:[AffectationTachesComponent]
 })
 export class AppModule { }

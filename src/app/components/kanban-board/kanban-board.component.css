@@ -3,10 +3,11 @@
   }
  
   .example-container {
-    width: 400px;
+    width: 800px;
+    height: 800px;
     max-width: 100%;
-    margin: 0 25px 25px 0;
     display: inline-block;
+    left: 70px;
     vertical-align: top;
   }
   .example-list {
@@ -16,6 +17,7 @@
     border-radius: 4px;
     overflow: hidden;
     display: block;
+
   }
   .example-list .pic{
     position: absolute;
@@ -45,4 +47,17 @@
     width: 40%;
     box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
   }
+  mat-cell{
+    width:20px;
+  }
+  .position {
+    position: relative;
+    top: 0px;
+    left: -40px;
+    right: -10;
+
+ }
+ .position2 {
+  position: relative;
   
+}

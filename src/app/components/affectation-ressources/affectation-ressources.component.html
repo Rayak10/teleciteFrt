@@ -1,21 +1,16 @@
 
 <hr/>
 <hr/>
-
-
-
 <!-- FORM  -->	    
 <div class="container">	       
-     
-
 <!-- Form Name -->
-
-
-
 <legend  class="navbar-brand titre"  > Affectation ressources</legend>
 <form #AffectationForm="ngForm" (ngSubmit)="onSubmit(AffectationForm)">
-    <h4 class="titre">Vos projets</h4>
-    <div>
+  <div class="row">
+    <div class="col col-md-2">
+    <h4 class="titre">Vos projets :</h4>
+    </div>
+    <div class="col col-md-2">
     <mat-form-field appearance="fill">
       <mat-label>Projets</mat-label>
       <mat-select  [(ngModel)]="selectedValue" name="projet" (selectionChange)="onChangeProjet($event)">
@@ -25,46 +20,34 @@
       </mat-select>
     </mat-form-field>
   </div>
-</form>
-<form>
- 
-<div class="search-div">
-  <mat-form-field class="search-form-field" floatLabel="never">
+  </div>
+<div class=" row search-div">
+  <div class="col col-md-11">
+    <mat-form-field class="search-form-field" floatLabel="never">
 <input matInput [(ngModel)]="searchKey" [ngModelOptions]="{standalone: true}" placeholder="Rechercher" autocomplete="off" (keyup)="applyFilter()">
 <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
   <mat-icon  style="color: rgb(90, 169, 235);">close</mat-icon>
 </button>
   </mat-form-field>
 </div>
-
-
-   
-</form>
-
-<div class="mat-elevation-z8">
+<div class="col col-md-1">
+  <i class="fab fa-trello  fa-5x" style="color: rgb(90, 169, 235);"></i>
+</div>
+</div>
+<div class="row mat-elevation-z8">
     <mat-table [dataSource]="dataSource" matSort>
-
-      <!--- Note that these columns can be defined in any order.
-            The actual rendered columns are set as a property on the row definition" -->
-         
-      <!-- Position Column -->
       <ng-container matColumnDef="libelleUserStory">
         <mat-header-cell *matHeaderCellDef mat-sort-header class="titre"> UserStory </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.libelleUserStory}} </mat-cell>
       </ng-container>
-    
-      <!-- Name Column -->
       <ng-container matColumnDef="priorite">
         <mat-header-cell *matHeaderCellDef mat-sort-header class="titre"> Priorité </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.priorite}} </mat-cell>
       </ng-container>
-    
-      <!-- Weight Column -->
       <ng-container matColumnDef="complexite">
         <mat-header-cell *matHeaderCellDef mat-sort-header class="titre"> Complexité </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.complexite}} </mat-cell>
       </ng-container>
-    
       <ng-container matColumnDef="affectation">
         <mat-header-cell *matHeaderCellDef class="titre">Taches</mat-header-cell>
         <mat-cell *matCellDef="let row">
@@ -72,7 +55,6 @@
          </mat-icon></button>
       </mat-cell>
       </ng-container>
-      
       <ng-container matColumnDef="gerer">
         <mat-header-cell *matHeaderCellDef class="titre">Gérer</mat-header-cell>
         <mat-cell *matCellDef="let row">
@@ -84,11 +66,11 @@
         électionner un projet ... 
       </mat-footer-cell>
     </ng-container>
-    
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
       <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':test==true}"></mat-footer-row>
     </mat-table>
-    <mat-paginator [pageSizeOptions]="[10,20,30,40,50,60,70,80,90,100]"[pageSize]="10"></mat-paginator>
+    <mat-paginator [pageSizeOptions]="[10,20,30,40,50,60,70,80,90,100]"[pageSize]="7"></mat-paginator>
 </div>
+</form>
 </div>

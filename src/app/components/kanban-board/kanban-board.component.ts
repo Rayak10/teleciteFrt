@@ -1,19 +1,21 @@
-import { CdkDragDrop, CdkDragEnter, CdkDragExit, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { HttpClient } from '@angular/common/http';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { Router, ActivatedRoute } from '@angular/router';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Projet } from 'src/app/models/projet';
+import { Sprint } from 'src/app/models/sprint';
 import { Tache } from 'src/app/models/tache';
-import { Todo } from 'src/app/models/todo';
 import { Userstory } from 'src/app/models/userStory';
 import { EmployeService } from 'src/app/services/employe/employe.service';
 import { EquipeService } from 'src/app/services/equipe/equipe.service';
 import { ProjetService } from 'src/app/services/projet/projet.service';
+import { SprintService } from 'src/app/services/sprint/sprint.service';
 import { TacheService } from 'src/app/services/tache/tache.service';
 import { UserstoryService } from 'src/app/services/userstory/userstory.service';
-import { AffectationRessourcesComponent } from '../affectation-ressources/affectation-ressources.component';
+import { UserstoriesProjets } from '../affectation-ressources/elementData';
 
 @Component({
   selector: 'app-kanban-board',
@@ -23,73 +25,214 @@ import { AffectationRessourcesComponent } from '../affectation-ressources/affect
 export class KanbanBoardComponent implements OnInit {
   recivedRow;
   idEmploye:number;
+  idProjet:number;
+  projet:Observable<Projet>;
+  sprints:Sprint[]=[]
+  sprintBL:Sprint=new Sprint();
   userstory:Userstory=new Userstory();
   taches: Observable<Tache[]>;
+  products:Userstory[]=[];
   todos:Tache[]=[];
   doing:Tache[]=[];
   done:Tache[]=[];
-  constructor(private tacheservice:TacheService ,private userstoryservice:UserstoryService,private projetservice:ProjetService,private employeservice:EmployeService,private equipeservice:EquipeService,private formBuilder: FormBuilder, private router: Router,private httpClient:HttpClient,private route: ActivatedRoute,
-    public dialogRef:MatDialogRef<AffectationRessourcesComponent>,
-      @Inject(MAT_DIALOG_DATA) public data: any){
-        this.recivedRow=data;
+  sprintBacklog:Userstory[]=[];
+  displayedColumns: string[] = ['libelleUserStory'];
+  searchKey:string;
+
+  sprintArray= [];
+selectedSprintId:number;
+  ELEMENT_DATA:UserstoriesProjets[]=[];
+  dataSource = new MatTableDataSource<UserstoriesProjets>(this.ELEMENT_DATA);
+  @ViewChild(MatSort ,{ static: true } ) sort:MatSort;
+  @ViewChild(MatPaginator ,{ static: true } ) paginator:MatPaginator;
+  test:boolean=false;
+  constructor(private tacheservice:TacheService ,private userstoryservice:UserstoryService,private projetservice:ProjetService,private employeservice:EmployeService,private sprintservice:SprintService,private formBuilder: FormBuilder, private router: Router,private httpClient:HttpClient,private route: ActivatedRoute,
+    
+     ){
+       
       }
 
   ngOnInit() {
-    
-    this.userstoryservice.findUserstoryById(this.recivedRow.selectedUserStory.idUserStory)
-    .subscribe(data=>{
-      this.userstory=data;})
+    this.idEmploye=this.route.snapshot.params['id1'];
+    this.idProjet=this.route.snapshot.params['id2'];
+    this.projet=this.projetservice.findProjetById(this.idProjet)
+    this.sprintservice.projetSprintProgress(this.idProjet).subscribe(
+      data => {console.log("data from find all sprint progress:"+JSON.stringify(data));   
+      data.forEach((element,index)=>{
+        if(element.nomSprint=='Backlog produit') data.splice(index,1);  })
+                       this.sprintArray.push(...data);
+          this.selectedSprintId= this.sprintArray[0].idSprint;
+          this.userstoryservice.findUserStorysSprintByProjet(this.idProjet,this.selectedSprintId).subscribe(data=>{
+          this.sprintBacklog=data;
+ this.sprintBacklog.forEach(us=>this.tacheservice.findAllTachesStoriesEtat(us.idUserStory,"Todo").subscribe(
+  data=>{
+    this.todos.push(...data);  
+    console.log("loula"+JSON.stringify(this.todos))
+  }, error=>console.log(error)))    
+  this.sprintBacklog.forEach(us=>this.tacheservice.findAllTachesStoriesEtat(us.idUserStory,"Doing").subscribe(
+    data=>{
+      this.doing.push(...data);
+      console.log("thenya"+JSON.stringify(this.doing))
+  
+    }, error=>console.log(error))) 
+    this.sprintBacklog.forEach(us=>this.tacheservice.findAllTachesStoriesEtat(us.idUserStory,"Done").subscribe(
+      data=>{
+        this.done.push(...data);  
+        console.log("theltha"+JSON.stringify(this.done))
 
-      
-    //this.taches=this.tacheservice.findAllTacheByUserstory(this.recivedRow.selectedUserStory.idUserStory);
-    this.tacheservice.findAllTachesStoriesEtat(this.recivedRow.selectedUserStory.idUserStory,"Todo")
-    .subscribe(data=>{
-      console.log("tooooooodoooooooooooooo"+JSON.stringify(this.todos));
+      }, error=>console.log(error))) 
 
-      this.todos=data;  
-      console.log("tooooooodoooooooooooooo"+JSON.stringify(this.todos));
-               
-    }, error=>console.log(error));  
-    this.tacheservice.findAllTachesStoriesEtat(this.recivedRow.selectedUserStory.idUserStory,"Doing")
-    .subscribe(data=>{
-      this.doing=data;
-      
-      console.log("dooooooooooingggggggg"+JSON.stringify(this.doing));
-                
-    }, error=>console.log(error)); 
-    this.tacheservice.findAllTachesStoriesEtat(this.recivedRow.selectedUserStory.idUserStory,"Done")
-    .subscribe(data=>{
-      this.done=data;   
-      console.log("dddddddooooooooooneeeeee"+JSON.stringify(this.done));
-              
-    }, error=>console.log(error)); 
+                  }, error=>console.log(error)); 
+                }
+    );
+
+let resp=this.userstoryservice.findAllUserstoryByProjet(this.idProjet);
+resp.subscribe(x  =>this.dataSource.data = x as UserstoriesProjets[]);
+console.log("ddddddddddddaaaaaaaaaaataaaaaaaa"+JSON.stringify(this.dataSource.data));
+
+
+
+      this.userstoryservice.userstorysSprintBaclogProjet(this.idProjet).subscribe(data=>{
+  
+        this.products=data;  
+        console.log("productssssssssssssssss"+JSON.stringify(this.products));
+                 
+      }, error=>console.log(error));  
+
+
+  
+                 
+   }
+  
+  onSearchClear (){
+
+    this.searchKey="";
+    this.applyFilter();
   }
- 
+applyFilter(){
+
+    this.dataSource.filter=this.searchKey.trim().toLowerCase();
+  }
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
       transferArrayItem(event.previousContainer.data,
-                        event.container.data,
+                        event.container.data, 
                         event.previousIndex,
                         event.currentIndex);
-                        console.log("previousContainer"+JSON.stringify(event.previousContainer.data))
-                        console.log("container"+JSON.stringify(event.item.data))
-
-                        console.log("previousIndex"+event.previousIndex)
-                        console.log("currentIndex"+ event.currentIndex)
+                        
 const todo =event.item.data;
-todo.etatTache= event.container.element.nativeElement.classList[0]                        
-console.log("gggggggggggggggggggggggggg"+ todo.etatTache)
-console.log("gggggggggggggggggggggggggg"+ todo.idTache)
-   this.tacheservice.updateEtatTacheEmploye( todo.idTache,todo.etatTache,null).subscribe(
-                        data=> console.log(data),error=>console.log(error))
- 
-                         
+todo.etatrow= event.container.element.nativeElement.classList[0]
+if(todo.etatrow=="Todo"){
+  this.tacheservice.updateEtatTacheEmploye( todo.idTache,todo.etatrow,null).subscribe(
+                      data=> console.log(data),error=>console.log(error))}
+
+  if(todo.etatrow=="Doing"){
+ this.tacheservice.updateEtatTacheEmploye( todo.idTache,todo.etatrow,null).subscribe(
+   data=> console.log(data),error=>console.log(error))}
+                      
+     if(todo.etatrow=="Done"){
+      this.tacheservice.updateEtatTacheEmploye( todo.idTache,todo.etatrow,null).subscribe(
+     data=> console.log(data),error=>console.log(error))}
+ if(todo.etatrow=="sprintBacklog"){
+      this.userstoryservice.updateSprintUserStory(todo.idUserStory,this.selectedSprintId,null) .subscribe(
+           data=> console.log(data),error=>console.log(error))   
+
+           this.tacheservice.findAllTachesStoriesEtat(todo.idUserStory,"Todo")
+           .subscribe(data=>{
+             this.todos.push(...data);  
+           }, error=>console.log(error));  
+           this.tacheservice.findAllTachesStoriesEtat(todo.idUserStory,"Doing")
+           .subscribe(data=>{
+             this.doing.push(...data);
+             
+             console.log("dooooooooooingggggggg"+JSON.stringify(this.doing));
                        
+           }, error=>console.log(error)); 
+           this.tacheservice.findAllTachesStoriesEtat(todo.idUserStory,"Done")
+           .subscribe(data=>{
+             this.done.push(...data);   
+             console.log("dddddddooooooooooneeeeee"+JSON.stringify(this.done));
+                     
+           }, error=>console.log(error)); 
+           
+         
+
+          }  
+          if(todo.etatrow=="productBacklog"){
+            this.sprintservice.findSprintBlByProjet(this.idProjet).subscribe(
+              data=>{
+          
+                this.sprintBL=data;  
+                console.log("eeeeeeeeeeeeeeeffffffff"+JSON.stringify(this.sprintBL)   )  
+                this.userstoryservice.updateSprintUserStory(todo.idUserStory,this.sprintBL.idSprint,null) .subscribe(
+                  data=> console.log(data),error=>console.log(error)) 
+                  this.todos=[];
+                  this.doing=[];
+                  this.done=[];
+                   this.userstoryservice.findUserStorysSprintByProjet(this.idProjet,this.selectedSprintId).subscribe(data=>{
+              this.sprintBacklog=data;
+     this.sprintBacklog.forEach(us=>this.tacheservice.findAllTachesStoriesEtat(us.idUserStory,"Todo").subscribe(
+      data=>{
+        this.todos.push(...data);  
+        console.log("loula"+JSON.stringify(this.todos))
+      }, error=>console.log(error)))    
+      this.sprintBacklog.forEach(us=>this.tacheservice.findAllTachesStoriesEtat(us.idUserStory,"Doing").subscribe(
+        data=>{
+          this.doing.push(...data);
+          console.log("thenya"+JSON.stringify(this.doing))
+      
+        }, error=>console.log(error))) 
+        this.sprintBacklog.forEach(us=>this.tacheservice.findAllTachesStoriesEtat(us.idUserStory,"Done").subscribe(
+          data=>{
+            this.done.push(...data);  
+            console.log("theltha"+JSON.stringify(this.done))
+    
+          }, error=>console.log(error))) 
+    
+                      }, error=>console.log(error)); 
+              }, error=>console.log(error));  
+             
+                             
+                }         
 
     }
+  }
+  onChange(event){
+   
+    console.log("id sprint: "+JSON.stringify(this.selectedSprintId));
+ 
+    this.userstoryservice.findUserStorysSprintByProjet(this.idProjet,this.selectedSprintId).subscribe(data=>{
+  
+      this.sprintBacklog=data;  
+      console.log("productssssssssssssssss"+JSON.stringify(this.sprintBacklog));
+      this.todos=[];
+      this.doing=[];
+      this.done=[];
+       this.userstoryservice.findUserStorysSprintByProjet(this.idProjet,this.selectedSprintId).subscribe(data=>{
+  this.sprintBacklog=data;
+this.sprintBacklog.forEach(us=>this.tacheservice.findAllTachesStoriesEtat(us.idUserStory,"Todo").subscribe(
+data=>{
+this.todos.push(...data);  
+console.log("loula"+JSON.stringify(this.todos))
+}, error=>console.log(error)))    
+this.sprintBacklog.forEach(us=>this.tacheservice.findAllTachesStoriesEtat(us.idUserStory,"Doing").subscribe(
+data=>{
+this.doing.push(...data);
+console.log("thenya"+JSON.stringify(this.doing))
+
+}, error=>console.log(error))) 
+this.sprintBacklog.forEach(us=>this.tacheservice.findAllTachesStoriesEtat(us.idUserStory,"Done").subscribe(
+data=>{
+this.done.push(...data);  
+console.log("theltha"+JSON.stringify(this.done))
+
+}, error=>console.log(error))) 
+
+          }, error=>console.log(error)); 
+    }, error=>console.log(error)); 
   }
 
 }

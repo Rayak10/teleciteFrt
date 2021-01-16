@@ -56,7 +56,7 @@ const routes: Routes = [
   {path: 'equipes/update/:id',component :EquipeUpdateComponent },
   {path: 'affectationRessources/:id',component :AffectationRessourcesComponent },
   {path: 'affectationTaches/:id',component :AffectationTachesComponent},
-  {path: 'canbanBoeard/:id',component :KanbanBoardComponent},
+  {path: 'canbanBoeard/:id1/:id2',component :KanbanBoardComponent},
 
   
 

@@ -15,6 +15,9 @@ export class UserstoryService {
   findAllUserstoryByProjet(idProjet:number){
     return this.http.get<Userstory[]>(AppSettings.APP_URL+"/userStorys/userstorysProjet/"+idProjet)
   }
+  userstorysSprintBaclogProjet(idProjet:number){
+    return this.http.get<Userstory[]>(AppSettings.APP_URL+"/userStorys/userstorysSprintBaclogProjet/"+idProjet)
+  }
   findUserstoryById(idUserStory:number){
     return this.http.get<Userstory>(AppSettings.APP_URL+"/userStorys/"+idUserStory)
 
@@ -23,7 +26,9 @@ export class UserstoryService {
     return this.http.get<Userstory[]>(AppSettings.APP_URL+"/userStorys/sprint/"+idSprint)
 
   }
-  
+  findUserStorysSprintByProjet(idProjet:number,idSprint:number){
+    return this.http.get<Userstory[]>(AppSettings.APP_URL+"/userStorys/userstorysSprintProjet/"+idProjet+"/"+idSprint)
+  }
   findUserstoryTache(idTache:number){
     return this.http.get<Userstory>(AppSettings.APP_URL+"/userStorys/userstoryTache/"+idTache)
 
@@ -33,8 +38,14 @@ export class UserstoryService {
   }
   updateUserStory(idUserStory:number,value:any){
    
-   return this.http.put<Userstory>(AppSettings.APP_URL+"/userStorys/update/"+idUserStory,value)
-  }
+  return this.http.put<Userstory>(AppSettings.APP_URL+"/userStorys/update/"+idUserStory,value)
+  } 
+  
+  updateSprintUserStory(idUserStory:number,idSprint:number,value:any){
+   
+    return this.http.put<Userstory>(AppSettings.APP_URL+"/userStorys/updateSprintUserStory/"+idUserStory+"/"+idSprint,value)
+    }
+    
   deleteUserStory(idUserStory:number){
     return this.http.delete(AppSettings.APP_URL+"/userStorys/"+idUserStory)
     

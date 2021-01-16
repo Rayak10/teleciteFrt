@@ -1,19 +1,72 @@
+<hr><hr>
 <div class="row">
     <div class="col col-md-3">
-        <label class="control-label">description UserStory :</label>
+        <label class="titre"></label> 
     </div>
-    <div class="col col-md-8">
-        <textarea id="userStory-name" rows="2" cols="12" required [(ngModel)]="userstory.libelleUserStory"
-            name="userStory-name" type="text" class="form-control input-md"></textarea>
+    <div class="col col-md-1">
+        <label class="control-label titre">Sprint courant :</label>
+    </div>
+    <div class="col-md-4">
+        <select required
+         type="text" 
+         class="form-control "
+          id="field_sprint"
+            name="sprint" [(ngModel)]="selectedSprintId"
+            (change)="onChange($event)">
+          <option  *ngFor="let s of sprintArray" [value]="s.idSprint">
+            {{s.nomSprint}}
+          </option>
+        </select>
         <p class="help-block"></p>
+        </div>
+</div>
+<div class="row titre position">
+    <div class="col-md-3 col-sm-2">
+      
+    <div class="position ">
+      <h2>ProductBacklog</h2>
+      <div #scrollEl cdk-scrollable style="height:430px; overflow-y:scroll">
+  
+      <div class="productBacklog example-list"
+      cdkDropList #productList="cdkDropList"
+       [cdkDropListData]="products" 
+       [cdkDropListConnectedTo]="[sprintBList]" 
+          (cdkDropListDropped)="drop($event)">
+          <div class="alert alert-danger" *ngFor="let product of products" cdkDrag
+          [cdkDragData]="product">
+              {{product.libelleUserStory}} 
+              
+          </div>
+      </div>
+      </div>
     </div>
 </div>
-<div class="row titre">
-    <div class="col-md-4 col-sm-4">
+
+
+
+
+<div class="col-md-1 col-sm-4s">
+    <h2>SB</h2>
+    <div #scrollEl cdk-scrollable style="height:430px; overflow-y:scroll">
+
+    <div class="sprintBacklog example-list"
+    cdkDropList #sprintBList="cdkDropList"
+     [cdkDropListData]="sprintBacklog" 
+     [cdkDropListConnectedTo]="[productList]" 
+        (cdkDropListDropped)="drop($event)">
+        <div class="alert alert-danger" *ngFor="let todo of sprintBacklog" cdkDrag
+        [cdkDragData]="todo">
+            {{todo.libelleUserStory}} 
+           
+        </div>
+    </div>
+    </div>
+</div>
+    <div class="col-md-3 col-sm-4s">
         <h2>Todo</h2>
         <div #scrollEl cdk-scrollable style="height:430px; overflow-y:scroll">
 
-        <div class="todo example-list"
+        <div class="Todo example-list"
         cdkDropList #todoList="cdkDropList"
          [cdkDropListData]="todos" 
          [cdkDropListConnectedTo]="[doingList,doneList]" 
@@ -32,12 +85,12 @@
         </div>
         </div>
     </div>
-    <div class="col-md-4 col-sm-4">
+    <div class="col-md-3 col-sm-4">
         <h2>Doing</h2>
         <div #scrollEl cdk-scrollable style="height:430px; overflow-y:scroll">
 
         <div
-        class="doing example-list"
+        class="Doing example-list"
         cdkDropList #doingList="cdkDropList"
         [cdkDropListData]="doing" 
         [cdkDropListConnectedTo]="[todoList,doneList]" 
@@ -58,11 +111,11 @@
        </div>
         </div>
     </div>
-    <div class="col-md-4 col-sm-4">
+    <div class="col-md-2 col-sm-4">
         <h2>Done</h2>
         <div #scrollEl cdk-scrollable style="height:430px; overflow-y:scroll">
 
-        <div class="done example-list"
+        <div class="Done example-list"
         cdkDropList #doneList="cdkDropList"
         [cdkDropListData]="done" 
         [cdkDropListConnectedTo]="[todoList,doingList]" 
@@ -81,5 +134,3 @@
        </div>
         </div>
     </div>
-
-</div>
