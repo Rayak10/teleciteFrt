@@ -3,7 +3,7 @@
     <div class="col col-md-3">
         <label class="titre"></label> 
     </div>
-    <div class="col col-md-1">
+    <div class="col col-md-2">
         <label class="control-label titre">Sprint courant :</label>
     </div>
     <div class="col-md-4">
@@ -20,60 +20,74 @@
         <p class="help-block"></p>
         </div>
 </div>
-<div class="row titre position">
+
+
+<div class="row titre ">
+             <div class="col-md-3 col-sm-2">
+                <h2>Sprint backlog :</h2>
+            </div>
+        <div class="sprintBacklog example-list ul "
+        cdkDropList #sprintBList="cdkDropList"
+         [cdkDropListData]="sprintBacklog" 
+         [cdkDropListConnectedTo]="[productList]" 
+            (cdkDropListDropped)="drop($event)">
+      <div  class="alert alert-warning li" role="alert"  *ngFor="let todo of sprintBacklog" cdkDrag
+      [cdkDragData]="todo">
+      <p class="card-text"
+      mat-raised-button
+      matTooltipShowDelay="200"
+        matTooltip="{{todo.libelleUserStory}}">
+          {{todo.libelleUserStory}} 
+        </p>
+        
+      </div>
+    </div>
+    
+</div>
+          
+
+<div class="row titre ">
     <div class="col-md-3 col-sm-2">
-      
-    <div class="position ">
-      <h2>ProductBacklog</h2>
-      <div #scrollEl cdk-scrollable style="height:430px; overflow-y:scroll">
+    
+        <h2>Backlog product</h2>
+        <div #scrollEl cdk-scrollable style="height:430px; overflow-y:scroll">
   
-      <div class="productBacklog example-list"
+      <div class="productBacklog example-list detail "
       cdkDropList #productList="cdkDropList"
        [cdkDropListData]="products" 
        [cdkDropListConnectedTo]="[sprintBList]" 
           (cdkDropListDropped)="drop($event)">
           <div class="alert alert-danger" *ngFor="let product of products" cdkDrag
-          [cdkDragData]="product">
+          [cdkDragData]="product"
+          (onmouseenter)="clickEvent($event,product.libelleUserStory)"
+          >
+          <p class="card-textcard">
               {{product.libelleUserStory}} 
-              
-          </div>
-      </div>
-      </div>
-    </div>
-</div>
-
-
-
-
-<div class="col-md-1 col-sm-4s">
-    <h2>SB</h2>
-    <div #scrollEl cdk-scrollable style="height:430px; overflow-y:scroll">
-
-    <div class="sprintBacklog example-list"
-    cdkDropList #sprintBList="cdkDropList"
-     [cdkDropListData]="sprintBacklog" 
-     [cdkDropListConnectedTo]="[productList]" 
-        (cdkDropListDropped)="drop($event)">
-        <div class="alert alert-danger" *ngFor="let todo of sprintBacklog" cdkDrag
-        [cdkDragData]="todo">
-            {{todo.libelleUserStory}} 
-           
+            </p>
         </div>
-    </div>
+      </div>
+      
+      
     </div>
 </div>
+
+
+
+
     <div class="col-md-3 col-sm-4s">
         <h2>Todo</h2>
         <div #scrollEl cdk-scrollable style="height:430px; overflow-y:scroll">
 
-        <div class="Todo example-list"
+        <div class="Todo example-list detail"
         cdkDropList #todoList="cdkDropList"
          [cdkDropListData]="todos" 
          [cdkDropListConnectedTo]="[doingList,doneList]" 
             (cdkDropListDropped)="drop($event)">
-            <div class="alert alert-danger" *ngFor="let todo of todos" cdkDrag
+            <div class=" zoom1 alert alert-danger" *ngFor="let todo of todos" cdkDrag
             [cdkDragData]="todo">
-                {{todo.descriptionTache}} 
+            <p class="card-textcard">
+            {{todo.descriptionTache}} 
+            </p>
                 <div class="zoom">
                     <img class="topright" *ngIf="todo.employe.photo!=null; else logo" src="http://localhost:8081/telecite/employes/photo/{{todo.employe.idEmploye}}" name="photo" id="profileDisplay">
                  <ng-template #logo>
@@ -90,15 +104,17 @@
         <div #scrollEl cdk-scrollable style="height:430px; overflow-y:scroll">
 
         <div
-        class="Doing example-list"
+        class="Doing example-list detail"
         cdkDropList #doingList="cdkDropList"
         [cdkDropListData]="doing" 
         [cdkDropListConnectedTo]="[todoList,doneList]" 
            (cdkDropListDropped)="drop($event)">
            <div class="alert alert-info" *ngFor="let todo of doing" cdkDrag
            [cdkDragData]="todo">
-               {{todo.descriptionTache}} 
+           <p class="card-textcard">
 
+               {{todo.descriptionTache}} 
+           </p>
               <div class="zoom">
                 <img class="topright" *ngIf="todo.employe.photo!=null; else logo" src="http://localhost:8081/telecite/employes/photo/{{todo.employe.idEmploye}}" name="photo" id="profileDisplay">
              <ng-template #logo>
@@ -111,18 +127,21 @@
        </div>
         </div>
     </div>
-    <div class="col-md-2 col-sm-4">
+    <div class="col-md-3 col-sm-4">
         <h2>Done</h2>
         <div #scrollEl cdk-scrollable style="height:430px; overflow-y:scroll">
 
-        <div class="Done example-list"
+        <div class="Done example-list detail"
         cdkDropList #doneList="cdkDropList"
         [cdkDropListData]="done" 
         [cdkDropListConnectedTo]="[todoList,doingList]" 
            (cdkDropListDropped)="drop($event)">
            <div class="alert alert-success" *ngFor="let todo of done" cdkDrag
            [cdkDragData]="todo">
+           <p class="card-textcard">
+
                {{todo.descriptionTache}} 
+           </p>
                <div class="zoom">
                 <img class="topright" *ngIf="todo.employe.photo!=null; else logo" src="http://localhost:8081/telecite/employes/photo/{{todo.employe.idEmploye}}" name="photo" id="profileDisplay">
              <ng-template #logo>
@@ -134,3 +153,8 @@
        </div>
         </div>
     </div>
+
+     
+        
+       
+        

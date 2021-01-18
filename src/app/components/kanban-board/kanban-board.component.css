@@ -47,9 +47,7 @@
     width: 40%;
     box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
   }
-  mat-cell{
-    width:20px;
-  }
+  
   .position {
     position: relative;
     top: 0px;
@@ -57,7 +55,51 @@
     right: -10;
 
  }
- .position2 {
-  position: relative;
+ .ul { 
+  width: 870px;
+  display: block;
+  white-space: nowrap;
+  font-size: 0;
+   overflow: auto; 
+ 
+
+  }
+.li{ 
+  width: 200px;
+  height: 50px;
+  display: inline-block;
+ font-size: 16px;
+  }
   
-}
+  .card-text{
+    -webkit-line-clamp: 3;
+display:-webkit-box;
+
+-webkit-box-orient: vertical;
+overflow: hidden;
+
+
+  }
+  .card-textcard{
+-webkit-line-clamp: 3;
+display:-webkit-box;
+-webkit-box-orient: vertical;
+overflow: hidden;
+
+  }
+  .detail p:hover{
+    white-space: normal;
+
+    height: 200px; 
+    width: 200px;
+  }
+  
+  .detail p{
+    width: 100%;
+    height: 60px; 
+    
+
+    transition: 1s;
+  }
+
+

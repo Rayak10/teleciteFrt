@@ -46,10 +46,11 @@ selectedSprintId:number;
   @ViewChild(MatSort ,{ static: true } ) sort:MatSort;
   @ViewChild(MatPaginator ,{ static: true } ) paginator:MatPaginator;
   test:boolean=false;
+  public isShowingMessage:boolean;
   constructor(private tacheservice:TacheService ,private userstoryservice:UserstoryService,private projetservice:ProjetService,private employeservice:EmployeService,private sprintservice:SprintService,private formBuilder: FormBuilder, private router: Router,private httpClient:HttpClient,private route: ActivatedRoute,
     
      ){
-       
+       this.isShowingMessage=false;
       }
 
   ngOnInit() {
@@ -235,4 +236,6 @@ console.log("theltha"+JSON.stringify(this.done))
     }, error=>console.log(error)); 
   }
 
+ 
 }
+

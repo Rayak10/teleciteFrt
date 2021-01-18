@@ -43,6 +43,8 @@ import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import { AffectationTachesComponent } from './components/affectation-taches/affectation-taches.component';
 import { KanbanBoardComponent } from './components/kanban-board/kanban-board.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import {ScrollingModule} from '@angular/cdk/scrolling';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -96,6 +98,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     MatInputModule,
     MatDialogModule,
     DragDropModule ,
+    ScrollingModule,
+    MatTooltipModule,
 
     
   ],
