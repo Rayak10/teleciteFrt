@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AppSettings } from 'src/app/settings/app.settings';
 import { Userstory } from 'src/app/models/userStory';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -50,6 +51,9 @@ export class UserstoryService {
     return this.http.delete(AppSettings.APP_URL+"/userStorys/"+idUserStory)
     
   }
+  etatUserstoryById(idUserStory:number){
+    return this.http.get<boolean>(AppSettings.APP_URL+"/userStorys/UserStoryNonTerminerBySprint/"+idUserStory);
+}
 
 
 }
