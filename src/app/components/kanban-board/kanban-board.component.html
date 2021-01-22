@@ -20,8 +20,6 @@
         <p class="help-block"></p>
         </div>
 </div>
-
-
 <div class="row titre ">
              <div class="col-md-3 col-sm-2">
                 <h2>Sprint backlog :</h2>
@@ -63,7 +61,14 @@
           >
           <p class="card-textcard">
               {{product.libelleUserStory}} 
+            
+
             </p>
+            <div>
+
+                <i class="fas fa-hands-wash"></i>       
+                     {{product.complexite}}
+               </div> 
         </div>
       </div>
       
@@ -86,8 +91,16 @@
             <div class=" zoom1 alert alert-danger" *ngFor="let todo of todos" cdkDrag
             [cdkDragData]="todo">
             <p class="card-textcard">
-            {{todo.descriptionTache}} 
-            </p>
+            {{todo.descriptionTache}}
+        </p>
+            <div>
+
+                <i class="fas fa-hourglass-half"> </i>
+                {{todo.dureeTache}}jour(s)
+               </div> 
+           
+
+            
                 <div class="zoom">
                     <img class="topright" *ngIf="todo.employe.photo!=null; else logo" src="http://localhost:8081/telecite/employes/photo/{{todo.employe.idEmploye}}" name="photo" id="profileDisplay">
                  <ng-template #logo>
@@ -115,6 +128,12 @@
 
                {{todo.descriptionTache}} 
            </p>
+         
+           <div>
+
+            <i class="fas fa-hourglass-half"> </i>
+            {{todo.dureeTache}}jour(s)
+           </div> 
               <div class="zoom">
                 <img class="topright" *ngIf="todo.employe.photo!=null; else logo" src="http://localhost:8081/telecite/employes/photo/{{todo.employe.idEmploye}}" name="photo" id="profileDisplay">
              <ng-template #logo>
@@ -142,6 +161,11 @@
 
                {{todo.descriptionTache}} 
            </p>
+           <div>
+
+            <i class="fas fa-hourglass-half"> </i>
+            {{todo.dureeTache}}jour(s)
+           </div> 
                <div class="zoom">
                 <img class="topright" *ngIf="todo.employe.photo!=null; else logo" src="http://localhost:8081/telecite/employes/photo/{{todo.employe.idEmploye}}" name="photo" id="profileDisplay">
              <ng-template #logo>
