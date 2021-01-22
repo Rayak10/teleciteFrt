@@ -110,6 +110,12 @@ onAffect(row){
          }});
 
       }
+      onkanban(id1:number,id2:number){
+        this.router.navigate(['KanbanBoard',id1,id2]);
+      }
+      onburndown(id:number,){
+        this.router.navigate(['burndownchart',id]);
+      }
 }      
        
 

@@ -54,6 +54,9 @@ export class UserstoryService {
   etatUserstoryById(idUserStory:number){
     return this.http.get<boolean>(AppSettings.APP_URL+"/userStorys/UserStoryNonTerminerBySprint/"+idUserStory);
 }
+tableComplexite(idProjet:number){
+  return this.http.get<number[]>(AppSettings.APP_URL+"/userStorys/tablecomplexite/"+idProjet);
+}
 
 
 }

@@ -26,6 +26,7 @@ import { EquipeUpdateComponent } from './components/equipe-update/equipe-update.
 import { AffectationRessourcesComponent } from './components/affectation-ressources/affectation-ressources.component';
 import { AffectationTachesComponent } from './components/affectation-taches/affectation-taches.component';
 import { KanbanBoardComponent } from './components/kanban-board/kanban-board.component';
+import { BurndownchartComponent } from './components/burndownchart/burndownchart.component';
 
 
 
@@ -56,7 +57,9 @@ const routes: Routes = [
   {path: 'equipes/update/:id',component :EquipeUpdateComponent },
   {path: 'affectationRessources/:id',component :AffectationRessourcesComponent },
   {path: 'affectationTaches/:id',component :AffectationTachesComponent},
-  {path: 'canbanBoeard/:id1/:id2',component :KanbanBoardComponent},
+  {path: 'KanbanBoard/:id1/:id2',component :KanbanBoardComponent},
+  {path: 'burndownchart/:id',component :BurndownchartComponent},
+
 
   
 

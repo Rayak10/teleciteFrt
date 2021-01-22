@@ -22,7 +22,7 @@
   </div>
   </div>
 <div class=" row search-div">
-  <div class="col col-md-11">
+  <div class="col col-md-10">
     <mat-form-field class="search-form-field" floatLabel="never">
 <input matInput [(ngModel)]="searchKey" [ngModelOptions]="{standalone: true}" placeholder="Rechercher" autocomplete="off" (keyup)="applyFilter()">
 <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
@@ -31,8 +31,13 @@
   </mat-form-field>
 </div>
 <div class="col col-md-1">
-  <i class="fab fa-trello  fa-5x" style="color: rgb(90, 169, 235);"></i>
+  <i class="fab fa-trello  fa-5x" style="color: rgb(90, 169, 235);" (click)="onkanban(id,selectedValue)"></i>
 </div>
+<div class="col col-md-1">
+
+<i class="fas fa-chart-line fa-5x" style="color: rgb(90, 169, 235);" (click)="onburndown(selectedValue)"></i>
+</div>
+
 </div>
 <div class="row mat-elevation-z8">
     <mat-table [dataSource]="dataSource" matSort>

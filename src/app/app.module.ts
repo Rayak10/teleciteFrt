@@ -45,6 +45,9 @@ import { KanbanBoardComponent } from './components/kanban-board/kanban-board.com
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { BurndownchartComponent } from './components/burndownchart/burndownchart.component';
+import { NgApexchartsModule } from "ng-apexcharts";
+import { DatePipe } from '@angular/common'
 
 
 @NgModule({
@@ -76,7 +79,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     EquipeUpdateComponent,
     AffectationRessourcesComponent,
     AffectationTachesComponent,
-    KanbanBoardComponent
+    KanbanBoardComponent,
+    BurndownchartComponent,
     
   ],
   imports: [
@@ -100,11 +104,14 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     DragDropModule ,
     ScrollingModule,
     MatTooltipModule,
+    NgApexchartsModule,
+    
 
     
   ],
   providers: [
-    EmployeService
+    EmployeService,DatePipe
+
   ],
   bootstrap: [AppComponent],
   entryComponents:[AffectationTachesComponent]
