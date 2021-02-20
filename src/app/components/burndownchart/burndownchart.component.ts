@@ -53,7 +53,8 @@ export class BurndownchartComponent implements OnInit {
 
 
   ngOnInit(): void {
-    
+    this.datefinSprints[0]=0;
+
     this.id=this.route.snapshot.params['id'];
     
 this.userstoryservice.tableComplexite(this.id).subscribe(
@@ -69,6 +70,7 @@ this.userstoryservice.tableComplexite(this.id).subscribe(
         this.sprintservice.findSprintsByProjet(this.id).subscribe(
           data=>{
             this.sprintsProjet.push(...data)
+            this.sprintsProjet.shift();
             this.sprintsProjetData.push(...data)
 
 this.sprintsProjet.forEach(element=>
@@ -76,8 +78,8 @@ this.sprintsProjet.forEach(element=>
   
             this.sprintsProjet.forEach(element=>
               
-              
               this.datefinSprints.push(this.datepipe.transform(element.dateFin,'dd-MM-yy')+" "+element.nomSprint),
+              
               this.userstoryservice.findAllUserstoryByProjet(this.id).subscribe(
                 data=>{
                   this.complexProjet=0;
@@ -87,10 +89,11 @@ this.sprintsProjet.forEach(element=>
 
 
                     this.initializeChartOptions(this.projet,this.complexProjet,this.nameSprints,this.datefinSprints,this.data1,this.data2);
+                    console.log("datefiiiiiiiiiiiiiiiiiiiiin"+JSON.stringify(this.datefinSprints))
 
                   }
                   )
-                  this.nbrSprinProjet=this.sprintsProjet.length-1;
+                  this.nbrSprinProjet=this.sprintsProjet.length;
                  for (let i = 1; i <this.nbrSprinProjet; i++) {
                     this.data1[0]=this.complexProjet;
                     this.data1[i]= Math.trunc(this.data1[i-1]-(this.complexProjet/this.nbrSprinProjet))
@@ -130,6 +133,7 @@ this.sprintsProjet.forEach(element=>
 
     this.initializeChartOptions(this.projet,this.complexProjet,this.nameSprints,this.datefinSprints,this.data1,this.data2);
   
+    console.log("datefiiiiiiiiiiiiiiiiiiiiin"+JSON.stringify(this.datefinSprints));
 
 
   }

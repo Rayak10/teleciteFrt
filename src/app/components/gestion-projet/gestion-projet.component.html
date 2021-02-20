@@ -121,8 +121,8 @@
             <tr>
                 <td>{{projet.nomProjet}}</td>
                 <td>{{projet.theme}}</td>
-                <td>{{projet.dateDebut}}</td>
-                <td>{{projet.dateFin}}</td>
+                <td>{{projet.dateDebut | date :'shortDate'}}</td>
+                <td>{{projet.dateFin | date :'shortDate'}}</td>
                 <td>{{projet.equipe.nomEquipe}}</td>
                 <td>
                   

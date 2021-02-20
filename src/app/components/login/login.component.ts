@@ -44,7 +44,12 @@ employe:Employe=new Employe();
       .pipe()
       .subscribe(data => {
         localStorage.setItem('currentEmploye', JSON.stringify(data));
-        this.employeservice.findEmployeByEmail(this.authentification.email)
+        this.employe=data;
+        AppSettings.userRole=data.role.nomRole;
+        localStorage.setItem('token', this.employe.token);
+        localStorage.setItem('role', this.employe.role.nomRole);
+
+              /*this.employeservice.findEmployeByEmail(this.authentification.email)
         .subscribe(data=>{
           console.log("g"+JSON.stringify(data))
 
@@ -52,7 +57,7 @@ employe:Employe=new Employe();
 
           AppSettings.userRole=data.role.nomRole;
 
-        }),
+        })*/
 
           console.log("roleeeeeeeeeeeeeeeeeeeee"+AppSettings.userRole)
           this.router.navigate(['/affectationRessources/',this.employe.idEmploye]);
@@ -62,7 +67,7 @@ employe:Employe=new Employe();
           this.errorMessage = "No user was found with the following Email/Password";
         }
         if(error.status === 400) {
-          this.errorMessage = "EMail and / or password is incorrect";
+          this.errorMessage = "Email et / ou mot de passe incorrect";
         }
       });
   }

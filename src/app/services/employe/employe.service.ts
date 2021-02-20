@@ -8,6 +8,8 @@ import { Observable ,Subject} from 'rxjs';
 import { Departement } from 'src/app/models/departement';
 import { FormGroup } from '@angular/forms';
 import { Authentification } from 'src/app/models/authentification';
+import { createAuthorizationHeader } from 'src/app/settings/util';
+import { HttpHeaders } from '@angular/common/http';
 
 
 
@@ -34,9 +36,7 @@ export class EmployeService {
   findAllBureaux():Observable<any>{
     return this.http.get<Bureau[]>(AppSettings.APP_URL+"/bureaux/")
   }
-  saveEmployeProfile(formData: FormData): Observable<any> {
-    return this.http.post(AppSettings.APP_URL+"/employes/saveEmployeProfile", formData);
-  }
+  
   updateEmployeProfile(formData: FormData): Observable<any> {
     return this.http.put(AppSettings.APP_URL+"/employes/updateProfile", formData);
   }
@@ -52,9 +52,16 @@ return this.http.get<Employe[]>(AppSettings.APP_URL+"/employes/AllActives/"+acti
     return this.http.get<Employe>(AppSettings.APP_URL+"/employes/email/"+email)
 
   }
-
+  saveEmployeProfile(formData: FormData): Observable<any> {
+  //  let headers = createAuthorizationHeader();
+  let headers= new HttpHeaders({
+  'Authorization': "Bearer "+localStorage.getItem('token')
+});
+    return this.http.post(AppSettings.APP_URL+"/employes/"+localStorage.getItem('role')+"/saveEmployeProfile", formData, {headers: headers});
+  }
   createEmploye(employe:Employe){
-    return this.http.post<Employe>(AppSettings.APP_URL+"/employes/",employe)
+    let headers = createAuthorizationHeader();
+    return this.http.post<Employe>(AppSettings.APP_URL+"/employes/"+localStorage.getItem('role')+"/createEmploye",employe, {headers: headers})
   }
   updateEmploye (idEmploye:number,value:any){
    
@@ -65,7 +72,7 @@ return this.http.get<Employe[]>(AppSettings.APP_URL+"/employes/AllActives/"+acti
     return this.http.post<Employe>(AppSettings.APP_URL + "/employes/login?email=" + email + "&password=" + password, null);
   }
   login1(authentification:Authentification){
-    return this.http.post<Authentification>(AppSettings.APP_URL +"/employes/auth",authentification);
+    return this.http.post<Employe>(AppSettings.APP_URL +"/employes/auth",authentification);
   }
   
   deleteEmploye(idEmploye:number){

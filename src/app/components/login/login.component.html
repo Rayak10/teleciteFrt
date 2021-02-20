@@ -8,8 +8,8 @@
     
 	<div class="login-html">
     
-		<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
-    <input id="tab-2" type="radio" name="tab" class="for-pwd"><label for="tab-2" class="tab">Forgot Password</label>
+		<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Se connecter</label>
+    <input id="tab-2" type="radio" name="tab" class="for-pwd"><label for="tab-2" class="tab"> </label>
 
 		<div class="login-form">
     
@@ -17,12 +17,12 @@
 			<div class="sign-in-htm">
 				<div class="group">
           <span class="textdanger" >{{errorMessage}}</span>
-					<label for="user" class="label">Username or Email</label>
+					<label for="user" class="label">Email</label>
 					<input id="user" type="text" [(ngModel)]="authentification.email" class="input" placeholder="Login" formControlName="login">
 				</div>
 			
 				<div class="group">
-					<label for="pass" class="label">Password</label>
+					<label for="pass" class="label">Mot de passe</label>
 					<input id="pass" type="password"  [(ngModel)]="authentification.password" class="input" data-type="password" placeholder="Password" formControlName="password">
 				</div>
 				<div class="group">
@@ -32,7 +32,7 @@
 			</div>
 			<div class="for-pwd-htm">
 				<div class="group">
-					<label for="user" class="label">Username or Email</label>
+					<label for="user" class="label">Email</label>
 					<input id="user" type="text" class="input">
 				</div>
 				<div class="group">

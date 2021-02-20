@@ -21,7 +21,7 @@ export class Employe{
 	isChecked:boolean;
 	bureau: Bureau=new Bureau();
 	role: RoleMember=new RoleMember();
-
+	token: string = '';
 	departement: Departement=new Departement();
 	equipe: Equipe=new Equipe();
 	reunions: Reunion[] = [];

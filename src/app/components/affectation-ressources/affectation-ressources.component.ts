@@ -36,7 +36,7 @@ export class AffectationRessourcesComponent implements OnInit {
   userstoriesProjet:Observable<Userstory[]>;
   userstoriesProjetArray:Userstory[]=[];
   ELEMENT_DATA:UserstoriesProjets[]=[];
-  displayedColumns: string[] = ['libelleUserStory', 'priorite', 'complexite','affectation','gerer'];
+  displayedColumns: string[] = ['libelleUserStory', 'priorite', 'complexite','affectation'];
   @ViewChild(MatSort ,{ static: true } ) sort:MatSort;
   @ViewChild(MatPaginator ,{ static: true } ) paginator:MatPaginator;
   

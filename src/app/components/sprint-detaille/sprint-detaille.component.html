@@ -1,16 +1,16 @@
 <hr/>
 <hr/>
-<legend  class="navbar-brand titre"  > Les informations du sprint</legend>
+<legend  class="navbar-brand titre"  > Les informations du {{sprint.nomSprint}}</legend>
 <hr/>
 <div >
         <div>
             <b>Nom sprint  :</b><label>{{sprint.nomSprint}}</label>
         </div>
-        <div>
-            <b>Date debut  :</b><label>{{sprint.dateDebut}}</label>
+        <div *ngIf="sprint.nomSprint != 'Backlog produit'">
+            <b>Date debut  :</b><label>{{sprint.dateDebut | date :'shortDate'}}</label>
         </div>
-        <div>
-            <b>Date fin  :</b><label>{{sprint.dateFin}}</label>
+        <div *ngIf="sprint.nomSprint != 'Backlog produit'">
+            <b>Date fin  :</b><label>{{sprint.dateFin | date :'shortDate'}}</label>
         </div>
 
         <div>
@@ -45,7 +45,7 @@
 </div>
     
     <form id="form-list-userstorySprint" >
-            <legend class="navbar-brand titre">Liste des UserStorys du sprint</legend>
+            <legend class="navbar-brand titre">Liste des UserStorys du {{sprint.nomSprint}}</legend>
     
                 
               
@@ -55,8 +55,7 @@
                             <th scope="col"  width=40%>UserStory</th>
                             <th scope="col"  width=5%>Priorite</th>
                             <th scope="col" width=5%>Complexite</th>
-                            <th scope="col" width=20%>Projet</th>
-                            <th scope="col" width=20%>Sprint</th>
+                            <th  *ngIf="sprint.nomSprint != 'Backlog produit'" scope="col" width=20%>Sprint</th>
                             <th scope="col" width=10%>Actions</th>
                         </tr>
                             
@@ -66,8 +65,7 @@
                             <td>{{userstory.libelleUserStory}}</td>
                             <td>{{userstory.priorite}}</td>
                             <td>{{userstory.complexite}}</td>
-                            <td>{{userstory.sprint.projet.nomProjet}}</td>
-                            <td>{{userstory.sprint.nomSprint}}</td>
+                            <td *ngIf="sprint.nomSprint != 'Backlog produit'">{{userstory.sprint.nomSprint}}</td>
                             <td>
                               
                                 <a title="les détails du projet" class="btn btn-default btn-sm "(click)="userstoryDetails(userstory.idUserStory)"> <i class="glyphicon glyphicon-eye-open text-primary"  ></i> </a> 
