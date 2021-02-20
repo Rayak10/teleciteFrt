@@ -48,6 +48,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { BurndownchartComponent } from './components/burndownchart/burndownchart.component';
 import { NgApexchartsModule } from "ng-apexcharts";
 import { DatePipe } from '@angular/common'
+import { AuthGuardService } from './services/jwt/auth-guard.service';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 
 @NgModule({
@@ -105,12 +107,13 @@ import { DatePipe } from '@angular/common'
     ScrollingModule,
     MatTooltipModule,
     NgApexchartsModule,
+
     
 
     
   ],
   providers: [
-    EmployeService,DatePipe
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },EmployeService, DatePipe, AuthGuardService, JwtHelperService 
 
   ],
   bootstrap: [AppComponent],

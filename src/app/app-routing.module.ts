@@ -27,38 +27,37 @@ import { AffectationRessourcesComponent } from './components/affectation-ressour
 import { AffectationTachesComponent } from './components/affectation-taches/affectation-taches.component';
 import { KanbanBoardComponent } from './components/kanban-board/kanban-board.component';
 import { BurndownchartComponent } from './components/burndownchart/burndownchart.component';
-
+import { AuthGuardService as AuthGuard} from './services/jwt/auth-guard.service';
 
 
 const routes: Routes = [
  
   {path: '', component: LoginComponent},
-  {path: 'gestionComptes', component: GestionComptesComponent},
-  {path: 'update/:id', component: EmployeUpdatComponent},
-  {path: 'details/:id', component: EmployeDetailleComponent},
-  {path: 'gestionProjets', component: GestionProjetComponent},
-  {path: 'projets/update/:id',component :ProjetUpdateComponent },
-  {path: 'projets/details/:id',component :ProjetDetailleComponent },
-  {path: 'gestionSprints',component :GestionSprintsComponent },
-  {path: 'sprints/details/:id',component :SprintDetailleComponent },
-  {path: 'sprints/update/:id',component :SprintUpdateComponent },
-  {path: 'gestionUserstory', component: GestionUserstoryComponent},
-  {path: 'userstory/update/:id', component: UserstoryUpdateComponent},
-  {path: 'userstory/details/:id',component :UserstoryDetailleComponent},
-  {path: 'gestionTaches/:id', component: GestionTacheComponent},
-  {path: 'taches/details/:id',component :TacheDetailleComponent },
-  {path: 'taches/update/:id',component :TacheUpdateComponent },
-  {path: 'gestionReunions', component: GestionReunionComponent},
-  {path: 'reunions/details/:id', component: ReunionDetailleComponent},
-  {path: 'reunions/update/:id', component: ReunionUpdateComponent},
-  {path: 'Reunions/list', component: ListReunionsComponent},
-  {path: 'gestionEquipes', component: GestionEquipeComponent},
-  {path: 'equipes/details/:id',component :EquipeDetailleComponent},
-  {path: 'equipes/update/:id',component :EquipeUpdateComponent},
-  {path: 'affectationRessources/:id',component :AffectationRessourcesComponent},
-  {path: 'affectationTaches/:id',component :AffectationTachesComponent},
-  {path: 'KanbanBoard/:id1/:id2',component :KanbanBoardComponent},
-  {path: 'burndownchart/:id',component :BurndownchartComponent},
+  {path: 'gestionComptes', component: GestionComptesComponent, canActivate: [AuthGuard]},
+  {path: 'update/:id', component: EmployeUpdatComponent, canActivate: [AuthGuard]},
+  {path: 'details/:id', component: EmployeDetailleComponent, canActivate: [AuthGuard]},
+  {path: 'gestionProjets', component: GestionProjetComponent, canActivate: [AuthGuard]},
+  {path: 'projets/update/:id',component :ProjetUpdateComponent, canActivate: [AuthGuard]},
+  {path: 'projets/details/:id',component :ProjetDetailleComponent, canActivate: [AuthGuard]},
+  {path: 'gestionSprints',component :GestionSprintsComponent, canActivate: [AuthGuard]},
+  {path: 'sprints/details/:id',component :SprintDetailleComponent, canActivate: [AuthGuard]},
+  {path: 'sprints/update/:id',component :SprintUpdateComponent ,canActivate: [AuthGuard]},
+  {path: 'gestionUserstory', component: GestionUserstoryComponent ,canActivate: [AuthGuard]},
+  {path: 'userstory/update/:id', component: UserstoryUpdateComponent ,canActivate: [AuthGuard]},
+  {path: 'userstory/details/:id',component :UserstoryDetailleComponent ,canActivate: [AuthGuard]},
+  {path: 'gestionTaches/:id', component: GestionTacheComponent ,canActivate: [AuthGuard]},
+  {path: 'taches/details/:id',component :TacheDetailleComponent ,canActivate: [AuthGuard]},
+  {path: 'taches/update/:id',component :TacheUpdateComponent ,canActivate: [AuthGuard]},
+  {path: 'gestionReunions', component: GestionReunionComponent ,canActivate: [AuthGuard]},
+  {path: 'reunions/details/:id', component: ReunionDetailleComponent ,canActivate: [AuthGuard]},
+  {path: 'reunions/update/:id', component: ReunionUpdateComponent ,canActivate: [AuthGuard]},
+  {path: 'Reunions/list', component: ListReunionsComponent ,canActivate: [AuthGuard]},
+  {path: 'gestionEquipes', component: GestionEquipeComponent ,canActivate: [AuthGuard]},
+  {path: 'equipes/details/:id',component :EquipeDetailleComponent ,canActivate: [AuthGuard]},
+  {path: 'equipes/update/:id',component :EquipeUpdateComponent ,canActivate: [AuthGuard]},
+  {path: 'affectationRessources/:id',component :AffectationRessourcesComponent ,canActivate: [AuthGuard]},
+  {path: 'KanbanBoard/:id1/:id2',component :KanbanBoardComponent ,canActivate: [AuthGuard]},
+  {path: 'burndownchart/:id',component :BurndownchartComponent ,canActivate: [AuthGuard]}
 
 
   
