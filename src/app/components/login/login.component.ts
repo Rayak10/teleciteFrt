@@ -47,6 +47,7 @@ employe:Employe=new Employe();
         this.employe=data;
         AppSettings.userRole=data.role.nomRole;
         localStorage.setItem('token', this.employe.token);
+        const role: string =this.employe.role.nomRole;
         localStorage.setItem('role', this.employe.role.nomRole);
 
               /*this.employeservice.findEmployeByEmail(this.authentification.email)
@@ -59,8 +60,11 @@ employe:Employe=new Employe();
 
         })*/
 
-          console.log("roleeeeeeeeeeeeeeeeeeeee"+AppSettings.userRole)
-          this.router.navigate(['/affectationRessources/',this.employe.idEmploye]);
+        //  console.log("roleeeeeeeeeeeeeeeeeeeee"+AppSettings.userRole)
+          switch(role){
+            case 'ROLE_SCRUM_MASTER':  this.router.navigate(['/details/',this.employe.idEmploye]); break; 
+          }
+         
           
       }, error => {
         if(error.status === 404) {

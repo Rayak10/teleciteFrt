@@ -28,14 +28,22 @@ import { AffectationTachesComponent } from './components/affectation-taches/affe
 import { KanbanBoardComponent } from './components/kanban-board/kanban-board.component';
 import { BurndownchartComponent } from './components/burndownchart/burndownchart.component';
 import { AuthGuardService as AuthGuard} from './services/jwt/auth-guard.service';
-
+import { 
+  RoleGuardService as RoleGuard 
+} from './services/jwt/role-guard.service';
 
 const routes: Routes = [
  
   {path: '', component: LoginComponent},
-  {path: 'gestionComptes', component: GestionComptesComponent, canActivate: [AuthGuard]},
-  {path: 'update/:id', component: EmployeUpdatComponent, canActivate: [AuthGuard]},
-  {path: 'details/:id', component: EmployeDetailleComponent, canActivate: [AuthGuard]},
+  {path: 'gestionComptes', component: GestionComptesComponent, canActivate: [RoleGuard], data: { 
+    expectedRole: 'ROLE_DRH,ROLE_SCRUM_MASTER'
+  } },
+  {path: 'update/:id', component: EmployeUpdatComponent, canActivate: [RoleGuard], data: { 
+    expectedRole: 'ROLE_DRH'
+  } },
+  {path: 'details/:id', component: EmployeDetailleComponent, canActivate: [RoleGuard], data: { 
+    expectedRole: 'ROLE_DRH,ROLE_PRODUCT_OWNER,ROLE_SCRUM_MASTER'
+  } },
   {path: 'gestionProjets', component: GestionProjetComponent, canActivate: [AuthGuard]},
   {path: 'projets/update/:id',component :ProjetUpdateComponent, canActivate: [AuthGuard]},
   {path: 'projets/details/:id',component :ProjetDetailleComponent, canActivate: [AuthGuard]},

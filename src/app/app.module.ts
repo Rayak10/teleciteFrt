@@ -50,6 +50,7 @@ import { NgApexchartsModule } from "ng-apexcharts";
 import { DatePipe } from '@angular/common'
 import { AuthGuardService } from './services/jwt/auth-guard.service';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { RoleGuardService } from './services/jwt/role-guard.service';
 
 
 @NgModule({
@@ -113,7 +114,7 @@ import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
     
   ],
   providers: [
-    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },EmployeService, DatePipe, AuthGuardService, JwtHelperService 
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },EmployeService, DatePipe, AuthGuardService, JwtHelperService, RoleGuardService 
 
   ],
   bootstrap: [AppComponent],
