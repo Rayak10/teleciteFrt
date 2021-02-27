@@ -27,27 +27,17 @@
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="[ collapse navbar-collapse ]" id="bs-example-navbar-collapse-1">
-				<ul class="[ nav navbar-nav navbar-right ]">
-					<li class="[ visible-xs ]">
-						<form action="http://bootsnipp.com/search" method="GET" role="search">
-							<div class="[ input-group ]">
-								<input type="text" class="[ form-control ]" name="q" placeholder="Search for snippets">
-								<span class="[ input-group-btn ]">
-									<button class="[ btn btn-primary ]" type="submit"><span class="[ glyphicon glyphicon-search ]"></span></button>
-									<button class="[ btn btn-danger ]" type="reset"><span class="[ glyphicon glyphicon-remove ]"></span></button>
-								</span>
-							</div>
-						</form>
-					</li>
-					<li><a href="http://localhost:5300/gestionComptes" class="animate" >G cmpt</a></li>
-					<li><a href="http://localhost:5300/gestionProjets" class="animate">G p</a></li>
-					<li><a href="http://localhost:5300/gestionSprints"  class="animate">G spt </a></li>
-					<li><a class="animate" href="http://localhost:5300/gestionUserstory">Ge userS</a></li>
-					<li><a class="animate" href="http://localhost:5300/Reunions/list">Gestion réunion</a></li>
-					<li><a class="animate" href="http://localhost:5300/gestionEquipes"></a>g eq</li>
-					<li><a class="animate" href="http://localhost:5300/affectationRessources"></a></li>
+				<ul class="[ nav navbar-nav navbar-right ]" [ngSwitch]="[role]">
+					<li *ngSwitchCase="'ROLE_DRH'"><a (click)="employeDetails()" class="animate" >Profil</a></li>
 
-					<li class="[ hidden-xs ]"><a href="#toggle-search" class="[ animate ]"><span class="[ glyphicon glyphicon-search ]"></span></a></li>
+					<li *ngSwitchCase="'ROLE_DRH'"><a href="http://localhost:5300/gestionComptes" class="animate" >Comptes</a></li>
+					<li *ngSwitchCase="'ROLE_DRH'||'ROLE_PRODUCT_OWNER'||'ROLE_SCRUM_TEAM_MEMBER'||'ROLE_SCRUM_MASTER'"><a href="http://localhost:5300/gestionProjets" class="animate">Projets</a></li>
+					<li><a href="http://localhost:5300/gestionSprints"  class="animate">Sprints </a></li>
+					<li><a class="animate" href="http://localhost:5300/gestionUserstory">UserStories</a></li>
+					<li><a class="animate" href="http://localhost:5300/Reunions/list">Réunions</a></li>
+					<li><a class="animate" href="http://localhost:5300/gestionEquipes">Equipe</a></li>
+					<li *ngSwitchCase="'ROLE_SCRUM_MASTER'"><a class="animate" href="http://localhost:5300/affectationRessources">Ressources</a></li>
+					<li><a class="animate" href="">Déconnexion</a></li>
 				</ul>
 			</div>
 		</div>

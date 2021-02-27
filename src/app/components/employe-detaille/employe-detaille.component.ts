@@ -9,6 +9,7 @@ import { Departement } from 'src/app/models/departement';
 import { EquipeService } from 'src/app/services/equipe/equipe.service';
 import { Equipe } from 'src/app/models/equipe';
 import { RoleService } from 'src/app/services/role/role.service';
+import { DatapassService } from 'src/app/services/datapass/datapass.service';
 @Component({
   selector: 'app-employe-detaille',
   templateUrl: './employe-detaille.component.html',
@@ -45,7 +46,6 @@ bureau:Bureau;
     .subscribe(data=>{
       console.log(data)
       this.employe=data;
-      console.log("gggggggggggggggggggggggggggggggggggggggggggggg",JSON.stringify(this.employe))
 if(this.employe.photo==null){
   this.photo="http://localhost:8081/telecite/employes/photo/{{this.employe.idEmploye}}";
 }else{

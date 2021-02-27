@@ -51,6 +51,7 @@ import { DatePipe } from '@angular/common'
 import { AuthGuardService } from './services/jwt/auth-guard.service';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { RoleGuardService } from './services/jwt/role-guard.service';
+import { DatapassService } from './services/datapass/datapass.service';
 
 
 @NgModule({
@@ -114,7 +115,7 @@ import { RoleGuardService } from './services/jwt/role-guard.service';
     
   ],
   providers: [
-    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },EmployeService, DatePipe, AuthGuardService, JwtHelperService, RoleGuardService 
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },DatapassService,EmployeService, DatePipe, AuthGuardService, JwtHelperService, RoleGuardService 
 
   ],
   bootstrap: [AppComponent],

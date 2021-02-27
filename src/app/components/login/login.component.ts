@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit,EventEmitter,Output } from '@angular/core';
 import { Router } from '@angular/router';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 
@@ -7,6 +7,7 @@ import { Authentification } from 'src/app/models/authentification';
 import { Employe } from 'src/app/models/employe';
 import { Observable } from 'rxjs';
 import { AppSettings } from 'src/app/settings/app.settings';
+import { DatapassService } from 'src/app/services/datapass/datapass.service';
 
 @Component({
   selector: 'app-login',
@@ -14,19 +15,21 @@ import { AppSettings } from 'src/app/settings/app.settings';
   styleUrls: ['../../resources/bootstrap/css/bootstrap.min.css','./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  private role:string="";
   id:any;
   errorMessage: string;
   private loginForm: FormGroup;
 employe:Employe=new Employe();
-  constructor(private employeservice:EmployeService,private formBuilder: FormBuilder, private router: Router) {
+  constructor(private dataPass: DatapassService,private employeservice:EmployeService,private formBuilder: FormBuilder, private router: Router) {
     this.loginForm = formBuilder.group({
       login: ['', Validators.required],
       password: ['', Validators.required]
     });
    } 
+
    authentification:Authentification=new Authentification();
   
-
+ 
 
   ngOnInit() {
     this.authentification.email=this.login.value;
@@ -49,8 +52,11 @@ employe:Employe=new Employe();
         localStorage.setItem('token', this.employe.token);
         const role: string =this.employe.role.nomRole;
         localStorage.setItem('role', this.employe.role.nomRole);
+        localStorage.setItem('id', String(this.employe.idEmploye));
 
-              /*this.employeservice.findEmployeByEmail(this.authentification.email)
+        this.role=this.employe.role.nomRole
+        this.dataPass.child1DataChanges(this.role);
+           /*this.employeservice.findEmployeByEmail(this.authentification.email)
         .subscribe(data=>{
           console.log("g"+JSON.stringify(data))
 
@@ -63,8 +69,14 @@ employe:Employe=new Employe();
         //  console.log("roleeeeeeeeeeeeeeeeeeeee"+AppSettings.userRole)
           switch(role){
             case 'ROLE_SCRUM_MASTER':  this.router.navigate(['/details/',this.employe.idEmploye]); break; 
+            case 'ROLE_DRH':  this.router.navigate(['/details/',this.employe.idEmploye]); break; 
+            case 'ROLE_PRODUCT_OWNER':  this.router.navigate(['/details/',this.employe.idEmploye]); break; 
+            case 'ROLE_ROLE_EMPLOYE':  this.router.navigate(['/details/',this.employe.idEmploye]); break; 
+            case 'ROLE_ROLE_SCRUM_TEAM_MEMBER':  this.router.navigate(['/details/',this.employe.idEmploye]); break; 
+            case 'ROLE_ROLE_DEV_TEAM_MEMBER':  this.router.navigate(['/details/',this.employe.idEmploye]); break; 
+            
           }
-         
+          
           
       }, error => {
         if(error.status === 404) {
@@ -74,6 +86,7 @@ employe:Employe=new Employe();
           this.errorMessage = "Email et / ou mot de passe incorrect";
         }
       });
+      
   }
 
   get login() {
