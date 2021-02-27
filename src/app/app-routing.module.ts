@@ -36,15 +36,17 @@ const routes: Routes = [
  
   {path: '', component: LoginComponent},
   {path: 'gestionComptes', component: GestionComptesComponent, canActivate: [RoleGuard], data: { 
-    expectedRole: 'ROLE_DRH,ROLE_SCRUM_MASTER'
+    expectedRole: 'ROLE_DRH'
   } },
   {path: 'update/:id', component: EmployeUpdatComponent, canActivate: [RoleGuard], data: { 
     expectedRole: 'ROLE_DRH'
   } },
   {path: 'details/:id', component: EmployeDetailleComponent, canActivate: [RoleGuard], data: { 
-    expectedRole: 'ROLE_DRH,ROLE_PRODUCT_OWNER,ROLE_SCRUM_MASTER'
+    expectedRole: 'ROLE_SCRUM_MASTER,ROLE_DRH,ROLE_PRODUCT_OWNER,ROLE_EMPLOYE,ROLE_SCRUM_TEAM_MEMBER,ROLE_DEV_TEAM_MEMBER'
   } },
-  {path: 'gestionProjets', component: GestionProjetComponent, canActivate: [AuthGuard]},
+  {path: 'gestionProjets', component: GestionProjetComponent, canActivate: [AuthGuard], data: { 
+    expectedRole: 'ROLE_SCRUM_MASTER,ROLE_PRODUCT_OWNER,ROLE_SCRUM_TEAM_MEMBER,ROLE_DEV_TEAM_MEMBER'
+  } },
   {path: 'projets/update/:id',component :ProjetUpdateComponent, canActivate: [AuthGuard]},
   {path: 'projets/details/:id',component :ProjetDetailleComponent, canActivate: [AuthGuard]},
   {path: 'gestionSprints',component :GestionSprintsComponent, canActivate: [AuthGuard]},

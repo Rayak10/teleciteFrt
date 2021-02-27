@@ -16,7 +16,7 @@
 				</button>
 				<div class="[ animbrand ]">
           <img  width="100" height="70" bind-src="logo">
-					<a class="[ navbar-brand ][ animate ]"  href="">Telecite</a>
+					<a class="[ navbar-brand ][ animate ]"  >Telecite</a>
 				</div>
 			</div>
 
@@ -28,16 +28,36 @@
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="[ collapse navbar-collapse ]" id="bs-example-navbar-collapse-1">
 				<ul class="[ nav navbar-nav navbar-right ]" [ngSwitch]="[role]">
-					<li *ngSwitchCase="'ROLE_DRH'"><a (click)="employeDetails()" class="animate" >Profil</a></li>
-
+					<li *ngSwitchCase="role==='ROLE_SCRUM_MASTER'||role==='ROLE_DRH'||role==='ROLE_PRODUCT_OWNER'
+					||role==='ROLE_EMPLOYE'||role==='ROLE_SCRUM_TEAM_MEMBER'||role==='ROLE_DEV_TEAM_MEMBER'? role : ''">
+					<a *ngIf="role" (click)="employeDetails()" class="animate" >Profil</a></li>
+					
 					<li *ngSwitchCase="'ROLE_DRH'"><a href="http://localhost:5300/gestionComptes" class="animate" >Comptes</a></li>
-					<li *ngSwitchCase="'ROLE_DRH'||'ROLE_PRODUCT_OWNER'||'ROLE_SCRUM_TEAM_MEMBER'||'ROLE_SCRUM_MASTER'"><a href="http://localhost:5300/gestionProjets" class="animate">Projets</a></li>
-					<li><a href="http://localhost:5300/gestionSprints"  class="animate">Sprints </a></li>
-					<li><a class="animate" href="http://localhost:5300/gestionUserstory">UserStories</a></li>
-					<li><a class="animate" href="http://localhost:5300/Reunions/list">Réunions</a></li>
-					<li><a class="animate" href="http://localhost:5300/gestionEquipes">Equipe</a></li>
-					<li *ngSwitchCase="'ROLE_SCRUM_MASTER'"><a class="animate" href="http://localhost:5300/affectationRessources">Ressources</a></li>
-					<li><a class="animate" href="">Déconnexion</a></li>
+					
+					<li *ngSwitchCase="role==='ROLE_SCRUM_MASTER'||role==='ROLE_PRODUCT_OWNER'
+					||role==='ROLE_EMPLOYE'||role==='ROLE_SCRUM_TEAM_MEMBER'||role==='ROLE_DEV_TEAM_MEMBER'? role : ''">
+					<a *ngIf="role" href="http://localhost:5300/gestionProjets" class="animate">Projets</a></li>
+					
+					<li *ngSwitchCase="role==='ROLE_SCRUM_MASTER'||role==='ROLE_PRODUCT_OWNER'
+					||role==='ROLE_SCRUM_TEAM_MEMBER'? role : ''">
+					<a *ngIf="role" href="http://localhost:5300/gestionSprints"  class="animate">Sprints </a></li>
+					
+					<li *ngSwitchCase="role==='ROLE_SCRUM_MASTER'||role==='ROLE_PRODUCT_OWNER'
+					||role==='ROLE_SCRUM_TEAM_MEMBER'? role : ''">
+					<a *ngIf="role" class="animate" href="http://localhost:5300/gestionUserstory">UserStories</a></li>
+					
+					<li *ngSwitchCase="role==='ROLE_SCRUM_MASTER'||role==='ROLE_DRH'||role==='ROLE_PRODUCT_OWNER'
+					||role==='ROLE_EMPLOYE'||role==='ROLE_SCRUM_TEAM_MEMBER'||role==='ROLE_DEV_TEAM_MEMBER'? role : ''">
+					<a *ngIf="role" class="animate" href="http://localhost:5300/Reunions/list">Réunions</a></li>
+					
+					<li *ngSwitchCase="'ROLE_SCRUM_MASTER'">
+					<a class="animate" href="http://localhost:5300/gestionEquipes">Equipe</a></li>
+					
+					<li *ngSwitchCase="role==='ROLE_SCRUM_MASTER'||role==='ROLE_PRODUCT_OWNER'
+					||role==='ROLE_SCRUM_TEAM_MEMBER'? role : ''">
+					<a *ngIf="role" class="animate" href="http://localhost:5300/affectationRessources">Ressources</a></li>
+
+					<li><a *ngIf="role" class="animate" href="" (click)="logout()">Déconnexion</a></li>
 				</ul>
 			</div>
 		</div>
