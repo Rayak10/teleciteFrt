@@ -52,6 +52,8 @@ import { AuthGuardService } from './services/jwt/auth-guard.service';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { RoleGuardService } from './services/jwt/role-guard.service';
 import { DatapassService } from './services/datapass/datapass.service';
+import { AjoutProjetComponent } from './components/ajout-projet/ajout-projet.component';
+import { AjoutSprintComponent } from './components/ajout-sprint/ajout-sprint.component';
 
 
 @NgModule({
@@ -85,6 +87,8 @@ import { DatapassService } from './services/datapass/datapass.service';
     AffectationTachesComponent,
     KanbanBoardComponent,
     BurndownchartComponent,
+    AjoutProjetComponent,
+    AjoutSprintComponent,
     
   ],
   imports: [

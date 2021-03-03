@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { Projet } from 'src/app/models/projet';
-import { Observable } from 'rxjs';
 import { ProjetService } from 'src/app/services/projet/projet.service';
 import { FormBuilder, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EquipeService } from 'src/app/services/equipe/equipe.service';
 import { Equipe } from 'src/app/models/equipe';
-
+import { Observable } from 'rxjs';
+import { Projet } from 'src/app/models/projet';
 @Component({
-  selector: 'app-gestion-projet',
-  templateUrl: './gestion-projet.component.html',
-  styleUrls: ['./gestion-projet.component.css']
+  selector: 'app-ajout-projet',
+  templateUrl: './ajout-projet.component.html',
+  styleUrls: ['./ajout-projet.component.css']
 })
-export class GestionProjetComponent implements OnInit {
+export class AjoutProjetComponent implements OnInit {
   projet:Projet=new Projet();
   submitted = false;
   projets: Observable<Projet[]>;
@@ -87,9 +86,5 @@ reloadData(){
    
     this.projet.equipe = {idEquipe:this.selectedEquipeId,nomEquipe:'',specialite:''};
     console.log(JSON.stringify(this.projet.equipe.idEquipe));  
-  }
-
-  ajoutProjet(){
-    this.router.navigate(['ajoutProjet']);
   }
 }

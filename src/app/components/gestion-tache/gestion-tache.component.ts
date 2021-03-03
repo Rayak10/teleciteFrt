@@ -65,10 +65,9 @@ onSubmit(tacheForm:NgForm) {
 }
 save() {
   
-  console.log("tache: "+JSON.stringify(this.tache));
- 
   this.tacheservice.createTache(this.tache)
-    .subscribe(data => console.log(data), error => console.log(error));
+  .subscribe(data => console.log(data), error => console.log(error)); 
+    
     
  // this.tache= new Tache();
   

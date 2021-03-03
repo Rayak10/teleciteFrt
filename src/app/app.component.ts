@@ -39,6 +39,10 @@ export class AppComponent  implements OnInit {
   employeDetails(){
     this.router.navigate(['details',this.id]);
   }
+  ressource(){
+
+    this.router.navigate(['affectationRessources',this.id]);
+  }
   logout(){
     localStorage.removeItem('currentEmploye')
     localStorage.removeItem('token')

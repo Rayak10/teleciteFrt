@@ -42,7 +42,7 @@
 					||role==='ROLE_SCRUM_TEAM_MEMBER'? role : ''">
 					<a *ngIf="role" href="http://localhost:5300/gestionSprints"  class="animate">Sprints </a></li>
 					
-					<li *ngSwitchCase="role==='ROLE_SCRUM_MASTER'||role==='ROLE_PRODUCT_OWNER'
+					<li *ngSwitchCase="role==='ROLE_PRODUCT_OWNER'
 					||role==='ROLE_SCRUM_TEAM_MEMBER'? role : ''">
 					<a *ngIf="role" class="animate" href="http://localhost:5300/gestionUserstory">UserStories</a></li>
 					
@@ -55,8 +55,8 @@
 					
 					<li *ngSwitchCase="role==='ROLE_SCRUM_MASTER'||role==='ROLE_PRODUCT_OWNER'
 					||role==='ROLE_SCRUM_TEAM_MEMBER'? role : ''">
-					<a *ngIf="role" class="animate" href="http://localhost:5300/affectationRessources">Ressources</a></li>
-
+					<a *ngIf="role" class="animate" (click)="ressource()">Ressources</a></li>
+					
 					<li><a *ngIf="role" class="animate" href="" (click)="logout()">Déconnexion</a></li>
 				</ul>
 			</div>

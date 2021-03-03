@@ -49,7 +49,8 @@ export class AffectationRessourcesComponent implements OnInit {
     private formBuilder: FormBuilder,
      private router: Router,private httpClient:HttpClient,private route: ActivatedRoute) { }
   ngOnInit() {
-    this.id=this.route.snapshot.params['id'];
+    this.id =parseInt(localStorage.getItem('id'));
+    console.log("ddddddddd"+this.id)
     this.equipeservice.findEmployeEquipe(this.id).subscribe(
       data => { this.equipe= data});
       

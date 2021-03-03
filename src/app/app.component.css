@@ -1,6 +1,3 @@
-.titre{
-    color:rgb(95, 176, 228);
-  }
 .animate {
     -webkit-transition: all 0.3s ease-in-out;
 	-moz-transition: all 0.3s ease-in-out;
@@ -42,7 +39,7 @@
 
 .navbar-bootsnipp .navbar-nav > li > a {
 	border: 0px solid rgb(95, 176, 228);
-	color: rgb(185, 216, 228);
+	color: rgb(120, 120, 120);
 	padding: 15px 14px;
 }
 
@@ -203,43 +200,3 @@
 		padding: 0px;
 	}    
 }
-
-
-
-.social-part .fa{
-    padding-right:20px;
-}
-ul li a{
-    margin-right: 20px;
-}
-
-.deroulant > a::after{
-    content:" ▼";
-    font-size: 12px;
-}
-
-.sous{
-    display: none;
-    box-shadow: 0px 1px 2px #CCC;
-    background-color: white;
-    position: absolute;
-    width: 100%;
-    z-index: 1000;
-}
-nav > ul li:hover .sous{
-    display: block;
-}
-.sous li{
-    float: none;
-    width: 100%;
-    text-align: left;
-}
-.sous a{
-    padding: 10px;
-    border-bottom: none;
-}
-.sous a:hover{
-    border-bottom: none;
-    background-color: RGBa(200,200,200,0.1);
-}
-

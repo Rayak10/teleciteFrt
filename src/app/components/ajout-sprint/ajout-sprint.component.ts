@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { SprintService } from 'src/app/services/sprint/sprint.service';
 import { FormBuilder, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Sprint } from 'src/app/models/sprint';
 import { Observable } from 'rxjs';
+import { Sprint } from 'src/app/models/sprint';
 import { ProjetService } from 'src/app/services/projet/projet.service';
+import { SprintService } from 'src/app/services/sprint/sprint.service';
 import * as $ from 'jquery' ;
 
 @Component({
-  selector: 'app-gestion-sprints',
-  templateUrl: './gestion-sprints.component.html',
-  styleUrls: ['./gestion-sprints.component.css']
+  selector: 'app-ajout-sprint',
+  templateUrl: './ajout-sprint.component.html',
+  styleUrls: ['./ajout-sprint.component.css']
 })
-export class GestionSprintsComponent implements OnInit {
+export class AjoutSprintComponent implements OnInit {
+
   sprint:Sprint=new Sprint();
   submitted = false;
   sprints: Observable<Sprint[]>;
@@ -75,13 +76,7 @@ this.gotoList();
 }  
 reloadData(){
   this.sprints= this.sprintservice.findAllSprintOrderByProjet();
-  this.sprintsProjet =this.sprintservice.findSprintsByProjet(this.selectedProjetSprintsId);
-  this.sprintservice.findSprintsByProjet(this.selectedProjetSprintsId).subscribe(
-    resp  =>{ this.sprintsProjetArray = resp;
-     this.sprintsProjetArray = this.sprintsProjetArray.filter(x=>x.nomSprint!='Backlog produit');
-    console.log("*****"+(this.sprintsProjetArray));
-    }
-  );
+ 
 }
 sprintDetails(id:number){
   this.router.navigate(['sprints/details',id]);
@@ -105,7 +100,6 @@ deleteSprints(id:number){
   error=>console.log(error));
   
 }
-
 onChange(projet){
  
   this.sprint.projet = this.projetArray.find(projet=> projet.idProjet ==this.selectedProjetId);//^ {idProjet:,dateDebut:null,dateFin:null,descriptionTechnique:'',equipe:null,description:'',nomProjet:'',theme:'',sprints:[]};
@@ -122,7 +116,8 @@ onChange1(event){
   );
 }
 
-ajoutSprint(){
-  this.router.navigate(['ajoutSprint']);
-}
+/*toggleBPList(){
+  this.showBPList = ! this.showBPList;
+  console.log(this.showBPList+"*****");
+}*/
 }

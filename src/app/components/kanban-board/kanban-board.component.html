@@ -101,14 +101,14 @@
                </div> 
            
 
-            
-                <div class="zoom">
-                    <img class="topright" *ngIf="todo.employe.photo!=null; else logo" src="http://localhost:8081/telecite/employes/photo/{{todo.employe.idEmploye}}" name="photo" id="profileDisplay">
-                 <ng-template #logo>
-                  <img class="topright" src="../../assets/telecite.webp" name="photo" id="profileDisplay">
-        
-                 </ng-template>
-                  </div>
+               <div class="zoom">
+                <img class="topright" *ngIf="todo.employe!=null && todo.employe.photo!=null; else logo" src="http://localhost:8081/telecite/employes/photo/{{todo.employe.idEmploye}}" name="photo" id="profileDisplay">
+             <ng-template #logo>
+              <img class="topright" src="../../assets/telecite.webp" name="photo" id="profileDisplay">
+    
+             </ng-template>
+              </div>
+                  
             </div>
         </div>
         </div>
@@ -136,7 +136,7 @@
             {{todo.dureeTache}}jour(s)
            </div> 
               <div class="zoom">
-                <img class="topright" *ngIf="todo.employe.photo!=null; else logo" src="http://localhost:8081/telecite/employes/photo/{{todo.employe.idEmploye}}" name="photo" id="profileDisplay">
+                <img class="topright" *ngIf="todo.employe!=null && todo.employe.photo!=null; else logo" src="http://localhost:8081/telecite/employes/photo/{{todo.employe.idEmploye}}" name="photo" id="profileDisplay">
              <ng-template #logo>
               <img class="topright" src="../../assets/telecite.webp" name="photo" id="profileDisplay">
     
@@ -168,7 +168,7 @@
             {{todo.dureeTache}}jour(s)
            </div> 
                <div class="zoom">
-                <img class="topright" *ngIf="todo.employe.photo!=null; else logo" src="http://localhost:8081/telecite/employes/photo/{{todo.employe.idEmploye}}" name="photo" id="profileDisplay">
+                <img class="topright" *ngIf="todo.employe!=null && todo.employe.photo!=null; else logo" src="http://localhost:8081/telecite/employes/photo/{{todo.employe.idEmploye}}" name="photo" id="profileDisplay">
              <ng-template #logo>
               <img class="topright" src="../../assets/telecite.webp" name="photo" id="profileDisplay">
     

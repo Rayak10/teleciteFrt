@@ -23,6 +23,8 @@ import { ReunionUpdateComponent } from './components/reunion-update/reunion-upda
 import { GestionEquipeComponent } from './components/gestion-equipe/gestion-equipe.component';
 import { EquipeDetailleComponent } from './components/equipe-detaille/equipe-detaille.component';
 import { EquipeUpdateComponent } from './components/equipe-update/equipe-update.component';
+import { AjoutProjetComponent } from './components/ajout-projet/ajout-projet.component';
+
 import { AffectationRessourcesComponent } from './components/affectation-ressources/affectation-ressources.component';
 import { AffectationTachesComponent } from './components/affectation-taches/affectation-taches.component';
 import { KanbanBoardComponent } from './components/kanban-board/kanban-board.component';
@@ -31,6 +33,7 @@ import { AuthGuardService as AuthGuard} from './services/jwt/auth-guard.service'
 import { 
   RoleGuardService as RoleGuard 
 } from './services/jwt/role-guard.service';
+import { AjoutSprintComponent } from './components/ajout-sprint/ajout-sprint.component';
 
 const routes: Routes = [
  
@@ -65,9 +68,13 @@ const routes: Routes = [
   {path: 'gestionEquipes', component: GestionEquipeComponent ,canActivate: [AuthGuard]},
   {path: 'equipes/details/:id',component :EquipeDetailleComponent ,canActivate: [AuthGuard]},
   {path: 'equipes/update/:id',component :EquipeUpdateComponent ,canActivate: [AuthGuard]},
-  {path: 'affectationRessources/:id',component :AffectationRessourcesComponent ,canActivate: [AuthGuard]},
+  {path: 'affectationRessources/:id',component :AffectationRessourcesComponent},
   {path: 'KanbanBoard/:id1/:id2',component :KanbanBoardComponent ,canActivate: [AuthGuard]},
-  {path: 'burndownchart/:id',component :BurndownchartComponent ,canActivate: [AuthGuard]}
+  {path: 'burndownchart/:id',component :BurndownchartComponent ,canActivate: [AuthGuard]},
+  {path: 'ajoutProjet',component :AjoutProjetComponent ,canActivate: [AuthGuard]},
+  {path: 'ajoutSprint',component :AjoutSprintComponent ,canActivate: [AuthGuard]}
+
+
 
 
   

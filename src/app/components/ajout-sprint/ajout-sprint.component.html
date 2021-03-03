@@ -1,0 +1,92 @@
+<hr/>
+<hr/>
+<div class="col-md-16">	       
+     
+    <fieldset>
+    
+    <!-- Form Name -->
+    
+    <legend  class="navbar-brand titre"  > Ajouter un sprint</legend>
+    <form #getSprintForm="ngForm" (ngSubmit)="onSubmit(getSprintForm)">
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-2 control-label" >Nom de Sprint :</label>  
+      <div class="col-md-4">
+      <input id="sprint-name" required [(ngModel)]="sprint.nomSprint" name="sprint-name" type="text" placeholder="tapez le nom du sprint" class="form-control input-md" >
+      <span class="help-block"></span>  
+      </div>
+      <label class="col-md-2 control-label">Etat du sprint :</label>
+      <div class="col-md-4">
+        <select required
+         type="text" 
+         class="form-control "
+          id="field_sprint"
+            name="sprintEtat" [(ngModel)]="sprint.etatSprint">
+          <option *ngFor='let etat of etatArray'> {{etat}} </option>
+          
+        </select>
+        <p class="help-block"></p>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Date début Sprint :</label>  
+        <div class="col-md-4">
+          <input  
+          name="sprint-date-debut"
+          placeholder = "Selectionner la date début"
+          [(ngModel)]="sprint.dateDebut"
+          autocomplete="off" 
+          class="form-control"
+          bsDatepicker
+          [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
+       
+        <span class="help-block"></span>  
+        </div>  
+        <label class="col-md-2 control-label">Date fin sprint :</label>  
+        <div class="col-md-4">
+          <input  
+          name="sprint-date-fin"
+          placeholder = "Selectionner la date fin"
+          [(ngModel)]="sprint.dateFin"
+          autocomplete="off" 
+          class="form-control"
+          bsDatepicker
+          [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
+       
+        <span class="help-block"></span>  
+        </div>  
+      </div>
+      <label class="col-md-2 control-label" >Description  :</label>  
+      <div class="col-md-4">
+        <textarea id="sprint-description"required [(ngModel)]="sprint.descriptionSprint" name="sprint-description" type="text" placeholder="tapez une description pour ce sprint ..." class="form-control input-md"></textarea>
+      <span class="help-block"></span>  
+      </div>
+      <label class="col-md-2 control-label">Projet :</label>
+      <div class="col-md-4">
+        <select required
+         type="text" 
+         class="form-control "
+          id="field_projet"
+            name="projet" [(ngModel)]="selectedProjetId"
+            (change)="onChange($event)">
+          <option  *ngFor="let p of projetArray" [value]="p.idProjet">
+            {{p.nomProjet}}
+          </option>
+        </select>
+        <p class="help-block"></p>
+        </div>
+        
+        <hr>
+    <!-- Button -->
+    
+        <label class="col-md-4 control-label" for="btn-save"></label>
+        <div class="col col-lg-2">
+         <button id="btn-save" name="btn-save" type="submit" class="btn btn-success">Enregistrer</button>
+        </div>
+    </form>
+    </fieldset>
+    
+    
+    
+           </div> 
+           

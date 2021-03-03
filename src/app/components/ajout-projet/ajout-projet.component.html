@@ -1,0 +1,94 @@
+<hr/>
+<hr/>
+<!-- FORM  -->	    
+	   <div class="col-md-16">	       
+     
+<fieldset>
+
+<!-- Form Name -->
+
+<legend  class="navbar-brand titre"  > Ajouter un projet</legend>
+<form #getprojetForm="ngForm"(ngSubmit)="onSubmit(getprojetForm)">
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-2 control-label" >Nom de projet:</label>  
+  <div class="col-md-4">
+  <input id="projet-name" required [(ngModel)]="projet.nomProjet" name="projet-name" type="text" placeholder="tapez le nom du projet" class="form-control input-md" >
+  <span class="help-block"></span>  
+  </div>
+  <label class="col-md-2 control-label" >Théme :</label>  
+  <div class="col-md-4">
+  <input id="projet-theme"required [(ngModel)]="projet.theme" name="projet-theme" type="text" placeholder="tapez le théme du projet" class="form-control input-md">
+  <span class="help-block"></span>  
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-md-2 control-label" >Description générale :</label>  
+  <div class="col-md-4">
+    <textarea id="projet-description"required [(ngModel)]="projet.description" name="projet-description" type="text" placeholder="tapez une description générale" class="form-control input-md"></textarea>
+  <span class="help-block"></span>  
+  </div>
+  <label class="col-md-2 control-label" >Description technique :</label>  
+  <div class="col-md-4">
+    
+  <textarea id="projet-description-thechnique"  required [(ngModel)]="projet.descriptionTechnique" name="projet-description-thechnique" type="text" placeholder="tapez une description technique " class="form-control input-md"></textarea>
+  <span class="help-block"></span>  
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-md-2 control-label">Date début projet :</label>  
+  <div class="col-md-4">
+    <input  
+    name="projet-date-debut"
+    placeholder = "Selectionner la date début"
+    [(ngModel)]="projet.dateDebut"
+    autocomplete="off" 
+    class="form-control"
+    bsDatepicker
+    [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
+ 
+  <span class="help-block"></span>  
+  </div>  
+  <label class="col-md-2 control-label">Date fin projet :</label>  
+  <div class="col-md-4">
+    <input  
+    name="projet-date-fin"
+    placeholder = "Selectionner la date fin"
+    [(ngModel)]="projet.dateFin"
+    autocomplete="off" 
+    class="form-control"
+    bsDatepicker
+    [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
+ 
+  <span class="help-block"></span>  
+  </div>  
+</div>
+<label class="col-md-2 control-label">Equipe :</label>
+  <div class="col-md-4">
+    <select required
+     type="text" 
+     class="form-control "
+      id="field_equipe"
+        name="equipe" [(ngModel)]="selectedEquipeId"
+        (change)="onChangeEquipe($event)">
+      <option  *ngFor="let e of equipeArray" [value]="e.idEquipe">
+        {{e.nomEquipe}}
+      </option>
+    </select>
+    <p class="help-block"></p>
+    </div>
+    
+<!-- Button -->
+
+    <label class="col-md-4 control-label" for="btn-save"></label>
+    <div class="col col-lg-2">
+     <button id="btn-save" name="btn-save" type="submit" class="btn btn-success">Enregistrer</button>
+    </div>
+</form>
+</fieldset>
+
+
+
+	   </div> 
+	    
+
