@@ -98,19 +98,7 @@ onAffect(row){
           console.log("alooo resultat" +result ) 
         })
       }
-      onGerer(row){    
-        console.log("ffffffffffff"+JSON.stringify(row)+'lllllolo');
-
-        const dialogRef=this.dialog.open(KanbanBoardComponent,{
-        autoFocus:true,
-        height: '1000px',
-        width: '1500px',
-        data:{
-           equipeProjer:this.equipe,
-           selectedUserStory:row
-         }});
-
-      }
+     
       onkanban(id1:number,id2:number){
         this.router.navigate(['KanbanBoard',id1,id2]);
       }

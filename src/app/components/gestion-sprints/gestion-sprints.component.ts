@@ -6,6 +6,9 @@ import { Sprint } from 'src/app/models/sprint';
 import { Observable } from 'rxjs';
 import { ProjetService } from 'src/app/services/projet/projet.service';
 import * as $ from 'jquery' ;
+import { AffectationTachesComponent } from '../affectation-taches/affectation-taches.component';
+import { AjoutcommentaireComponent } from '../ajoutcommentaire/ajoutcommentaire.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-gestion-sprints',
@@ -27,11 +30,14 @@ export class GestionSprintsComponent implements OnInit {
   sprintsProjetArray: Sprint[] = [];
   selectedProjetSprintsId:number;
   showBPList: boolean = false;
-  constructor(private sprintservice:SprintService,private projetservice:ProjetService,private formBuilder:FormBuilder,private router:Router) { }
+  idEmploye:number;
+  showDataOfChildComponent;
+
+  constructor(private dialog:MatDialog, private sprintservice:SprintService,private projetservice:ProjetService,private formBuilder:FormBuilder,private router:Router) { }
 
   ngOnInit()  {
     
-   
+   this.idEmploye=parseInt(localStorage.getItem('id'));
    
       $("#leg2").click(function(){
         $("#tab1").toggle("slide");
@@ -124,5 +130,19 @@ onChange1(event){
 
 ajoutSprint(){
   this.router.navigate(['ajoutSprint']);
+}
+onAffect(id){
+
+  const dialogRef=this.dialog.open(AjoutcommentaireComponent,{
+  autoFocus:true,
+  width:"70%",
+  data:{
+     idUser:this.idEmploye,
+     idSprint:id
+   }});
+  dialogRef.afterClosed().subscribe(result=> {
+    this.showDataOfChildComponent=result;
+    console.log("alooo resultat" +result ) 
+  })
 }
 }

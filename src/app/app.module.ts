@@ -54,6 +54,8 @@ import { RoleGuardService } from './services/jwt/role-guard.service';
 import { DatapassService } from './services/datapass/datapass.service';
 import { AjoutProjetComponent } from './components/ajout-projet/ajout-projet.component';
 import { AjoutSprintComponent } from './components/ajout-sprint/ajout-sprint.component';
+import { AjoutcommentaireComponent } from './components/ajoutcommentaire/ajoutcommentaire.component';
+import { UpdateCommentaireComponent } from './components/update-commentaire/update-commentaire.component';
 
 
 @NgModule({
@@ -89,6 +91,8 @@ import { AjoutSprintComponent } from './components/ajout-sprint/ajout-sprint.com
     BurndownchartComponent,
     AjoutProjetComponent,
     AjoutSprintComponent,
+    AjoutcommentaireComponent,
+    UpdateCommentaireComponent,
     
   ],
   imports: [
@@ -123,6 +127,6 @@ import { AjoutSprintComponent } from './components/ajout-sprint/ajout-sprint.com
 
   ],
   bootstrap: [AppComponent],
-  entryComponents:[AffectationTachesComponent]
+  entryComponents:[AffectationTachesComponent,AjoutcommentaireComponent,UpdateCommentaireComponent]
 })
 export class AppModule { }

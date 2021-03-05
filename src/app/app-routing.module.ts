@@ -34,6 +34,8 @@ import {
   RoleGuardService as RoleGuard 
 } from './services/jwt/role-guard.service';
 import { AjoutSprintComponent } from './components/ajout-sprint/ajout-sprint.component';
+import { AjoutcommentaireComponent } from './components/ajoutcommentaire/ajoutcommentaire.component';
+import { UpdateCommentaireComponent } from './components/update-commentaire/update-commentaire.component';
 
 const routes: Routes = [
  
@@ -72,7 +74,10 @@ const routes: Routes = [
   {path: 'KanbanBoard/:id1/:id2',component :KanbanBoardComponent ,canActivate: [AuthGuard]},
   {path: 'burndownchart/:id',component :BurndownchartComponent ,canActivate: [AuthGuard]},
   {path: 'ajoutProjet',component :AjoutProjetComponent ,canActivate: [AuthGuard]},
-  {path: 'ajoutSprint',component :AjoutSprintComponent ,canActivate: [AuthGuard]}
+  {path: 'ajoutSprint',component :AjoutSprintComponent ,canActivate: [AuthGuard]},
+  {path: 'ajoutCommentaire',component :AjoutcommentaireComponent},
+  {path: 'commentaire/update',component :UpdateCommentaireComponent}
+
 
 
 

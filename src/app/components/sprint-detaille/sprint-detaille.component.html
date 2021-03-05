@@ -45,16 +45,15 @@
 </div>
     
     <form id="form-list-userstorySprint" >
-            <legend class="navbar-brand titre">Liste des UserStorys du {{sprint.nomSprint}}</legend>
-    
+            <legend id="leg1"class="navbar-brand titre " (click)="toogletag1()">  <a>Liste des UserStorys du {{sprint.nomSprint}}</a></legend>
                 
               
-                <table class="table table-bordered table-condensed table-hover">
+                <table  id="tab1" class="table table-bordered table-condensed table-hover">
                     <thead>
                         <tr>
-                            <th scope="col"  width=40%>UserStory</th>
-                            <th scope="col"  width=5%>Priorite</th>
-                            <th scope="col" width=5%>Complexite</th>
+                            <th scope="col"  width=50%>UserStory</th>
+                            <th scope="col"  width=10%>Priorite</th>
+                            <th scope="col" width=10%>Complexite</th>
                             <th  *ngIf="sprint.nomSprint != 'Backlog produit'" scope="col" width=20%>Sprint</th>
                             <th scope="col" width=10%>Actions</th>
                         </tr>
@@ -76,5 +75,42 @@
                             </td>
                         </tr>
                     </tbody>
+                </table>
+                <form id="form-list-commentaires" >
+                    <legend id="leg2"class="navbar-brand titre"(click)="toogletag2()"><a>Liste des commentaires du {{sprint.nomSprint}}</a></legend>
+            
+
+                <table id="tab2" class="table table-bordered table-condensed table-hover">
+                    <thead>
+                        <tr>
+                          <th scope="col" width=15% >Membre d'equipe scrum </th>   
+                          <th scope="col" width=10% >Equipe scrum </th>   
+                            <th scope="col" width=64%>Commentaire</th>   
+                            <th scope="col" width=5%>Date</th> 
+                            <th scope="col" width=6%>Actions</th>
+
+                        </tr>
+                            
+              
+                         
+              
+                    </thead>
+                      <tbody id="form-list-projets-body">
+                        
+                        <tr *ngFor="let com of commentaires">
+                                   
+                            <td>{{com.employe.nomEmploye}} {{com.employe.prenomEmploye}}</td>
+                            <td>{{com.employe.equipe.nomEquipe}}</td>
+
+                            <td>{{com.libelleCommentaire}}</td>
+                            <td>{{com.dateCommentaire| date :'shortDate'}}</td>
+                            <td>
+                
+                                <a title="modifier le  commentaire" class="btn btn-default btn-sm "(click)="updateCommentaire(com.idCommentaire)"> <i class="glyphicon glyphicon-edit titre"></i> </a>
+                                
+                               
+                            </td>
+                </tr>
+                  </tbody>
                 </table>
                 </form>

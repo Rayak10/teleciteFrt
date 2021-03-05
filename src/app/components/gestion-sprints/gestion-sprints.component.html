@@ -88,11 +88,11 @@
           <tr>
             <th scope="col" width=20% >Projet </th>   
 
-              <th scope="col" width=20%>Nom sprint</th>   
-              <th scope="col" width=20%>Date début</th> 
-              <th scope="col" width=20%>Date fin</th>              
-              <th scope="col" width=10%>Statut</th>
-              <th scope="col" width=10%>Actions</th>
+              <th scope="col" width=25%>Nom sprint</th>   
+              <th scope="col" width=15%>Date début</th> 
+              <th scope="col" width=15%>Date fin</th>              
+              <th scope="col" width=15%>Statut</th>
+              <th scope="col" width=15%>Actions</th>
           </tr>
               
 
@@ -113,9 +113,10 @@
 
               <td>
                 
-                  <a title="les détails du projet" class="btn btn-default btn-sm "(click)="sprintDetails(sprint.idSprint)"> <i class="glyphicon glyphicon-eye-open text-primary"  ></i> </a> 
-                  <a title="modifier le  projet" class="btn btn-default btn-sm "(click)="updateSprint(sprint.idSprint)"> <i class="glyphicon glyphicon-edit text-primary"></i> </a>
-                  <a title="supprimer le projet " class="btn btn-default btn-sm " (click)="deleteSprints(sprint.idSprint)"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
+                  <a title="les détails du sprint" class="btn btn-default btn-sm "(click)="sprintDetails(sprint.idSprint)"> <i class="glyphicon glyphicon-eye-open text-primary"  ></i> </a> 
+                  <a title="Commenterle sprint" class="btn btn-default btn-sm "(click)="onAffect(sprint.idSprint)"> <i class="lime far fa-comment-dots"></i></a> 
+                  <a title="modifier le  sprint" class="btn btn-default btn-sm "(click)="updateSprint(sprint.idSprint)"> <i class="glyphicon glyphicon-edit orange"></i> </a>
+                  <a title="supprimer le sprint " class="btn btn-default btn-sm " (click)="deleteSprints(sprint.idSprint)"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
                   
                  
               </td>

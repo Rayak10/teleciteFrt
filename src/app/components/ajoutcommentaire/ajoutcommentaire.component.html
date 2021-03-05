@@ -1,0 +1,30 @@
+
+<!-- FORM  -->	    
+	   <div class="container">	       
+     
+<fieldset>
+
+<!-- Form Name -->
+
+<legend  class="navbar-brand titre"  >Ajouter un commentaire</legend>
+<form #commentaireForm="ngForm" (ngSubmit)="onSubmit(commentaireForm)">
+<!-- Text input-->
+<div class="row">
+ 
+   
+
+    
+  <div class="col col-md-8">
+    <textarea id="comment-name"  rows="3" cols="25" required [(ngModel)]="commantaire.libelleCommentaire" name="libcmt-name" type="text" placeholder="écrire ici ....." class="form-control input-md"></textarea>
+
+  <span class="help-block"></span>  
+  </div>
+  <div class="col col-md-2">
+    <button id="btn-save" name="btn-save" type="submit" class="btn btn-success">Enregistrer</button>
+   </div>
+</div>
+
+</form>
+</fieldset>
+	  
+</div> 
