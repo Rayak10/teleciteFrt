@@ -45,10 +45,12 @@ export class EmployeUpdatComponent implements OnInit {
   message:string;
     public imagePath;
   offset: number =new Date().getTimezoneOffset() * 60 * 1000;
-  
+  roleE:string;
+
   constructor(private employeservice:EmployeService,private roleservice:RoleService,private route: ActivatedRoute, private router: Router,private departementservice:DepartementService,private equipeservice:EquipeService,private bureauservice:BureauService) { }
   
   ngOnInit() {
+    this.roleE=localStorage.getItem('role')
     this.etatArray=[
       {idEtat:1,nomEtat:"Active"},
       {idEtat:2,nomEtat:"Inactive"}

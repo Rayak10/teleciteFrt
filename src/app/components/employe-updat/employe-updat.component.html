@@ -5,13 +5,14 @@
 
 
 <!-- FORM  -->	    
-<div class="col-md-16">	       
+<div class="col-md-16" *ngIf="roleE=='ROLE_DRH'">	       
      
     <fieldset>
     
     <!-- Form Name -->
     
     <legend  class="navbar-brand titre"  >Changer les informations </legend>
+
     <form #getCompteForm="ngForm"(ngSubmit)="onSubmit(getCompteForm)">
       <div class="row">
         <div class="col col-md-2">
@@ -253,98 +254,250 @@
 	   </div> 
 	    
 
-
-
-
-
-<!-- view 
-
-<div class="col-md-12">
-    
-    <legend>View client</legend>
-    
-    <div >
+     <div class="col-md-16" *ngIf="roleE=='ROLE_SCRUM_MASTER'">	       
+     
+      <fieldset>
+      
+      <!-- Form Name -->
+      
+      <legend  class="navbar-brand titre"  >Changer les informations </legend>
+  
+      <form #getCompteForm="ngForm"(ngSubmit)="onSubmit(getCompteForm)">
+        <div class="row">
+          <div class="col col-md-2">
+          <label class="control-label" >Nom :</label> 
+         </div>
+         <div class="col col-md-4">
+          <input disabled id="client-name" required [(ngModel)]="employe.nomEmploye" autocomplete="off" name="nomEmploye" type="text" placeholder="tapez le nom de l'employé" class="form-control input-md" >
+          <span class="help-block"></span>  
+          </div>
+          <div class="col col-md-2">
+          <label class="control-label" >Prenom :</label>  
+        </div>
+        <div class="col col-md-4">
+          <input disabled id="employe-prenom"required [(ngModel)]="employe.prenomEmploye" autocomplete="off" name="prenomEmploye" type="text" placeholder="tapez le prenom de l'employé" class="form-control input-md">
+          <span class="help-block"></span>  
+          </div>
+        </div>
         
-              <div class2=" col-md-9 col-lg-9 "> 
-                  <table class="table table-user-information">
-                    <tbody>
-                      <tr>
-                        <td>Name:</td>
-                        <td>Andre Silva</td>
-                      </tr>
-                      <tr>
-                        <td>Email</td>
-                        <td><a href="mailto:info@support.com">info@support.com</a></td>
-                      </tr>
-                    </tbody>
-                  </table>
+        <div class="row">
+          <div class="col col-md-2">
+          <label class="control-label" >Date naissance :</label>  
+          </div>
+          <div class="col col-md-4">
+            <input disabled 
+            name="dateNaissance"
+            placeholder = "Selectionner la date naissance"
+            [(ngModel)]="employe.dateNaissance"
+            autocomplete="off" 
+            class="form-control"
+            bsDatepicker
+            [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
+          <span class="help-block"></span>  
+          </div>  
+          <div class="col col-md-2">
+          <label class="control-label" >Date d'embauche :</label>  
+          </div>
+          <div class="col col-md-4">
+            <input  disabled
+            name="dateEmbauche"
+            placeholder = "Selectionner la date embauche "
+            [(ngModel)]="employe.dateEmbauche"    
+            autocomplete="off"
+            class="form-control"
+             bsDatepicker
+             [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" >
+          <span class="help-block"></span>  
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col col-md-2">
+          <label class="control-label">Post :</label>  
+          </div>
+          <div class="col col-md-4">
+            <input disabled id="employe-post" required [(ngModel)]="employe.post"  name="post" type="text" placeholder="tapez lepost de l'employe" class="form-control input-md">
+          <span class="help-block"></span>  
+          </div>
+          <div class="col col-md-2">
+          <label class="control-label">Role :</label> 
+          </div> 
+          <div class="col col-md-4">
+            <select required disabled
+             type="text" 
+             class="form-control "
+              id="field_role"
+                name="role" [(ngModel)]="employe.role.idRole"
+                (change)="onChangeRole($event)">
+              <option  *ngFor="let r of roleArray" [value]="r.idRole">
+                {{r.nomRole}}
+              </option>
+            </select>
+            <p class="help-block">{{role | json}}</p>
+        
             </div>
+        </div>
         
-        
-    </div>
-            <div class="panel with-nav-tabs panel-default">
-                <div class="panel-heading">
-                        <ul class="nav nav-tabs">
-                            <li class="active"><a href="#tab1default" data-toggle="tab">Default 1</a></li>
-                            <li><a href="#tab2default" data-toggle="tab">Default 2</a></li>
-                            
-                            <li><a href="#tab3default" data-toggle="tab">Default 3</a></li>
-                            <!-
-                            <li class="dropdown">
-                                <a href="#" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#tab4default" data-toggle="tab">Default 4</a></li>
-                                    <li><a href="#tab5default" data-toggle="tab">Default 5</a></li>
-                                </ul>
-                            </li>
-                           
-                        </ul>
-                </div>
-                <div class="panel-body">
-                    <div class="tab-content">
-                        <div class="tab-pane fade in active" id="tab1default">Default 1</div>
-                        <div class="tab-pane fade" id="tab2default">Default 2</div>
-                        <div class="tab-pane fade" id="tab3default">Default 3</div>
-                        <!-
-                        <div class="tab-pane fade" id="tab4default">Default 4</div>
-                        <div class="tab-pane fade" id="tab5default">Default 5</div>
-                        
-                    </div>
-                </div>
+        <div class="row">
+          <div class="col col-md-2">
+          <label class="control-label">Matricule :</label>
+          </div>
+          <div class="col col-md-4">
+            <input disabled id="employe-matricule" required [(ngModel)]="employe.matricule"  name="matricule" class="form-control" placeholder="tappez matricule employé" type="double">
             </div>
-
-</div>
-	    
-	    
-	</div>
-</div>
- -->
-<script>
-   $(function() { 
-
-$('a[href="#toggle-search"], .navbar-bootsnipp .bootsnipp-search .input-group-btn > .btn[type="reset"]').on('click', function(event) {
-event.preventDefault();
-$('.navbar-bootsnipp .bootsnipp-search .input-group > input').val('');
-$('.navbar-bootsnipp .bootsnipp-search').toggleClass('open');
-$('a[href="#toggle-search"]').closest('li').toggleClass('active');
-
-if ($('.navbar-bootsnipp .bootsnipp-search').hasClass('open')) {
-  /* I think .focus dosen't like css animations, set timeout to make sure input gets focus */
-  setTimeout(function() { 
-    $('.navbar-bootsnipp .bootsnipp-search .form-control').focus();
-  }, 100);
-}			
-});
-
-$(document).on('keyup', function(event) {
-if (event.which == 27 && $('.navbar-bootsnipp .bootsnipp-search').hasClass('open')) {
-  $('a[href="#toggle-search"]').trigger('click');
-}
-});
-
-});
-
-</script>
-
-
-
+            <div class="col col-md-2">
+          <label class="control-label">Salaire :</label>
+            </div>
+            <div class="col col-md-4">
+              <div class="input-group">
+              <span class="input-group-addon">TN</span>
+              <input disabled id="employe-salaire"required [(ngModel)]="employe.salaire" autocomplete="off" name="salaire" class="form-control" placeholder="tappez salaire en dinare" type="double">
+            </div>
+            <p class="help-block"></p>
+          </div>
+        </div>
+        
+        <div class="row"> 
+           <div class="col col-md-2">
+              <label class="control-label">Bureau :</label>
+           </div>
+           <div class="col col-md-4">
+            <select required disabled
+             type="text" 
+             class="form-control "
+              id="field_bureau"
+                name="bureau" [(ngModel)]="employe.bureau.idBureau"
+                >
+              <option  *ngFor="let b of bureauArray" [value]="b.idBureau">
+                {{b.nomBureau}}
+              </option>
+            </select>
+            <p class="help-block">{{bureau | json}}</p>
+            </div>
+            <div class="col col-md-2">
+              <label class="control-label">Departement :</label>
+            </div>
+            <div class="col col-md-4">
+              <select required disabled
+               type="text" 
+               class="form-control "
+                id="field_departement"
+                  name="departement" [(ngModel)]="employe.departement.idDepartement"
+                  >
+                <option  *ngFor="let b of departementArray" [value]="b.idDepartement">
+                  {{b.nomDepartement}}
+                </option>
+              </select>
+              <p class="help-block">{{departement | json}}</p>
+        </div>
+        </div>
+        
+        
+        
+        
+        <div class="row"> 
+          <div class="col col-md-2">
+          <label class="control-label">Equipe :</label>
+          </div>
+          <div class="col col-md-4">
+            <select required
+             type="text" 
+             class="form-control "
+              id="field_equipe"
+                name="equipe" [(ngModel)]="employe.equipe.idEquipe"
+              >
+              <option  *ngFor="let e of equipeArray" [value]="e.idEquipe">
+                {{e.nomEquipe}}
+              </option>
+            </select>
+            <p class="help-block">{{equipe | json}}</p>
+            </div>
+            <div class="col col-md-2">
+        
+          <label class="control-label">Email :</label>
+            </div>
+            <div class="col col-md-4">
+              <div class="input-group">
+              <span class="input-group-addon">@</span>
+              <input disabled id="employe-email"required [(ngModel)]="employe.email"  name="email" autocomplete="off"class="form-control" placeholder="tonnom@tondomain.tn" type="email">
+            </div>
+            
+          </div>
+           
+          
+        </div>
+        
+        <!-- Multiple Radios -->
+        <div class="row"> 
+         
+          <div class="col col-md-2">
+        
+          <label class="control-label">Client status :</label>
+          </div>
+          <div class="col col-md-4">
+            <select required disabled
+       type="text" 
+       class="form-control "
+        id="field_active"
+        name="active"
+         [(ngModel)]="defaultChoice"
+         (change)="onEtatSelected($event)">
+         
+        <option *ngFor='let etat of etatArray' [value]="etat.idEtat"> {{etat.nomEtat}}</option>
+      </select>
+      <p class="help-block"></p>
+          </div>
+          <div class="col col-md-2">
+          <label class="control-label">Mot de passe :</label>
+          </div>
+          <div class="col col-md-4">
+            <div class="input-group">
+              <span class="input-group-addon">*</span>
+              <input  disabled type="password" autocomplete="off" id="employe-password"required [(ngModel)]="employe.password" name="password" autocomplete="off"  class="form-control" placeholder="tapez mot de passe" >
+            </div>
+          </div>
+          <div class="col col-md-2">
+          <label class="control-label">Confirmation mot de passe :</label>
+          </div>
+          <div class="col col-md-4">
+            <div class="input-group">
+              <span class="input-group-addon"> * </span>
+              <input   disabled type="password" id="employe-confirmationpassword" autocomplete="off" name="password" class="form-control" placeholder="confirmez mot de passe" >
+            </div>
+            
+          </div>
+        </div>
+        
+        
+        
+        
+        
+         
+        <!-- Button -->
+        <div class="row">
+          
+          <div class="col col-md-2">
+          <label class="control-label">Photo :</label>
+          </div>
+          <div class="col col-md-3">
+            <input disabled type="file" class="btn btn-success btn-sm"  (change)="OnSelectFile($event)"> 
+        </div>
+        <div class="col col-md-2 zoom">
+          <img class="topright" *ngIf="employe.photo!=null; else logo" [src]="urllink" src="http://localhost:8081/telecite/employes/photo/{{employe.idEmploye}}" name="photo" id="profileDisplay">
+          <ng-template #logo>
+           <img class="topright"  [src]="urllink" name="photo" id="profileDisplay">
+  
+          </ng-template>
+        </div>
+        <label class="col-md-3 control-label" for="btn-save"></label>
+        
+            <div class="col-md-2">
+             <button id="btn-save" name="btn-save" class="btn btn-success" (click)="updateEmploye(getCompteForm)">Modifier les informations</button>
+            </div>
+        </div>
+  </form>
+  </fieldset>
+  
+  
+  
+       </div> 

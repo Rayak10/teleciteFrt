@@ -39,6 +39,8 @@ export class GestionComptesComponent implements OnInit {
   selectedBureauId: number;
   selectedRoleId: number;
   public imagePath;
+  roleE:string;
+
   offset: number =new Date().getTimezoneOffset() * 60 * 1000;
 
   urllink:any="../../assets/telecite.webp";  
@@ -49,6 +51,8 @@ export class GestionComptesComponent implements OnInit {
   constructor(private employeservice:EmployeService,private departementservice:DepartementService,private roleservice:RoleService,private equipeservice:EquipeService,private bureauservice:BureauService,private formBuilder: FormBuilder, private router: Router,private httpClient:HttpClient) {}
 
   ngOnInit() {
+    this.roleE=localStorage.getItem('role')
+    console.log("rrrrrrrroooooooooooolllllllllleeeeee"+JSON.stringify(this.roleE));   
     this.reloadData();
   
     this.bureauservice.findAllBureaux().subscribe(

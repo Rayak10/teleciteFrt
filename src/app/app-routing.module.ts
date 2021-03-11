@@ -41,10 +41,10 @@ const routes: Routes = [
  
   {path: '', component: LoginComponent},
   {path: 'gestionComptes', component: GestionComptesComponent, canActivate: [RoleGuard], data: { 
-    expectedRole: 'ROLE_DRH'
+    expectedRole: 'ROLE_DRH,ROLE_SCRUM_MASTER'
   } },
   {path: 'update/:id', component: EmployeUpdatComponent, canActivate: [RoleGuard], data: { 
-    expectedRole: 'ROLE_DRH'
+    expectedRole: 'ROLE_DRH,ROLE_SCRUM_MASTER'
   } },
   {path: 'details/:id', component: EmployeDetailleComponent, canActivate: [RoleGuard], data: { 
     expectedRole: 'ROLE_SCRUM_MASTER,ROLE_DRH,ROLE_PRODUCT_OWNER,ROLE_EMPLOYE,ROLE_SCRUM_TEAM_MEMBER,ROLE_DEV_TEAM_MEMBER'

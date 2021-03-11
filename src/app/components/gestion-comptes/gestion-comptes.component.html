@@ -2,7 +2,7 @@
 <hr/>
 <hr/>
 <!-- FORM  -->	    
-<div class="container">	       
+<div class="container" *ngIf="roleE==ROLE_DRH">	       
      
 <fieldset>
 
@@ -279,13 +279,14 @@
                 <td>{{employe.active}}</td>
                 
                 <td>
+           
+                    <a title="Les détails de l'employé" class="btn btn-default btn-sm "(click)="employeDetails(employe.idEmploye)"> <i class="glyphicon glyphicon-eye-open text-primary"  ></i> </a> 
+                    <a title="Modifier ces informations" class="btn btn-default btn-sm "(click)="updateEmploye(employe.idEmploye)"> <i class="glyphicon glyphicon-edit text-primary"></i> </a>                   
+                    <a  *ngIf="roleE=='ROLE_DRH'" title="Supprimer ce compte"  class="btn btn-default btn-sm " (click)="deleteEmploye(employe.idEmploye)"ng-change="gotoList()"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
+                    <a  *ngIf="roleE=='ROLE_SCRUM_MASTER'" disabled title="Vous n'avez pas le droit"   class="btn btn-default btn-sm " (click)="deleteEmploye(employe.idEmploye)"ng-change="gotoList()"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
                   
-                    <a title="les détails de l'employé" class="btn btn-default btn-sm "(click)="employeDetails(employe.idEmploye)"> <i class="glyphicon glyphicon-eye-open text-primary"  ></i> </a> 
-                    <a title="modifier ces informations" class="btn btn-default btn-sm "(click)="updateEmploye(employe.idEmploye)"> <i class="glyphicon glyphicon-edit text-primary"></i> </a>
-                    <a title="supprimer " class="btn btn-default btn-sm " (click)="deleteEmploye(employe.idEmploye)"ng-change="gotoList()"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
-                    
-                   
-                </td>
+                  </td>
+
             </tr>
         </tbody>
     </table>
