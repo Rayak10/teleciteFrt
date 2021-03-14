@@ -39,7 +39,8 @@ export class AffectationRessourcesComponent implements OnInit {
   displayedColumns: string[] = ['libelleUserStory', 'priorite', 'complexite','affectation'];
   @ViewChild(MatSort ,{ static: true } ) sort:MatSort;
   @ViewChild(MatPaginator ,{ static: true } ) paginator:MatPaginator;
-  
+  roleE:string;
+
   dataSource = new MatTableDataSource<UserstoriesProjets>(this.ELEMENT_DATA);
   test:boolean=false;
   searchKey:string;
@@ -49,6 +50,8 @@ export class AffectationRessourcesComponent implements OnInit {
     private formBuilder: FormBuilder,
      private router: Router,private httpClient:HttpClient,private route: ActivatedRoute) { }
   ngOnInit() {
+    this.roleE=localStorage.getItem('role')
+
     this.id =parseInt(localStorage.getItem('id'));
     console.log("ddddddddd"+this.id)
     this.equipeservice.findEmployeEquipe(this.id).subscribe(

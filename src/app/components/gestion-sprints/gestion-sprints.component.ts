@@ -32,11 +32,13 @@ export class GestionSprintsComponent implements OnInit {
   showBPList: boolean = false;
   idEmploye:number;
   showDataOfChildComponent;
+  roleE:string;
 
   constructor(private dialog:MatDialog, private sprintservice:SprintService,private projetservice:ProjetService,private formBuilder:FormBuilder,private router:Router) { }
 
   ngOnInit()  {
-    
+    this.roleE=localStorage.getItem('role')
+
    this.idEmploye=parseInt(localStorage.getItem('id'));
    
       $("#leg2").click(function(){

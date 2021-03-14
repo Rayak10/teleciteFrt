@@ -48,6 +48,7 @@ export class AppComponent  implements OnInit {
     localStorage.removeItem('token')
     localStorage.removeItem('role')
     localStorage.removeItem('id')
+    localStorage.removeItem('idEquipe')
   //  if (localStorage.getItem('id')===null){
 //this.router.navigate(['/'])
 //}

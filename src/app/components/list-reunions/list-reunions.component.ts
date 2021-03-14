@@ -47,14 +47,22 @@ reunion:Reunion;
   
 }
 findReunionsByType(){
+  
   this.reunionservice.findReunionByType(this.selectedType).subscribe(
-    resp  =>{ this.reunionsSort = resp;
+    resp  =>{ 
+      if(this.selectedType== 'Reunion_Administratif'){
+      let id: number = +localStorage.getItem('id');
+      this.reunionsSort = resp.filter(r=>r.employes.indexOf(id)>-1);
+    }
+    if(this.selectedType== 'Reunion_Scrum'){
+      let iEquipe = +localStorage.getItem('idEquipe');
+      this.reunionsSort = resp.filter(r=>r.equipe.idEquipe==(iEquipe));
       console.log("reunionnnnnnnnnnsc"+JSON.stringify(this.reunionsSort ))
     }
+  }
   );
 
 }
-
 deleteReunion(id:number){
   this.reunionservice.deleteReunion(id)
   .subscribe(

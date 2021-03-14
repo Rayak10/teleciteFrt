@@ -34,8 +34,7 @@
 					
 					<li *ngSwitchCase="role==='ROLE_SCRUM_MASTER'||role==='ROLE_DRH'? role : ''"><a href="http://localhost:5300/gestionComptes" class="animate" >Comptes</a></li>
 					
-					<li *ngSwitchCase="role==='ROLE_SCRUM_MASTER'||role==='ROLE_PRODUCT_OWNER'
-					||role==='ROLE_EMPLOYE'||role==='ROLE_SCRUM_TEAM_MEMBER'||role==='ROLE_DEV_TEAM_MEMBER'? role : ''">
+					<li *ngSwitchCase="role==='ROLE_SCRUM_MASTER'||role==='ROLE_PRODUCT_OWNER'? role : ''">
 					<a *ngIf="role" href="http://localhost:5300/gestionProjets" class="animate">Projets</a></li>
 					
 					<li *ngSwitchCase="role==='ROLE_SCRUM_MASTER'||role==='ROLE_PRODUCT_OWNER'

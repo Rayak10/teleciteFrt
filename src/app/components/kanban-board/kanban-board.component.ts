@@ -282,5 +282,9 @@ console.log("theltha"+JSON.stringify(this.done))
     }, error=>console.log(error)); 
   }
 
- 
+
+
+  ressource(){
+    this.router.navigate(['affectationRessources/',  this.idEmploye]);
+  }
 }

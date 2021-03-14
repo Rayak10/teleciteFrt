@@ -52,7 +52,6 @@ export class GestionComptesComponent implements OnInit {
 
   ngOnInit() {
     this.roleE=localStorage.getItem('role')
-    console.log("rrrrrrrroooooooooooolllllllllleeeeee"+JSON.stringify(this.roleE));   
     this.reloadData();
   
     this.bureauservice.findAllBureaux().subscribe(

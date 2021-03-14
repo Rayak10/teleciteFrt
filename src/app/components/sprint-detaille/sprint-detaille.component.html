@@ -4,7 +4,7 @@
 <hr/>
 <div >
         <div>
-            <b>Nom sprint  :</b><label>{{sprint.nomSprint}}</label>
+            <b *ngIf="sprint.nomSprint !='Backlog produit'" >Nom sprint  :</b><label>{{sprint.nomSprint}}</label>
         </div>
         <div *ngIf="sprint.nomSprint != 'Backlog produit'">
             <b>Date debut  :</b><label>{{sprint.dateDebut | date :'shortDate'}}</label>
@@ -54,17 +54,17 @@
                             <th scope="col"  width=50%>UserStory</th>
                             <th scope="col"  width=10%>Priorite</th>
                             <th scope="col" width=10%>Complexite</th>
-                            <th  *ngIf="sprint.nomSprint != 'Backlog produit'" scope="col" width=20%>Sprint</th>
+                            <th scope="col" width=20%>Sprint</th>
                             <th scope="col" width=10%>Actions</th>
                         </tr>
                             
                     </thead>
-                    <tbody id="form-list-projets-body"  *ngFor="let userstory of userstorys | async">
+                    <tbody id="form-list-projets-body"  *ngFor="let userstory of userstorys">
                         <tr>
                             <td>{{userstory.libelleUserStory}}</td>
                             <td>{{userstory.priorite}}</td>
                             <td>{{userstory.complexite}}</td>
-                            <td *ngIf="sprint.nomSprint != 'Backlog produit'">{{userstory.sprint.nomSprint}}</td>
+                            <td >{{userstory.sprint.nomSprint}}</td>
                             <td>
                               
                                 <a title="les détails du projet" class="btn btn-default btn-sm "(click)="userstoryDetails(userstory.idUserStory)"> <i class="glyphicon glyphicon-eye-open text-primary"  ></i> </a> 

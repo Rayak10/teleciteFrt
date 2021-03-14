@@ -53,7 +53,7 @@ employe:Employe=new Employe();
         const role: string =this.employe.role.nomRole;
         localStorage.setItem('role', this.employe.role.nomRole);
         localStorage.setItem('id', String(this.employe.idEmploye));
-
+        localStorage.setItem('idEquipe', String(this.employe.equipe.idEquipe));
         this.role=this.employe.role.nomRole
         this.dataPass.child1DataChanges(this.role);
            /*this.employeservice.findEmployeByEmail(this.authentification.email)

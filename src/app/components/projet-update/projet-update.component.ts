@@ -16,13 +16,15 @@ export class ProjetUpdateComponent implements OnInit {
   projet:Projet;
   projets: Observable<Projet[]>;
   equipeArray= [];
- 
+  roleE:string;
+
   offset: number =new Date().getTimezoneOffset() * 60 * 1000;
   constructor(private projetservice:ProjetService,private route: ActivatedRoute, private router: Router,private equipeservice:EquipeService) { }
   
   
   ngOnInit() {
-    
+    this.roleE=localStorage.getItem('role')
+
     this.projet=new Projet();
     
     this.id=this.route.snapshot.params['id'];

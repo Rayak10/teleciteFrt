@@ -15,9 +15,13 @@ export class ProjetDetailleComponent implements OnInit {
   sprints: Observable<Sprint[]>;
   id:number;
 projet:Projet;
+roleE:string;
+
   constructor(private projetservice:ProjetService,private sprintservice : SprintService,private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
+    this.roleE=localStorage.getItem('role')
+
     this.projet=new Projet();
     
     this.id=this.route.snapshot.params['id'];

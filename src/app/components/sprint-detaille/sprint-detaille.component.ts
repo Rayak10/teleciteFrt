@@ -25,6 +25,7 @@ showDataOfChildComponent;
 idEmploye:number;
   id:number;
 sprint:Sprint;
+userstorys:Userstory[];
   constructor(private dialog:MatDialog,private commentaireservice:CommentaireService,private sprintservice:SprintService,private route: ActivatedRoute, private router: Router,private userstoryservice:UserstoryService) {
     this.commentaireservice.listen().subscribe((m:any)=>{
     console.log(m)
@@ -38,7 +39,6 @@ sprint:Sprint;
     this.reloadData();
 
     this.idEmploye=parseInt(localStorage.getItem('id'));
-
     $("#tab1").hide();
     $("#tab2").hide();
 
@@ -47,10 +47,30 @@ sprint:Sprint;
     .subscribe(data=>{
       console.log(data)
       this.sprint=data;
-    }, error=>console.log(error));
-  
+      console.log("userrrrrrrrrsss"+JSON.stringify(this.sprint.projet.idProjet))
+      if(this.sprint.nomSprint=='Backlog produit'){
+      this.userstoryservice.findAllUserstoryByProjet(this.sprint.projet.idProjet).subscribe(
+        response =>{
+          this.userstorys = response;
+  console.log("userrrrrrrrrsss"+JSON.stringify(this.userstorys))
+        },
+        error => alert('problem!!!')
+      );}
+      else{
+        this.userstoryservice.findAllStoriessprint(this.sprint.idSprint).subscribe(
+          response =>{
+            this.userstorys = response;
+    console.log("userrrrrrrrrsss"+JSON.stringify(this.userstorys))
+          },
+          error => alert('problem!!!')
+        );}
 
-  }
+      
+
+    }, error=>console.log(error));
+    
+    }
+  
   updateUserstory(id:number){
   
     this.router.navigate(['userstory/update',id]);

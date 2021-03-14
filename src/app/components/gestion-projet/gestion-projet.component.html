@@ -12,8 +12,9 @@
         <legend class="navbar-brand titre">Liste des projets</legend>
        </div>
        <div class="col col-md-1">
-        <a title="ajouter un projet " class="btn btn-default btn-sm "(click)="ajoutProjet()"><i class="fas fa-calendar-plus  fa-2x lime"></i></a> 
-      </div>
+        <a *ngIf="roleE=='ROLE_PRODUCT_OWNER'"  title="ajouter un projet " class="btn btn-default btn-sm "(click)="ajoutProjet()"><i class="fas fa-calendar-plus  fa-2x lime"></i></a> 
+        <a *ngIf="roleE=='ROLE_SCRUM_MASTER'" disabled title="vous n'avez pas le droit " class="btn btn-default btn-sm "(click)="ajoutProjet()"><i class="fas fa-calendar-plus  fa-2x lime"></i></a> 
+    </div>
     
    <!-- <div class="pull-right">
         <a class="btn btn-default-btn-xs btn-primary"><i class="glyphicon glyphicon-refresh"></i> Refresh</a>
@@ -42,8 +43,9 @@
                   
                     <a title="les détails du projet" class="btn btn-default btn-sm "(click)="projetDetails(projet.idProjet)"> <i class="glyphicon glyphicon-eye-open text-primary"  ></i> </a> 
                     <a title="modifier le  projet" class="btn btn-default btn-sm "(click)="updateProjet(projet.idProjet)"> <i class="glyphicon glyphicon-edit text-primary"></i> </a>
-                    <a title="supprimer le projet " class="btn btn-default btn-sm " (click)="deleteProjet(projet.idProjet)"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
-                    
+                    <a *ngIf="roleE=='PRODUCT_OWNER'" title="supprimer le projet " class="btn btn-default btn-sm " (click)="deleteProjet(projet.idProjet)"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
+                    <a *ngIf="roleE=='ROLE_SCRUM_MASTER'" disabled title="supprimer le projet " class="btn btn-default btn-sm " (click)="deleteProjet(projet.idProjet)"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
+
                    
                 </td>
             </tr>

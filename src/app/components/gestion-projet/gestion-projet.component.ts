@@ -22,10 +22,13 @@ export class GestionProjetComponent implements OnInit {
   selectedEquipeId:number;
 equipe:Equipe;
 offset: number =new Date().getTimezoneOffset() * 60 * 1000;
+roleE:string;
 
   constructor(private projetservice:ProjetService,private equipeservice:EquipeService,private formBuilder:FormBuilder,private router:Router) { }
 
   ngOnInit() {
+    this.roleE=localStorage.getItem('role')
+
     this.equipeservice.findAllEquipe().subscribe(
       data => {console.log("data from find all Equipe:"+JSON.stringify(data));   
       

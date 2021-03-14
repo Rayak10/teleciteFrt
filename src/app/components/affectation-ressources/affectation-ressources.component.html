@@ -31,11 +31,11 @@
   </mat-form-field>
 </div>
 <div class="col col-md-1">
-  <i class="fab fa-trello  fa-5x" style="color: rgb(90, 169, 235);" (click)="onkanban(id,selectedValue)"></i>
+  <i *ngIf="roleE=='ROLE_SCRUM_TEAM_MEMBER'" title="Kanban"class="fab fa-trello  fa-5x" style="color: rgb(90, 169, 235);" (click)="onkanban(id,selectedValue)"></i>
 </div>
 <div class="col col-md-1">
 
-<i class="fas fa-chart-line fa-5x" style="color: rgb(90, 169, 235);" (click)="onburndown(selectedValue)"></i>
+<i class="fas fa-chart-line fa-5x" title="Burndown chart "style="color: rgb(90, 169, 235);" (click)="onburndown(selectedValue)"></i>
 </div>
 
 </div>
@@ -53,10 +53,10 @@
         <mat-header-cell *matHeaderCellDef mat-sort-header class="titre"> Complexité </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.complexite}} </mat-cell>
       </ng-container>
-      <ng-container matColumnDef="affectation">
-        <mat-header-cell *matHeaderCellDef class="titre">Taches</mat-header-cell>
+      <ng-container  matColumnDef="affectation">
+        <mat-header-cell *matHeaderCellDef class="titre" >Taches</mat-header-cell>
         <mat-cell *matCellDef="let row">
-         <button mat-icon-button (click)="onAffect(row)"><mat-icon style="color: rgb(90, 169, 235);"><i class="fas fa-tasks"></i>
+         <button *ngIf="roleE=='ROLE_SCRUM_TEAM_MEMBER'" mat-icon-button (click)="onAffect(row)"><mat-icon style="color: rgb(90, 169, 235);"><i class="fas fa-tasks"></i>
          </mat-icon></button>
       </mat-cell>
       </ng-container>

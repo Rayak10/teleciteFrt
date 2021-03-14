@@ -14,7 +14,7 @@
           <legend class="navbar-brand titre">Liste des Backlog Produit</legend>
          </div>
          <div class="col col-md-1">
-          <a title="ajouter un projet " class="btn btn-default btn-sm "(click)="ajoutSprint()"><i class="fas fa-calendar-plus  fa-2x lime"></i></a> 
+          <a   *ngIf="roleE=='ROLE_PRODUCT_OWNER'"  title="ajouter un projet " class="btn btn-default btn-sm "(click)="ajoutSprint()"><i class="fas fa-calendar-plus  fa-2x lime"></i></a> 
         </div>
       
     
@@ -44,9 +44,7 @@
 
                 <td>
                   
-                    <a title="les détails du projet" class="btn btn-default btn-sm "(click)="sprintDetails(sprint.idSprint)"> <i class="glyphicon glyphicon-eye-open text-primary"  ></i> </a> 
-                    <a title="modifier le  projet" class="btn btn-default btn-sm "(click)="updateSprint(sprint.idSprint)"> <i class="glyphicon glyphicon-edit text-primary"></i> </a>
-                    <a title="supprimer le projet " class="btn btn-default btn-sm " (click)="deleteSprints(sprint.idSprint)"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
+                    <a title="les détails du Backlog" class="btn btn-default btn-sm "(click)="sprintDetails(sprint.idSprint)"> <i class="glyphicon glyphicon-eye-open text-primary"  ></i> </a> 
                     
                    
                 </td>
@@ -115,8 +113,8 @@
                 
                   <a title="les détails du sprint" class="btn btn-default btn-sm "(click)="sprintDetails(sprint.idSprint)"> <i class="glyphicon glyphicon-eye-open text-primary"  ></i> </a> 
                   <a title="Commenterle sprint" class="btn btn-default btn-sm "(click)="onAffect(sprint.idSprint)"> <i class="lime far fa-comment-dots"></i></a> 
-                  <a title="modifier le  sprint" class="btn btn-default btn-sm "(click)="updateSprint(sprint.idSprint)"> <i class="glyphicon glyphicon-edit orange"></i> </a>
-                  <a title="supprimer le sprint " class="btn btn-default btn-sm " (click)="deleteSprints(sprint.idSprint)"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
+                  <a *ngIf="roleE=='ROLE_PRODUCT_OWNER'" title="modifier le  sprint" class="btn btn-default btn-sm "(click)="updateSprint(sprint.idSprint)"> <i class="glyphicon glyphicon-edit orange"></i> </a>
+                  <a *ngIf="roleE=='ROLE_PRODUCT_OWNER'" title="supprimer le sprint " class="btn btn-default btn-sm " (click)="deleteSprints(sprint.idSprint)"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
                   
                  
               </td>

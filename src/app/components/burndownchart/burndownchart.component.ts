@@ -47,12 +47,15 @@ export class BurndownchartComponent implements OnInit {
   data2:any=[];
    complexProjet:number;
   userstorysProjet:Userstory[]=[];
+  idEmp:number;
   @ViewChild("chart",{ static: true } ) chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
   constructor(public datepipe: DatePipe,private userstoryservice:UserstoryService,private sprintservice: SprintService,private projetservice:ProjetService,private route: ActivatedRoute,private router: Router) {}
 
 
   ngOnInit(): void {
+    this.idEmp=+localStorage.getItem('id')
+
     this.datefinSprints[0]=0;
 
     this.id=this.route.snapshot.params['id'];
@@ -232,6 +235,12 @@ this.sprintsProjet.forEach(element=>
     };
   }
 
+
+
+
+  ressource(){
+    this.router.navigate(['affectationRessources/',  this.idEmp]);
+  }
  
 }
 

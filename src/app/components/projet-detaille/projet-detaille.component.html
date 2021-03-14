@@ -58,7 +58,8 @@
             </tr>
                 
         </thead>
-        <tbody id="form-list-projets-body"  *ngFor="let sprint of sprints | async">
+        <ng-container *ngFor="let sprint of sprints | async">
+            <tbody id="form-list-projets-body" *ngIf="sprint.nomSprint !='Backlog produit'">
             <tr>
                 <td>{{sprint.nomSprint}}</td>
                 <td>{{sprint.dateDebut}}</td>
@@ -68,13 +69,14 @@
                 <td>
                   
                     <a title="les détails du projet" class="btn btn-default btn-sm "(click)="sprintDetails(sprint.idSprint)"> <i class="glyphicon glyphicon-eye-open text-primary"  ></i> </a> 
-                    <a title="modifier le  projet" class="btn btn-default btn-sm "(click)="updateSprint(sprint.idSprint)"> <i class="glyphicon glyphicon-edit text-primary"></i> </a>
-                    <a title="supprimer le projet " class="btn btn-default btn-sm " (click)="deleteSprints(sprint.idSprint)"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
+                    <a *ngIf="roleE=='ROLE_PRODUCT_OWNER'"  title="modifier le  projet" class="btn btn-default btn-sm "(click)="updateSprint(sprint.idSprint)"> <i class="glyphicon glyphicon-edit text-primary"></i> </a>
+                    <a *ngIf="roleE=='ROLE_PRODUCT_OWNER'"  title="supprimer le projet " class="btn btn-default btn-sm " (click)="deleteSprints(sprint.idSprint)"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
                     
                    
                 </td>
             </tr>
         </tbody>
+    </ng-container>
     </table>
     </form>
 

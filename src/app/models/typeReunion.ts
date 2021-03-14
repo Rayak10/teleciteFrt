@@ -1,6 +1,6 @@
 export  enum TypeReunion {
     Reunion_Scrum = 'Reunion_Scrum',
-     Reunion_Administratif = 'Reunion_Scrum'
+     Reunion_Administratif = 'Reunion_Administratif'
 }
 export namespace TypeReunion {
 
