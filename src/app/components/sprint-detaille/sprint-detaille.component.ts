@@ -26,6 +26,7 @@ idEmploye:number;
   id:number;
 sprint:Sprint;
 userstorys:Userstory[];
+roleE:String;
   constructor(private dialog:MatDialog,private commentaireservice:CommentaireService,private sprintservice:SprintService,private route: ActivatedRoute, private router: Router,private userstoryservice:UserstoryService) {
     this.commentaireservice.listen().subscribe((m:any)=>{
     console.log(m)
@@ -35,6 +36,7 @@ userstorys:Userstory[];
   }
 
   ngOnInit() {
+    this.roleE=localStorage.getItem('role');
     this.id=this.route.snapshot.params['id'];
     this.reloadData();
 

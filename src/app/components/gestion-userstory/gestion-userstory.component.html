@@ -118,7 +118,7 @@
                 <th scope="col" width=10%>Complexite</th>
                 <th scope="col" width=10%>Sprint</th>
                 <th scope="col" width=10%>Projet</th>
-                <th scope="col" width=10%> tâches </th>
+                <th *ngIf="roleE=='ROLE_SCRUM_TEAM_MEMBER'" scope="col" width=10%> tâches </th>
                 <th scope="col" width=10%>Actions</th>
             </tr>
                 
@@ -130,15 +130,15 @@
                 <td>{{userstory.complexite}}</td>
                 <td>{{userstory.sprint.nomSprint}}</td>
                 <td>{{userstory.sprint.projet.nomProjet}}</td>
-                <td>
+                <td *ngIf="roleE=='ROLE_SCRUM_TEAM_MEMBER'" >
                   
-                  <a title="ajouter les tâches pour un user Story" class="btn btn-default btn-sm "(click)="gestionTaches(userstory.idUserStory)"><i class="fas fa-tasks lime"></i> </a> 
+                  <a   title="ajouter les tâches pour un user Story" class="btn btn-default btn-sm "(click)="gestionTaches(userstory.idUserStory)"><i class="fas fa-tasks lime"></i> </a> 
                 </td>
                 <td>
                   
                     <a title="les détails du projet" class="btn btn-default btn-sm "(click)="userstoryDetails(userstory.idUserStory)"> <i class="glyphicon glyphicon-eye-open text-primary"  ></i> </a> 
-                    <a title="modifier le  projet" class="btn btn-default btn-sm "(click)="updateUserstory(userstory.idUserStory)"> <i class="glyphicon glyphicon-edit text-primary"></i> </a>
-                    <a title="supprimer le projet " class="btn btn-default btn-sm " (click)="deleteUserstory(userstory.idUserStory)"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
+                    <a *ngIf="roleE=='ROLE_PRODUCT_OWNER'"title="modifier le  projet" class="btn btn-default btn-sm "(click)="updateUserstory(userstory.idUserStory)"> <i class="glyphicon glyphicon-edit text-primary"></i> </a>
+                    <a *ngIf="roleE=='ROLE_PRODUCT_OWNER'"title="supprimer le projet " class="btn btn-default btn-sm " (click)="deleteUserstory(userstory.idUserStory)"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
                     
                    
                 </td>

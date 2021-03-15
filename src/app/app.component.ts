@@ -20,7 +20,7 @@ export class AppComponent  implements OnInit {
   
     this.dataPass.child1Subject.subscribe(data=>{
     this.role = data;
-
+    
 }) }
   ngOnInit(): void {
     this.role=localStorage.getItem('role');

@@ -13,13 +13,14 @@ import {TIME_ZONE_OFFSET} from '../../settings/app.settings';
 })
 export class ProjetUpdateComponent implements OnInit {
   id:number;
-  projet:Projet;
+  projet:Projet=new Projet();
   projets: Observable<Projet[]>;
   equipeArray= [];
   roleE:string;
 
   offset: number =new Date().getTimezoneOffset() * 60 * 1000;
-  constructor(private projetservice:ProjetService,private route: ActivatedRoute, private router: Router,private equipeservice:EquipeService) { }
+  constructor(private projetservice:ProjetService,private route: ActivatedRoute, private router: Router,private equipeservice:EquipeService) {
+   }
   
   
   ngOnInit() {
@@ -37,8 +38,9 @@ export class ProjetUpdateComponent implements OnInit {
 
     this.equipeservice.findAllEquipe().subscribe(
       data => {console.log("data from find all Equipe:"+JSON.stringify(data));   
-      
-                  this.equipeArray.push(...data);}
+                  this.equipeArray.push(...data);
+                }
+                 
                   );
 
                   this.projet.dateDebut = new Date(new Date(this.projet.dateDebut));

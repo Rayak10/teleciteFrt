@@ -34,7 +34,7 @@ export class GestionSprintsComponent implements OnInit {
   showDataOfChildComponent;
   roleE:string;
 
-  constructor(private dialog:MatDialog, private sprintservice:SprintService,private projetservice:ProjetService,private formBuilder:FormBuilder,private router:Router) { }
+  constructor(private dialog:MatDialog, private sprintservice:SprintService,private projetservice:ProjetService,private formBuilder:FormBuilder,private router:Router) {}
 
   ngOnInit()  {
     this.roleE=localStorage.getItem('role')

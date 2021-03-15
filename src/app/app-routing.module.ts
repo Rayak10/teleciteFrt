@@ -47,36 +47,86 @@ const routes: Routes = [
     expectedRole: 'ROLE_DRH,ROLE_SCRUM_MASTER'
   } },
   {path: 'details/:id', component: EmployeDetailleComponent, canActivate: [RoleGuard], data: { 
-    expectedRole: 'ROLE_SCRUM_MASTER,ROLE_DRH,ROLE_PRODUCT_OWNER,ROLE_EMPLOYE,ROLE_SCRUM_TEAM_MEMBER,ROLE_DEV_TEAM_MEMBER'
+    expectedRole: 'ROLE_SCRUM_MASTER,ROLE_DRH,ROLE_PRODUCT_OWNER,ROLE_EMPLOYE,ROLE_SCRUM_TEAM_MEMBER'
   } },
   {path: 'gestionProjets', component: GestionProjetComponent, canActivate: [AuthGuard], data: { 
-    expectedRole: 'ROLE_SCRUM_MASTER,ROLE_PRODUCT_OWNER,ROLE_SCRUM_TEAM_MEMBER,ROLE_DEV_TEAM_MEMBER'
+    expectedRole: 'ROLE_SCRUM_MASTER,ROLE_PRODUCT_OWNER'
   } },
-  {path: 'projets/update/:id',component :ProjetUpdateComponent, canActivate: [AuthGuard]},
-  {path: 'projets/details/:id',component :ProjetDetailleComponent, canActivate: [AuthGuard]},
-  {path: 'gestionSprints',component :GestionSprintsComponent, canActivate: [AuthGuard]},
-  {path: 'sprints/details/:id',component :SprintDetailleComponent, canActivate: [AuthGuard]},
-  {path: 'sprints/update/:id',component :SprintUpdateComponent ,canActivate: [AuthGuard]},
-  {path: 'gestionUserstory', component: GestionUserstoryComponent ,canActivate: [AuthGuard]},
-  {path: 'userstory/update/:id', component: UserstoryUpdateComponent ,canActivate: [AuthGuard]},
-  {path: 'userstory/details/:id',component :UserstoryDetailleComponent ,canActivate: [AuthGuard]},
-  {path: 'gestionTaches/:id', component: GestionTacheComponent ,canActivate: [AuthGuard]},
-  {path: 'taches/details/:id',component :TacheDetailleComponent ,canActivate: [AuthGuard]},
-  {path: 'taches/update/:id',component :TacheUpdateComponent ,canActivate: [AuthGuard]},
-  {path: 'gestionReunions', component: GestionReunionComponent ,canActivate: [AuthGuard]},
-  {path: 'reunions/details/:id', component: ReunionDetailleComponent ,canActivate: [AuthGuard]},
-  {path: 'reunions/update/:id', component: ReunionUpdateComponent ,canActivate: [AuthGuard]},
-  {path: 'Reunions/list', component: ListReunionsComponent ,canActivate: [AuthGuard]},
-  {path: 'gestionEquipes', component: GestionEquipeComponent ,canActivate: [AuthGuard]},
-  {path: 'equipes/details/:id',component :EquipeDetailleComponent ,canActivate: [AuthGuard]},
-  {path: 'equipes/update/:id',component :EquipeUpdateComponent ,canActivate: [AuthGuard]},
-  {path: 'affectationRessources/:id',component :AffectationRessourcesComponent},
-  {path: 'KanbanBoard/:id1/:id2',component :KanbanBoardComponent ,canActivate: [AuthGuard]},
-  {path: 'burndownchart/:id',component :BurndownchartComponent ,canActivate: [AuthGuard]},
-  {path: 'ajoutProjet',component :AjoutProjetComponent ,canActivate: [AuthGuard]},
-  {path: 'ajoutSprint',component :AjoutSprintComponent ,canActivate: [AuthGuard]},
-  {path: 'ajoutCommentaire',component :AjoutcommentaireComponent},
-  {path: 'commentaire/update',component :UpdateCommentaireComponent}
+  {path: 'projets/update/:id',component :ProjetUpdateComponent, canActivate: [AuthGuard], data: { 
+    expectedRole: 'ROLE_SCRUM_MASTER,ROLE_PRODUCT_OWNER'
+  } },
+  {path: 'projets/details/:id',component :ProjetDetailleComponent, canActivate: [AuthGuard], data: { 
+    expectedRole: 'ROLE_SCRUM_MASTER,ROLE_PRODUCT_OWNER,ROLE_SCRUM_TEAM_MEMBER'
+  } },
+  {path: 'gestionSprints',component :GestionSprintsComponent, canActivate: [AuthGuard], data: { 
+    expectedRole: 'ROLE_SCRUM_MASTER,ROLE_PRODUCT_OWNER,ROLE_SCRUM_TEAM_MEMBER'
+  } },
+  {path: 'sprints/details/:id',component :SprintDetailleComponent, canActivate: [AuthGuard], data: { 
+    expectedRole: 'ROLE_SCRUM_MASTER,ROLE_PRODUCT_OWNER,ROLE_SCRUM_TEAM_MEMBER'
+  } },
+  {path: 'sprints/update/:id',component :SprintUpdateComponent ,canActivate: [AuthGuard], data: { 
+    expectedRole: 'ROLE_PRODUCT_OWNER'
+  } },
+  {path: 'gestionUserstory', component: GestionUserstoryComponent ,canActivate: [AuthGuard], data: { 
+    expectedRole: 'ROLE_PRODUCT_OWNER,ROLE_SCRUM_TEAM_MEMBER,ROLE_DEV_TEAM_MEMBER'
+  } },
+  {path: 'userstory/update/:id', component: UserstoryUpdateComponent ,canActivate: [AuthGuard], data: { 
+    expectedRole: 'ROLE_PRODUCT_OWNER,ROLE_SCRUM_TEAM_MEMBER,ROLE_DEV_TEAM_MEMBER'
+  } },
+  {path: 'userstory/details/:id',component :UserstoryDetailleComponent ,canActivate: [AuthGuard], data: { 
+    expectedRole: 'ROLE_PRODUCT_OWNER,ROLE_SCRUM_TEAM_MEMBER,ROLE_DEV_TEAM_MEMBER'
+  } },
+  {path: 'gestionTaches/:id', component: GestionTacheComponent ,canActivate: [AuthGuard], data: { 
+    expectedRole: 'ROLE_PRODUCT_OWNER,ROLE_SCRUM_TEAM_MEMBER,ROLE_DEV_TEAM_MEMBER'
+  } },
+  {path: 'taches/details/:id',component :TacheDetailleComponent ,canActivate: [AuthGuard], data: { 
+    expectedRole: 'ROLE_PRODUCT_OWNER,ROLE_SCRUM_TEAM_MEMBER,ROLE_DEV_TEAM_MEMBER'
+  } },
+  {path: 'taches/update/:id',component :TacheUpdateComponent ,canActivate: [AuthGuard], data: { 
+    expectedRole: 'ROLE_PRODUCT_OWNER,ROLE_SCRUM_TEAM_MEMBER,ROLE_DEV_TEAM_MEMBER'
+  } },
+  {path: 'gestionReunions', component: GestionReunionComponent ,canActivate: [AuthGuard], data: { 
+    expectedRole: 'ROLE_SCRUM_MASTER,ROLE_DRH,ROLE_PRODUCT_OWNER,ROLE_EMPLOYE,ROLE_SCRUM_TEAM_MEMBER,ROLE_DEV_TEAM_MEMBER,ROLE_EMPLOYE'
+  } },
+  {path: 'reunions/details/:id', component: ReunionDetailleComponent ,canActivate: [AuthGuard], data: { 
+    expectedRole: 'ROLE_SCRUM_MASTER,ROLE_DRH,ROLE_PRODUCT_OWNER,ROLE_EMPLOYE,ROLE_SCRUM_TEAM_MEMBER,ROLE_DEV_TEAM_MEMBER,ROLE_EMPLOYE'
+  } },
+  {path: 'reunions/update/:id', component: ReunionUpdateComponent ,canActivate: [AuthGuard], data: { 
+    expectedRole: 'ROLE_SCRUM_MASTER,ROLE_DRH,ROLE_PRODUCT_OWNER,ROLE_EMPLOYE,ROLE_SCRUM_TEAM_MEMBER,ROLE_DEV_TEAM_MEMBER,ROLE_EMPLOYE'
+  } },
+  {path: 'Reunions/list', component: ListReunionsComponent ,canActivate: [AuthGuard], data: { 
+    expectedRole: 'ROLE_SCRUM_MASTER,ROLE_DRH,ROLE_PRODUCT_OWNER,ROLE_EMPLOYE,ROLE_SCRUM_TEAM_MEMBER,ROLE_DEV_TEAM_MEMBER,ROLE_EMPLOYE'
+  } },
+  {path: 'gestionEquipes', component: GestionEquipeComponent ,canActivate: [AuthGuard], data: { 
+    expectedRole: 'ROLE_SCRUM_MASTER'
+  } },
+  {path: 'equipes/details/:id',component :EquipeDetailleComponent ,canActivate: [AuthGuard], data: { 
+    expectedRole: 'ROLE_SCRUM_MASTER'
+  } },
+  {path: 'equipes/update/:id',component :EquipeUpdateComponent ,canActivate: [AuthGuard], data: { 
+    expectedRole: 'ROLE_SCRUM_MASTER'
+  } },
+  {path: 'affectationRessources/:id',component :AffectationRessourcesComponent,canActivate: [AuthGuard], data: { 
+    expectedRole: 'ROLE_SCRUM_MASTER,ROLE_PRODUCT_OWNER,ROLE_SCRUM_TEAM_MEMBER'
+  } },
+  {path: 'KanbanBoard/:id1/:id2',component :KanbanBoardComponent ,canActivate: [AuthGuard], data: { 
+    expectedRole: 'ROLE_SCRUM_MASTER,ROLE_PRODUCT_OWNER,ROLE_SCRUM_TEAM_MEMBER'
+  } },
+  {path: 'burndownchart/:id',component :BurndownchartComponent ,canActivate: [AuthGuard], data: { 
+    expectedRole: 'ROLE_SCRUM_MASTER,ROLE_PRODUCT_OWNER,ROLE_SCRUM_TEAM_MEMBER'
+  } },
+  {path: 'ajoutProjet',component :AjoutProjetComponent ,canActivate: [AuthGuard], data: { 
+    expectedRole: 'ROLE_PRODUCT_OWNER'
+  } },
+  {path: 'ajoutSprint',component :AjoutSprintComponent ,canActivate: [AuthGuard], data: { 
+    expectedRole: 'ROLE_PRODUCT_OWNER'
+  } },
+  {path: 'ajoutCommentaire',component :AjoutcommentaireComponent,canActivate: [AuthGuard], data: { 
+    expectedRole: 'ROLE_SCRUM_MASTER,ROLE_PRODUCT_OWNER,ROLE_SCRUM_TEAM_MEMBER'
+  } },
+  {path: 'commentaire/update',component :UpdateCommentaireComponent,canActivate: [AuthGuard], data: { 
+    expectedRole: 'ROLE_SCRUM_MASTER,ROLE_PRODUCT_OWNER,ROLE_SCRUM_TEAM_MEMBER'
+  } },
 
 
 

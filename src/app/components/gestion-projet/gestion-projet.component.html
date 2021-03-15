@@ -38,12 +38,14 @@
                 <td>{{projet.theme}}</td>
                 <td>{{projet.dateDebut | date :'shortDate'}}</td>
                 <td>{{projet.dateFin | date :'shortDate'}}</td>
-                <td>{{projet.equipe.nomEquipe}}</td>
+                <td *ngIf="projet.equipe!=null" >{{projet.equipe.nomEquipe}}</td>
+                <td *ngIf="projet.equipe==null" >Équipe non affectée</td>
+
                 <td>
                   
                     <a title="les détails du projet" class="btn btn-default btn-sm "(click)="projetDetails(projet.idProjet)"> <i class="glyphicon glyphicon-eye-open text-primary"  ></i> </a> 
                     <a title="modifier le  projet" class="btn btn-default btn-sm "(click)="updateProjet(projet.idProjet)"> <i class="glyphicon glyphicon-edit text-primary"></i> </a>
-                    <a *ngIf="roleE=='PRODUCT_OWNER'" title="supprimer le projet " class="btn btn-default btn-sm " (click)="deleteProjet(projet.idProjet)"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
+                    <a *ngIf="roleE=='ROLE_PRODUCT_OWNER'" title="supprimer le projet " class="btn btn-default btn-sm " (click)="deleteProjet(projet.idProjet)"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
                     <a *ngIf="roleE=='ROLE_SCRUM_MASTER'" disabled title="supprimer le projet " class="btn btn-default btn-sm " (click)="deleteProjet(projet.idProjet)"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
 
                    

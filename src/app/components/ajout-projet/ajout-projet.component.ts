@@ -25,6 +25,15 @@ offset: number =new Date().getTimezoneOffset() * 60 * 1000;
   constructor(private projetservice:ProjetService,private equipeservice:EquipeService,private formBuilder:FormBuilder,private router:Router) { }
 
   ngOnInit() {
+    this.equipeservice.findEquipeByNom("Équipe non affectée").subscribe(
+      data=>{
+        this.equipe=data
+        console.log("equuuuuuurrrrrrrrrrrrrrrrrrrrrruuuiiipe: "+JSON.stringify(data))
+
+        console.log("equuuuuuurrrrrrrrrrrrrrrrrrrrrruuuiiipe: "+JSON.stringify(this.equipe))
+      }
+          );
+          console.log("equuuuuuurrrrrrrrrrrrrrrrrrrrrruuuiiipe: "+JSON.stringify(this.projet.equipe))
     this.equipeservice.findAllEquipe().subscribe(
       data => {console.log("data from find all Equipe:"+JSON.stringify(data));   
       
@@ -45,9 +54,11 @@ offset: number =new Date().getTimezoneOffset() * 60 * 1000;
        this.gotoList();
   }
   save() {
+   
     console.log("projet: "+JSON.stringify(this.projet));
     this.projet.dateDebut = new Date(new Date(this.projet.dateDebut).getTime() - this.offset);
     this.projet.dateFin = new Date(new Date(this.projet.dateFin).getTime() - this.offset);
+    this.projet.equipe=this.equipe;
     this.projetservice.createProjet(this.projet)
       .subscribe(data => console.log(data), error => console.log(error));
     this.projet= new Projet();

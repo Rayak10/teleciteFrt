@@ -31,12 +31,14 @@ export class GestionUserstoryComponent implements OnInit {
   complexiteArray= [];
   selectedComplexite:number;
 val:any
+roleE:String;
   constructor(private userstoryservice:UserstoryService,private projetservice:ProjetService,private sprintservice:SprintService,private formBuilder:FormBuilder,private router:Router) { 
     this.val=this.selectedProjetId;
 
   }
 
   ngOnInit() {
+    this.roleE=localStorage.getItem('role')
     this.prioriteArray=[
       {Id:1,name:"Must have"},
       {Id:2,name:"Should have"},

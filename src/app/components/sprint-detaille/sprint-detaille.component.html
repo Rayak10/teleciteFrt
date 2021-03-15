@@ -68,15 +68,15 @@
                             <td>
                               
                                 <a title="les détails du projet" class="btn btn-default btn-sm "(click)="userstoryDetails(userstory.idUserStory)"> <i class="glyphicon glyphicon-eye-open text-primary"  ></i> </a> 
-                                <a title="modifier le  projet" class="btn btn-default btn-sm "(click)="updateUserstory(userstory.idUserStory)"> <i class="glyphicon glyphicon-edit text-primary"></i> </a>
-                                <a title="supprimer le projet " class="btn btn-default btn-sm " (click)="deleteUserstory(userstory.idUserStory)"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
+                                <a  *ngIf="roleE=='ROLE_PRODUCT_OWNER'" title="modifier le  projet" class="btn btn-default btn-sm "(click)="updateUserstory(userstory.idUserStory)"> <i class="glyphicon glyphicon-edit text-primary"></i> </a>
+                                <a *ngIf="roleE=='ROLE_PRODUCT_OWNER'" title="supprimer le projet " class="btn btn-default btn-sm " (click)="deleteUserstory(userstory.idUserStory)"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
                                 
                                
                             </td>
                         </tr>
                     </tbody>
                 </table>
-                <form id="form-list-commentaires" >
+                <form id="form-list-commentaires" *ngIf="sprint.nomSprint!='Backlog produit'" >
                     <legend id="leg2"class="navbar-brand titre"(click)="toogletag2()"><a>Liste des commentaires du {{sprint.nomSprint}}</a></legend>
             
 

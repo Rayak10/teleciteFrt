@@ -64,8 +64,8 @@
                 <td>
                   
                     <a title="les détails du projet" class="btn btn-default btn-sm "(click)="tacheDetails(tache.idTache)"> <i class="glyphicon glyphicon-eye-open text-primary"  ></i> </a> 
-                    <a title="modifier le  projet" class="btn btn-default btn-sm "(click)="updateTache(tache.idTache)"> <i class="glyphicon glyphicon-edit text-primary"></i> </a>
-                    <a title="supprimer le projet " class="btn btn-default btn-sm " (click)="deleteTache(tache.idTache)"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
+                    <a *ngIf="roleE=='ROLE_SCRUM_TEAM_MEMBER'" title="modifier le  projet" class="btn btn-default btn-sm "(click)="updateTache(tache.idTache)"> <i class="glyphicon glyphicon-edit text-primary"></i> </a>
+                    <a *ngIf="roleE=='ROLE_SCRUM_TEAM_MEMBER'" title="supprimer le projet " class="btn btn-default btn-sm " (click)="deleteTache(tache.idTache)"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
                     
                    
                 </td>

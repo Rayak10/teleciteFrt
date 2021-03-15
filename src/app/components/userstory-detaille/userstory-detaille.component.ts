@@ -17,10 +17,11 @@ export class UserstoryDetailleComponent implements OnInit {
   id:number;
 userstory:Userstory;
 taches: Observable<Tache[]>;
-
+roleE:String
   constructor(private userstoryservice:UserstoryService,private tacheservice:TacheService,private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
+    this.roleE=localStorage.getItem('role')
     this.userstory=new Userstory();
     this.id=this.route.snapshot.params['id'];
     this.userstoryservice.findUserstoryById(this.id)

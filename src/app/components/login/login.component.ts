@@ -72,7 +72,7 @@ employe:Employe=new Employe();
             case 'ROLE_DRH':  this.router.navigate(['/details/',this.employe.idEmploye]); break; 
             case 'ROLE_PRODUCT_OWNER':  this.router.navigate(['/details/',this.employe.idEmploye]); break; 
             case 'ROLE_ROLE_EMPLOYE':  this.router.navigate(['/details/',this.employe.idEmploye]); break; 
-            case 'ROLE_ROLE_SCRUM_TEAM_MEMBER':  this.router.navigate(['/details/',this.employe.idEmploye]); break; 
+            case 'ROLE_SCRUM_TEAM_MEMBER':  this.router.navigate(['/details/',this.employe.idEmploye]); break; 
             case 'ROLE_ROLE_DEV_TEAM_MEMBER':  this.router.navigate(['/details/',this.employe.idEmploye]); break; 
             
           }

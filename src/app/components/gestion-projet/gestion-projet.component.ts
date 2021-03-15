@@ -49,7 +49,8 @@ roleE:string;
        this.gotoList();
   }
   save() {
-    console.log("projet: "+JSON.stringify(this.projet));
+   
+
     this.projet.dateDebut = new Date(new Date(this.projet.dateDebut).getTime() - this.offset);
     this.projet.dateFin = new Date(new Date(this.projet.dateFin).getTime() - this.offset);
     this.projetservice.createProjet(this.projet)
@@ -61,7 +62,6 @@ this.gotoList();
   }  
 reloadData(){
     this.projets= this.projetservice.findAllProjets();
-    console.log("projetsssssssssssssssssssssssssssssss: "+JSON.stringify(this.projets));
 
   }
   projetDetails(id:number){

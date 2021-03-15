@@ -4,20 +4,25 @@
 <hr/>
 <div >
         <div>
-            <b>Tâche  :</b><label>{{tache.descriptionTache}}</label>
+            <b>Tâche :</b><label>{{tache.descriptionTache}}</label>
         </div>
         <div>
-            <b>Durée   :</b><label>{{tache.dureeTache}}</label>
+            <b>Durée :</b><label>{{tache.dureeTache}}</label>
         </div>
         <div>
-            <b>Etat :</b><label>{{tache.etatTache}}</label>
+            <b>Etat : </b><label>{{tache.etatTache}}</label>
         </div>
-
-        <div>
-            <b>Projet  :</b><label>{{tache.userStory.sprint.projet.nomProjet}}</label>
+        <div *ngIf="tache.employe!=null">
+            <b>Affectée à : </b><label> {{ tache.employe.nomEmploye }} {{ tache.employe.prenomEmploye }}</label>
+        </div>
+        <div *ngIf="tache.employe==null">
+            <b>Affectée à : </b><label> N'est pas encore affectée</label>
         </div>
         <div>
-            <b>Sprint  :</b><label>{{tache.userStory.sprint.nomSprint}}</label>
+            <b>Projet  : </b><label>{{tache.userStory.sprint.projet.nomProjet}}</label>
+        </div>
+        <div>
+            <b>Sprint  : </b><label>{{tache.userStory.sprint.nomSprint}}</label>
         </div>
       
        
