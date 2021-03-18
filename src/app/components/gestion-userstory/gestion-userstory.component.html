@@ -32,10 +32,10 @@
 
     <div class="col col-md-2">
 
-  <label class="control-label" >User storie :</label>  
+  <label *ngIf="roleE=='ROLE_PRODUCT_OWNER'" class="control-label" >User storie :</label>  
 </div>
   <div class="col col-md-4">
-    <textarea id="sprint-name"  rows="2" cols="25" required [(ngModel)]="userstory.libelleUserStory" name="userstory-name" type="text" placeholder="En tant que...... je veux .....à fin de ....." class="form-control input-md"></textarea>
+    <textarea *ngIf="roleE=='ROLE_PRODUCT_OWNER'"id="sprint-name"  rows="2" cols="25" required [(ngModel)]="userstory.libelleUserStory" name="userstory-name" type="text" placeholder="En tant que...... je veux .....à fin de ....." class="form-control input-md"></textarea>
 
   <span class="help-block"></span>  
   </div>
@@ -44,10 +44,10 @@
 <div class="row">
   <div class="col col-md-2">
 
-  <label class=" control-label">Priorité :</label>
+  <label *ngIf="roleE=='ROLE_PRODUCT_OWNER'" class=" control-label">Priorité :</label>
 </div>
 <div class="col col-md-3">
-  <select required
+  <select required *ngIf="roleE=='ROLE_PRODUCT_OWNER'"
      type="text" 
      class="form-control "
       id="field_priorite"
@@ -62,10 +62,10 @@
     </div>
   
     <div class="col col-md-2">
-      <label class="control-label" >Complexité  :</label>  
+      <label *ngIf="roleE=='ROLE_PRODUCT_OWNER'" class="control-label" >Complexité  :</label>  
     </div>
     <div class="col col-md-4">
-      <select required
+      <select required *ngIf="roleE=='ROLE_PRODUCT_OWNER'"
       type="text" 
       class="form-control "
        id="field_complexite"
@@ -90,7 +90,7 @@
     </div>
     
     <div class="col col-md-1">
-      <button id="btn-save" name="btn-save" type="submit" class="btn btn-success">Enregistrer</button>
+      <button *ngIf="roleE=='ROLE_PRODUCT_OWNER'" id="btn-save" name="btn-save" type="submit" class="btn btn-success">Enregistrer</button>
     </div>
   </div>
 

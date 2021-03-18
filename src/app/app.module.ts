@@ -101,7 +101,6 @@ import { UpdateCommentaireComponent } from './components/update-commentaire/upda
     MatRadioModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule,
     HttpClientModule,
     BsDatepickerModule.forRoot(),
     NgbTimepickerModule,
@@ -117,7 +116,7 @@ import { UpdateCommentaireComponent } from './components/update-commentaire/upda
     ScrollingModule,
     MatTooltipModule,
     NgApexchartsModule,
-
+    ReactiveFormsModule 
     
 
     

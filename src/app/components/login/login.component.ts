@@ -1,6 +1,6 @@
 import { Component, Input, OnInit,EventEmitter,Output } from '@angular/core';
 import { Router } from '@angular/router';
-import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
 
 import { EmployeService } from 'src/app/services/employe/employe.service';
 import { Authentification } from 'src/app/models/authentification';
@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   private role:string="";
   id:any;
   errorMessage: string;
-  private loginForm: FormGroup;
+  loginForm : FormGroup
 employe:Employe=new Employe();
   constructor(private dataPass: DatapassService,private employeservice:EmployeService,private formBuilder: FormBuilder, private router: Router) {
     this.loginForm = formBuilder.group({
@@ -32,6 +32,12 @@ employe:Employe=new Employe();
  
 
   ngOnInit() {
+    this.loginForm = new FormGroup({
+      login: new FormControl(null, [
+       Validators.required,
+       Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
+      password: new FormControl(null, Validators.required)
+    });
     this.authentification.email=this.login.value;
     this.authentification.password=this.password.value;
 
@@ -40,7 +46,7 @@ employe:Employe=new Employe();
   loginUser() {
     this.errorMessage = "";
     if (this.loginForm.invalid) {
-      this.errorMessage = "EMail and / or password is incorrect";
+      this.errorMessage = "L'email et / ou mot de passe incorrect";
       return;
     }
     this.employeservice.login1(this.authentification)
@@ -79,11 +85,11 @@ employe:Employe=new Employe();
           
           
       }, error => {
-        if(error.status === 404) {
-          this.errorMessage = "No user was found with the following Email/Password";
+        if(error.status === 500) {
+          this.errorMessage = "Aucun utilisateur n'a été trouvé avec ce e-mail / mot de passe ";
         }
         if(error.status === 400) {
-          this.errorMessage = "Email et / ou mot de passe incorrect";
+          this.errorMessage = "L'email et / ou mot de passe incorrect(s)";
         }
       });
       

@@ -36,7 +36,7 @@ export class AffectationRessourcesComponent implements OnInit {
   userstoriesProjet:Observable<Userstory[]>;
   userstoriesProjetArray:Userstory[]=[];
   ELEMENT_DATA:UserstoriesProjets[]=[];
-  displayedColumns: string[] = ['libelleUserStory', 'priorite', 'complexite','affectation'];
+  displayedColumns: string[] ;
   @ViewChild(MatSort ,{ static: true } ) sort:MatSort;
   @ViewChild(MatPaginator ,{ static: true } ) paginator:MatPaginator;
   roleE:string;
@@ -51,7 +51,12 @@ export class AffectationRessourcesComponent implements OnInit {
      private router: Router,private httpClient:HttpClient,private route: ActivatedRoute) { }
   ngOnInit() {
     this.roleE=localStorage.getItem('role')
-
+    if(this.roleE=="ROLE_SCRUM_TEAM_MEMBER"){
+      this.displayedColumns= ['libelleUserStory', 'priorite', 'complexite','affectation'];
+    }
+    else{
+      this.displayedColumns= ['libelleUserStory', 'priorite', 'complexite']
+    }
     this.id =parseInt(localStorage.getItem('id'));
     console.log("ddddddddd"+this.id)
     this.equipeservice.findEmployeEquipe(this.id).subscribe(

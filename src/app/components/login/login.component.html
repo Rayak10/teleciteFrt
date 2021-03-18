@@ -15,15 +15,30 @@
     
       <form  class="form-signin" [formGroup]="loginForm" (ngSubmit)="loginUser()" novalidate>
 			<div class="sign-in-htm">
-				<div class="group">
+				<div class="group1 form-group">
           <span class="textdanger" >{{errorMessage}}</span>
-					<label for="user" class="label">Email</label>
-					<input id="user" type="text" [(ngModel)]="authentification.email" class="input" placeholder="Login" formControlName="login">
+					<label for="email" class="label">Email</label>
+					<input [class.is-invalid]="loginForm.get('login').invalid && loginForm.get('login').touched"  type="email"
+					 [(ngModel)]="authentification.email" class="input1 form-control" formControlName="login" 
+					
+					placeholder="exemple@email.com"/>
+					<div *ngIf="(login.invalid && login.touched) || login.dirty">
+						<small *ngIf="login.errors?.required" class="textdanger">L'email est obligatoire</small>
+						<!--question mark(?) is a safe navigation operator-->
+						<small *ngIf="login.errors?.pattern" class="textdanger">Veuillez fournir une adresse email valide</small>
+					  </div>
 				</div>
 			
-				<div class="group">
+				<div class="group1 form-group">
 					<label for="pass" class="label">Mot de passe</label>
-					<input id="pass" type="password"  [(ngModel)]="authentification.password" class="input" data-type="password" placeholder="Password" formControlName="password">
+					<input id="pass" type="password"  [(ngModel)]="authentification.password"  class="input1 form-control" formControlName="password" 
+					[ngClass]="{'is-invalid': loginForm.get('password').touched && loginForm.get('password').invalid}"
+					data-type="password" placeholder="mot de passe"/>
+
+					<div *ngIf="loginForm.get('password').touched && loginForm.get('password').invalid" class="textdanger ">
+						<div *ngIf="loginForm.get('password').errors.required"> Mot de passe est obligatoire</div>
+					</div>
+
 				</div>
 				<div class="group">
 					<input type="submit" class="button" value="Sign In">
@@ -33,7 +48,7 @@
 			<div class="for-pwd-htm">
 				<div class="group">
 					<label for="user" class="label">Email</label>
-					<input id="user" type="text" class="input">
+					<input id="user" type="email" class="input">
 				</div>
 				<div class="group">
 					<input type="submit" class="button" value="Reset Password">
