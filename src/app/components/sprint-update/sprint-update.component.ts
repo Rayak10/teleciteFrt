@@ -5,6 +5,9 @@ import { Sprint } from 'src/app/models/sprint';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Projet } from 'src/app/models/projet';
+import { FormGroup } from '@angular/forms';
+import { FormControl } from '@angular/forms';
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-sprint-update',
@@ -17,13 +20,21 @@ export class SprintUpdateComponent implements OnInit {
   sprints: Observable<Sprint[]>;
   projetArray= [];
   etatArray= [];
-
+  exform:FormGroup;
   offset: number =new Date().getTimezoneOffset() * 60 * 1000;
   constructor(private sprintservice:SprintService,private route: ActivatedRoute, private router: Router,private projetservice:ProjetService) { }
   
-  
   ngOnInit() {
-    this.etatArray=["Non terminé","Terminé"]
+    this.exform = new FormGroup({
+      'nom' : new FormControl(null,Validators.required),
+      'etat' : new FormControl(null,Validators.required),
+      'dateDebut' : new FormControl(null,Validators.required),
+      'dateFin' : new FormControl(null,Validators.required),
+      'description' : new FormControl(null,Validators.required),
+      'projet' : new FormControl(null,Validators.required)
+    
+    })
+    this.etatArray=["","Non terminé","Terminé"]
     this.sprint=new Sprint();
     
     this.id=this.route.snapshot.params['id'];

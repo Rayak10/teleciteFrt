@@ -9,7 +9,7 @@
 <!-- Form Name -->
 
 <legend  class="navbar-brand titre"  > Gestion des user stories</legend>
-<form #userstoryForm="ngForm" (ngSubmit)="onSubmit(userstoryForm)">
+<form [formGroup]="exform" #userstoryForm="ngForm" (ngSubmit)="onSubmit(userstoryForm)">
 <!-- Text input-->
 <div class="row">
   <div class="col col-md-2">
@@ -17,7 +17,7 @@
 <label class="control-label">Projet :</label>
 </div>
 <div class="col col-md-3">
-    <select required
+    <select required formControlName="projet"
      type="text" 
      class=" form-control "
       id="field_projet"
@@ -27,6 +27,8 @@
         {{p.nomProjet}}
       </option>
     </select>
+    <small *ngIf="exform.get('projet').invalid && exform.get('projet').touched" class="textdanger">Sélectionner un projet</small>
+
     <p class="help-block"></p>
     </div>
 
@@ -35,8 +37,8 @@
   <label *ngIf="roleE=='ROLE_PRODUCT_OWNER'" class="control-label" >User storie :</label>  
 </div>
   <div class="col col-md-4">
-    <textarea *ngIf="roleE=='ROLE_PRODUCT_OWNER'"id="sprint-name"  rows="2" cols="25" required [(ngModel)]="userstory.libelleUserStory" name="userstory-name" type="text" placeholder="En tant que...... je veux .....à fin de ....." class="form-control input-md"></textarea>
-
+    <textarea *ngIf="roleE=='ROLE_PRODUCT_OWNER'"id="sprint-us" formControlName="userStory" rows="2" cols="25" required [(ngModel)]="userstory.libelleUserStory" type="text" placeholder="En tant que...... je veux .....à fin de ....." class="form-control input-md"></textarea>
+    <small *ngIf="exform.get('userStory').invalid && exform.get('userStory').touched" class="textdanger">User storie est obligatoire</small>
   <span class="help-block"></span>  
   </div>
 </div>
@@ -48,7 +50,7 @@
 </div>
 <div class="col col-md-3">
   <select required *ngIf="roleE=='ROLE_PRODUCT_OWNER'"
-     type="text" 
+     type="text" formControlName="priorite"
      class="form-control "
       id="field_priorite"
         name="priorite" [(ngModel)]="selectedPriorite"
@@ -57,6 +59,7 @@
         {{p.name}}
       </option>
     </select>
+    <small *ngIf="exform.get('priorite').invalid && exform.get('priorite').touched" class="textdanger">Sélectionner la  priorité</small>
     <p class="help-block">
     </p>
     </div>
@@ -66,7 +69,7 @@
     </div>
     <div class="col col-md-4">
       <select required *ngIf="roleE=='ROLE_PRODUCT_OWNER'"
-      type="text" 
+      type="text"  formControlName="complexite"
       class="form-control "
        id="field_complexite"
          name="complexite" [(ngModel)]="selectedComplexite"
@@ -75,7 +78,7 @@
          {{c}}
        </option>
      </select>
-   
+     <small *ngIf="exform.get('complexite').invalid && exform.get('complexite').touched" class="textdanger">Sélectionner taux de complexité</small>
   <span class="help-block"></span>  
   </div>
 </div>

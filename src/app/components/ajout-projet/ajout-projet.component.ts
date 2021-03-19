@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjetService } from 'src/app/services/projet/projet.service';
-import { FormBuilder, NgForm } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EquipeService } from 'src/app/services/equipe/equipe.service';
 import { Equipe } from 'src/app/models/equipe';
@@ -21,10 +21,21 @@ export class AjoutProjetComponent implements OnInit {
   selectedEquipeId:number;
 equipe:Equipe;
 offset: number =new Date().getTimezoneOffset() * 60 * 1000;
-
+exform:FormGroup;
   constructor(private projetservice:ProjetService,private equipeservice:EquipeService,private formBuilder:FormBuilder,private router:Router) { }
 
+
   ngOnInit() {
+this.exform = new FormGroup({
+  'nom' : new FormControl(null,Validators.required),
+  'theme' : new FormControl(null,Validators.required),
+  'descriptionG' : new FormControl(null,Validators.required),
+  'descriptionT' : new FormControl(null,Validators.required),
+  'dateDebut' : new FormControl(null,Validators.required),
+  'dateFin' : new FormControl(null,Validators.required)
+})
+ 
+
     this.equipeservice.findEquipeByNom("Équipe non affectée").subscribe(
       data=>{
         this.equipe=data

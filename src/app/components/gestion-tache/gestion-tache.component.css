@@ -28,3 +28,7 @@ th[scope="col"] {
 th[scope="row"] {
   background-color: #d7d9f2;
 }
+.textdanger{
+  color:rgb(233, 45, 12);
+  font-size:12px;
+}

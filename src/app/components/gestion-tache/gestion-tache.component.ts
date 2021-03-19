@@ -11,6 +11,9 @@ import { Router, ActivatedRoute,ParamMap } from '@angular/router';
 import { Userstory } from 'src/app/models/userStory';
 import { TacheService } from 'src/app/services/tache/tache.service';
 import { switchMap } from 'rxjs/operators';
+import { FormGroup } from '@angular/forms';
+import { Validators } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 @Component({
   selector: 'app-gestion-tache',
   templateUrl: './gestion-tache.component.html',
@@ -26,16 +29,20 @@ export class GestionTacheComponent implements OnInit {
   userstory:Userstory=new Userstory();
   id:number;
   tacheArray= [];
-
+  exform:FormGroup;
   constructor(private userstoryservice:UserstoryService,private tacheservice:TacheService,private sprintservice:SprintService,private route: ActivatedRoute,private formBuilder:FormBuilder,private router:Router) { }
 
   ngOnInit() {
-
+    this.exform = new FormGroup({
+      'description' : new FormControl(null,Validators.required),
+      'dure' : new FormControl(null,[Validators.required, Validators.pattern(/^(1|10|[1-9]\d*)$/)]),
+      'etat' : new FormControl(null,Validators.required),
+         })
       this.id=this.route.snapshot.params['id'];
 
       console.log("iiiiiidddddddddddddddd: "+JSON.stringify(this.id));
 
-    this.etatArray=["To do","Doing","Done"]
+    this.etatArray=["","To do","Doing","Done"]
     this.userstoryservice.findUserstoryById(this.id).subscribe(
       response =>{
         this.tache.userStory = response;

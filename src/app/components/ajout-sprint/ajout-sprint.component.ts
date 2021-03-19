@@ -6,6 +6,9 @@ import { Sprint } from 'src/app/models/sprint';
 import { ProjetService } from 'src/app/services/projet/projet.service';
 import { SprintService } from 'src/app/services/sprint/sprint.service';
 import * as $ from 'jquery' ;
+import { FormGroup } from '@angular/forms';
+import { FormControl } from '@angular/forms';
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-ajout-sprint',
@@ -13,7 +16,7 @@ import * as $ from 'jquery' ;
   styleUrls: ['./ajout-sprint.component.css']
 })
 export class AjoutSprintComponent implements OnInit {
-
+  exform:FormGroup;
   sprint:Sprint=new Sprint();
   submitted = false;
   sprints: Observable<Sprint[]>;
@@ -32,7 +35,15 @@ export class AjoutSprintComponent implements OnInit {
 
   ngOnInit()  {
     
-   
+    this.exform = new FormGroup({
+      'nom' : new FormControl(null,Validators.required),
+      'etat' : new FormControl(null,Validators.required),
+      'dateDebut' : new FormControl(null,Validators.required),
+      'dateFin' : new FormControl(null,Validators.required),
+      'description' : new FormControl(null,Validators.required),
+      'projet' : new FormControl(null,Validators.required)
+    
+    })
    
       $("#leg2").click(function(){
         $("#tab1").toggle("slide");
@@ -43,7 +54,7 @@ export class AjoutSprintComponent implements OnInit {
     
     
   
-this.etatArray=["Non terminé","Terminé"]
+this.etatArray=["","Non terminé","Terminé"]
 this.projetservice.findAllProjets().subscribe(
   data => {console.log("data from find all projet:"+JSON.stringify(data));   
   

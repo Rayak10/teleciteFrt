@@ -1,5 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { FormBuilder, NgForm } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -25,8 +28,9 @@ export class AjoutcommentaireComponent implements OnInit {
    commantaire:Commentaire=new Commentaire();
    commantaires: Observable<Commentaire[]>;
    submitted = false;
- employe:Employe=new Employe();
- sprint:Sprint=new Sprint();
+   employe:Employe=new Employe();
+   sprint:Sprint=new Sprint();
+   exform:FormGroup;
 
    constructor(private employeservice:EmployeService,private commentaireservice:CommentaireService,private sprintservice:SprintService,private formBuilder: FormBuilder, private router: Router,private httpClient:HttpClient,private route: ActivatedRoute,
    public dialogRef:MatDialogRef<GestionSprintsComponent>,
@@ -36,6 +40,11 @@ export class AjoutcommentaireComponent implements OnInit {
  
  
    ngOnInit() {
+    this.exform = new FormGroup({
+      'commantaire' : new FormControl(null,Validators.required),
+     
+    })
+
     this.sprintservice.findSprintById(this.recivedData.idSprint).subscribe(
       response =>{
         this.commantaire.sprint = response;

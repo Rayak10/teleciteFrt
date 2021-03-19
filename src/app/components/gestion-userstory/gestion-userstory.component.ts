@@ -8,6 +8,9 @@ import { Sprint } from 'src/app/models/sprint';
 import { UserstoryService } from 'src/app/services/userstory/userstory.service';
 import { SprintService } from 'src/app/services/sprint/sprint.service';
 import { Projet } from 'src/app/models/projet';
+import { FormGroup } from '@angular/forms';
+import { FormControl } from '@angular/forms';
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-gestion-userstory',
@@ -15,6 +18,7 @@ import { Projet } from 'src/app/models/projet';
   styleUrls: ['./gestion-userstory.component.css']
 })
 export class GestionUserstoryComponent implements OnInit {
+  exform:FormGroup;
   userstory:Userstory=new Userstory();
   submitted = false;
   userstorys: Observable<Userstory[]>;
@@ -38,6 +42,13 @@ roleE:String;
   }
 
   ngOnInit() {
+    this.exform = new FormGroup({
+      'projet' : new FormControl(null,Validators.required),
+      'userStory' : new FormControl(null,Validators.required),
+      'priorite' : new FormControl(null,Validators.required),
+      'complexite' : new FormControl(null,Validators.required),
+    
+    })
     this.roleE=localStorage.getItem('role')
     this.prioriteArray=[
       {Id:1,name:"Must have"},

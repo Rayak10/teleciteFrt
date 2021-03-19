@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { EquipeService } from 'src/app/services/equipe/equipe.service';
 import {TIME_ZONE_OFFSET} from '../../settings/app.settings';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-projet-update',
@@ -17,13 +18,25 @@ export class ProjetUpdateComponent implements OnInit {
   projets: Observable<Projet[]>;
   equipeArray= [];
   roleE:string;
-
+  exform:FormGroup;
   offset: number =new Date().getTimezoneOffset() * 60 * 1000;
   constructor(private projetservice:ProjetService,private route: ActivatedRoute, private router: Router,private equipeservice:EquipeService) {
    }
   
   
   ngOnInit() {
+
+    this.exform = new FormGroup({
+      'nom' : new FormControl(null,Validators.required),
+      'theme' : new FormControl(null,Validators.required),
+      'descriptionG' : new FormControl(null,Validators.required),
+      'descriptionT' : new FormControl(null,Validators.required),
+      'dateDebut' : new FormControl(null,Validators.required),
+      'dateFin' : new FormControl(null,Validators.required),
+      'equipe' : new FormControl(null,Validators.required)
+
+    })
+
     this.roleE=localStorage.getItem('role')
 
     this.projet=new Projet();

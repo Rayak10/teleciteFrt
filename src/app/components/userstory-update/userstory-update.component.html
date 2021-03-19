@@ -8,12 +8,13 @@
 <!-- Form Name -->
 
 <legend  class="navbar-brand titre"  >Changer les informations</legend>
-<form (ngSubmit)="onSubmit()">
+<form [formGroup]="exform" (ngSubmit)="onSubmit()">
 <!-- Text input-->
 <div class="form-group">
   <label class="col-md-4 control-label" >User storie :</label>  
   <div class="col-md-12">
-  <input id="sprint-name" required [(ngModel)]="userstory.libelleUserStory" name="userstory-name" type="text" placeholder="En tant que...... je veux ....." class="form-control input-md" >
+  <input id="us-name" formControlName="userStory"  [(ngModel)]="userstory.libelleUserStory"  type="text" placeholder="En tant que...... je veux ....." class="form-control input-md" >
+  <small *ngIf="exform.get('userStory').invalid && exform.get('userStory').touched" class="textdanger">User storie est obligatoire</small>
   <span class="help-block"></span>  
   </div>
 </div>
@@ -21,19 +22,26 @@
 <div class="form-group">
   <label class="col-md-2 control-label">Priorité :</label>
   <div class="col-md-4">
-    <input id="userstory-name" required [(ngModel)]="userstory.priorite" name="priorite-name" type="number" placeholder="choisir un nembre sur 5" class="form-control input-md" >
+    <input id="priorite-name" formControlName="priorite"  [(ngModel)]="userstory.priorite" type="number" placeholder="choisir un nembre sur 5" class="form-control input-md" >
+    <small *ngIf="exform.get('priorite').errors?.required && exform.get('priorite').touched" class="textdanger">Sélectionner la  priorité</small>
+    <small *ngIf="exform.get('priorite').errors?.pattern && exform.get('priorite').touched" class="textdanger">La valeur entre 1 et 4</small>
     <p class="help-block"></p>
     </div>
   <label class="col-md-2 control-label" >Complexité  :</label>  
   <div class="col-md-4">
-    <input id="complexite-name" required [(ngModel)]="userstory.complexite" name="complexite-name" type="number" placeholder="choisir un nembre sur 5" class="form-control input-md" >
-  <span class="help-block"></span>  
+    <input id="complexite-name" formControlName="complexite"  [(ngModel)]="userstory.complexite"  type="number" placeholder="choisir un nembre sur 5" class="form-control input-md" >
+    <small *ngIf="exform.get('complexite').errors?.required && exform.get('complexite').touched" class="textdanger">Sélectionner taux de complexité</small>
+    <small *ngIf="exform.get('complexite').errors?.pattern && exform.get('complexite').touched" class="textdanger">La valeur doit appartient à la suite fibonacci</small>
+
+    <span class="help-block"></span>  
   </div>
 </div>
 <div class="form-group">
   <label class="col-md-4 control-label" >Backlog Produit de projet :</label>  
   <div class="col-md-12">
-    <input id="sprintuser-name" required [(ngModel)]="userstory.sprint.projet.nomProjet"disabled="disabled" name="sprintuser-name" type="text" placeholder="" class="form-control input-md" >
+    <input id="sprintuser-name" formControlName="nomProjet"   [(ngModel)]="userstory.sprint.projet.nomProjet"disabled="disabled"  type="text" placeholder="" class="form-control input-md" >
+    <small *ngIf="exform.get('nomProjet').errors?.required && exform.get('nomProjet').touched" class="textdanger">Sélectionner taux de complexité</small>
+
     <span class="help-block"></span>  
   </div>
 </div>

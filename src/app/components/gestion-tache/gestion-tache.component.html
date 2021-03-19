@@ -9,7 +9,7 @@
 <!-- Form Name -->
 
 <legend  class="navbar-brand titre"  > Gestion des tâches </legend>
-<form #tacheForm="ngForm" (ngSubmit)="onSubmit(tacheForm)">
+<form #tacheForm="ngForm" [formGroup]="exform"  (ngSubmit)="onSubmit(tacheForm)">
 <!-- Text input-->
 <div class="row">
   <div class="col col-md-2">
@@ -17,7 +17,8 @@
 <label class="control-label">description tâche :</label>
 </div>
 <div class="col col-md-8">
-    <textarea id="tache-name"  rows="2" cols="12" required [(ngModel)]="tache.descriptionTache" name="tache-name" type="text" placeholder="ecrire la tâche ." class="form-control input-md"></textarea>
+    <textarea formControlName="description" id="tache-description"  rows="2" cols="12"  [(ngModel)]="tache.descriptionTache" name="tache-name" type="text" placeholder="ecrire la tâche ." class="form-control input-md"></textarea>
+    <small *ngIf="exform.get('description').errors?.required && exform.get('description').touched" class="textdanger">Description tâche est obligatoire</small>
 
     <p class="help-block"></p>
     </div>
@@ -31,7 +32,9 @@
 </div>
 <div class="col col-md-3">
 
-    <input id="tache-name" required [(ngModel)]="tache.dureeTache" name="duree-name" type="number" placeholder="Nembre des jours." class="form-control input-md" >
+    <input formControlName="dure" id="tache-dure"  [(ngModel)]="tache.dureeTache" name="duree-name" type="number" placeholder="Nembre de(s) jour(s)." class="form-control input-md" >
+    <small *ngIf="exform.get('dure').errors?.required && exform.get('dure').touched" class="textdanger">La durée est obligatoire</small>
+    <small *ngIf="exform.get('dure').errors?.pattern && exform.get('dure').touched" class="textdanger">Durée est par nembre de(s) jour(s)/(positif)</small>
     <p class="help-block"></p>
     </div>
   
@@ -40,13 +43,13 @@
     </div>
     <div class="col col-md-3">
 
-        <select required
-        type="text" 
+        <select formControlName="etat"
+        type="text" disabled
         class="form-control "
          id="field_tache"
            name="tacheEta" [(ngModel)]="tache.etatTache">
          <option *ngFor='let etat of etatArray'> {{etat}} </option>
-         
+         <small *ngIf="exform.get('etat').errors?.required && exform.get('etat').touched" class="textdanger">L'eta est obligatoire</small>
        </select>  <span class="help-block"></span>  
   </div>
 </div>

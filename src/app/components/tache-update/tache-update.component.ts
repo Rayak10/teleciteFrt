@@ -4,6 +4,7 @@ import { Tache } from 'src/app/models/tache';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Userstory } from 'src/app/models/userStory';
 import { UserstoryService } from 'src/app/services/userstory/userstory.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-tache-update',
@@ -16,10 +17,17 @@ export class TacheUpdateComponent implements OnInit {
   userstory:Userstory;
   sprintArray= [];
   etatArray= [];
+  exform:FormGroup;
+
   constructor(private tacheservice:TacheService,private userstoryservice:UserstoryService,private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
-    this.etatArray=["To do","Doing","Done"]
+    this.exform = new FormGroup({
+      'description' : new FormControl(null,Validators.required),
+      'etat' : new FormControl(null,Validators.required),
+      'dure' : new FormControl(null,[Validators.required, Validators.pattern(/^(1|10|[1-9]\d*)$/)]),
+         })
+    this.etatArray=["","To do","Doing","Done"]
     this.tache=new Tache();
     
     this.id=this.route.snapshot.params['id'];

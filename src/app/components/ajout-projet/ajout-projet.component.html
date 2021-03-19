@@ -8,37 +8,40 @@
 <!-- Form Name -->
 
 <legend  class="navbar-brand titre"  > Ajouter un projet</legend>
-<form #getprojetForm="ngForm"(ngSubmit)="onSubmit(getprojetForm)">
+<form #getprojetForm="ngForm" [formGroup]="exform" (ngSubmit)="onSubmit(getprojetForm)">
 <!-- Text input-->
 <div class="form-group">
   <label class="col-md-2 control-label" >Nom de projet:</label>  
   <div class="col-md-4">
-  <input id="projet-name" required [(ngModel)]="projet.nomProjet" name="projet-name" type="text" placeholder="tapez le nom du projet" class="form-control input-md" >
+  <input id="projet-name" formControlName="nom" required [(ngModel)]="projet.nomProjet" name="projet-name" type="text" placeholder="tapez le nom du projet" class="form-control input-md" >
+  <small *ngIf="exform.get('nom').invalid && exform.get('nom').touched" class="textdanger">Nom projet est obligatoire</small>
   <span class="help-block"></span>  
   </div>
   <label class="col-md-2 control-label" >Théme :</label>  
   <div class="col-md-4">
-  <input id="projet-theme"required [(ngModel)]="projet.theme" name="projet-theme" type="text" placeholder="tapez le théme du projet" class="form-control input-md">
+  <input id="projet-theme" formControlName="theme" required [(ngModel)]="projet.theme" name="projet-theme" type="text" placeholder="tapez le théme du projet" class="form-control input-md">
+  <small *ngIf="exform.get('theme').invalid && exform.get('theme').touched" class="textdanger">Théme est obligatoire</small>
   <span class="help-block"></span>  
   </div>
 </div>
 <div class="form-group">
   <label class="col-md-2 control-label" >Description générale :</label>  
   <div class="col-md-4">
-    <textarea id="projet-description"required [(ngModel)]="projet.description" name="projet-description" type="text" placeholder="tapez une description générale" class="form-control input-md"></textarea>
-  <span class="help-block"></span>  
+    <textarea  id="projet-description" formControlName="descriptionG" required [(ngModel)]="projet.description" name="projet-description" type="text" placeholder="tapez une description générale" class="form-control input-md"></textarea>
+    <small *ngIf="exform.get('descriptionG').invalid && exform.get('descriptionG').touched" class="textdanger">Description générale est obligatoire</small>
+    <span class="help-block"></span>  
   </div>
   <label class="col-md-2 control-label" >Description technique :</label>  
   <div class="col-md-4">
-    
-  <textarea id="projet-description-thechnique"  required [(ngModel)]="projet.descriptionTechnique" name="projet-description-thechnique" type="text" placeholder="tapez une description technique " class="form-control input-md"></textarea>
+  <textarea id="projet-description-thechnique"  formControlName="descriptionT" required [(ngModel)]="projet.descriptionTechnique" name="projet-description-thechnique" type="text" placeholder="tapez une description technique " class="form-control input-md"></textarea>
+  <small *ngIf="exform.get('descriptionT').invalid && exform.get('descriptionT').touched" class="textdanger">Description technique est obligatoire</small>
   <span class="help-block"></span>  
   </div>
 </div>
 <div class="form-group">
   <label class="col-md-2 control-label">Date début projet :</label>  
   <div class="col-md-4">
-    <input  
+    <input formControlName="dateDebut"
     name="projet-date-debut"
     placeholder = "Selectionner la date début"
     [(ngModel)]="projet.dateDebut"
@@ -46,12 +49,12 @@
     class="form-control"
     bsDatepicker
     [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
- 
+    <small *ngIf="exform.get('dateDebut').invalid && exform.get('dateDebut').touched" class="textdanger">Date début projet est obligatoire</small>
   <span class="help-block"></span>  
   </div>  
   <label class="col-md-2 control-label">Date fin projet :</label>  
   <div class="col-md-4">
-    <input  
+    <input  formControlName="dateFin"
     name="projet-date-fin"
     placeholder = "Selectionner la date fin"
     [(ngModel)]="projet.dateFin"
@@ -59,7 +62,7 @@
     class="form-control"
     bsDatepicker
     [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
- 
+    <small *ngIf="exform.get('dateFin').invalid && exform.get('dateFin').touched" class="textdanger">Date fin projet  est obligatoire</small>
   <span class="help-block"></span>  
   </div>  
 </div>

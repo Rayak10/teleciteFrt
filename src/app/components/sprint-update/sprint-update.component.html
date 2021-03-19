@@ -8,31 +8,32 @@
 <!-- Form Name -->
 
 <legend  class="navbar-brand titre"  > Changer les informations </legend>
-<form (ngSubmit)="onSubmit()">
+<form [formGroup]="exform" (ngSubmit)="onSubmit()">
 <!-- Text input-->
 <div class="form-group">
   <label class="col-md-2 control-label" >Nom de Sprint :</label>  
   <div class="col-md-4">
-  <input id="sprint-name" required [(ngModel)]="sprint.nomSprint" name="sprint-name" type="text" placeholder="tapez le nom du sprint" class="form-control input-md" >
+  <input id="sprint-name" formControlName="nom" required [(ngModel)]="sprint.nomSprint" name="sprint-name" type="text" placeholder="tapez le nom du sprint" class="form-control input-md" >
+  <small *ngIf="exform.get('nom').invalid && exform.get('nom').touched" class="textdanger">Nom sprint est obligatoire</small>
   <span class="help-block"></span>  
   </div>
   <label class="col-md-2 control-label">Etat du sprint :</label>
   <div class="col-md-4">
-    <select required
+    <select  formControlName="etat"
      type="text" 
      class="form-control "
       id="field_sprint"
         name="sprintEtat" [(ngModel)]="sprint.etatSprint">
       <option *ngFor='let etat of etatArray'> {{etat}} </option>
-      
     </select>
+    <small *ngIf="exform.get('etat').invalid && exform.get('etat').touched" class="textdanger">Sélectionner une état</small>
     <p class="help-block"></p>
     </div>
 </div>
 <div class="form-group">
     <label class="col-md-2 control-label">Date début Sprint :</label>  
     <div class="col-md-4">
-      <input  
+      <input  formControlName="dateDebut"
       name="sprint-date-debut"
       placeholder = "Selectionner la date début"
       [(ngModel)]="sprint.dateDebut"
@@ -40,12 +41,12 @@
       class="form-control"
       bsDatepicker
       [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
-   
+      <small *ngIf="exform.get('dateDebut').invalid && exform.get('dateDebut').touched" class="textdanger">Date début Sprint est obligatoire</small>
     <span class="help-block"></span>  
     </div>  
     <label class="col-md-2 control-label">Date fin sprint :</label>  
     <div class="col-md-4">
-      <input  
+      <input  formControlName="dateFin"
       name="sprint-date-fin"
       placeholder = "Selectionner la date fin"
       [(ngModel)]="sprint.dateFin"
@@ -53,23 +54,24 @@
       class="form-control"
       bsDatepicker
       [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
-   
+      <small *ngIf="exform.get('dateFin').invalid && exform.get('dateFin').touched" class="textdanger">Date fin sprint est obligatoire</small>
     <span class="help-block"></span>  
     </div>  
   </div>
   <label class="col-md-2 control-label" >Description  :</label>  
   <div class="col-md-4">
-    <textarea id="sprint-description"required [(ngModel)]="sprint.descriptionSprint" name="sprint-description" type="text" placeholder="tapez une description pour ce sprint ..." class="form-control input-md"></textarea>
-  <span class="help-block"></span>  
+    <textarea formControlName="description" id="sprint-description"required [(ngModel)]="sprint.descriptionSprint" name="sprint-description" type="text" placeholder="tapez une description pour ce sprint ..." class="form-control input-md"></textarea>
+    <small *ngIf="exform.get('description').invalid && exform.get('description').touched" class="textdanger">Description est obligatoire</small>
+    <span class="help-block"></span>  
   </div>
   <label class="col-md-2 control-label">Projet :</label>
   <div class="col-md-4">
-    <select required
+    <select required formControlName="projet"
      type="text" 
      class="form-control "
       id="field_projet"
-        name="projet" [(ngModel)]="sprint.projet.idProjet"
-        >
+        name="projet" [(ngModel)]="sprint.projet.idProjet">
+        <small *ngIf="exform.get('projet').invalid && exform.get('projet').touched" class="textdanger">Sélectionner un projet</small>
       <option  *ngFor="let p of projetArray" [value]="p.idProjet">
         {{p.nomProjet}}
       </option>
