@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeService } from 'src/app/services/employe/employe.service';
-import { FormBuilder, FormGroup, FormControl, NgForm } from '@angular/forms';
+import { FormBuilder,Validators, FormGroup, FormControl, NgForm } from '@angular/forms';
 import { Router, NavigationEnd } from '@angular/router';
 import { Employe } from 'src/app/models/employe';
 import { Observable } from 'rxjs';
@@ -12,7 +12,6 @@ import { EquipeService } from 'src/app/services/equipe/equipe.service';
 import { Equipe } from 'src/app/models/equipe';
 import { RoleMember } from 'src/app/models/roleMember';
 import { RoleService } from 'src/app/services/role/role.service';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-gestion-comptes',
@@ -20,6 +19,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./gestion-comptes.component.css']
 })
 export class GestionComptesComponent implements OnInit {
+  exform:FormGroup;
   employe:Employe=new Employe();
   submitted = false;
   employes: Observable<Employe[]>;
@@ -40,17 +40,36 @@ export class GestionComptesComponent implements OnInit {
   selectedRoleId: number;
   public imagePath;
   roleE:string;
-
   offset: number =new Date().getTimezoneOffset() * 60 * 1000;
-
   urllink:any="../../assets/telecite.webp";  
   selectedFile: File;
   retrievedImage: any;
   public userFile : any =null;
   message:string;
-  constructor(private employeservice:EmployeService,private departementservice:DepartementService,private roleservice:RoleService,private equipeservice:EquipeService,private bureauservice:BureauService,private formBuilder: FormBuilder, private router: Router,private httpClient:HttpClient) {}
+  constructor(private employeservice:EmployeService,private departementservice:DepartementService,private roleservice:RoleService,private equipeservice:EquipeService,private bureauservice:BureauService, private router: Router,private formBuilder: FormBuilder) {}
 
   ngOnInit() {
+  
+    this.exform = new FormGroup({
+      'prenom' : new FormControl(null,Validators.required),
+      'naissance' : new FormControl(null,Validators.required),
+      'embauche' : new FormControl(null,Validators.required),
+      'post' : new FormControl(null,Validators.required),
+      'role' : new FormControl(null,Validators.required),
+      'nom' : new FormControl(null,Validators.required),
+      'matricule' : new FormControl(null,Validators.required),
+      'bureau' : new FormControl(null,Validators.required),
+      'departement' : new FormControl(null,Validators.required),
+      'email' : new FormControl(null,[Validators.required,
+                                      Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
+      'status1' : new FormControl(null,Validators.required),
+      'status2' : new FormControl(null,Validators.required),
+      'salaire' : new FormControl(null,Validators.required),
+      'equipe' : new FormControl(null,Validators.required),
+      'password' : new FormControl('', [Validators.required,Validators.minLength(8)]),
+      'confirme' : new FormControl(null,Validators.required),
+    })
+
     this.roleE=localStorage.getItem('role')
     this.reloadData();
   
@@ -81,6 +100,7 @@ export class GestionComptesComponent implements OnInit {
     this.employe.role=null;
 
   }
+  get password(){return this.exform.get('password')}
 
   newEmployee(): void {
     this.submitted = false;

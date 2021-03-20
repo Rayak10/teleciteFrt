@@ -24,6 +24,7 @@
     "@auth0/angular-jwt": "^5.0.2",
     "@fortawesome/fontawesome-free": "^5.14.0",
     "@ng-bootstrap/ng-bootstrap": "5.2.2",
+    "angular-validation-match": "^1.9.0",
     "apexcharts": "^3.23.1",
     "bootstrap": "^4.5.0",
     "font-awesome": "^4.7.0",
@@ -57,6 +58,7 @@
     "protractor": "^7.0.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
-    "typescript": "~3.5.3"
+    "typescript": "~3.5.3",
+    "validator": "^13.5.2"
   }
 }

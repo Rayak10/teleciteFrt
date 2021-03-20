@@ -4,16 +4,16 @@
 <!-- FORM  -->	    
  <div class="container">	  
 
- <form   (ngSubmit)="onSubmit()" >
+ <form  [formGroup]="exform" (ngSubmit)="onSubmit()" >
 
 <legend  class="navbar-brand titre"  > Gestion des reunions </legend>
 <!-- Text input-->
 <div class="row">
   <label class="col-md-2 control-label">Type réunion :</label>
   <div class="col-md-4">
-    <select required
+    <select formControlName="type" 
      type="text" 
-     class="form-control "
+     class="form-control"
       id="field_reunion"
         name="reunion" [(ngModel)]="this.reunion.type"
         (change)="onChange($event)">
@@ -21,13 +21,16 @@
         {{type}}
       </option>
     </select>
+    <small *ngIf="exform.get('type').invalid && exform.get('type').touched" class="textdanger">Sélectionner un type de réunion</small>
+
     <p class="help-block"></p>
     </div>
     <div class="col col-md-2">
   <label class="control-label" >Nom de réunion :</label> 
     </div>
   <div class="col-md-4">
-  <input id="reunion-name" required [(ngModel)]="reunion.nomReunion" name="reunion-name" type="text" placeholder="tapez le nom du reunion" class="form-control input-md" >
+  <input id="reunion-name" formControlName="nom"  [(ngModel)]="reunion.nomReunion" name="reunion-name" type="text" placeholder="tapez le nom du reunion" class="form-control input-md" >
+  <small *ngIf="exform.get('nom').invalid && exform.get('nom').touched" class="textdanger">Nom de réunion est obligatoire</small>
   <span class="help-block"></span>  
   </div>
 </div>
@@ -41,22 +44,22 @@
 </div>
 
   <div class="col-md-4">
-    <textarea id="reunion-description" rows="2" cols="12" required [(ngModel)]="reunion.descriptionReunion" name="reunion-description" type="text" placeholder="tapez une description pour cette réunion ..." class="form-control input-md"></textarea>
-
+    <textarea id="reunion-description" rows="2" cols="12" formControlName="contexte"  [(ngModel)]="reunion.descriptionReunion" name="reunion-description" type="text" placeholder="tapez une description pour cette réunion ..." class="form-control input-md"></textarea>
+    <small *ngIf="exform.get('contexte').invalid && exform.get('contexte').touched" class="textdanger">Contexte de réunion est obligatoire</small>
     <p class="help-block"></p>
     </div>
     <div class="col col-md-2">
   <label class="control-label">Date début réunion :</label>  
     </div>
     <div class="col-md-4">
-      <input  
+      <input  formControlName="dateDebut" 
       name="reunion-date-debut"
       placeholder = "Selectionner la date début"
       [(ngModel)]="reunion.dateDebut"
       class="form-control"
       bsDatepicker
       [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
-   
+      <small *ngIf="exform.get('dateDebut').invalid && exform.get('dateDebut').touched" class="textdanger">Date début de réunion est obligatoire</small>
     <span class="help-block"></span>  
     </div>  
 </div>
@@ -72,14 +75,14 @@
     <label class="control-label">Date fin réunion :</label>
   </div>  
     <div class="col-md-4">
-      <input  
+      <input  formControlName="dateFin" 
       name="reunion-date-fin"
       placeholder = "Selectionner la date fin"
       [(ngModel)]="reunion.dateFin"
       class="form-control"
       bsDatepicker
       [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
-   
+      <small *ngIf="exform.get('dateFin').invalid && exform.get('dateFin').touched" class="textdanger">Date fin de réunion est obligatoire</small>
     <span class="help-block"></span>  
     </div>  
   </div>
@@ -91,13 +94,13 @@
     </div>
       
     <div class="col-md-4">
-      <ngb-timepicker [formControl]="ctrl1" [(ngModel)]="reunion.heureDeb" required></ngb-timepicker>
+      <ngb-timepicker [formControl]="ctrl1" [(ngModel)]="reunion.heureDeb" formControlName="heureDebut" ></ngb-timepicker>
       <div *ngIf="ctrl1.valid" class="small form-text text-success">Bon choix</div>
-      <div *ngIf="ctrl1.errors" class="small form-text text-danger">
+      <div *ngIf="ctrl1.errors" class="small form-text textdanger">
         <div *ngIf="ctrl1.errors['required']">Sélectionnez l'heure début</div>
         <div *ngIf="ctrl1.errors['tooLate']">C'est un peu trop tard</div>
         <div *ngIf="ctrl1.errors['tooEarly']">C'est un peu trop tôt</div>
-
+        <small *ngIf="exform.get('heureDebut').invalid && exform.get('heureDebut').touched" class="textdanger">Heure début  de réunion est obligatoire</small>
       </div>
      </div>
      <div class="col col-md-2">
@@ -105,9 +108,9 @@
       </div>
       
      <div class="col col-md-4">
-      <ngb-timepicker [formControl]="ctrl2" [(ngModel)]="reunion.heureFin" required></ngb-timepicker>
+      <ngb-timepicker [formControl]="ctrl2" [(ngModel)]="reunion.heureFin" formControlName="heureFin" ></ngb-timepicker>
       <div *ngIf="ctrl2.valid" class="small form-text text-success">Bon choix</div>
-      <div *ngIf="ctrl2.errors" class="small form-text text-danger">
+      <div *ngIf="ctrl2.errors" class="small form-text textdanger">
         <div *ngIf="ctrl2.errors['required']">Sélectionnez l'heure fin</div>
         <div *ngIf="ctrl2.errors['tooLate']">C'est un peu trop tard</div>
         <div *ngIf="ctrl2.errors['probleme']">Verifier l'heure fin de reunion  </div>
@@ -120,7 +123,7 @@
   <label class="control-label">Equipe :</label>
     </div>
   <div class="col-md-4">
-    <select required
+    <select formControlName="equipe" 
      type="text" 
      class="form-control "
       id="field_equipe"
@@ -130,6 +133,7 @@
         {{e.nomEquipe}}
       </option>
     </select>
+    <small *ngIf="exform.get('equipe').invalid && exform.get('equipe').touched" class="textdanger">Sélectionner une équipe</small>
     <p class="help-block"></p>
     </div>
     </div>
@@ -140,7 +144,7 @@
     <label class="control-label">Departement :</label>
       </div>
     <div class="col-md-4">
-      <select required
+      <select formControlName="departement" 
        type="text" 
        class="form-control "
         id="field_departement"
@@ -150,6 +154,7 @@
           {{d.nomDepartement}}
         </option>
       </select>
+      <small *ngIf="exform.get('departement').invalid && exform.get('departement').touched" class="textdanger">Sélectionner un departement</small>
       <p class="help-block"></p>
       </div>
       </div>

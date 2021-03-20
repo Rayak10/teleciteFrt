@@ -52,6 +52,7 @@ export class GestionReunionComponent implements OnInit {
   form: FormGroup;
   selectedItemsList:Employe[] = [];
   checkedIDs:number[];
+  exform:FormGroup;
   constructor(config: NgbTimepickerConfig ,private runionservice:ReunionService,private employeservice:EmployeService,private equipeservice:EquipeService,private departementservive:DepartementService,private formBuilder:FormBuilder,private router:Router) {
     config.seconds = false;
     config.spinners = true;
@@ -62,6 +63,17 @@ export class GestionReunionComponent implements OnInit {
    }
 
   ngOnInit()  {
+    this.exform = new FormGroup({
+      'type' : new FormControl(null,Validators.required),
+      'heureDebut' : new FormControl(null,Validators.required),
+      'heureFin' : new FormControl(null,Validators.required),
+      'departement' : new FormControl(null,Validators.required),
+      'contexte' : new FormControl(null,Validators.required),
+      'equipe' : new FormControl(null,Validators.required),
+      'nom' : new FormControl(null,Validators.required),
+      'dateDebut' : new FormControl(null,Validators.required),
+      'dateFin' : new FormControl(null,Validators.required)
+    })
     this.reunion.heureDeb={hour: 0, minute: 0,second:0};
    this.reunion.heureFin={hour: 0, minute: 0,second:0};
     this.fetchSelectedItems();
@@ -79,10 +91,10 @@ this.mnt2=this.value2.minute;
       if ( ((this.h2)-(this.h1))==0) {
         return  {probleme: true};;
       }
-      if ((this.value2.hour > 18 ) ){ 
+      if (( this.value2.hour > 18 )||( this.value2.hour <9 )){ 
         return {tooLate: true};
       }
-     
+      
       if ( (this.h2)-(this.h1)<0) {
         return {probleme: true};
       }

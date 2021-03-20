@@ -11,7 +11,7 @@
             <b>Contexte  :</b><label>{{reunion.descriptionReunion}}</label>
         </div>
         <div>
-            <b>Date début  :</b><label>{{reunion.dateDebut}}</label>
+            <b>Date début  :</b><label>{{reunion.dateDebut | date :'shortDate'}}</label>
         </div>
 
         <div>
@@ -51,11 +51,11 @@
     <table class="table table-bordered table-condensed table-hover">
         <thead>
             <tr>
-                <th scope="col" width=20%>Nom </th>
-                <th scope="col" width=20%>Preénom</th>
+                <th scope="col" width=15%>Nom </th>
+                <th scope="col" width=15%>Preénom</th>
                 <th scope="col" width=20%>Email</th>
                 <th scope="col" width=15%>Post</th>
-                <th scope="col" width=15%>Role</th>
+                <th scope="col" width=25%>Role</th>
             </tr>
                 
         </thead>
@@ -65,7 +65,7 @@
                 <td>{{emp.prenomEmploye}}</td>
                 <td>{{emp.email}}</td>
                 <td>{{emp.post}}</td>
-                <td>{{emp.role}}</td>
+                <td>{{emp.role.nomRole}}</td>
                 
                   
                   
