@@ -1,9 +1,10 @@
 <hr/>
 <hr/>    
-<div class="container" *ngIf="roleE=='ROLE_DRH'">	       
-<legend  class="navbar-brand titre"  > Gestion des employés</legend>
+<div class="container" >	       
+<legend *ngIf="roleE=='ROLE_DRH'" class="navbar-brand titre"  > Gestion des employés</legend>
 <form #getCompteForm="ngForm" [formGroup]="exform"(ngSubmit)="onSubmit(getCompteForm)">
-<div class="row">
+<div *ngIf="roleE=='ROLE_DRH'"> 
+  <div class="row">
   <div class="col col-md-2">
   <label class="control-label" >Nom :</label> 
  </div>
@@ -16,7 +17,7 @@
   <label class="control-label" >Prenom :</label>  
 </div>
 <div class="col col-md-4">
-  <input id="employe-prenom"formControlName="prenom" [(ngModel)]="employe.prenomEmploye" autocomplete="off" name="prenomEmploye" type="text" placeholder="tapez le prenom de l'employé" class="form-control input-md">
+  <input id="employe-prenom" formControlName="prenom" [(ngModel)]="employe.prenomEmploye" autocomplete="off" name="prenomEmploye" type="text" placeholder="tapez le prenom de l'employé" class="form-control input-md">
   <span class="help-block"></span> 
   <small *ngIf="exform.get('prenom').invalid && exform.get('prenom').touched" class="textdanger">Prenom est obligatoire</small>
   </div>
@@ -95,7 +96,7 @@
     <div class="col col-md-4">
       <div class="input-group">
       <span class="input-group-addon">DTN</span>
-      <input id="employe-salaire"formControlName="salaire" [(ngModel)]="employe.salaire" autocomplete="off" name="salaire" class="form-control" placeholder="tappez salaire en dinare" type="double">
+      <input id="employe-salaire" formControlName="salaire" [(ngModel)]="employe.salaire" autocomplete="off" name="salaire" class="form-control" placeholder="tappez salaire en dinare" type="double">
       <small *ngIf="exform.get('salaire').invalid && exform.get('salaire').touched" class="textdanger"> Salaire est obligatoire</small>  
     </div>
     <p class="help-block"></p>
@@ -163,7 +164,7 @@
     <div class="col col-md-4">
       <div class="input-group">
       <span class="input-group-addon">@</span>
-      <input id="employe-email"formControlName="email" [(ngModel)]="employe.email"  name="email" autocomplete="off"class="form-control" placeholder="tonnom@tondomain.tn" type="email">
+      <input id="employe-email" formControlName="email" [(ngModel)]="employe.email"  name="email" autocomplete="off"class="form-control" placeholder="tonnom@tondomain.tn" type="email">
      
       <small *ngIf="exform.get('email').errors?.required && exform.get('email').touched" class="textdanger">L'email est obligatoire</small>
       <small *ngIf="exform.get('email').errors?.pattern && exform.get('email').touched" class="textdanger">Veuillez fournir une adresse email valide</small>
@@ -201,13 +202,13 @@
   <div class="col col-md-4">
     <div class="input-group">
       <span class="input-group-addon">*</span>
-      <input   type="password"  formControlName="password" minlength="8" maxlength="15" [(ngModel)]="employe.password" class="form-control"
+      <input   type="password"  formControlName="password"  [(ngModel)]="employe.password" class="form-control"
        placeholder="tapez mot de passe">
 
 
       
 
-        <small *ngIf="exform.get('password').errors?.minlength && exform.get('password').touched" class="textdanger">le mot de passe doit contenir au moins 8 caractères!</small>
+       <small *ngIf="exform.get('password').errors?.minlength && exform.get('password').touched" class="textdanger">le mot de passe doit contenir au moins 8 caractères!</small>
        <small  *ngIf="exform.get('password').errors?.required && exform.get('password').touched" class="textdanger">Mot de passe est obligatoire</small>
 
       </div>
@@ -254,7 +255,7 @@
 </div>
 
 
-
+</div>
 
 <!-- LIST -->
 <div class=col-md-12 >

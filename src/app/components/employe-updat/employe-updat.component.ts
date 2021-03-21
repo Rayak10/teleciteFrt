@@ -1,5 +1,8 @@
 import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { Validators } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -46,10 +49,29 @@ export class EmployeUpdatComponent implements OnInit {
     public imagePath;
   offset: number =new Date().getTimezoneOffset() * 60 * 1000;
   roleE:string;
-
+  exform:FormGroup;
   constructor(private employeservice:EmployeService,private roleservice:RoleService,private route: ActivatedRoute, private router: Router,private departementservice:DepartementService,private equipeservice:EquipeService,private bureauservice:BureauService) { }
   
   ngOnInit() {
+    this.exform = new FormGroup({
+      'prenom' : new FormControl(null,Validators.required),
+      'naissance' : new FormControl(null,Validators.required),
+      'embauche' : new FormControl(null,Validators.required),
+      'post' : new FormControl(null,Validators.required),
+      'role' : new FormControl(null,Validators.required),
+      'nom' : new FormControl(null,Validators.required),
+      'matricule' : new FormControl(null,Validators.required),
+      'bureau' : new FormControl(null,Validators.required),
+      'departement' : new FormControl(null,Validators.required),
+      'email' : new FormControl(null,[Validators.required,
+                                      Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
+      'status' : new FormControl(null,Validators.required),
+      'status2' : new FormControl(null,Validators.required),
+      'salaire' : new FormControl(null,Validators.required),
+      'equipe' : new FormControl(null,Validators.required),
+      'password' : new FormControl('', [Validators.required,Validators.minLength(8)]),
+      'confirme' : new FormControl(null,Validators.required),
+    })
     this.roleE=localStorage.getItem('role')
     this.etatArray=[
       {idEtat:1,nomEtat:"Active"},
