@@ -8,8 +8,10 @@
 <!-- Form Name -->
 
 <legend  class="navbar-brand titre"  > Ajouter un projet</legend>
+
 <form #getprojetForm="ngForm" [formGroup]="exform" (ngSubmit)="onSubmit(getprojetForm)">
 <!-- Text input-->
+
 <div class="form-group">
   <label class="col-md-2 control-label" >Nom de projet:</label>  
   <div class="col-md-4">
@@ -94,5 +96,4 @@
 
 
 	   </div> 
-	    
-
+     <simple-notifications></simple-notifications>

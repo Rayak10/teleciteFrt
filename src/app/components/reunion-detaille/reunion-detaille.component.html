@@ -5,28 +5,28 @@
 <hr/>
 <div >
         <div>
-            <b>Nom Reunion  :</b><label>{{reunion.nomReunion}}</label>
+            <b style="color: dodgerblue;">Nom Reunion  :</b><label>{{reunion.nomReunion}}</label>
         </div>
         <div>
-            <b>Contexte  :</b><label>{{reunion.descriptionReunion}}</label>
+            <b style="color: dodgerblue;">Contexte  :</b><label>{{reunion.descriptionReunion}}</label>
         </div>
         <div>
-            <b>Date début  :</b><label>{{reunion.dateDebut | date :'shortDate'}}</label>
-        </div>
-
-        <div>
-            <b>Heure début  :</b><label>{{reunion.heurDeb}}</label>
+            <b style="color: dodgerblue;">Date début  :</b><label>{{reunion.dateDebut | date :'shortDate'}}</label>
         </div>
 
         <div>
-            <b>Heure fin  :</b><label>{{reunion.heurFin}}</label>
+            <b style="color: dodgerblue;">Heure début  :</b><label>{{reunion.heurDeb}}</label>
+        </div>
+
+        <div>
+            <b style="color: dodgerblue;">Heure fin  :</b><label>{{reunion.heurFin}}</label>
         </div>
        
         <div>
-            <b>Type réunion  :</b><label>{{reunion.type}}</label>
+            <b style="color: dodgerblue;">Type réunion  :</b><label>{{reunion.type}}</label>
         </div>
         <div *ngIf="reunion.equipe!=null">
-            <b>Equipe :</b><label >{{reunion.equipe.nomEquipe}}</label>
+            <b style="color: dodgerblue;">Equipe :</b><label >{{reunion.equipe.nomEquipe}}</label>
         </div>
 </div>
 <br>

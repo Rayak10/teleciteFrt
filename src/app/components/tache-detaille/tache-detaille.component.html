@@ -4,25 +4,25 @@
 <hr/>
 <div >
         <div>
-            <b>Tâche :</b><label>{{tache.descriptionTache}}</label>
+            <b style="color: dodgerblue;">Tâche :</b><label>{{tache.descriptionTache}}</label>
         </div>
         <div>
-            <b>Durée :</b><label>{{tache.dureeTache}}</label>
+            <b style="color: dodgerblue;">Durée :</b><label>{{tache.dureeTache}}</label>
         </div>
         <div>
-            <b>Etat : </b><label>{{tache.etatTache}}</label>
+            <b style="color: dodgerblue;">Etat : </b><label>{{tache.etatTache}}</label>
         </div>
         <div *ngIf="tache.employe!=null">
-            <b>Affectée à : </b><label> {{ tache.employe.nomEmploye }} {{ tache.employe.prenomEmploye }}</label>
+            <b style="color: dodgerblue;">Affectée à : </b><label> {{ tache.employe.nomEmploye }} {{ tache.employe.prenomEmploye }}</label>
         </div>
         <div *ngIf="tache.employe==null">
-            <b>Affectée à : </b><label> N'est pas encore affectée</label>
+            <b style="color: dodgerblue;">Affectée à : </b><label> N'est pas encore affectée</label>
         </div>
         <div>
-            <b>Projet  : </b><label>{{tache.userStory.sprint.projet.nomProjet}}</label>
+            <b style="color: dodgerblue;">Projet  : </b><label>{{tache.userStory.sprint.projet.nomProjet}}</label>
         </div>
         <div>
-            <b>Sprint  : </b><label>{{tache.userStory.sprint.nomSprint}}</label>
+            <b style="color: dodgerblue;">Sprint  : </b><label>{{tache.userStory.sprint.nomSprint}}</label>
         </div>
       
        

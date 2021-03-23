@@ -25,6 +25,7 @@
     "@fortawesome/fontawesome-free": "^5.14.0",
     "@ng-bootstrap/ng-bootstrap": "5.2.2",
     "angular-validation-match": "^1.9.0",
+    "angular2-notifications": "^9.0.0",
     "apexcharts": "^3.23.1",
     "bootstrap": "^4.5.0",
     "font-awesome": "^4.7.0",

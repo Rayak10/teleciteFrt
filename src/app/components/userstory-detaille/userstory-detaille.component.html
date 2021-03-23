@@ -3,23 +3,36 @@
 <legend  class="navbar-brand titre"  > Les informations du UserStory</legend>
 <hr/>
 <div >
-        <div>
-            <b>UserStory  :</b><label>{{userstory.libelleUserStory}}</label>
-        </div>
-        <div>
-            <b>Complexité   :</b><label>{{userstory.complexite}}</label>
-        </div>
-        <div>
-            <b>Priorité :</b><label>{{userstory.priorite}}</label>
-        </div>
+    <table class="table table-bordered table-condensed table-hover">
+        
+            <tr>
+                <th style="color: dodgerblue;"  width=40%>User storie :</th>
+                <td>{{ userstory.libelleUserStory}}</td>
+            </tr>
+            <tr>
+                <th  style="color: dodgerblue;" width=5%>Complexité :</th>
+                <td>{{ userstory.complexite}}</td>
+            </tr>
+            <tr>
+                <th  style="color: dodgerblue;" width=5%>Priorité :</th>
+                <td>{{ userstory.priorite}}</td>
+            </tr>
+            <tr>
+           <th  style="color: dodgerblue;" width=20%>Sprint :</th>
+           <td>{{ userstory.sprint.nomSprint}}</td>
+            </tr>
+            <tr>
+           <th style="color: dodgerblue;" width=20%>projet :</th>
+           <td>{{ userstory.sprint.projet.nomProjet}}</td>
 
-        <div>
-            <b>Sprint  :</b><label>{{userstory.sprint.nomSprint}}</label>
-        </div>
-        <div>
-            <b>projet  :</b><label>{{userstory.sprint.projet.nomProjet}}</label>
-        </div>
-      
+            </tr>
+                
+        
+    
+              
+    </table>
+       
+</div>
        
       
 <br>

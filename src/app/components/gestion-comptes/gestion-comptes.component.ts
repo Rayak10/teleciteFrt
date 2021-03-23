@@ -12,6 +12,7 @@ import { EquipeService } from 'src/app/services/equipe/equipe.service';
 import { Equipe } from 'src/app/models/equipe';
 import { RoleMember } from 'src/app/models/roleMember';
 import { RoleService } from 'src/app/services/role/role.service';
+import { DialogConfirmService } from 'src/app/services/confirm/dialog-confirm.service';
 
 @Component({
   selector: 'app-gestion-comptes',
@@ -46,7 +47,7 @@ export class GestionComptesComponent implements OnInit {
   retrievedImage: any;
   public userFile : any =null;
   message:string;
-  constructor(private employeservice:EmployeService,private departementservice:DepartementService,private roleservice:RoleService,private equipeservice:EquipeService,private bureauservice:BureauService, private router: Router,private formBuilder: FormBuilder) {}
+  constructor(private employeservice:EmployeService,private departementservice:DepartementService,private roleservice:RoleService,private equipeservice:EquipeService,private bureauservice:BureauService, private router: Router,private formBuilder: FormBuilder,private dialogService:DialogConfirmService) {}
 
   ngOnInit() {
   
@@ -146,18 +147,30 @@ reloadData(){
 }
 
   deleteEmploye(id:number){
-    let resp=this.employeservice.deleteEmploye(id);
-    resp.subscribe(
-    data=>{
-      console.log(data);
+
+
+    this.dialogService.openConfirmDialog('êtes-vous sûr de supprimer cet employe ?')
+    .afterClosed().subscribe(res =>{
+    if(res) {
+      let resp=this.employeservice.deleteEmploye(id);
+      resp.subscribe(
+      data=>{
+        console.log(data);
+        
+       this.reloadData();
       
-     this.reloadData();
+      },
+      error=>console.log(error));
+      
+      this.employeservice.filter('delete ok?')
+    }
+  })}
+  
+
+
+
+
     
-    },
-    error=>console.log(error));
-    
-    this.employeservice.filter('delete ok?')
-  }
   
 
   employeDetails(id:number){

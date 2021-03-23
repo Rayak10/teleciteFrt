@@ -9,6 +9,7 @@ import * as $ from 'jquery' ;
 import { AffectationTachesComponent } from '../affectation-taches/affectation-taches.component';
 import { AjoutcommentaireComponent } from '../ajoutcommentaire/ajoutcommentaire.component';
 import { MatDialog } from '@angular/material';
+import { DialogConfirmService } from 'src/app/services/confirm/dialog-confirm.service';
 
 @Component({
   selector: 'app-gestion-sprints',
@@ -34,7 +35,8 @@ export class GestionSprintsComponent implements OnInit {
   showDataOfChildComponent;
   roleE:string;
 
-  constructor(private dialog:MatDialog, private sprintservice:SprintService,private projetservice:ProjetService,private formBuilder:FormBuilder,private router:Router) {}
+  constructor(private dialog:MatDialog, private sprintservice:SprintService,private projetservice:ProjetService,
+    private formBuilder:FormBuilder,private router:Router,private dialogService:DialogConfirmService) {}
 
   ngOnInit()  {
     this.roleE=localStorage.getItem('role')
@@ -101,18 +103,22 @@ gotoList(){
   this.router.navigate(['gestionSprints']);
 }
 deleteSprints(id:number){
-  this.sprintservice.deleteSprint(id)
-  .subscribe(
-  data=>{
-    console.log(data);
-   
-
-   this.reloadData();
-   this.gotoList();
-  },
-  error=>console.log(error));
+  this.dialogService.openConfirmDialog('êtes-vous sûr de supprimer cette sprint ?')
+  .afterClosed().subscribe(res =>{
+  if(res) {
+    this.sprintservice.deleteSprint(id)
+    .subscribe(
+    data=>{
+      console.log(data);
+     
   
-}
+     this.reloadData();
+     this.gotoList();
+    },
+    error=>console.log(error));
+    
+  }
+})}
 
 onChange(projet){
  

@@ -6,6 +6,7 @@ import { Sprint } from 'src/app/models/sprint';
 import { Observable } from 'rxjs';
 import { Tache } from 'src/app/models/tache';
 import { TacheService } from 'src/app/services/tache/tache.service';
+import { DialogConfirmService } from 'src/app/services/confirm/dialog-confirm.service';
 
 @Component({
   selector: 'app-userstory-detaille',
@@ -18,7 +19,8 @@ export class UserstoryDetailleComponent implements OnInit {
 userstory:Userstory;
 taches: Observable<Tache[]>;
 roleE:String
-  constructor(private userstoryservice:UserstoryService,private tacheservice:TacheService,private route: ActivatedRoute, private router: Router) {}
+  constructor(private userstoryservice:UserstoryService,private tacheservice:TacheService,
+    private route: ActivatedRoute, private router: Router,private dialogService:DialogConfirmService) {}
 
   ngOnInit() {
     this.roleE=localStorage.getItem('role')
@@ -50,18 +52,28 @@ roleE:String
     this.router.navigate(['taches/update',id]);
   }
   deleteTache(id:number){
-    this.tacheservice.deleteTache(id)
-    .subscribe(
-    data=>{
-      console.log(data);
-     
-  
-     this.reloadData();
-     //this.gotoList();
-    },
-    error=>console.log(error));
+    this.dialogService.openConfirmDialog('êtes-vous sûr de supprimer cette tâche ?')
+    .afterClosed().subscribe(res =>{
+    if(res) {
+      this.tacheservice.deleteTache(id)
+      .subscribe(
+      data=>{
+        console.log(data);
+       
     
-  }
+       this.reloadData();
+       //this.gotoList();
+      },
+      error=>console.log(error));
+      
+    
+      
+    }
+  })}
+
+
+
+    
   
   
   reloadData(){

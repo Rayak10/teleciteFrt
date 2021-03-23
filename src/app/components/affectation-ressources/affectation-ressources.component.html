@@ -5,7 +5,7 @@
 <div class="container">	       
 <!-- Form Name -->
 <legend  class="navbar-brand titre"  > Affectation ressources</legend>
-<form #AffectationForm="ngForm" (ngSubmit)="onSubmit(AffectationForm)">
+<form #AffectationForm="ngForm" [formGroup]="exform" (ngSubmit)="onSubmit(AffectationForm)">
   <div class="row">
     <div class="col col-md-2">
     <h4 class="titre">Vos projets :</h4>
@@ -13,11 +13,12 @@
     <div class="col col-md-2">
     <mat-form-field appearance="fill">
       <mat-label>Projets</mat-label>
-      <mat-select  [(ngModel)]="selectedValue" name="projet" (selectionChange)="onChangeProjet($event)">
+      <mat-select  [(ngModel)]="selectedValue" name="projet"  formControlName="projet" (selectionChange)="onChangeProjet($event)">
         <mat-option *ngFor="let p of projetArray" [value]="p.idProjet">
           {{p.nomProjet}}
         </mat-option>
       </mat-select>
+      <small *ngIf="exform.get('projet').invalid && exform.get('projet').touched || !AffectationForm.form.valid" class="textdanger">Sélectionner un projet</small>
     </mat-form-field>
   </div>
   </div>
@@ -31,11 +32,10 @@
   </mat-form-field>
 </div>
 <div class="col col-md-1">
-  <i *ngIf="roleE=='ROLE_SCRUM_TEAM_MEMBER'" title="Kanban"class="fab fa-trello  fa-5x" style="color: rgb(90, 169, 235);" (click)="onkanban(id,selectedValue)"></i>
+  <button [disabled]="!AffectationForm.form.valid"  (click)="onkanban(id,selectedValue)" *ngIf="roleE=='ROLE_SCRUM_TEAM_MEMBER'"><i  title="Kanban"class="fab fa-trello  fa-5x" style="color: rgb(90, 169, 235);"></i></button>
 </div>
 <div class="col col-md-1">
-
-<i class="fas fa-chart-line fa-5x" title="Burndown chart "style="color: rgb(90, 169, 235);" (click)="onburndown(selectedValue)"></i>
+  <button [disabled]="!AffectationForm.form.valid" (click)="onburndown(selectedValue)"><i class="fas fa-chart-line fa-5x" title="Burndown chart "style="color: rgb(90, 169, 235);" ></i></button>
 </div>
 
 </div>

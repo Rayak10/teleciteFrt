@@ -14,6 +14,7 @@ import { switchMap } from 'rxjs/operators';
 import { FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { FormControl } from '@angular/forms';
+import { DialogConfirmService } from 'src/app/services/confirm/dialog-confirm.service';
 @Component({
   selector: 'app-gestion-tache',
   templateUrl: './gestion-tache.component.html',
@@ -30,7 +31,9 @@ export class GestionTacheComponent implements OnInit {
   id:number;
   tacheArray= [];
   exform:FormGroup;
-  constructor(private userstoryservice:UserstoryService,private tacheservice:TacheService,private sprintservice:SprintService,private route: ActivatedRoute,private formBuilder:FormBuilder,private router:Router) { }
+  constructor(private userstoryservice:UserstoryService,private tacheservice:TacheService,
+    private sprintservice:SprintService,private route: ActivatedRoute,private formBuilder:FormBuilder,
+    private router:Router,private dialogService:DialogConfirmService) { }
 
   ngOnInit() {
     this.exform = new FormGroup({
@@ -94,7 +97,11 @@ gotoList(){
   this.router.navigate(['gestionUserstory']);
 }
 deleteTache(id:number){
-  this.tacheservice.deleteTache(id)
+
+  this.dialogService.openConfirmDialog('êtes-vous sûr de supprimer cette tâche ?')
+    .afterClosed().subscribe(res =>{
+    if(res) {
+      this.tacheservice.deleteTache(id)
   .subscribe(
   data=>{
     console.log(data);
@@ -105,8 +112,16 @@ deleteTache(id:number){
   },
   error=>console.log(error));
   
-}
 
+
+      
+    
+      
+    }
+  })}
+
+
+ 
 
 
 }

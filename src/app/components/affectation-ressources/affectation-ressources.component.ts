@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit,ViewChild } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Projet } from 'src/app/models/projet';
@@ -40,7 +40,7 @@ export class AffectationRessourcesComponent implements OnInit {
   @ViewChild(MatSort ,{ static: true } ) sort:MatSort;
   @ViewChild(MatPaginator ,{ static: true } ) paginator:MatPaginator;
   roleE:string;
-
+  exform:FormGroup;
   dataSource = new MatTableDataSource<UserstoriesProjets>(this.ELEMENT_DATA);
   test:boolean=false;
   searchKey:string;
@@ -50,6 +50,11 @@ export class AffectationRessourcesComponent implements OnInit {
     private formBuilder: FormBuilder,
      private router: Router,private httpClient:HttpClient,private route: ActivatedRoute) { }
   ngOnInit() {
+    this.exform = new FormGroup({
+      'projet' : new FormControl(null,Validators.required),
+      'canban' : new FormControl('projet' , new FormControl(null,Validators.required)),
+
+    })
     this.roleE=localStorage.getItem('role')
     if(this.roleE=="ROLE_SCRUM_TEAM_MEMBER"){
       this.displayedColumns= ['libelleUserStory', 'priorite', 'complexite','affectation'];
@@ -96,7 +101,7 @@ onAffect(row){
         console.log(JSON.stringify(this.equipe)+'lllllolo');
         const dialogRef=this.dialog.open(AffectationTachesComponent,{
         autoFocus:true,
-        width:"75%",
+        width:"80%",
         data:{
            equipeProjer:this.equipe,
            selectedUserStory:row

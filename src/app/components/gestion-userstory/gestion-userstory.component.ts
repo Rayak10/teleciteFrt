@@ -11,6 +11,7 @@ import { Projet } from 'src/app/models/projet';
 import { FormGroup } from '@angular/forms';
 import { FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
+import { DialogConfirmService } from 'src/app/services/confirm/dialog-confirm.service';
 
 @Component({
   selector: 'app-gestion-userstory',
@@ -36,7 +37,9 @@ export class GestionUserstoryComponent implements OnInit {
   selectedComplexite:number;
 val:any
 roleE:String;
-  constructor(private userstoryservice:UserstoryService,private projetservice:ProjetService,private sprintservice:SprintService,private formBuilder:FormBuilder,private router:Router) { 
+  constructor(private userstoryservice:UserstoryService,private projetservice:ProjetService,
+    private sprintservice:SprintService,private formBuilder:FormBuilder,private router:Router,
+    private dialogService:DialogConfirmService) { 
     this.val=this.selectedProjetId;
 
   }
@@ -105,18 +108,29 @@ gotoList(){
   this.router.navigate(['gestionUserstory']);
 }
 deleteUserstory(id:number){
-  this.userstoryservice.deleteUserStory(id)
-  .subscribe(
-  data=>{
-    console.log(data);
-   
 
-   this.reloadData();
-   this.gotoList();
-  },
-  error=>console.log(error));
+
+  this.dialogService.openConfirmDialog('êtes-vous sûr de supprimer cette user storie?')
+  .afterClosed().subscribe(res =>{
+  if(res) {
+    this.userstoryservice.deleteUserStory(id)
+    .subscribe(
+    data=>{
+      console.log(data);
+     
   
-}
+     this.reloadData();
+     this.gotoList();
+    },
+    error=>console.log(error));
+    
+  
+    
+  }
+})}
+
+
+  
 
 
 onChange(event){

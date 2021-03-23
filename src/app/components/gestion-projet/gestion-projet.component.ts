@@ -6,6 +6,8 @@ import { FormBuilder, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EquipeService } from 'src/app/services/equipe/equipe.service';
 import { Equipe } from 'src/app/models/equipe';
+import { MatDialog, MatDialogConfig} from '@angular/material';
+import { DialogConfirmService } from 'src/app/services/confirm/dialog-confirm.service';
 
 @Component({
   selector: 'app-gestion-projet',
@@ -24,7 +26,8 @@ equipe:Equipe;
 offset: number =new Date().getTimezoneOffset() * 60 * 1000;
 roleE:string;
 
-  constructor(private projetservice:ProjetService,private equipeservice:EquipeService,private formBuilder:FormBuilder,private router:Router) { }
+  constructor(private projetservice:ProjetService,private equipeservice:EquipeService,
+    private formBuilder:FormBuilder,private router:Router, private dialogService:DialogConfirmService) { }
 
   ngOnInit() {
     this.roleE=localStorage.getItem('role')
@@ -74,16 +77,20 @@ reloadData(){
     this.router.navigate(['gestionProjets']);
   }
   deleteProjet(id:number){
-    this.projetservice.deleteProjet(id)
-    .subscribe(
-    data=>{
-      console.log(data);
-     
-
-     this.reloadData();
-     this.gotoList();
-    },
-    error=>console.log(error));
+    this.dialogService.openConfirmDialog('êtes-vous sûr de supprimer cet projet?')
+    .afterClosed().subscribe(res =>{
+    if(res) {
+      this.projetservice.deleteProjet(id)
+      .subscribe(
+      data=>{
+        console.log(data);
+       
+  
+       this.reloadData();
+       this.gotoList();
+      },
+      error=>console.log(error));} 
+    });
     
   }
   onChangeEquipe(event){

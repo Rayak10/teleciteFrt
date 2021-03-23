@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { FormBuilder, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Equipe } from 'src/app/models/equipe';
 import { Projet } from 'src/app/models/projet';
+import { DialogConfirmService } from 'src/app/services/confirm/dialog-confirm.service';
 import { EquipeService } from 'src/app/services/equipe/equipe.service';
 
 @Component({
@@ -17,13 +21,20 @@ export class GestionEquipeComponent implements OnInit {
   errorMessage: string;
   successMessage: string;
   equipes: Observable<Equipe[]>;
-
+  exform:FormGroup;
   equipeArray= [];
 
-
-  constructor(private equipeservice:EquipeService,private formBuilder:FormBuilder,private router:Router) { }
+  constructor(private equipeservice:EquipeService,private formBuilder:FormBuilder,
+    private router:Router,private dialogService:DialogConfirmService) { }
 
   ngOnInit() {
+
+    this.exform = new FormGroup({
+     
+      'specialite' : new FormControl(null,Validators.required),
+      'nom' : new FormControl(null,Validators.required),
+      
+    })
     this.equipeservice.findAllEquipe().subscribe(
       data => {console.log("data from find all Equipe:"+JSON.stringify(data));   
       
@@ -67,18 +78,20 @@ reloadData(){
     this.router.navigate(['gestionEquipes']);
   }
   deleteEquipe(id:number){
-    this.equipeservice.deleteEquipe(id)
-    .subscribe(
-    data=>{
-      console.log(data);
-     
-
-     this.reloadData();
-     this.gotoList();
-    },
-    error=>console.log(error));
-    
-  }
- 
+    this.dialogService.openConfirmDialog('êtes-vous sûr de supprimer cette équipe?')
+    .afterClosed().subscribe(res =>{
+    if(res) {
+      this.equipeservice.deleteEquipe(id)
+      .subscribe(
+      data=>{
+        console.log(data);
+       
+  
+       this.reloadData();
+       this.gotoList();
+      },
+      error=>console.log(error));
+      
+    }
+})}
 }
-

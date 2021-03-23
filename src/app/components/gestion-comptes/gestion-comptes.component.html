@@ -2,7 +2,7 @@
 <hr/>    
 <div class="container" >	       
 <legend *ngIf="roleE=='ROLE_DRH'" class="navbar-brand titre"  > Gestion des employés</legend>
-<form #getCompteForm="ngForm" [formGroup]="exform"(ngSubmit)="onSubmit(getCompteForm)">
+<form #getCompteForm="ngForm" [formGroup]="exform" (ngSubmit)="onSubmit(getCompteForm)">
 <div *ngIf="roleE=='ROLE_DRH'"> 
   <div class="row">
   <div class="col col-md-2">

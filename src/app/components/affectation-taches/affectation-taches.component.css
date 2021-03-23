@@ -14,7 +14,9 @@
     justify-content: center;
   }
    .mat-column-descriptionTache {
-    flex: 5 5 300px;  }
+    flex: 5 5 280px;  }
+    .mat-column-actions {
+      flex: 1.5 1.5 5px;  }
    mat-footer-cell{
     color:rgb(95, 176, 228);
   

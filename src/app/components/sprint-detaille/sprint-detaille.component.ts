@@ -11,6 +11,7 @@ import * as $ from 'jquery' ;
 import { MatDialog } from '@angular/material';
 import { AjoutcommentaireComponent } from '../ajoutcommentaire/ajoutcommentaire.component';
 import { UpdateCommentaireComponent } from '../update-commentaire/update-commentaire.component';
+import { DialogConfirmService } from 'src/app/services/confirm/dialog-confirm.service';
 
 @Component({
   selector: 'app-sprint-detaille',
@@ -27,7 +28,8 @@ idEmploye:number;
 sprint:Sprint;
 userstorys:Userstory[];
 roleE:String;
-  constructor(private dialog:MatDialog,private commentaireservice:CommentaireService,private sprintservice:SprintService,private route: ActivatedRoute, private router: Router,private userstoryservice:UserstoryService) {
+  constructor(private dialog:MatDialog,private commentaireservice:CommentaireService,private sprintservice:SprintService,private route: ActivatedRoute,
+     private router: Router,private userstoryservice:UserstoryService,private dialogService:DialogConfirmService) {
     this.commentaireservice.listen().subscribe((m:any)=>{
     console.log(m)
     this.reloadData();
@@ -82,18 +84,35 @@ roleE:String;
   
     this.router.navigate(['userstory/details',id]);
   }
+  reloadData1(){
+    this.userstoryservice.findAllStoriessprint(this.sprint.idSprint).subscribe(
+      response =>{
+        this.userstorys = response;
+console.log("userrrrrrrrrsss"+JSON.stringify(this.userstorys))
+      },
+      error => alert('problem!!!')
+    )
+
+  }
   deleteUserstory(id:number){
+
+
+    this.dialogService.openConfirmDialog('êtes-vous sûr de supprimer cette équipe?')
+  .afterClosed().subscribe(res =>{
+  if(res) {
     this.userstoryservice.deleteUserStory(id)
     .subscribe(
     data=>{
       console.log(data);
      
   
-     this.reloadData();
+     this.reloadData1();
     },
     error=>console.log(error));
     
   }
+})}
+
   list(){
     this.router.navigate(['gestionSprints']);
   }

@@ -56,8 +56,9 @@ import { AjoutProjetComponent } from './components/ajout-projet/ajout-projet.com
 import { AjoutSprintComponent } from './components/ajout-sprint/ajout-sprint.component';
 import { AjoutcommentaireComponent } from './components/ajoutcommentaire/ajoutcommentaire.component';
 import { UpdateCommentaireComponent } from './components/update-commentaire/update-commentaire.component';
-
-
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import {MatButtonModule} from '@angular/material/button';
+import { SimpleNotificationsModule } from 'angular2-notifications';
 @NgModule({
   declarations: [
     AppComponent,
@@ -93,12 +94,14 @@ import { UpdateCommentaireComponent } from './components/update-commentaire/upda
     AjoutSprintComponent,
     AjoutcommentaireComponent,
     UpdateCommentaireComponent,
+    ConfirmDialogComponent,
     
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     MatRadioModule,
+    MatIconModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
@@ -106,7 +109,6 @@ import { UpdateCommentaireComponent } from './components/update-commentaire/upda
     NgbTimepickerModule,
     MatSelectModule,
     MatTableModule,
-    MatIconModule,
     MatPaginatorModule,
     MatSortModule,
     MatFormFieldModule,
@@ -116,9 +118,9 @@ import { UpdateCommentaireComponent } from './components/update-commentaire/upda
     ScrollingModule,
     MatTooltipModule,
     NgApexchartsModule,
-    ReactiveFormsModule 
-    
-
+    ReactiveFormsModule,
+    MatButtonModule,
+    SimpleNotificationsModule .forRoot()
     
   ],
   providers: [
@@ -126,6 +128,6 @@ import { UpdateCommentaireComponent } from './components/update-commentaire/upda
 
   ],
   bootstrap: [AppComponent],
-  entryComponents:[AffectationTachesComponent,AjoutcommentaireComponent,UpdateCommentaireComponent]
+  entryComponents:[AffectationTachesComponent,AjoutcommentaireComponent,UpdateCommentaireComponent,ConfirmDialogComponent]
 })
 export class AppModule { }

@@ -6,6 +6,7 @@ import { EquipeService } from 'src/app/services/equipe/equipe.service';
 import { Equipe } from 'src/app/models/equipe';
 import { Observable } from 'rxjs';
 import { Projet } from 'src/app/models/projet';
+import { NotificationsService } from 'angular2-notifications';
 @Component({
   selector: 'app-ajout-projet',
   templateUrl: './ajout-projet.component.html',
@@ -19,10 +20,14 @@ export class AjoutProjetComponent implements OnInit {
   successMessage: string;
   equipeArray= [];
   selectedEquipeId:number;
-equipe:Equipe;
-offset: number =new Date().getTimezoneOffset() * 60 * 1000;
-exform:FormGroup;
-  constructor(private projetservice:ProjetService,private equipeservice:EquipeService,private formBuilder:FormBuilder,private router:Router) { }
+  equipe:Equipe;
+  offset: number =new Date().getTimezoneOffset() * 60 * 1000;
+  exform:FormGroup;
+  messageS:String="Projet ajouté avec succès";
+  messageE:String="Ajout du projet est échoué";
+
+  constructor(private projetservice:ProjetService,private equipeservice:EquipeService,
+    private formBuilder:FormBuilder,private router:Router, private _service: NotificationsService) { }
 
 
   ngOnInit() {
@@ -62,7 +67,6 @@ this.exform = new FormGroup({
     gestProjet.reset();
 
        this.reloadData();
-       this.gotoList();
   }
   save() {
    
@@ -71,12 +75,26 @@ this.exform = new FormGroup({
     this.projet.dateFin = new Date(new Date(this.projet.dateFin).getTime() - this.offset);
     this.projet.equipe=this.equipe;
     this.projetservice.createProjet(this.projet)
-      .subscribe(data => console.log(data), error => console.log(error));
+      .subscribe(data => this.onSuccess(this.messageS)
+      , error => this.onErorr(this.messageE));
     this.projet= new Projet();
-    
-   
-this.gotoList();
-  }  
+}  
+
+  onSuccess(messageS){
+  this._service.success('Success',messageS, {
+    position: ['bottom','right'],
+    timeOut: 2000,
+    animate: 'fade',
+    showProgressBar: true
+  })}
+  onErorr(messageE){
+    this._service.error('Erreur',messageE, {
+      position: ['bottom','right'],
+      timeOut: 2000,
+      animate: 'fade',
+      showProgressBar: true
+    })}
+
 reloadData(){
     this.projets= this.projetservice.findAllProjets();
     console.log("projetsssssssssssssssssssssssssssssss: "+JSON.stringify(this.projets));

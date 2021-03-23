@@ -39,10 +39,10 @@
         <mat-header-cell *matHeaderCellDef class="titre">Membre</mat-header-cell>
         <mat-cell *matCellDef="let element">
             <mat-form-field appearance="fill">
-                <mat-label>{{recivedRow.equipeProjer.nomEquipe}}</mat-label>
+                <mat-label>{{recivedRow.equipeProjer.nomEquipe}} </mat-label>
                 <mat-select   [(ngModel)]="element.idEmploye" name="equipe" (selectionChange)="onChangeProjet($event, element.idTache)">
                   <mat-option *ngFor="let e of employeArray" [value]="e.idEmploye">
-                    {{e.nomEmploye}}
+                    {{e.nomEmploye}} {{e.prenomEmploye}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>      </mat-cell>

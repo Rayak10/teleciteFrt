@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Reunion } from 'src/app/models/Reunion';
 import { TypeReunion } from 'src/app/models/typeReunion';
+import { DialogConfirmService } from 'src/app/services/confirm/dialog-confirm.service';
 import { ReunionService } from 'src/app/services/reunion/reunion.service';
 @Component({
   selector: 'app-list-reunions',
@@ -22,7 +23,8 @@ reunion:Reunion;
   selectedType:TypeReunion ;
   reunionstrie: Observable<Reunion[]>;
  
-  constructor(private reunionservice:ReunionService,private formBuilder:FormBuilder,private router:Router) { }
+  constructor(private reunionservice:ReunionService,private formBuilder:FormBuilder,
+    private router:Router,private dialogService:DialogConfirmService) { }
 
   ngOnInit() {
     this.typeArray=["Reunion_Scrum","Reunion_Administratif"]
@@ -64,17 +66,25 @@ findReunionsByType(){
 
 }
 deleteReunion(id:number){
-  this.reunionservice.deleteReunion(id)
-  .subscribe(
-  data=>{
-    console.log(data);
-   
-    this.findReunionsByType();
 
-  },
-  error=>console.log(error));
-  console.log("selectedtype"+JSON.stringify+this.selectedType)
-}
+  this.dialogService.openConfirmDialog('êtes-vous sûr de supprimer cette réunion?')
+  .afterClosed().subscribe(res =>{
+  if(res) {
+    this.reunionservice.deleteReunion(id)
+    .subscribe(
+    data=>{
+      console.log(data);
+     
+      this.findReunionsByType();
+  
+    },
+    error=>console.log(error));
+    console.log("selectedtype"+JSON.stringify+this.selectedType)
+  }
+})}
+
+
+  
 
 
 

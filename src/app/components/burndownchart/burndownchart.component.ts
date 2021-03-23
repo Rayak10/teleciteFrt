@@ -63,7 +63,6 @@ export class BurndownchartComponent implements OnInit {
 this.userstoryservice.tableComplexite(this.id).subscribe(
   data=>{
     this.data2.push(...data)
-    console.log("etrfyfjyfjfjyf"+JSON.stringify( this.data2))
   }
 )
     this.projetservice.findProjetById(this.id).subscribe(
@@ -92,7 +91,6 @@ this.sprintsProjet.forEach(element=>
 
 
                     this.initializeChartOptions(this.projet,this.complexProjet,this.nameSprints,this.datefinSprints,this.data1,this.data2);
-                    console.log("datefiiiiiiiiiiiiiiiiiiiiin"+JSON.stringify(this.datefinSprints))
 
                   }
                   )
@@ -108,12 +106,7 @@ this.sprintsProjet.forEach(element=>
                  
 
 
-                  console.log("dataaaaa1111111111"+JSON.stringify( this.data1))
-                  console.log("cccccccccccccccccccccccccccc"+JSON.stringify( this.nbrSprinProjet))
-                  console.log("datefiiiiiiiiiiiiiiiiiiiiin"+JSON.stringify(this.datefinSprints))
-                  console.log("ggggggggggggggggggggg"+JSON.stringify(  this.complexProjet))
-                  console.log("kkkkkkkkkkkkkkkkkkkkkkk"+JSON.stringify(    this.userstorysProjet
-                    ))
+                
 
                 })
               )

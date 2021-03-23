@@ -48,4 +48,7 @@
 .search-form-field div.mat-form-field-suffix button{
   height: 32px;
   width: 32px;
+} .textdanger{
+  color:rgb(233, 45, 12);
+  font-size:12px;
 }

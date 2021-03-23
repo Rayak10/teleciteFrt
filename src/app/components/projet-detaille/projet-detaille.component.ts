@@ -5,6 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Sprint } from 'src/app/models/sprint';
 import { SprintService } from 'src/app/services/sprint/sprint.service';
 import { Observable } from 'rxjs';
+import { DialogConfirmService } from 'src/app/services/confirm/dialog-confirm.service';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-projet-detaille',
@@ -17,7 +19,8 @@ export class ProjetDetailleComponent implements OnInit {
 projet:Projet;
 roleE:string;
 
-  constructor(private projetservice:ProjetService,private sprintservice : SprintService,private route: ActivatedRoute, private router: Router) {}
+  constructor(private projetservice:ProjetService,private sprintservice : SprintService,
+    private route: ActivatedRoute, private router: Router, private dialogService:DialogConfirmService) {}
 
   ngOnInit() {
     this.roleE=localStorage.getItem('role')
@@ -52,15 +55,19 @@ updateSprint(id:number){
   this.router.navigate(['sprints/update',id]);
 }
 deleteSprints(id:number){
-  this.sprintservice.deleteSprint(id)
-  .subscribe(
-  data=>{
-    console.log(data);
-   
-
-   this.reloadData();
-  },
-  error=>console.log(error));
+  this.dialogService.openConfirmDialog('êtes-vous sûr de supprimer cet projet?')
+  .afterClosed().subscribe(res =>{
+  if(res) {
+    this.sprintservice.deleteSprint(id)
+    .subscribe(
+    data=>{
+      console.log(data);
+     
+  
+     this.reloadData();
+    },
+    error=>console.log(error));} 
+  });
   
 }
 sprintDetails(id:number){

@@ -9,17 +9,20 @@
 <!-- Form Name -->
 
 <legend  class="navbar-brand titre"  > Gestion des equipes</legend>
-<form #getequipeForm="ngForm"(ngSubmit)="onSubmit(getequipeForm)">
+<form #getequipeForm="ngForm" [formGroup]="exform" (ngSubmit)="onSubmit(getequipeForm)">
 <!-- Text input-->
 <div class="form-group">
   <label class="col-md-2 control-label" >Nom d'equipe:</label>  
   <div class="col-md-4">
-  <input id="equipe-name" required [(ngModel)]="equipe.nomEquipe" name="equipe-name" type="text" placeholder="tapez le nom d'equipe" class="form-control input-md" >
+  <input id="equipe-name" formControlName="nom" [(ngModel)]="equipe.nomEquipe" name="equipe-name" type="text" placeholder="tapez le nom d'equipe" class="form-control input-md" >
+  <small *ngIf="exform.get('nom').invalid && exform.get('nom').touched" class="textdanger">Nom d'équipe est obligatoire</small>
   <span class="help-block"></span>  
   </div>
   <label class="col-md-2 control-label" >Spécialité :</label>  
   <div class="col-md-4">
-  <input id="equipe-theme"required [(ngModel)]="equipe.specialite" name="equipe-specialite" type="text" placeholder="tapez la spécialité du projet" class="form-control input-md">
+  <input id="equipe-theme" formControlName="specialite" [(ngModel)]="equipe.specialite" name="equipe-specialite" type="text" placeholder="tapez la spécialité du projet" class="form-control input-md">
+  <small *ngIf="exform.get('specialite').invalid && exform.get('specialite').touched" class="textdanger">Spécialité d'équipe est obligatoire</small>
+
   <span class="help-block"></span>  
   </div>
 </div>
@@ -69,21 +72,23 @@
             </tr>
                 
         </thead>
-        <tbody id="form-list-projets-body"  *ngFor="let equipe of equipes | async">
+        <ng-container *ngFor="let equipe of equipes | async">
+        <tbody id="form-list-projets-body" *ngIf="equipe.nomEquipe!='Équipe non affectée'" >
             <tr>
                 <td>{{equipe.nomEquipe}}</td>
                 <td>{{equipe.specialite}}</td>
                
                 <td>
                   
-                    <a title="les détails d'equipe" class="btn btn-default btn-sm "(click)="EquipeDetails(equipe.idEquipe)"> <i class="glyphicon glyphicon-eye-open text-primary"  ></i> </a> 
-                    <a title="modifier l'equipe" class="btn btn-default btn-sm "(click)="updateEquipe(equipe.idEquipe)"> <i class="glyphicon glyphicon-edit text-primary"></i> </a>
-                    <a title="supprimer l'equipe " class="btn btn-default btn-sm " (click)="deleteEquipe(equipe.idEquipe)"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
+                    <a   title="les détails d'equipe" class="btn btn-default btn-sm "(click)="EquipeDetails(equipe.idEquipe)"> <i class="glyphicon glyphicon-eye-open text-primary"  ></i> </a> 
+                    <a  title="modifier l'equipe" class="btn btn-default btn-sm "(click)="updateEquipe(equipe.idEquipe)"> <i class="glyphicon glyphicon-edit text-primary"></i> </a>
+                    <a  title="supprimer l'equipe " class="btn btn-default btn-sm " (click)="deleteEquipe(equipe.idEquipe)"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
                     
                    
                 </td>
             </tr>
         </tbody>
+      </ng-container>
     </table>
     </form>
 
