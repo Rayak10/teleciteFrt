@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { EquipeService } from 'src/app/services/equipe/equipe.service';
 import {TIME_ZONE_OFFSET} from '../../settings/app.settings';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-projet-update',
@@ -20,7 +21,11 @@ export class ProjetUpdateComponent implements OnInit {
   roleE:string;
   exform:FormGroup;
   offset: number =new Date().getTimezoneOffset() * 60 * 1000;
-  constructor(private projetservice:ProjetService,private route: ActivatedRoute, private router: Router,private equipeservice:EquipeService) {
+  messageS:String="Projet modifié avec succès";
+  messageE:String="Modification du projet est échoué";
+
+  constructor(private projetservice:ProjetService,private route: ActivatedRoute, private router: Router,
+    private equipeservice:EquipeService,private _service: NotificationsService) {
    }
   
   
@@ -65,12 +70,11 @@ export class ProjetUpdateComponent implements OnInit {
   
 updateProjet(){
   this.projetservice.updateProjet(this.id , this.projet )
-  .subscribe(data=> console.log(data),error=>console.log(error)),
+  .subscribe(data=>this.onSuccess(this.messageS)
   
-    this.projet=new Projet();
+  ,error=>this.onErorr(this.messageE));
   
-    this.gotoList();
-    this.reloadData();
+  
 }
 onSubmit(){
   this.updateProjet();
@@ -81,6 +85,19 @@ gotoList(){
 reloadData(){
   this.projets=this.projetservice.findAllProjets();
 }
-
+onSuccess(messageS){
+  this._service.success('Success',messageS, {
+    position: ['bottom','right'],
+    timeOut: 2000,
+    animate: 'fade',
+    showProgressBar: true
+  })}
+  onErorr(messageE){
+    this._service.error('Erreur',messageE, {
+      position: ['bottom','right'],
+      timeOut: 2000,
+      animate: 'fade',
+      showProgressBar: true
+    })}
 
 }
