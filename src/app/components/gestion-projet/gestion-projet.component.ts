@@ -39,30 +39,9 @@ roleE:string;
     );
     this.reloadData();
   }
-  newProjet(): void {
-    this.submitted = false;
-    this.projet= new Projet();
-  }
-  onSubmit(gestProjet:NgForm) {
-    this.submitted = true;
-    this.save(); 
-    gestProjet.reset();
-
-       this.reloadData();
-       this.gotoList();
-  }
-  save() {
-   
-
-    this.projet.dateDebut = new Date(new Date(this.projet.dateDebut).getTime() - this.offset);
-    this.projet.dateFin = new Date(new Date(this.projet.dateFin).getTime() - this.offset);
-    this.projetservice.createProjet(this.projet)
-      .subscribe(data => console.log(data), error => console.log(error));
-    this.projet= new Projet();
-    
-   
-this.gotoList();
-  }  
+ 
+  
+  
 reloadData(){
     this.projets= this.projetservice.findAllProjets();
 
@@ -93,11 +72,7 @@ reloadData(){
     });
     
   }
-  onChangeEquipe(event){
-   
-    this.projet.equipe = {idEquipe:this.selectedEquipeId,nomEquipe:'',specialite:''};
-    console.log(JSON.stringify(this.projet.equipe.idEquipe));  
-  }
+
 
   ajoutProjet(){
     this.router.navigate(['ajoutProjet']);

@@ -49,7 +49,6 @@
          id="field_tache"
            name="tacheEta" [(ngModel)]="tache.etatTache">
          <option *ngFor='let etat of etatArray'> {{etat}} </option>
-         <small *ngIf="exform.get('etat').errors?.required && exform.get('etat').touched" class="textdanger">L'eta est obligatoire</small>
        </select>  <span class="help-block"></span>  
   </div>
 </div>
@@ -62,9 +61,11 @@
     <div class="col align-self-center">
       <label class="col-md-5 control-label" for="btn-save"></label>
     </div>
-    
     <div class="col col-md-1">
-      <button id="btn-save" name="btn-save" type="submit" class="btn btn-success">Enregistrer</button>
+      <button id="btn-retour" name="btn-retour" (click)="gotoList()" class="btn btn-success">Retour</button>
+    </div>
+    <div class="col col-md-1">
+      <button id="btn-save" name="btn-save" [disabled]="exform.invalid"  type="submit" class="btn btn-success">Enregistrer</button>
     </div>
   </div>
 
@@ -115,3 +116,4 @@
 
     
 </div>
+<simple-notifications></simple-notifications>

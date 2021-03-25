@@ -74,11 +74,17 @@
         <p class="help-block"></p>
         </div>
         <hr>    
-        <label class="col-md-4 control-label" for="btn-save"></label>
-        <div class="col col-lg-2">
-         <button id="btn-save" name="btn-save" type="submit" class="btn btn-success">Enregistrer</button>
-        </div>
+        <div  class="form-group">
+          <label class="col-md-4 control-label" for="btn-save"></label>
+          <div class="col-md-1">
+            <button id="btn-retour" name="btn-retour" (click)="gotoList()" class="btn btn-success">Retour</button>
+          </div>
+      
+          <div class="col-md-0">
+            <button id="btn-save" [disabled]="exform.invalid" name="btn-save" type="submit" class="btn btn-success">Enregistrer</button>
+           </div>
+      </div>
     </form>
     </fieldset>
    </div> 
-           
+   <simple-notifications></simple-notifications>

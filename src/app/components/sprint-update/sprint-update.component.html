@@ -81,17 +81,19 @@
 <!-- Button -->
 
     
-</form>
+
+
+<label class="col-md-10 control-label" for="btn-save"></label>
+    <div class="col col-lg-1">
+     <button id="btn-save" name="btn-save" (click)="gotoList()" class="btn btn-success">Retour</button>
+    </div>
+    <label class="col-md-0 control-label" for="btn-save"></label>
+    <div class="col col-lg-1">
+     <button id="btn-save" name="btn-save" [disabled]="exform.invalid"  (click)="onSubmit()"  class="btn btn-success">Modifier</button>
+    </div>
+  </form>
 </fieldset>
 </div> 
+    <simple-notifications></simple-notifications>
 
-<label class="col-md-2 control-label" for="btn-save"></label>
-    <div class="col col-lg-2">
-     <button id="btn-save" name="btn-save" (click)="projetDetails(sprint.projet.idProjet)" class="btn btn-success">Modifier et retour au detaille projet</button>
-    </div>
-    <label class="col-md-4 control-label" for="btn-save"></label>
-    <div class="col col-lg-2">
-     <button id="btn-save" name="btn-save"  (click)="gotoList()"  class="btn btn-success">Modifier et retour au liste sprints</button>
-    </div>
-	    
 

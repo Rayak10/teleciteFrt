@@ -6,7 +6,7 @@
 <form (ngSubmit)="onSubmit()"[formGroup]="exform" >
 <div class="row">
     <div class="col col-md-2">  
-  <label class="control-label">description tache :</label>
+  <label class="control-label">description tâche :</label>
   </div>
   <div class="col col-md-8">
       <textarea id="tache-name" formControlName="description"  rows="2" cols="12"  [(ngModel)]="tache.descriptionTache" name="tache-name" type="text" placeholder="En tant que...... je veux .....à fin de .....  ." class="form-control input-md"></textarea>
@@ -16,7 +16,7 @@
   </div> 
   <div class="row">
     <div class="col col-md-2">
-    <label class=" control-label">Durée tache :</label>
+    <label class=" control-label">Durée tâche :</label>
   </div>
   <div class="col col-md-3">
       <input formControlName="dure" id="tache-name" 
@@ -27,7 +27,7 @@
       </div>   
       <div class="col col-md-2">
         <label class=" col col-md-2"></label>
-        <label class="control-label" >Etat tache  :</label>  
+        <label class="control-label" >Etat tâche  :</label>  
       </div>
       <div class="col col-md-3">
           <select formControlName="etat"
@@ -48,7 +48,9 @@
   <div class="form-group">
     <label class="col-md-4 control-label" for="btn-save"></label>
     <div class="col col-lg-2">
-        <button id="btn-save"  (click)="list()" name="btn-save" class="btn btn-success">Modifier et retour au liste des taches </button>
+        <button id="btn-save" [disabled]="exform.invalid"  (click)="list()" name="btn-save" class="btn btn-success">Modifier et retour au liste des tâches </button>
     </div>
 </div>
-	    
+<simple-notifications></simple-notifications>
+
+   

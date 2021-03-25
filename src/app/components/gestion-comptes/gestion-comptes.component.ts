@@ -13,6 +13,7 @@ import { Equipe } from 'src/app/models/equipe';
 import { RoleMember } from 'src/app/models/roleMember';
 import { RoleService } from 'src/app/services/role/role.service';
 import { DialogConfirmService } from 'src/app/services/confirm/dialog-confirm.service';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-gestion-comptes',
@@ -47,7 +48,11 @@ export class GestionComptesComponent implements OnInit {
   retrievedImage: any;
   public userFile : any =null;
   message:string;
-  constructor(private employeservice:EmployeService,private departementservice:DepartementService,private roleservice:RoleService,private equipeservice:EquipeService,private bureauservice:BureauService, private router: Router,private formBuilder: FormBuilder,private dialogService:DialogConfirmService) {}
+  messageS:String="Employe ajouté avec succès";
+  messageE:String="Ajout d'employe est échoué";
+  constructor(private employeservice:EmployeService,private departementservice:DepartementService,
+    private roleservice:RoleService,private equipeservice:EquipeService,private bureauservice:BureauService,
+     private router: Router,private formBuilder: FormBuilder,private dialogService:DialogConfirmService, private _service: NotificationsService) {}
 
   ngOnInit() {
   
@@ -63,8 +68,7 @@ export class GestionComptesComponent implements OnInit {
       'departement' : new FormControl(null,Validators.required),
       'email' : new FormControl(null,[Validators.required,
                                       Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
-      'status1' : new FormControl(null,Validators.required),
-      'status2' : new FormControl(null,Validators.required),
+      'status' : new FormControl(null,Validators.required),
       'salaire' : new FormControl(null,Validators.required),
       'equipe' : new FormControl(null,Validators.required),
       'password' : new FormControl('', [Validators.required,Validators.minLength(8)]),
@@ -119,22 +123,21 @@ export class GestionComptesComponent implements OnInit {
       this.employe.dateNaissance = new Date(new Date(this.employe.dateNaissance).getTime() - this.offset);
     this.employe.dateEmbauche = new Date(new Date(this.employe.dateEmbauche).getTime() - this.offset);
     this.employeservice.createEmploye(this.employe)
-      .subscribe(data => console.log(data), error => console.log(error));
+      .subscribe(resp=> this.onSuccess(this.messageS),error=>this.onErorr(this.messageE));
     }
     else{
     formData.append('employee',JSON.stringify(this.employe))  ;
     formData.append('file',this.userFile);
-    this.employeservice.saveEmployeProfile(formData).subscribe((Response)=>{
-      console.log(Response);
-    })
-  }
+    this.employeservice.saveEmployeProfile(formData).subscribe(
+      resp=> this.onSuccess(this.messageS),error=>this.onErorr(this.messageE))
+    }
 this.gotoList();
   }
   
   
+  
   checkEmploye() {
     if (localStorage.getItem('currentEmploye') === undefined || localStorage.getItem('currentEmploye') === null) {
-      console.log("employe is invalid, redirection");
       this.router.navigate(['/login']);
       return;
     }
@@ -168,7 +171,20 @@ reloadData(){
   
 
 
-
+  onSuccess(messageS){
+    this._service.success('Success',messageS, {
+      position: ['bottom','right'],
+      timeOut: 2000,
+      animate: 'fade',
+      showProgressBar: true
+    })}
+    onErorr(messageE){
+      this._service.error('Erreur',messageE, {
+        position: ['bottom','right'],
+        timeOut: 2000,
+        animate: 'fade',
+        showProgressBar: true
+      })}
 
     
   

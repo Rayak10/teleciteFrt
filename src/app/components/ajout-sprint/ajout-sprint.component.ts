@@ -9,6 +9,7 @@ import * as $ from 'jquery' ;
 import { FormGroup } from '@angular/forms';
 import { FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-ajout-sprint',
@@ -31,9 +32,12 @@ export class AjoutSprintComponent implements OnInit {
   sprintsProjetArray: Sprint[] = [];
   selectedProjetSprintsId:number;
   showBPList: boolean = false;
-  constructor(private sprintservice:SprintService,private projetservice:ProjetService,private formBuilder:FormBuilder,private router:Router) { }
+  messageS:String="Sprint ajouté avec succès";
+  messageE:String="Ajout du projet est échoué";
+  constructor(private sprintservice:SprintService,private projetservice:ProjetService,private formBuilder:FormBuilder,
+    private router:Router, private _service: NotificationsService) { }
 
-  ngOnInit()  {
+  ngOnInit()  { 
     
     this.exform = new FormGroup({
       'nom' : new FormControl(null,Validators.required),
@@ -72,18 +76,30 @@ onSubmit(getSprintForm:NgForm) {
   this.save(); 
   getSprintForm.reset();
      this.reloadData();
-     this.gotoList();
 }
+onSuccess(messageS){
+  this._service.success('Success',messageS, {
+    position: ['bottom','right'],
+    timeOut: 2000,
+    animate: 'fade',
+    showProgressBar: true
+  })}
+  onErorr(messageE){
+    this._service.error('Erreur',messageE, {
+      position: ['bottom','right'],
+      timeOut: 2000,
+      animate: 'fade',
+      showProgressBar: true
+    })}
 save() {
   console.log("sprint: "+JSON.stringify(this.sprint));
   this.sprint.dateDebut = new Date(new Date(this.sprint.dateDebut).getTime() - this.offset);
   this.sprint.dateFin = new Date(new Date(this.sprint.dateFin).getTime() - this.offset);
   this.sprintservice.createSprint(this.sprint)
-    .subscribe(data => console.log(data), error => console.log(error));
+    .subscribe(data =>this.onSuccess(this.messageS), error => this.onErorr(this.messageE));
   this.sprint= new Sprint();
   
  
-this.gotoList();
 }  
 reloadData(){
   this.sprints= this.sprintservice.findAllSprintOrderByProjet();

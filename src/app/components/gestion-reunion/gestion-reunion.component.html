@@ -4,7 +4,7 @@
 <!-- FORM  -->	    
  <div class="container">	  
 
- <form  [formGroup]="exform" (ngSubmit)="onSubmit()" >
+ <form  [formGroup]="exform" #reunionForm="ngForm" (ngSubmit)="onSubmit(reunionForm)" >
 
 <legend  class="navbar-brand titre"  > Gestion des reunions </legend>
 <!-- Text input-->
@@ -52,7 +52,7 @@
   <label class="control-label">Date début réunion :</label>  
     </div>
     <div class="col-md-4">
-      <input  formControlName="dateDebut" 
+      <input  formControlName="dateDebut" autocomplete="off" 
       name="reunion-date-debut"
       placeholder = "Selectionner la date début"
       [(ngModel)]="reunion.dateDebut"
@@ -75,7 +75,7 @@
     <label class="control-label">Date fin réunion :</label>
   </div>  
     <div class="col-md-4">
-      <input  formControlName="dateFin" 
+      <input  formControlName="dateFin" autocomplete="off" 
       name="reunion-date-fin"
       placeholder = "Selectionner la date fin"
       [(ngModel)]="reunion.dateFin"
@@ -159,18 +159,16 @@
       </div>
       </div>
       <!-- Button -->
-      <div class="row">
-        <div class="col-md-4">
-
-       <button id="btn-save"  (click)="gotoList()" name="btn-save" class="btn btn-success">Retour au liste des réunions</button>
-        </div>
-        <div class="col col-lg-2 pull-right">
-
-       <button    id="btn-save" name="btn-save" type="submit" class="btn btn-success">Enregistrer</button>
-    </div>
+      <div class="col col-lg-1 pull-right">
+        <button id="btn-save" name="btn-save"  type="submit" class="btn btn-success">Enregistrer</button>
+       </div>
+      <div class="col col-lg-1 pull-right">
+        <button id="btn-retour" name="btn-retour" (click)="gotoList()"class="btn btn-success">Retour</button>
       </div>
-  </form>
-<!--
+     
+    </form>
+    <simple-notifications></simple-notifications>
+    <!--
     
     <hr>
 

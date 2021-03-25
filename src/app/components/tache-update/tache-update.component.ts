@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Userstory } from 'src/app/models/userStory';
 import { UserstoryService } from 'src/app/services/userstory/userstory.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-tache-update',
@@ -17,9 +18,11 @@ export class TacheUpdateComponent implements OnInit {
   userstory:Userstory;
   sprintArray= [];
   etatArray= [];
-  exform:FormGroup;
-
-  constructor(private tacheservice:TacheService,private userstoryservice:UserstoryService,private route: ActivatedRoute, private router: Router) { }
+  exform:FormGroup; 
+  messageS:String="Tâche modifiée avec succèes";
+  messageE:String="Modification du tâche storie est échouée";
+  constructor(private tacheservice:TacheService,private userstoryservice:UserstoryService,
+    private route: ActivatedRoute, private router: Router,private _service: NotificationsService) { }
 
   ngOnInit() {
     this.exform = new FormGroup({
@@ -27,7 +30,7 @@ export class TacheUpdateComponent implements OnInit {
       'etat' : new FormControl(null,Validators.required),
       'dure' : new FormControl(null,[Validators.required, Validators.pattern(/^(1|10|[1-9]\d*)$/)]),
          })
-    this.etatArray=["","To do","Doing","Done"]
+    this.etatArray=["To do","Doing","Done"]
     this.tache=new Tache();
     
     this.id=this.route.snapshot.params['id'];
@@ -42,26 +45,31 @@ export class TacheUpdateComponent implements OnInit {
         console.log(data)
         this.userstory=data;
       }, error=>console.log(error));
-    
-    /*this.sprintservice.findAllSprint().subscribe(
-      data => {console.log("data from find all sprints:"+JSON.stringify(data));   
-      
-                  this.sprintArray.push(...data);}
-                  );*/
-
-                 
+             
       console.log("tache Update: "+JSON.stringify(this.tache))
     }, error=>console.log(error));
     } 
   
     updateTache(){
   this.tacheservice.updateTache(this.id , this.tache )
-  .subscribe(data=> console.log(data),error=>console.log(error)),
+  .subscribe(data=> this.onSuccess(this.messageS)
+  ,error=>this.onErorr(this.messageE));
   
-   // this.userstory=new Userstory();
-    console.log("aaaaaaaaaaaaaa"+this.tache)
-   
 }
+onSuccess(messageS){
+  this._service.success('Success',messageS, {
+    position: ['bottom','right'],
+    timeOut: 2000,
+    animate: 'fade',
+    showProgressBar: true
+  })}
+  onErorr(messageE){
+    this._service.error('Erreur',messageE, {
+      position: ['bottom','right'],
+      timeOut: 2000,
+      animate: 'fade',
+      showProgressBar: true
+    })}
 onSubmit(){
   this.updateTache();
 }

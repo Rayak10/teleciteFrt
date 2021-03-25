@@ -7,6 +7,7 @@ import { ProjetService } from 'src/app/services/projet/projet.service';
 import { Sprint } from 'src/app/models/sprint';
 import { UserstoryService } from 'src/app/services/userstory/userstory.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-userstory-update',
@@ -20,7 +21,10 @@ export class UserstoryUpdateComponent implements OnInit {
   sprintArray= [];
   etatArray= [];
   exform:FormGroup;
-  constructor(private sprintservice:SprintService,private route: ActivatedRoute, private router: Router,private userstoryservice:UserstoryService) { }
+  messageS:String="User storie modifiée avec succèes";
+  messageE:String="Modification du user storie est échouée";
+  constructor(private sprintservice:SprintService,private route: ActivatedRoute, private router: Router,
+    private userstoryservice:UserstoryService, private _service: NotificationsService) { }
   
   
   ngOnInit() {
@@ -51,18 +55,27 @@ export class UserstoryUpdateComponent implements OnInit {
       console.log("userStoryUpdate: "+JSON.stringify(this.userstory))
     }, error=>console.log(error));
     } 
-  
-    updateUserStory(){
+    update_UserStory(){
   this.userstoryservice.updateUserStory(this.id , this.userstory )
-  .subscribe(data=> console.log(data),error=>console.log(error)),
-  
-    this.userstory=new Userstory();
-    console.log("aaaaaaaaaaaaaa"+this.userstory)
-    this.gotoList();
-    this.reloadData();
+  .subscribe(data=> this.onSuccess(this.messageS)
+  ,error=>this.onErorr(this.messageE));
 }
+onSuccess(messageS){
+  this._service.success('Success',messageS, {
+    position: ['bottom','right'],
+    timeOut: 2000,
+    animate: 'fade',
+    showProgressBar: true
+  })}
+  onErorr(messageE){
+    this._service.error('Erreur',messageE, {
+      position: ['bottom','right'],
+      timeOut: 2000,
+      animate: 'fade',
+      showProgressBar: true
+    })}
 onSubmit(){
-  this.updateUserStory();
+  this.update_UserStory();
 }
 gotoList(){
   this.router.navigate(['gestionUserstory']);

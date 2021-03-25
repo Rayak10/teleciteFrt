@@ -12,6 +12,7 @@ import { NgbTimeStruct,NgbTimepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import { EmployeService } from 'src/app/services/employe/employe.service';
 import { Employe } from 'src/app/models/employe';
 import { stringify } from 'querystring';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-gestion-reunion',
@@ -53,7 +54,12 @@ export class GestionReunionComponent implements OnInit {
   selectedItemsList:Employe[] = [];
   checkedIDs:number[];
   exform:FormGroup;
-  constructor(config: NgbTimepickerConfig ,private runionservice:ReunionService,private employeservice:EmployeService,private equipeservice:EquipeService,private departementservive:DepartementService,private formBuilder:FormBuilder,private router:Router) {
+  messageS:String="Réunion ajoutée avec succèes";
+  messageE:String="Ajout du réunion est échouée";
+  constructor(config: NgbTimepickerConfig ,private runionservice:ReunionService,
+    private employeservice:EmployeService,private equipeservice:EquipeService,
+    private departementservive:DepartementService,private formBuilder:FormBuilder,
+    private router:Router, private _service: NotificationsService) {
     config.seconds = false;
     config.spinners = true;
     config.meridian=false;
@@ -85,8 +91,8 @@ export class GestionReunionComponent implements OnInit {
     this.ctrl2= new FormControl('', (control: FormControl) => {
       this.value2 = control.value;
       console.log("valeur heur fin:"+JSON.stringify(this.value2)); 
-this.h2=(this.value2.hour);
-this.mnt2=this.value2.minute;
+    this.h2=(this.value2.hour);
+    this.mnt2=this.value2.minute;
 
       if ( ((this.h2)-(this.h1))==0) {
         return  {probleme: true};;
@@ -109,23 +115,16 @@ this.mnt2=this.value2.minute;
 
 
 
-    this.ctrl1= new FormControl('', (control: FormControl) => {
+      this.ctrl1= new FormControl('', (control: FormControl) => {
       this.value1 = control.value;
-      console.log("valeur heur debut:"+JSON.stringify(this.value1)); 
-      console.log("hhhhhhhhhhheeeeeeeeeeeeeuuuuuuuuuurrr1: "+JSON.stringify(this.value1));
-
-    this.h1=this.value1.hour
-    this.mnt1=this.value1.minute
-
-
-
+      this.h1=+this.value1.hour
+      this.mnt1=this.value1.minute
       if (this.value1.hour< 9) {
         return {tooEarly: true};
       }
       if (this.value1.hour > 17) {
         return {tooLate: true};
       }
-
       return null;
     });
    
@@ -140,40 +139,43 @@ this.mnt2=this.value2.minute;
       
                   this.departementArray.push(...data);}
     );
-    console.log("efsef'rttttttttttttttttttttttttttttttttt"+JSON.stringify(this.departementArray)); 
 this.typeArray=["Réunion administratif","Reunion Scrum"]
-/*this.projetservice.findAllProjets().subscribe(
-  data => {console.log("data from find all projet:"+JSON.stringify(data));   
-  
-              this.projetArray.push(...data);}
-);*/
+
 }
     
 newSprint(): void {
   this.submitted = false;
   this.reunion= new Reunion();
 }
-onSubmit() {
+onSubmit(reunionForm:NgForm) {
   this.submitted = true;
   this.save(); 
-     this.gotoList();
+  reunionForm.reset();
 }
 save() {
   this.reunion.dateDebut = new Date(new Date(this.reunion.dateDebut).getTime() - this.offset);
   this.reunion.dateFin = new Date(new Date(this.reunion.dateFin).getTime() - this.offset);
-
-console.log("5555555555AAAAAA5A5"+JSON.stringify(this.reunion)); 
-
   this.runionservice.createReunion(this.reunion)
-  
-    .subscribe(data =>{ console.log(data);
-    } ,error => console.log(error));
-    console.log("5555555555AAAAAA5A5"+JSON.stringify(this.reunion)); 
-
-
+  .subscribe(resp=> console.log(resp),error=>this.onErorr(this.messageE))
+  if((this.reunion.type!=null) &&( (this.reunion.employes !=null) || (this.reunion.equipe!=null))){  
+    this.onSuccess(this.messageS);
+  }
 }  
 
-
+onSuccess(messageS){
+  this._service.success('Success',messageS, {
+    position: ['bottom','right'],
+    timeOut: 2000,
+    animate: 'fade',
+    showProgressBar: true
+  })}
+  onErorr(messageE){
+    this._service.error('Erreur',messageE, {
+      position: ['bottom','right'],
+      timeOut: 2000,
+      animate: 'fade',
+      showProgressBar: true
+    })}
 gotoList(){
   this.router.navigate(['Reunions/list']);
 }

@@ -12,6 +12,7 @@ import { FormGroup } from '@angular/forms';
 import { FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { DialogConfirmService } from 'src/app/services/confirm/dialog-confirm.service';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-gestion-userstory',
@@ -35,11 +36,13 @@ export class GestionUserstoryComponent implements OnInit {
   selectedPriorite:number;
   complexiteArray= [];
   selectedComplexite:number;
-val:any
-roleE:String;
+  val:any
+  roleE:String;
+  messageS:String="User storie ajoutée avec succèes";
+  messageE:String="Ajout du user storie est échouée";
   constructor(private userstoryservice:UserstoryService,private projetservice:ProjetService,
     private sprintservice:SprintService,private formBuilder:FormBuilder,private router:Router,
-    private dialogService:DialogConfirmService) { 
+    private dialogService:DialogConfirmService, private _service: NotificationsService) { 
     this.val=this.selectedProjetId;
 
   }
@@ -62,12 +65,23 @@ roleE:String;
 this.complexiteArray=[1,2,3,5,8,13,20,40,100]
 this.projetservice.findAllProjets().subscribe(
   data => {console.log("data from find all projets:"+JSON.stringify(data));   
-  
               this.projetArray.push(...data);}
-);
-
-}
+);}
     
+onSuccess(messageS){
+  this._service.success('Success',messageS, {
+    position: ['bottom','right'],
+    timeOut: 2000,
+    animate: 'fade',
+    showProgressBar: true
+  })}
+  onErorr(messageE){
+    this._service.error('Erreur',messageE, {
+      position: ['bottom','right'],
+      timeOut: 2000,
+      animate: 'fade',
+      showProgressBar: true
+    })}
 newUserstory(): void {
   this.submitted = false;
   this.userstory= new Userstory();
@@ -84,7 +98,7 @@ save() {
   console.log("userStory: "+JSON.stringify(this.userstory));
  
   this.userstoryservice.createUserStory(this.userstory)
-    .subscribe(data => console.log(data), error => console.log(error));
+    .subscribe(data =>this.onSuccess(this.messageS), error => this.onErorr(this.messageE));
     
   this.userstory= new Userstory();
   

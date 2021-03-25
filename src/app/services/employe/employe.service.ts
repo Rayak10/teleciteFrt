@@ -53,7 +53,7 @@ return this.http.get<Employe[]>(AppSettings.APP_URL+"/employes/AllActives/"+acti
 
   }
   saveEmployeProfile(formData: FormData): Observable<any> {
-  //  let headers = createAuthorizationHeader();
+  // let headers = createAuthorizationHeader();
   let headers= new HttpHeaders({
   'Authorization': "Bearer "+localStorage.getItem('token')
 });

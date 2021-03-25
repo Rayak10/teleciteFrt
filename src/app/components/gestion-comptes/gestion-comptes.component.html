@@ -96,7 +96,7 @@
     <div class="col col-md-4">
       <div class="input-group">
       <span class="input-group-addon">DTN</span>
-      <input id="employe-salaire" formControlName="salaire" [(ngModel)]="employe.salaire" autocomplete="off" name="salaire" class="form-control" placeholder="tappez salaire en dinare" type="double">
+      <input id="employe-salaire" type="number" formControlName="salaire" [(ngModel)]="employe.salaire" autocomplete="off" name="salaire" class="form-control" placeholder="tappez salaire en dinare">
       <small *ngIf="exform.get('salaire').invalid && exform.get('salaire').touched" class="textdanger"> Salaire est obligatoire</small>  
     </div>
     <p class="help-block"></p>
@@ -180,18 +180,18 @@
  
   <div class="col col-md-2">
 
-  <label class="control-label">Client status :</label>
+    <label class="control-label">Client status :</label>
   </div>
   <div class="col col-md-4">
     <div class="radio">
     <label for="client-status-0">
-      <input type="radio"  [(ngModel)]="employe.active"  id="client-status-0" value="true" checked>
+      <input type="radio" required [(ngModel)]="employe.active" required formControlName="status"  id="client-status-0" value="true" checked>
       Active
     </label>
   </div>
   <div class="radio">
     <label>
-      <input type="radio"  [(ngModel)]="employe.active" name="active" id="client-status-1" value="false">
+      <input type="radio" required [(ngModel)]="employe.active" formControlName="status" required id="client-status-1" value="false">
       Inactive
     </label>
   </div>
@@ -250,7 +250,7 @@
 <label class="col-md-4 control-label" for="btn-save"></label>
 
     <div class="col-md-1">
-     <button id="btn-save" name="btn-save" class="btn btn-success" (click)="save(getCompteForm)">Créer</button>
+     <button id="btn-save" [disabled]="exform.invalid"  name="btn-save" class="btn btn-success" (click)="save(getCompteForm)">Créer</button>
     </div>
 </div>
 
@@ -307,4 +307,4 @@
 </form>
 
 
-</div> 
+</div> <simple-notifications></simple-notifications>

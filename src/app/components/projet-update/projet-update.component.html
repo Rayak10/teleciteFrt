@@ -105,7 +105,7 @@
   </div>
 
   <div class="col-md-0">
-    <button id="btn-save" name="btn-save" type="submit" class="btn btn-success">Modifier</button>
+    <button id="btn-save" name="btn-save"  [disabled]="exform.invalid" type="submit" class="btn btn-success">Modifier</button>
    </div>
 </div>
 
@@ -124,7 +124,7 @@
       
       <!-- Form Name -->
       
-      <legend  class="navbar-brand titre"  > Changer lccces informations</legend>
+      <legend  class="navbar-brand titre"  > Changer les informations</legend>
       <form (ngSubmit)="onSubmit()" >
       <!-- Text input-->
       <div class="form-group">
@@ -206,7 +206,7 @@
         </div>
       
         <div class="col-md-0">
-          <button id="btn-save" name="btn-save" type="submit" class="btn btn-success">Modifier</button>
+          <button id="btn-save" name="btn-save" [disabled]="exform.invalid"  type="submit" class="btn btn-success">Modifier</button>
          </div>
       </div>
       </form>

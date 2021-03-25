@@ -71,7 +71,6 @@ export class ProjetUpdateComponent implements OnInit {
 updateProjet(){
   this.projetservice.updateProjet(this.id , this.projet )
   .subscribe(data=>this.onSuccess(this.messageS)
-  
   ,error=>this.onErorr(this.messageE));
   
   

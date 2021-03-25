@@ -8,6 +8,7 @@ import { Projet } from 'src/app/models/projet';
 import { FormGroup } from '@angular/forms';
 import { FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-sprint-update',
@@ -22,7 +23,10 @@ export class SprintUpdateComponent implements OnInit {
   etatArray= [];
   exform:FormGroup;
   offset: number =new Date().getTimezoneOffset() * 60 * 1000;
-  constructor(private sprintservice:SprintService,private route: ActivatedRoute, private router: Router,private projetservice:ProjetService) { }
+  messageS:String="Sprint modifié avec succès";
+  messageE:String="Modification du sprint est échoué";
+  constructor(private sprintservice:SprintService,private route: ActivatedRoute, private router: Router,
+    private projetservice:ProjetService,private _service: NotificationsService) { }
   
   ngOnInit() {
     this.exform = new FormGroup({
@@ -57,12 +61,12 @@ export class SprintUpdateComponent implements OnInit {
       console.log("projetUpdate: "+JSON.stringify(this.sprint))
     }, error=>console.log(error));
     } 
-  
+    
 updateSprint(){
   this.sprintservice.updateSprint(this.id , this.sprint )
-  .subscribe(data=> console.log(data),error=>console.log(error)),
+  .subscribe(data=>this.onSuccess(this.messageS),
+  error=>this.onErorr(this.messageE)),
   
-    this.sprint=new Sprint();
   
     this.reloadData();
 }
@@ -70,7 +74,6 @@ onSubmit(){
   this.updateSprint();
 }
 gotoList(){
-  this.updateSprint();
   this.router.navigate(['gestionSprints']);
 }
 projetDetails(id:number){
@@ -81,6 +84,20 @@ projetDetails(id:number){
 reloadData(){
   this.sprints=this.sprintservice.findAllSprint();
 }
+onSuccess(messageS){
+  this._service.success('Success',messageS, {
+    position: ['bottom','right'],
+    timeOut: 2000,
+    animate: 'fade',
+    showProgressBar: true
+  })}
+  onErorr(messageE){
+    this._service.error('Erreur',messageE, {
+      position: ['bottom','right'],
+      timeOut: 2000,
+      animate: 'fade',
+      showProgressBar: true
+    })}
 
 
 }

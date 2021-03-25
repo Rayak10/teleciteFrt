@@ -58,8 +58,9 @@ findReunionsByType(){
     }
     if(this.selectedType== 'Reunion_Scrum'){
       let iEquipe = +localStorage.getItem('idEquipe');
-      this.reunionsSort = resp.filter(r=>r.equipe.idEquipe==(iEquipe));
-      console.log("reunionnnnnnnnnnsc"+JSON.stringify(this.reunionsSort ))
+      console.log("--------------------------------:"+JSON.stringify(iEquipe));
+      this.reunionsSort = resp.filter(r=>r.equipe.idEquipe==(iEquipe)
+      );
     }
   }
   );

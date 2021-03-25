@@ -53,7 +53,7 @@
   <label class="control-label">Date début réunion :</label>  
     </div>
     <div class="col-md-4">
-      <input  formControlName="dateDebut" 
+      <input  formControlName="dateDebut" autocomplete="off" 
       name="reunion-date-debut"
       placeholder = "Selectionner la date début"
       [(ngModel)]="reunion.dateDebut"
@@ -76,7 +76,7 @@
     <label class="control-label">Date fin réunion :</label>
   </div>  
     <div class="col-md-4">
-      <input  formControlName="dateFin" 
+      <input autocomplete="off"  formControlName="dateFin" 
       name="reunion-date-fin"
       placeholder = "Selectionner la date fin"
       [(ngModel)]="reunion.dateFin"
@@ -159,10 +159,16 @@
       <p class="help-block"></p>
       </div>
       </div>
-      <div class="col col-lg-2 pull-right">
-       <button id="btn-save" name="btn-save" type="submit" class="btn btn-success">Modifier</button>
+      <div class="col col-lg-1 pull-right">
+        <button id="btn-save" name="btn-save"   type="submit" class="btn btn-success">Modifier</button>
+       </div>
+      <div class="col col-lg-1 pull-right">
+        <button id="btn-retour" name="btn-retour" (click)="gotoList()"class="btn btn-success">Retour</button>
       </div>
+     
   </form>
+  <simple-notifications></simple-notifications>
+
 <!--
     
     <hr>
@@ -213,11 +219,7 @@
   </tbody>
 </table>
 
-
-
-
-   
-
+<simple-notifications></simple-notifications>
 
 
 

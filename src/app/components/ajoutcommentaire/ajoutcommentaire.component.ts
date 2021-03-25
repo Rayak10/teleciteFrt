@@ -6,6 +6,7 @@ import { FormGroup } from '@angular/forms';
 import { FormBuilder, NgForm } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
+import { NotificationsService } from 'angular2-notifications';
 import { Observable } from 'rxjs';
 import { Commentaire } from 'src/app/models/Commentaire';
 import { Employe } from 'src/app/models/employe';
@@ -31,8 +32,11 @@ export class AjoutcommentaireComponent implements OnInit {
    employe:Employe=new Employe();
    sprint:Sprint=new Sprint();
    exform:FormGroup;
-
-   constructor(private employeservice:EmployeService,private commentaireservice:CommentaireService,private sprintservice:SprintService,private formBuilder: FormBuilder, private router: Router,private httpClient:HttpClient,private route: ActivatedRoute,
+   messageS:String="Commentaie ajouté avec succès";
+   messageE:String="Ajout du commentaire est échoué";
+   constructor(private employeservice:EmployeService,private commentaireservice:CommentaireService,
+    private sprintservice:SprintService,private formBuilder: FormBuilder, private router: Router,
+    private httpClient:HttpClient,private route: ActivatedRoute, private _service: NotificationsService,
    public dialogRef:MatDialogRef<GestionSprintsComponent>,
      @Inject(MAT_DIALOG_DATA) public data: any){
        this.recivedData=data;
@@ -62,6 +66,20 @@ export class AjoutcommentaireComponent implements OnInit {
       error => alert('problem!!!')
     );
    }
+   onErorr(messageE){
+    this._service.error('Erreur',messageE, {
+      position: ['bottom','right'],
+      timeOut: 2000,
+      animate: 'fade',
+      showProgressBar: true
+    })}
+  onSuccess(messageS){
+    this._service.success('Success',messageS, {
+      position: ['bottom','right'],
+      timeOut: 2000,
+      animate: 'fade',
+      showProgressBar: true
+    })}
    onSubmit(commentaireForm:NgForm) {
     this.submitted = true;
     this.save(); 
@@ -69,10 +87,8 @@ export class AjoutcommentaireComponent implements OnInit {
   }
    save() {
     this.commantaire.dateCommentaire = new Date(new Date().getTime() - this.offset);
-    console.log("bbbbbbbbbbbbbbbbb"+JSON.stringify( this.commantaire))
-
     this.commentaireservice.createCommentaire(this.commantaire)
-      .subscribe(data => console.log(data), error => console.log(error));
+      .subscribe(data =>this.onSuccess(this.messageS), error => this.onErorr(this.messageE));
 
   }  
 

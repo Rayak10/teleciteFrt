@@ -15,6 +15,7 @@ import { FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { FormControl } from '@angular/forms';
 import { DialogConfirmService } from 'src/app/services/confirm/dialog-confirm.service';
+import { NotificationsService } from 'angular2-notifications';
 @Component({
   selector: 'app-gestion-tache',
   templateUrl: './gestion-tache.component.html',
@@ -31,20 +32,19 @@ export class GestionTacheComponent implements OnInit {
   id:number;
   tacheArray= [];
   exform:FormGroup;
+  messageS:String="Tâche ajoutée avec succèes";
+  messageE:String="Ajout du tâche est échouée";
   constructor(private userstoryservice:UserstoryService,private tacheservice:TacheService,
     private sprintservice:SprintService,private route: ActivatedRoute,private formBuilder:FormBuilder,
-    private router:Router,private dialogService:DialogConfirmService) { }
+    private router:Router,private dialogService:DialogConfirmService, private _service: NotificationsService) { }
 
   ngOnInit() {
     this.exform = new FormGroup({
       'description' : new FormControl(null,Validators.required),
       'dure' : new FormControl(null,[Validators.required, Validators.pattern(/^(1|10|[1-9]\d*)$/)]),
-      'etat' : new FormControl(null,Validators.required),
+      'etat' : new FormControl(),
          })
       this.id=this.route.snapshot.params['id'];
-
-      console.log("iiiiiidddddddddddddddd: "+JSON.stringify(this.id));
-
     this.etatArray=["","To do","Doing","Done"]
     this.userstoryservice.findUserstoryById(this.id).subscribe(
       response =>{
@@ -52,15 +52,24 @@ export class GestionTacheComponent implements OnInit {
       },
       error => alert('problem!!!')
     );
-  //  this.tacheservice.findAllTacheByUserstory(this.id).subscribe(
-    //  data => {console.log("data from find all taches:"+JSON.stringify(data));   
-      //            this.tacheArray.push(...data);}
-    //);
+  
     this.reloadData();
-      
-//this.taches=this.userstoryservice.findUserstoryById();
-//this.reloadData();
 }
+    
+onSuccess(messageS){
+  this._service.success('Success',messageS, {
+    position: ['bottom','right'],
+    timeOut: 2000,
+    animate: 'fade',
+    showProgressBar: true
+  })}
+  onErorr(messageE){
+    this._service.error('Erreur',messageE, {
+      position: ['bottom','right'],
+      timeOut: 2000,
+      animate: 'fade',
+      showProgressBar: true
+    })}  
     
 newTache(): void {
   this.submitted = false;
@@ -71,18 +80,18 @@ onSubmit(tacheForm:NgForm) {
   this.save(); 
   tacheForm.reset();
      this.reloadData();
-     //this.gotoList();
 }
 save() {
   
   this.tacheservice.createTache(this.tache)
   .subscribe(data => console.log(data), error => console.log(error)); 
+    if(this.tache.idEmploye==null){
+      this.onSuccess(this.messageS)
+    }
+    else
+    this.onErorr(this.messageE)
     
-    
- // this.tache= new Tache();
-  
- 
-//this.gotoList();
+
 }  
 reloadData(){
   this.taches= this.tacheservice.findAllTacheByUserstory(this.id);  

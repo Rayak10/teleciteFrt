@@ -5,6 +5,7 @@ import { Validators } from '@angular/forms';
 import { FormControl } from '@angular/forms';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NotificationsService } from 'angular2-notifications';
 import { Observable } from 'rxjs';
 import { Bureau } from 'src/app/models/bureau';
 import { Departement } from 'src/app/models/departement';
@@ -50,7 +51,11 @@ export class EmployeUpdatComponent implements OnInit {
   offset: number =new Date().getTimezoneOffset() * 60 * 1000;
   roleE:string;
   exform:FormGroup;
-  constructor(private employeservice:EmployeService,private roleservice:RoleService,private route: ActivatedRoute, private router: Router,private departementservice:DepartementService,private equipeservice:EquipeService,private bureauservice:BureauService) { }
+  messageS:String="Employe modifié avec succès";
+  messageE:String="Modification d'employe est échoué";
+  constructor(private employeservice:EmployeService,private roleservice:RoleService,private route: ActivatedRoute,
+     private router: Router,private departementservice:DepartementService,private equipeservice:EquipeService,
+     private bureauservice:BureauService, private _service: NotificationsService) { }
   
   ngOnInit() {
     this.exform = new FormGroup({
@@ -144,16 +149,14 @@ export class EmployeUpdatComponent implements OnInit {
 updateEmploye(getCompteForm:NgForm){
 if (this.test==true){
   this.employeservice.updateEmploye(this.id , this.employe )
-  .subscribe(data=> console.log(data),error=>console.log(error));
-  console.log("eeeeeeeeeeeeeeeeeeeeerrraaaaaah")
+  .subscribe(data=> this.onSuccess(this.messageS),error=>this.onErorr(this.messageE));
 }
 else{
   var formData = new FormData();
   formData.append('employee',JSON.stringify(this.employe))  ;
   formData.append('file',this.userFile);
-  this.employeservice.saveEmployeProfile(formData).subscribe((Response)=>{
-    console.log(Response);
-  })
+  this.employeservice.saveEmployeProfile(formData).subscribe(data=> this.onSuccess(this.messageS),
+  error=>this.onErorr(this.messageE));
 }
 
 
@@ -161,6 +164,20 @@ else{
     this.reloadData();
   
 }
+onSuccess(messageS){
+  this._service.success('Success',messageS, {
+    position: ['bottom','right'],
+    timeOut: 2000,
+    animate: 'fade',
+    showProgressBar: true
+  })}
+  onErorr(messageE){
+    this._service.error('Erreur',messageE, {
+      position: ['bottom','right'],
+      timeOut: 2000,
+      animate: 'fade',
+      showProgressBar: true
+    })}
 
 gotoList(){
   this.router.navigate(['gestionComptes']);

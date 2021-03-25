@@ -11,6 +11,7 @@ import { EquipeService } from 'src/app/services/equipe/equipe.service';
 import * as $ from 'jquery' ;
 import { Observable } from 'rxjs';
 import { Employe } from 'src/app/models/employe';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-reunion-update',
@@ -46,8 +47,12 @@ export class ReunionUpdateComponent implements OnInit {
   heurdeb:NgbTimeStruct;
   heurfin:NgbTimeStruct;
   form: FormGroup;
-
-  constructor(private reunionservice:ReunionService,config: NgbTimepickerConfig ,private runionservice:ReunionService,private employeservice:EmployeService,private equipeservice:EquipeService,private departementservive:DepartementService,private route: ActivatedRoute, private router: Router,private formBuilder:FormBuilder) {
+  messageS:String="Réunion modifiée avec succèes";
+  messageE:String="Modification du réunion est échouée";
+  constructor(private reunionservice:ReunionService,config: NgbTimepickerConfig ,private runionservice:ReunionService,
+    private employeservice:EmployeService,private equipeservice:EquipeService,
+    private departementservive:DepartementService,private route: ActivatedRoute,
+     private router: Router,private formBuilder:FormBuilder, private _service: NotificationsService) {
     config.seconds = false;
     config.spinners = true;
     config.meridian=false;
@@ -127,33 +132,42 @@ this.mnt2=this.value2.minute;
 this.typeArray=["Réunion administratif","Reunion Scrum"]
   }
   updateReunion(){
-    console.log("efsef'rttttttttttttttttttttttttttttttttt"+JSON.stringify(this.reunion.employes)); 
     this.reunion.dateDebut = new Date(new Date(this.reunion.dateDebut).getTime() - this.offset);
     this.reunion.dateFin = new Date(new Date(this.reunion.dateFin).getTime() - this.offset);
     this.reunionservice.updateRieunion(this.id,this.reunion)
-    .subscribe(data=> console.log(data),error=>console.log(error))
+    .subscribe(data=> this.onSuccess(this.messageS),error=>this.onErorr(this.messageE))
   }
-
+  onSuccess(messageS){
+    this._service.success('Success',messageS, {
+      position: ['bottom','right'],
+      timeOut: 2000,
+      animate: 'fade',
+      showProgressBar: true
+    })}
+    onErorr(messageE){
+      this._service.error('Erreur',messageE, {
+        position: ['bottom','right'],
+        timeOut: 2000,
+        animate: 'fade',
+        showProgressBar: true
+      })}
   onSubmit(){
 this.updateReunion()
-this.gotoList();
-
 }
+
 gotoList(){
   this.router.navigate(['Reunions/list']);
 }
+
 onChange1(event){
-  
   this.reunion.equipe = {idEquipe:this.selectedEquipeId,nomEquipe:'',specialite:''};
   console.log(JSON.stringify(this.reunion.equipe.idEquipe)); 
 }
 
- 
   onChange2(event){
     $("#leg1").hide(1000);
     $("#tab1").hide(1500);
 this.employeservice.findAllEmployesDepartement(this.selectedDepartementId).subscribe(
-
   resp=>{
     this.employesdep=resp;
     let checkedEmployeesIds = this.selectedItemsList.filter(emp=> emp.departement.idDepartement == this.selectedDepartementId);
