@@ -4,37 +4,33 @@
 <!-- FORM  -->	    
  <div class="container">	  
 
- <form [formGroup]="exform"  (ngSubmit)="onSubmit()" >
+ <form   (ngSubmit)="onSubmit()" >
 
 <legend  class="navbar-brand titre"  > Gestion des reunions </legend>
 <!-- Text input-->
 <div class="row">
   <label class="col-md-2 control-label">Type réunion :</label>
   <div class="col-md-4">
-    <select formControlName="type" 
+    <select required
      type="text" 
      class="form-control "
       id="field_reunion"
         name="reunion" [(ngModel)]="this.reunion.type"
         (change)="onChange($event)">
-      <option *ngFor="let type of TypeReunion.values();" [value]="type" >
+      <option *ngFor="let type of TypeReunion.values();"disabled="disabled" >
         {{type}}
       </option>
     </select>
-    <small *ngIf="exform.get('type').invalid && exform.get('type').touched" class="textdanger">Sélectionner un type de réunion</small>
-
     <p class="help-block"></p>
     </div>
     <div class="col col-md-2">
   <label class="control-label" >Nom de réunion :</label> 
     </div>
   <div class="col-md-4">
-  <input id="reunion-name" formControlName="nom"  [(ngModel)]="reunion.nomReunion" name="reunion-name" type="text" placeholder="tapez le nom du reunion" class="form-control input-md" >
-  <small *ngIf="exform.get('nom').invalid && exform.get('nom').touched" class="textdanger">Nom de réunion est obligatoire</small>
+  <input id="reunion-name" required [(ngModel)]="reunion.nomReunion" name="reunion-name" type="text" placeholder="tapez le nom du reunion" class="form-control input-md" >
   <span class="help-block"></span>  
   </div>
 </div>
-
 
 
 
@@ -45,22 +41,22 @@
 </div>
 
   <div class="col-md-4">
-    <textarea id="reunion-description" rows="2" cols="12" formControlName="contexte"  [(ngModel)]="reunion.descriptionReunion" name="reunion-description" type="text" placeholder="tapez une description pour cette réunion ..." class="form-control input-md"></textarea>
-    <small *ngIf="exform.get('contexte').invalid && exform.get('contexte').touched" class="textdanger">Contexte de réunion est obligatoire</small>
+    <textarea id="reunion-description" rows="2" cols="12" required [(ngModel)]="reunion.descriptionReunion" name="reunion-description" type="text" placeholder="tapez une description pour cette réunion ..." class="form-control input-md"></textarea>
+
     <p class="help-block"></p>
     </div>
     <div class="col col-md-2">
   <label class="control-label">Date début réunion :</label>  
     </div>
     <div class="col-md-4">
-      <input  formControlName="dateDebut" autocomplete="off" 
+      <input  
       name="reunion-date-debut"
       placeholder = "Selectionner la date début"
       [(ngModel)]="reunion.dateDebut"
       class="form-control"
       bsDatepicker
       [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
-      <small *ngIf="exform.get('dateDebut').invalid && exform.get('dateDebut').touched" class="textdanger">Date début de réunion est obligatoire</small>
+   
     <span class="help-block"></span>  
     </div>  
 </div>
@@ -76,14 +72,14 @@
     <label class="control-label">Date fin réunion :</label>
   </div>  
     <div class="col-md-4">
-      <input autocomplete="off"  formControlName="dateFin" 
+      <input  
       name="reunion-date-fin"
       placeholder = "Selectionner la date fin"
       [(ngModel)]="reunion.dateFin"
       class="form-control"
       bsDatepicker
       [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
-      <small *ngIf="exform.get('dateFin').invalid && exform.get('dateFin').touched" class="textdanger">Date fin de réunion est obligatoire</small>
+   
     <span class="help-block"></span>  
     </div>  
   </div>
@@ -124,28 +120,27 @@
   <label class="control-label">Equipe :</label>
     </div>
   <div class="col-md-4">
-    <select formControlName="equipe" 
+    <select required
      type="text" 
      class="form-control "
       id="field_equipe"
-        name="equipe" [(ngModel)]="selectedEquipeId"
-        (change)="onChange1($event)">
+        name="equipe" [(ngModel)]="reunion.equipe.idEquipe"
+        >
       <option  *ngFor="let e of equipeArray" [value]="e.idEquipe">
         {{e.nomEquipe}}
       </option>
     </select>
-    <small *ngIf="exform.get('equipe').invalid && exform.get('equipe').touched" class="textdanger">Sélectionner une équipe</small>
     <p class="help-block"></p>
     </div>
     </div>
 
 
-    <div class="row" *ngIf="reunion.type == 'Reunion_Administratif'">
+    <div class="row" *ngIf="reunion.type=='Reunion_Administratif'">
       <div class="col col-md-2">
     <label class="control-label">Departement :</label>
       </div>
     <div class="col-md-4">
-      <select formControlName="departement" 
+      <select required
        type="text" 
        class="form-control "
         id="field_departement"
@@ -155,7 +150,6 @@
           {{d.nomDepartement}}
         </option>
       </select>
-      <small *ngIf="exform.get('departement').invalid && exform.get('departement').touched" class="textdanger">Sélectionner un departement</small>
       <p class="help-block"></p>
       </div>
       </div>
@@ -165,10 +159,7 @@
       <div class="col col-lg-1 pull-right">
         <button id="btn-retour" name="btn-retour" (click)="gotoList()"class="btn btn-success">Retour</button>
       </div>
-     
   </form>
-  <simple-notifications></simple-notifications>
-
 <!--
     
     <hr>
@@ -220,6 +211,11 @@
 </table>
 
 <simple-notifications></simple-notifications>
+
+
+
+   
+
 
 
 

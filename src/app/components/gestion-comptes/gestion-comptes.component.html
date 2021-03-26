@@ -180,20 +180,21 @@
  
   <div class="col col-md-2">
 
-    <label class="control-label">Client status :</label>
+    <label class="control-label">Employe status :</label>
   </div>
   <div class="col col-md-4">
     <div class="radio">
     <label for="client-status-0">
-      <input type="radio" required [(ngModel)]="employe.active" required formControlName="status"  id="client-status-0" value="true" checked>
+      <input type="radio"  [(ngModel)]="employe.active" [ngModelOptions]="{standalone: true}" name="active"  id="client-status-0" value="true" checked>
       Active
     </label>
   </div>
   <div class="radio">
     <label>
-      <input type="radio" required [(ngModel)]="employe.active" formControlName="status" required id="client-status-1" value="false">
+      <input type="radio"  [(ngModel)]="employe.active" [ngModelOptions]="{standalone: true}" name="active"   id="client-status-1" value="false">
       Inactive
     </label>
+
   </div>
   </div>
   <div class="col col-md-2">
@@ -219,9 +220,7 @@
   <div class="col col-md-4">
     <div class="input-group">
       <span class="input-group-addon"> * </span>
-      <input   type="password" id="employe-confirmationpassword" formControlName="confirme" autocomplete="off" 
-      name="password" class="form-control" placeholder="confirmez mot de passe">
-
+      <input   type="password"  formControlName="confirme" id="employe-confirmationpassword" autocomplete="off" name="password" class="form-control" placeholder="confirmez mot de passe" >
       <small *ngIf="exform.get('confirme').errors?.required && exform.get('confirme').touched" class="textdanger">Confirmation mot de passe est obligatoire</small>  
       <small *ngIf="exform.get('confirme').valid && exform.get('confirme').value !=exform.get('password').value" class="textdanger">Le mot de passe saisi ne correspond pas</small>  
 
@@ -250,7 +249,7 @@
 <label class="col-md-4 control-label" for="btn-save"></label>
 
     <div class="col-md-1">
-     <button id="btn-save" [disabled]="exform.invalid"  name="btn-save" class="btn btn-success" (click)="save(getCompteForm)">Créer</button>
+     <button id="btn-save" [disabled]="exform.invalid || exform.get('confirme').value !=exform.get('password').value"  name="btn-save" class="btn btn-success" (click)="save(getCompteForm)">Créer</button>
     </div>
 </div>
 

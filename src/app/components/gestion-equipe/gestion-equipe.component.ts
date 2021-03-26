@@ -4,6 +4,7 @@ import { Validators } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 import { FormBuilder, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NotificationsService } from 'angular2-notifications';
 import { Observable } from 'rxjs';
 import { Equipe } from 'src/app/models/equipe';
 import { Projet } from 'src/app/models/projet';
@@ -23,9 +24,11 @@ export class GestionEquipeComponent implements OnInit {
   equipes: Observable<Equipe[]>;
   exform:FormGroup;
   equipeArray= [];
+  messageS:String="Equipe ajoutée avec succèes";
+  messageE:String="Ajout d'équipe est échouée";
 
   constructor(private equipeservice:EquipeService,private formBuilder:FormBuilder,
-    private router:Router,private dialogService:DialogConfirmService) { }
+    private router:Router,private dialogService:DialogConfirmService, private _service: NotificationsService) { }
 
   ngOnInit() {
 
@@ -57,12 +60,26 @@ export class GestionEquipeComponent implements OnInit {
   save() {
     console.log("equipe: "+JSON.stringify(this.equipe));
     this.equipeservice.createEquipe(this.equipe)
-      .subscribe(data => console.log(data), error => console.log(error));
+    .subscribe(data => this.onSuccess(this.messageS))
     this.equipe= new Equipe();
     
    
 this.gotoList();
   }  
+  onSuccess(messageS){
+    this._service.success('Success',messageS, {
+      position: ['bottom','right'],
+      timeOut: 2000,
+      animate: 'fade',
+      showProgressBar: true
+    })}
+    onErorr(messageE){
+      this._service.error('Erreur',messageE, {
+        position: ['bottom','right'],
+        timeOut: 2000,
+        animate: 'fade',
+        showProgressBar: true
+      })}
 reloadData(){
     this.equipes= this.equipeservice.findAllEquipe();
     console.log("projetsssssssssssssssssssssssssssssss: "+JSON.stringify(this.equipes));

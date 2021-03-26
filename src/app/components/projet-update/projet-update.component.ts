@@ -37,9 +37,7 @@ export class ProjetUpdateComponent implements OnInit {
       'descriptionG' : new FormControl(null,Validators.required),
       'descriptionT' : new FormControl(null,Validators.required),
       'dateDebut' : new FormControl(null,Validators.required),
-      'dateFin' : new FormControl(null,Validators.required),
-      'equipe' : new FormControl(null,Validators.required)
-
+      'dateFin' : new FormControl(null,Validators.required)
     })
 
     this.roleE=localStorage.getItem('role')

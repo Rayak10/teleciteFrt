@@ -48,7 +48,7 @@ export class AjoutcommentaireComponent implements OnInit {
       'commantaire' : new FormControl(null,Validators.required),
      
     })
-
+ 
     this.sprintservice.findSprintById(this.recivedData.idSprint).subscribe(
       response =>{
         this.commantaire.sprint = response;

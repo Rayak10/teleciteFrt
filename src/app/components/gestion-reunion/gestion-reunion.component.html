@@ -4,7 +4,7 @@
 <!-- FORM  -->	    
  <div class="container">	  
 
- <form  [formGroup]="exform" #reunionForm="ngForm" (ngSubmit)="onSubmit(reunionForm)" >
+ <form  [formGroup]="exform" #reunionForm="ngForm" (ngSubmit)="onSubmit()" >
 
 <legend  class="navbar-brand titre"  > Gestion des reunions </legend>
 <!-- Text input-->
@@ -13,7 +13,7 @@
   <div class="col-md-4">
     <select formControlName="type" 
      type="text" 
-     class="form-control"
+     class="form-control "
       id="field_reunion"
         name="reunion" [(ngModel)]="this.reunion.type"
         (change)="onChange($event)">
@@ -22,14 +22,13 @@
       </option>
     </select>
     <small *ngIf="exform.get('type').invalid && exform.get('type').touched" class="textdanger">Sélectionner un type de réunion</small>
-
     <p class="help-block"></p>
     </div>
     <div class="col col-md-2">
   <label class="control-label" >Nom de réunion :</label> 
     </div>
   <div class="col-md-4">
-  <input id="reunion-name" formControlName="nom"  [(ngModel)]="reunion.nomReunion" name="reunion-name" type="text" placeholder="tapez le nom du reunion" class="form-control input-md" >
+  <input id="reunion-name" formControlName="nom" [(ngModel)]="reunion.nomReunion" name="reunion-name" type="text" placeholder="tapez le nom du reunion" class="form-control input-md" >
   <small *ngIf="exform.get('nom').invalid && exform.get('nom').touched" class="textdanger">Nom de réunion est obligatoire</small>
   <span class="help-block"></span>  
   </div>
@@ -44,8 +43,9 @@
 </div>
 
   <div class="col-md-4">
-    <textarea id="reunion-description" rows="2" cols="12" formControlName="contexte"  [(ngModel)]="reunion.descriptionReunion" name="reunion-description" type="text" placeholder="tapez une description pour cette réunion ..." class="form-control input-md"></textarea>
+    <textarea id="reunion-description" rows="2" cols="12" formControlName="contexte" [(ngModel)]="reunion.descriptionReunion" name="reunion-description" type="text" placeholder="tapez une description pour cette réunion ..." class="form-control input-md"></textarea>
     <small *ngIf="exform.get('contexte').invalid && exform.get('contexte').touched" class="textdanger">Contexte de réunion est obligatoire</small>
+
     <p class="help-block"></p>
     </div>
     <div class="col col-md-2">
@@ -75,7 +75,7 @@
     <label class="control-label">Date fin réunion :</label>
   </div>  
     <div class="col-md-4">
-      <input  formControlName="dateFin" autocomplete="off" 
+      <input  formControlName="dateFin" autocomplete="off"
       name="reunion-date-fin"
       placeholder = "Selectionner la date fin"
       [(ngModel)]="reunion.dateFin"
@@ -94,13 +94,12 @@
     </div>
       
     <div class="col-md-4">
-      <ngb-timepicker [formControl]="ctrl1" [(ngModel)]="reunion.heureDeb" formControlName="heureDebut" ></ngb-timepicker>
+      <ngb-timepicker [formControl]="ctrl1" [(ngModel)]="reunion.heureDeb"></ngb-timepicker>
       <div *ngIf="ctrl1.valid" class="small form-text text-success">Bon choix</div>
       <div *ngIf="ctrl1.errors" class="small form-text textdanger">
         <div *ngIf="ctrl1.errors['required']">Sélectionnez l'heure début</div>
         <div *ngIf="ctrl1.errors['tooLate']">C'est un peu trop tard</div>
         <div *ngIf="ctrl1.errors['tooEarly']">C'est un peu trop tôt</div>
-        <small *ngIf="exform.get('heureDebut').invalid && exform.get('heureDebut').touched" class="textdanger">Heure début  de réunion est obligatoire</small>
       </div>
      </div>
      <div class="col col-md-2">
@@ -108,7 +107,7 @@
       </div>
       
      <div class="col col-md-4">
-      <ngb-timepicker [formControl]="ctrl2" [(ngModel)]="reunion.heureFin" formControlName="heureFin" ></ngb-timepicker>
+      <ngb-timepicker [formControl]="ctrl2" [(ngModel)]="reunion.heureFin" ></ngb-timepicker>
       <div *ngIf="ctrl2.valid" class="small form-text text-success">Bon choix</div>
       <div *ngIf="ctrl2.errors" class="small form-text textdanger">
         <div *ngIf="ctrl2.errors['required']">Sélectionnez l'heure fin</div>
@@ -123,8 +122,8 @@
   <label class="control-label">Equipe :</label>
     </div>
   <div class="col-md-4">
-    <select formControlName="equipe" 
-     type="text" 
+    <select  
+     type="text"     [ngModelOptions]="{standalone: true}" 
      class="form-control "
       id="field_equipe"
         name="equipe" [(ngModel)]="selectedEquipeId"
@@ -133,7 +132,6 @@
         {{e.nomEquipe}}
       </option>
     </select>
-    <small *ngIf="exform.get('equipe').invalid && exform.get('equipe').touched" class="textdanger">Sélectionner une équipe</small>
     <p class="help-block"></p>
     </div>
     </div>
@@ -144,47 +142,33 @@
     <label class="control-label">Departement :</label>
       </div>
     <div class="col-md-4">
-      <select formControlName="departement" 
-       type="text" 
-       class="form-control "
-        id="field_departement"
-          name="departement" [(ngModel)]="selectedDepartementId"
-          (change)="onChange2($event)">
-        <option  *ngFor="let d of departementArray" [value]="d.idDepartement">
-          {{d.nomDepartement}}
-        </option>
-      </select>
-      <small *ngIf="exform.get('departement').invalid && exform.get('departement').touched" class="textdanger">Sélectionner un departement</small>
-      <p class="help-block"></p>
-      </div>
-      </div>
+      <select [ngModelOptions]="{standalone: true}" 
+      type="text" 
+      class="form-control "
+       id="field_departement"
+       name="departement" [(ngModel)]="selectedDepartementId" 
+       (change)="onChange2($event)">
+       <option  *ngFor="let d of departementArray" [value]="d.idDepartement">
+         {{d.nomDepartement}}
+       </option>
+     </select>
+     <p class="help-block"></p>
+     </div>
+     </div>
       <!-- Button -->
-      <div class="col col-lg-1 pull-right">
-        <button id="btn-save" name="btn-save"  type="submit" class="btn btn-success">Enregistrer</button>
-       </div>
-      <div class="col col-lg-1 pull-right">
-        <button id="btn-retour" name="btn-retour" (click)="gotoList()"class="btn btn-success">Retour</button>
+      <div class="row">
+        <div class="col-md-4">
+
+       <button id="btn-save"  (click)="gotoList()" name="btn-save" class="btn btn-success">Retour au liste des réunions</button>
+        </div>
+        <div class="col col-lg-2 pull-right">
+
+       <button    id="btn-save" name="btn-save" [disabled]="exform.invalid ||ctrl1.errors || ctrl2.errors || reunion.equipe==null ||depchek==false" type="submit" class="btn btn-success">Enregistrer</button>
+    </div>
       </div>
-     
-    </form>
-    <simple-notifications></simple-notifications>
-    <!--
-    
-    <hr>
 
-
-
-
-    
-
-<hr>
--->
-
-<!-- Button -->
-
-
- 
-     
+  </form>
+  
      
 
       <legend id="leg1" class="navbar-brand titre">Liste des employés de département </legend>
@@ -217,6 +201,7 @@
 </table>
 
 
+<simple-notifications></simple-notifications>
 
 
    

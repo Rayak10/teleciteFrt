@@ -1,5 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { FormControl } from '@angular/forms';
+import { Validators } from '@angular/forms';
 import { FormBuilder, NgForm } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -25,8 +28,10 @@ export class UpdateCommentaireComponent implements OnInit {
    offset: number =new Date().getTimezoneOffset() * 60 * 1000;
    commantaire:Commentaire=new Commentaire();
    submitted = false;
- employe:Employe=new Employe();
- sprint:Sprint=new Sprint();
+   employe:Employe=new Employe();
+   sprint:Sprint=new Sprint();
+   exform:FormGroup;
+
   constructor(private employeservice:EmployeService,private commentaireservice:CommentaireService,private sprintservice:SprintService,private formBuilder: FormBuilder, private router: Router,private httpClient:HttpClient,private route: ActivatedRoute,
     public dialogRef:MatDialogRef<GestionSprintsComponent>,
       @Inject(MAT_DIALOG_DATA) public data: any){
@@ -35,6 +40,11 @@ export class UpdateCommentaireComponent implements OnInit {
   
   
     ngOnInit() {
+
+      this.exform = new FormGroup({
+        'commantaire' : new FormControl(null,Validators.required),
+       
+      })
       this.commentaireservice.findremarqueById(this.recivedData.idCommentaire)
       .subscribe(data=>{
         console.log(data)

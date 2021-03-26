@@ -32,10 +32,11 @@ export class AjoutProjetComponent implements OnInit {
 
   ngOnInit() {
 this.exform = new FormGroup({
+  'type' : new FormControl(null,Validators.required),
   'nom' : new FormControl(null,Validators.required),
-  'theme' : new FormControl(null,Validators.required),
-  'descriptionG' : new FormControl(null,Validators.required),
-  'descriptionT' : new FormControl(null,Validators.required),
+  'contexte' : new FormControl(null,Validators.required),
+  'heurDebut' : new FormControl(null,Validators.required),
+  'heurFin' : new FormControl(null,Validators.required),
   'dateDebut' : new FormControl(null,Validators.required),
   'dateFin' : new FormControl(null,Validators.required)
 })
@@ -44,15 +45,10 @@ this.exform = new FormGroup({
     this.equipeservice.findEquipeByNom("Équipe non affectée").subscribe(
       data=>{
         this.equipe=data
-        console.log("equuuuuuurrrrrrrrrrrrrrrrrrrrrruuuiiipe: "+JSON.stringify(data))
-
-        console.log("equuuuuuurrrrrrrrrrrrrrrrrrrrrruuuiiipe: "+JSON.stringify(this.equipe))
       }
           );
-          console.log("equuuuuuurrrrrrrrrrrrrrrrrrrrrruuuiiipe: "+JSON.stringify(this.projet.equipe))
     this.equipeservice.findAllEquipe().subscribe(
-      data => {console.log("data from find all Equipe:"+JSON.stringify(data));   
-      
+      data => {  
                   this.equipeArray.push(...data);}
     );
     this.reloadData();
@@ -68,9 +64,7 @@ this.exform = new FormGroup({
 
        this.reloadData();
   }
-  save() {
-   
-    console.log("projet: "+JSON.stringify(this.projet));
+  save() { 
     this.projet.dateDebut = new Date(new Date(this.projet.dateDebut).getTime() - this.offset);
     this.projet.dateFin = new Date(new Date(this.projet.dateFin).getTime() - this.offset);
     this.projet.equipe=this.equipe;

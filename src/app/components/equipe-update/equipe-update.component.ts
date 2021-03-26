@@ -3,6 +3,7 @@ import { Validators } from '@angular/forms';
 import { FormControl } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NotificationsService } from 'angular2-notifications';
 import { Equipe } from 'src/app/models/equipe';
 import { Tache } from 'src/app/models/tache';
 import { EquipeService } from 'src/app/services/equipe/equipe.service';
@@ -16,8 +17,9 @@ export class EquipeUpdateComponent implements OnInit {
   id:number;
   equipe:Equipe;
   exform:FormGroup;
-
-  constructor(private equipeservice:EquipeService,private route: ActivatedRoute, private router: Router) { }
+  messageS:String="Equipe modifiée avec succèes";
+  messageE:String="Modification d'équipe est échouée";
+  constructor(private equipeservice:EquipeService,private route: ActivatedRoute, private router: Router, private _service: NotificationsService) { }
 
   ngOnInit() {
     this.exform = new FormGroup({
@@ -38,7 +40,7 @@ export class EquipeUpdateComponent implements OnInit {
   
     updateEquipe(){
   this.equipeservice.updateEquipe(this.id , this.equipe )
-  .subscribe(data=> console.log(data),error=>console.log(error)),
+  .subscribe(data => this.onSuccess(this.messageS));
   
    // this.userstory=new Userstory();
     console.log("aaaaaaaaaaaaaa"+this.equipe)
@@ -51,7 +53,20 @@ list(){
   this.updateEquipe();
   this.router.navigate(['gestionEquipes']);
 }
-
+onSuccess(messageS){
+  this._service.success('Success',messageS, {
+    position: ['bottom','right'],
+    timeOut: 2000,
+    animate: 'fade',
+    showProgressBar: true
+  })}
+  onErorr(messageE){
+    this._service.error('Erreur',messageE, {
+      position: ['bottom','right'],
+      timeOut: 2000,
+      animate: 'fade',
+      showProgressBar: true
+    })}
 
 }
 

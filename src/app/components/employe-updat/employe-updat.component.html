@@ -264,7 +264,7 @@
       <label class="col-md-3 control-label" for="btn-save"></label>
       
           <div class="col-md-2">
-           <button id="btn-save" name="btn-save" [disabled]="exform.invalid" class="btn btn-success" (click)="updateEmploye(getCompteForm)">Modifier les informations</button>
+           <button id="btn-save" name="btn-save" [disabled]="exform.invalid || exform.get('confirme').value !=exform.get('password').value" class="btn btn-success" (click)="updateEmploye(getCompteForm)">Modifier les informations</button>
           </div>
       </div>
 </form>
@@ -486,13 +486,13 @@
                [(ngModel)]="employe.password" name="password" autocomplete="off"  class="form-control" placeholder="tapez mot de passe" >
             </div>
           </div>
-          <div class="col col-md-2">
-          <label class="control-label">Confirmation mot de passe :</label>
+          <hr>
+          <div class="col col-md-6">
+            
+          <label class="control-label"></label>
           </div>
           <div class="col col-md-4">
             <div class="input-group">
-              <span class="input-group-addon"> * </span>
-              <input   disabled type="password" id="employe-confirmationpassword" autocomplete="off" name="password" class="form-control" placeholder="confirmez mot de passe" >
             </div>
             
           </div>
@@ -502,7 +502,7 @@
         
         
         
-         
+         <br>
         <!-- Button -->
         <div class="row">
           
@@ -522,7 +522,7 @@
         <label class="col-md-3 control-label" for="btn-save"></label>
         
             <div class="col-md-2">
-             <button id="btn-save" [disabled]="exform.invalid" name="btn-save" class="btn btn-success" (click)="updateEmploye(getCompteForm)">Modifier les informations</button>
+             <button id="btn-save"  name="btn-save" class="btn btn-success" (click)="updateEmploye(getCompteForm)">Modifier les informations</button>
             </div>
         </div>
   </form>

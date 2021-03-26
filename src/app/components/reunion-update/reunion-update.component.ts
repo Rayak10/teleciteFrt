@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Reunion } from 'src/app/models/Reunion';
 import { ReunionService } from 'src/app/services/reunion/reunion.service';
 import { TypeReunion } from 'src/app/models/typeReunion';
-import { FormControl, FormGroup ,FormBuilder, Validators} from '@angular/forms';
+import { FormControl, FormGroup ,FormBuilder} from '@angular/forms';
 import { NgbTimepickerConfig, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
 import { DepartementService } from 'src/app/services/departement/departement.service';
 import { EmployeService } from 'src/app/services/employe/employe.service';
@@ -30,7 +30,8 @@ export class ReunionUpdateComponent implements OnInit {
   selectedItemsList:Employe[]= [];
   checkedIDs:number[];
   offset: number =new Date().getTimezoneOffset() * 60 * 1000;
-  exform:FormGroup;
+  messageS:String="Réunion modifiée avec succèes";
+  messageE:String="Modificatuin du réunion est échouée";
   ctrl1:any
   ctrl2:any
   h1:number;
@@ -47,9 +48,8 @@ export class ReunionUpdateComponent implements OnInit {
   heurdeb:NgbTimeStruct;
   heurfin:NgbTimeStruct;
   form: FormGroup;
-  messageS:String="Réunion modifiée avec succèes";
-  messageE:String="Modification du réunion est échouée";
-  constructor(private reunionservice:ReunionService,config: NgbTimepickerConfig ,private runionservice:ReunionService,
+
+  constructor(private reunionservice:ReunionService,config: NgbTimepickerConfig ,
     private employeservice:EmployeService,private equipeservice:EquipeService,
     private departementservive:DepartementService,private route: ActivatedRoute,
      private router: Router,private formBuilder:FormBuilder, private _service: NotificationsService) {
@@ -62,30 +62,30 @@ export class ReunionUpdateComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.exform = new FormGroup({
-      'type' : new FormControl(null,Validators.required),
-      'heureDebut' : new FormControl(null,Validators.required),
-      'heureFin' : new FormControl(null,Validators.required),
-      'contexte' : new FormControl(null,Validators.required),
-      'equipe' : new FormControl(null,Validators.required),
-      'nom' : new FormControl(null,Validators.required),
-      'dateDebut' : new FormControl(null,Validators.required),
-      'dateFin' : new FormControl(null,Validators.required),
-      'departement' : new FormControl(null,Validators.required),
 
-    })
     this.reunion=new Reunion();
+   
+
     this.id=this.route.snapshot.params['id'];
     this.reunionservice.findReunionDtoById(this.id)
     .subscribe(data=>{
       console.log(data)
       this.reunion=data;
+      console.log(JSON.stringify("rtrtrdggrgdrgdgrdgdrgdrgrdg"+ this.reunion.employes));
+
       this.employesReunion=this.employeservice.findAllEemployesReunion(this.id);
       this.employesReunion.subscribe(
        checkedEmp => { this.selectedItemsList = checkedEmp;}  
       )
+      console.log("dddddddaaaaaaaaaaaad****************dddddd"+JSON.stringify( this.selectedItemsList))
+
+
     }, error=>console.log(error));
     
+   
+ 
+
+
     this.ctrl2= new FormControl('', (control: FormControl) => {
       this.value2 = control.value;
       console.log("valeur heur fin:"+JSON.stringify(this.value2)); 
@@ -109,65 +109,88 @@ this.mnt2=this.value2.minute;
     });
 
     this.ctrl1= new FormControl('', (control: FormControl) => {
-    this.value1 = control.value;
+      this.value1 = control.value;
+      console.log("valeur heur debut:"+JSON.stringify(this.value1)); 
+      console.log("hhhhhhhhhhheeeeeeeeeeeeeuuuuuuuuuurrr1: "+JSON.stringify(this.value1));
+
     this.h1=this.value1.hour
     this.mnt1=this.value1.minute
+
+
+
       if (this.value1.hour< 9) {
         return {tooEarly: true};
       }
       if (this.value1.hour > 17) {
         return {tooLate: true};
       }
+
       return null;
     });
    
+   
+     
     this.equipeservice.findAllEquipe().subscribe(
-      data => {
-        this.equipeArray.push(...data);}
+      data => {console.log("data from find all Equipe:"+JSON.stringify(data));   
+      
+                  this.equipeArray.push(...data);}
     );
     this.departementservive.findAllDepartements().subscribe(
-      data => {       
+      data => {console.log("data from find all departement:"+JSON.stringify(data));   
+      
                   this.departementArray.push(...data);}
     );
+    console.log("efsef'rttttttttttttttttttttttttttttttttt"+JSON.stringify(this.departementArray)); 
 this.typeArray=["Réunion administratif","Reunion Scrum"]
+
   }
+
+
+
   updateReunion(){
+    console.log("efsef'rttttttttttttttttttttttttttttttttt"+JSON.stringify(this.reunion.employes)); 
     this.reunion.dateDebut = new Date(new Date(this.reunion.dateDebut).getTime() - this.offset);
     this.reunion.dateFin = new Date(new Date(this.reunion.dateFin).getTime() - this.offset);
     this.reunionservice.updateRieunion(this.id,this.reunion)
-    .subscribe(data=> this.onSuccess(this.messageS),error=>this.onErorr(this.messageE))
+    .subscribe(data=> this.onSuccess(this.messageS)
+  ,error=>this.onErorr(this.messageE));
+    
   }
-  onSuccess(messageS){
-    this._service.success('Success',messageS, {
+
+  onSubmit(){
+this.updateReunion()
+}
+onSuccess(messageS){
+  this._service.success('Success',messageS, {
+    position: ['bottom','right'],
+    timeOut: 2000,
+    animate: 'fade',
+    showProgressBar: true
+  })}
+  onErorr(messageE){
+    this._service.error('Erreur',messageE, {
       position: ['bottom','right'],
       timeOut: 2000,
       animate: 'fade',
       showProgressBar: true
     })}
-    onErorr(messageE){
-      this._service.error('Erreur',messageE, {
-        position: ['bottom','right'],
-        timeOut: 2000,
-        animate: 'fade',
-        showProgressBar: true
-      })}
-  onSubmit(){
-this.updateReunion()
-}
-
 gotoList(){
   this.router.navigate(['Reunions/list']);
 }
-
 onChange1(event){
+  
   this.reunion.equipe = {idEquipe:this.selectedEquipeId,nomEquipe:'',specialite:''};
   console.log(JSON.stringify(this.reunion.equipe.idEquipe)); 
 }
 
+ 
   onChange2(event){
+   //// this.fetchCheckedIDs()
+
     $("#leg1").hide(1000);
     $("#tab1").hide(1500);
 this.employeservice.findAllEmployesDepartement(this.selectedDepartementId).subscribe(
+
   resp=>{
     this.employesdep=resp;
     let checkedEmployeesIds = this.selectedItemsList.filter(emp=> emp.departement.idDepartement == this.selectedDepartementId);
@@ -175,23 +198,25 @@ this.employeservice.findAllEmployesDepartement(this.selectedDepartementId).subsc
        emp=>{ if(checkedEmployeesIds.find(empChecked=>emp.idEmploye == empChecked.idEmploye))
                  emp.isChecked = true; } );
     console.log(JSON.stringify("qqqqqqqqqqq"+checkedEmployeesIds));
-  })
+  }
   
+)
   $("#field_departement").click(function(){
     $("#leg1").show(1000);
     $("#tab1").show(1500);
-  });}
-  
+  });
+  }
   changeSelection() {
     this.fetchSelectedItems()
   } 
-
+  
   fetchSelectedItems() {
     this.selectedItemsList = this.selectedItemsList.filter(emp=> emp.departement.idDepartement !=  this.selectedDepartementId)
     this.selectedItemsList.push(...this.employesdep.filter((value, index) => {
       return value.isChecked
     }));
     this.fetchCheckedIDs();
+
   }
 
   fetchCheckedIDs() {
@@ -200,6 +225,8 @@ this.employeservice.findAllEmployesDepartement(this.selectedDepartementId).subsc
       if (value.isChecked) {
         this.checkedIDs.push(value.idEmploye);
         this.reunion.employes=this.checkedIDs;
+        console.log(JSON.stringify("rtrtrdggrgdrgdgrdgdrgdrgrdg"+ this.reunion.employes));
+
       }
     });
   }
