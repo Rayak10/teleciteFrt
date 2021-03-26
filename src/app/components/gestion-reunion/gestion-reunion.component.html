@@ -4,7 +4,7 @@
 <!-- FORM  -->	    
  <div class="container">	  
 
- <form  [formGroup]="exform" #reunionForm="ngForm" (ngSubmit)="onSubmit()" >
+ <form  [formGroup]="exform" #reunionForm="ngForm" (ngSubmit)="onSubmit(reunionForm)" >
 
 <legend  class="navbar-brand titre"  > Gestion des reunions </legend>
 <!-- Text input-->
@@ -163,7 +163,7 @@
         </div>
         <div class="col col-lg-2 pull-right">
 
-       <button    id="btn-save" name="btn-save" [disabled]="exform.invalid ||ctrl1.errors || ctrl2.errors || reunion.equipe==null ||depchek==false" type="submit" class="btn btn-success">Enregistrer</button>
+       <button    id="btn-save" name="btn-save" [disabled]="exform.invalid ||ctrl1.errors || ctrl2.errors || reunion.equipe==null" type="submit" class="btn btn-success">Enregistrer</button>
     </div>
       </div>
 

@@ -12,6 +12,7 @@ import * as $ from 'jquery' ;
 import { Observable } from 'rxjs';
 import { Employe } from 'src/app/models/employe';
 import { NotificationsService } from 'angular2-notifications';
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-reunion-update',
@@ -48,6 +49,7 @@ export class ReunionUpdateComponent implements OnInit {
   heurdeb:NgbTimeStruct;
   heurfin:NgbTimeStruct;
   form: FormGroup;
+  exform:FormGroup;
 
   constructor(private reunionservice:ReunionService,config: NgbTimepickerConfig ,
     private employeservice:EmployeService,private equipeservice:EquipeService,
@@ -62,10 +64,13 @@ export class ReunionUpdateComponent implements OnInit {
    }
 
   ngOnInit() {
-
+    this.exform = new FormGroup({
+      'contexte' : new FormControl(null,Validators.required),
+      'nom' : new FormControl(null,Validators.required),
+      'dateDebut' : new FormControl(null,Validators.required),
+      'dateFin' : new FormControl(null,Validators.required)
+    })
     this.reunion=new Reunion();
-   
-
     this.id=this.route.snapshot.params['id'];
     this.reunionservice.findReunionDtoById(this.id)
     .subscribe(data=>{
@@ -86,11 +91,10 @@ export class ReunionUpdateComponent implements OnInit {
  
 
 
-    this.ctrl2= new FormControl('', (control: FormControl) => {
-      this.value2 = control.value;
-      console.log("valeur heur fin:"+JSON.stringify(this.value2)); 
-this.h2=(this.value2.hour);
-this.mnt2=this.value2.minute;
+    this.ctrl2= new FormControl('', (control1: FormControl) => {
+      this.value2 = control1.value;
+this.h2=(control1.value.hour);
+this.mnt2=control1.value.minute;
 
       if ( ((this.h2)-(this.h1))==0) {
         return  {probleme: true};;
@@ -108,13 +112,11 @@ this.mnt2=this.value2.minute;
 
     });
 
-    this.ctrl1= new FormControl('', (control: FormControl) => {
-      this.value1 = control.value;
-      console.log("valeur heur debut:"+JSON.stringify(this.value1)); 
-      console.log("hhhhhhhhhhheeeeeeeeeeeeeuuuuuuuuuurrr1: "+JSON.stringify(this.value1));
+    this.ctrl1= new FormControl('', (control2: FormControl) => {
+      this.value1 = control2.value;
 
-    this.h1=this.value1.hour
-    this.mnt1=this.value1.minute
+    this.h1=(control2.value.hour)
+    this.mnt1=control2.value.minute
 
 
 

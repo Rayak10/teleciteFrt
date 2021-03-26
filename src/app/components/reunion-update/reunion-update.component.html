@@ -4,14 +4,14 @@
 <!-- FORM  -->	    
  <div class="container">	  
 
- <form   (ngSubmit)="onSubmit()" >
+ <form   [formGroup]="exform"  (ngSubmit)="onSubmit()" >
 
 <legend  class="navbar-brand titre"  > Gestion des reunions </legend>
 <!-- Text input-->
 <div class="row">
   <label class="col-md-2 control-label">Type réunion :</label>
   <div class="col-md-4">
-    <select required
+    <select  [ngModelOptions]="{standalone: true}"
      type="text" 
      class="form-control "
       id="field_reunion"
@@ -27,7 +27,8 @@
   <label class="control-label" >Nom de réunion :</label> 
     </div>
   <div class="col-md-4">
-  <input id="reunion-name" required [(ngModel)]="reunion.nomReunion" name="reunion-name" type="text" placeholder="tapez le nom du reunion" class="form-control input-md" >
+  <input id="reunion-name" formControlName="nom"  [(ngModel)]="reunion.nomReunion" name="reunion-name" type="text" placeholder="tapez le nom du reunion" class="form-control input-md" >
+  <small *ngIf="exform.get('nom').invalid && exform.get('nom').touched" class="textdanger">Nom de réunion est obligatoire</small>
   <span class="help-block"></span>  
   </div>
 </div>
@@ -41,22 +42,22 @@
 </div>
 
   <div class="col-md-4">
-    <textarea id="reunion-description" rows="2" cols="12" required [(ngModel)]="reunion.descriptionReunion" name="reunion-description" type="text" placeholder="tapez une description pour cette réunion ..." class="form-control input-md"></textarea>
-
+    <textarea id="reunion-description" rows="2" cols="12" formControlName="contexte" [(ngModel)]="reunion.descriptionReunion" name="reunion-description" type="text" placeholder="tapez une description pour cette réunion ..." class="form-control input-md"></textarea>
+    <small *ngIf="exform.get('contexte').invalid && exform.get('contexte').touched" class="textdanger">Contexte de réunion est obligatoire</small>
     <p class="help-block"></p>
     </div>
     <div class="col col-md-2">
   <label class="control-label">Date début réunion :</label>  
     </div>
     <div class="col-md-4">
-      <input  
+      <input   formControlName="dateDebut" 
       name="reunion-date-debut"
       placeholder = "Selectionner la date début"
       [(ngModel)]="reunion.dateDebut"
       class="form-control"
       bsDatepicker
       [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
-   
+      <small *ngIf="exform.get('dateDebut').invalid && exform.get('dateDebut').touched" class="textdanger">Date début de réunion est obligatoire</small>
     <span class="help-block"></span>  
     </div>  
 </div>
@@ -72,14 +73,14 @@
     <label class="control-label">Date fin réunion :</label>
   </div>  
     <div class="col-md-4">
-      <input  
+      <input   formControlName="dateFin" autocomplete="off"
       name="reunion-date-fin"
       placeholder = "Selectionner la date fin"
       [(ngModel)]="reunion.dateFin"
       class="form-control"
       bsDatepicker
       [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
-   
+      <small *ngIf="exform.get('dateFin').invalid && exform.get('dateFin').touched" class="textdanger">Date fin de réunion est obligatoire</small>
     <span class="help-block"></span>  
     </div>  
   </div>
@@ -91,7 +92,7 @@
     </div>
       
     <div class="col-md-4">
-      <ngb-timepicker [formControl]="ctrl1" [(ngModel)]="reunion.heureDeb" required></ngb-timepicker>
+      <ngb-timepicker [formControl]="ctrl1" [(ngModel)]="reunion.heureDeb" ></ngb-timepicker>
       <div *ngIf="ctrl1.valid" class="small form-text text-success">Bon choix</div>
       <div *ngIf="ctrl1.errors" class="small form-text text-danger">
         <div *ngIf="ctrl1.errors['required']">Sélectionnez l'heure début</div>
@@ -105,7 +106,7 @@
       </div>
       
      <div class="col col-md-4">
-      <ngb-timepicker [formControl]="ctrl2" [(ngModel)]="reunion.heureFin" required></ngb-timepicker>
+      <ngb-timepicker [formControl]="ctrl2" [(ngModel)]="reunion.heureFin" ></ngb-timepicker>
       <div *ngIf="ctrl2.valid" class="small form-text text-success">Bon choix</div>
       <div *ngIf="ctrl2.errors" class="small form-text text-danger">
         <div *ngIf="ctrl2.errors['required']">Sélectionnez l'heure fin</div>
@@ -120,7 +121,7 @@
   <label class="control-label">Equipe :</label>
     </div>
   <div class="col-md-4">
-    <select required
+    <select  [ngModelOptions]="{standalone: true}" 
      type="text" 
      class="form-control "
       id="field_equipe"
@@ -140,7 +141,7 @@
     <label class="control-label">Departement :</label>
       </div>
     <div class="col-md-4">
-      <select required
+      <select  [ngModelOptions]="{standalone: true}" 
        type="text" 
        class="form-control "
         id="field_departement"
@@ -154,7 +155,8 @@
       </div>
       </div>
       <div class="col col-lg-1 pull-right">
-        <button id="btn-save" name="btn-save"   type="submit" class="btn btn-success">Modifier</button>
+        <button id="btn-save" name="btn-save" [disabled]=" exform.get('nom').invalid || exform.get('dateFin').invalid
+        || exform.get('dateDebut').invalid || exform.get('contexte').invalid"  type="submit" class="btn btn-success">Modifier</button>
        </div>
       <div class="col col-lg-1 pull-right">
         <button id="btn-retour" name="btn-retour" (click)="gotoList()"class="btn btn-success">Retour</button>

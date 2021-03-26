@@ -82,6 +82,7 @@ this.exform = new FormGroup({
    this.reunion.heureFin={hour: 0, minute: 0,second:0};
     this.fetchSelectedItems();
     this.fetchCheckedIDs();
+    
     this.ctrl2= new FormControl('', (control: FormControl) => {
       this.value2 = control.value;
       console.log("valeur heur fin:"+JSON.stringify(this.value2)); 
@@ -135,9 +136,10 @@ newSprint(): void {
   this.submitted = false;
   this.reunion= new Reunion();
 }
-onSubmit() {
+onSubmit(reunionForm:NgForm) {
   this.submitted = true;
   this.save(); 
+  reunionForm.reset()
 }
 save() {
   this.reunion.dateDebut = new Date(new Date(this.reunion.dateDebut).getTime() - this.offset);
