@@ -113,8 +113,7 @@ this.mnt2=control1.value.minute;
     });
 
     this.ctrl1= new FormControl('', (control2: FormControl) => {
-      this.value1 = control2.value;
-
+    this.value1 = control2.value;
     this.h1=(control2.value.hour)
     this.mnt1=control2.value.minute
 

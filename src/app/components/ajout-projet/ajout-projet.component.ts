@@ -32,14 +32,14 @@ export class AjoutProjetComponent implements OnInit {
 
   ngOnInit() {
 this.exform = new FormGroup({
-  'type' : new FormControl(null,Validators.required),
   'nom' : new FormControl(null,Validators.required),
-  'contexte' : new FormControl(null,Validators.required),
-  'heurDebut' : new FormControl(null,Validators.required),
-  'heurFin' : new FormControl(null,Validators.required),
+  'theme' : new FormControl(null,Validators.required),
+  'descriptionG' : new FormControl(null,Validators.required),
+  'descriptionT' : new FormControl(null,Validators.required),
   'dateDebut' : new FormControl(null,Validators.required),
   'dateFin' : new FormControl(null,Validators.required)
 })
+
  
 
     this.equipeservice.findEquipeByNom("Équipe non affectée").subscribe(

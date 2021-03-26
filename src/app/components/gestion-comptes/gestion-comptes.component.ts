@@ -55,6 +55,10 @@ export class GestionComptesComponent implements OnInit {
      private router: Router,private formBuilder: FormBuilder,private dialogService:DialogConfirmService, private _service: NotificationsService) {}
 
   ngOnInit() {
+
+    this.employeservice.refresh.subscribe(()=>{
+this.reloadData();
+    });
   
     this.exform = new FormGroup({
       'prenom' : new FormControl(null,Validators.required),
@@ -116,18 +120,20 @@ export class GestionComptesComponent implements OnInit {
      this.gotoList();
   }
 
-  save(getCompteForm:NgForm) {
+  save() {
     var formData = new FormData();
     if(this.userFile==null){
       this.employe.dateNaissance = new Date(new Date(this.employe.dateNaissance).getTime() - this.offset);
     this.employe.dateEmbauche = new Date(new Date(this.employe.dateEmbauche).getTime() - this.offset);
     this.employeservice.createEmploye(this.employe)
       .subscribe(resp=> this.onSuccess(this.messageS),error=>this.onErorr(this.messageE));
+      this.gotoList();
     }
     else{
     formData.append('employee',JSON.stringify(this.employe))  ;
     formData.append('file',this.userFile);
     this.employeservice.saveEmployeProfile(formData).subscribe(
+      
       resp=> this.onSuccess(this.messageS),error=>this.onErorr(this.messageE))
     }
 this.gotoList();
@@ -164,7 +170,6 @@ reloadData(){
       },
       error=>console.log(error));
       
-      this.employeservice.filter('delete ok?')
     }
   })}
   

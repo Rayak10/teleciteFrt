@@ -62,17 +62,7 @@ employe:Employe=new Employe();
         localStorage.setItem('idEquipe', String(this.employe.equipe.idEquipe));
         this.role=this.employe.role.nomRole
         this.dataPass.child1DataChanges(this.role);
-           /*this.employeservice.findEmployeByEmail(this.authentification.email)
-        .subscribe(data=>{
-          console.log("g"+JSON.stringify(data))
-
-          this.employe=data;
-
-          AppSettings.userRole=data.role.nomRole;
-
-        })*/
-
-        //  console.log("roleeeeeeeeeeeeeeeeeeeee"+AppSettings.userRole)
+      
           switch(role){
             case 'ROLE_SCRUM_MASTER':  this.router.navigate(['/details/',this.employe.idEmploye]); break; 
             case 'ROLE_DRH':  this.router.navigate(['/details/',this.employe.idEmploye]); break; 
@@ -91,7 +81,12 @@ employe:Employe=new Employe();
         if(error.status === 400) {
           this.errorMessage = "L'email et / ou mot de passe incorrect(s)";
         }
+        if(error.status === 404) {
+          this.errorMessage = "Utilisateur n'est pas active";
+        }
       });
+    
+      
       
   }
 

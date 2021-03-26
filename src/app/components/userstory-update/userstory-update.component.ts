@@ -39,22 +39,18 @@ export class UserstoryUpdateComponent implements OnInit {
     })
     
     this.id=this.route.snapshot.params['id'];
-
     this.userstoryservice.findUserstoryById(this.id)
     .subscribe(data=>{
       console.log(data)
       this.userstory=data;
-      console.log("ggggggggggggggggggg:"+JSON.stringify(this.userstory.sprint.projet.nomProjet)); 
     this.sprintservice.findAllSprint().subscribe(
       data => {console.log("data from find all sprints:"+JSON.stringify(data));   
-      
                   this.sprintArray.push(...data);}
-                  );
-
-                 
+                  );     
       console.log("userStoryUpdate: "+JSON.stringify(this.userstory))
     }, error=>console.log(error));
     } 
+
     update_UserStory(){
   this.userstoryservice.updateUserStory(this.id , this.userstory )
   .subscribe(data=> this.onSuccess(this.messageS)
@@ -87,6 +83,5 @@ sprintDetails(id:number){
   
   this.router.navigate(['sprints/details',id]);
 }
-
 
 }

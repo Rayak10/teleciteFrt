@@ -5,12 +5,11 @@ import { Employe } from 'src/app/models/employe';
 import { Bureau } from 'src/app/models/bureau';
 
 import { Observable ,Subject} from 'rxjs';
-import { Departement } from 'src/app/models/departement';
 import { FormGroup } from '@angular/forms';
 import { Authentification } from 'src/app/models/authentification';
 import { createAuthorizationHeader } from 'src/app/settings/util';
 import { HttpHeaders } from '@angular/common/http';
-
+import { tap } from 'rxjs/operators';
 
 
 @Injectable({
@@ -20,7 +19,11 @@ export class EmployeService {
   public dataForm:  FormGroup; 
 
   constructor(private http: HttpClient) { }
+  private _refresh = new Subject<void>();
 
+ get refresh(){
+  return this._refresh;
+}
   findAllEmployes(){
     return this.http.get<Employe[]>(AppSettings.APP_URL+"/employes/")
   }
@@ -59,14 +62,25 @@ return this.http.get<Employe[]>(AppSettings.APP_URL+"/employes/AllActives/"+acti
 });
     return this.http.post(AppSettings.APP_URL+"/employes/"+localStorage.getItem('role')+"/saveEmployeProfile", formData, {headers: headers});
   }
-  createEmploye(employe:Employe){
+  createEmploye(employe:Employe):Observable<Employe>{
     let headers = createAuthorizationHeader();
     return this.http.post<Employe>(AppSettings.APP_URL+"/employes/"+localStorage.getItem('role')+"/createEmploye",employe, {headers: headers})
-  }
+  .pipe(
+    tap(() =>  {
+      this._refresh.next();
+    })
+  );
+}
   updateEmploye (idEmploye:number,value:any){
    
    return this.http.put<Employe>(AppSettings.APP_URL+"/employes/update/"+idEmploye,value)
-  }
+   .pipe(
+    tap(() =>  {
+      this._refresh.next();
+    })
+  );
+}
+  
 
   login(email:string,password:string){
     return this.http.post<Employe>(AppSettings.APP_URL + "/employes/login?email=" + email + "&password=" + password, null);
@@ -79,13 +93,7 @@ return this.http.get<Employe[]>(AppSettings.APP_URL+"/employes/AllActives/"+acti
     return this.http.delete(AppSettings.APP_URL+"/employes/"+idEmploye)
     
   }
-  private listners=new Subject<any>();
-   listen():Observable<any>{
-     return this.listners.asObservable();
-   }
-   filter(filterBy: String){
-     this.listners.next(filterBy);
-   }
+
   employeActif(idEmploye:number,isActive:boolean){
 return this.http.get<Employe>(AppSettings.APP_URL+"/employes/active/"+idEmploye+"/"+isActive)
   }

@@ -47,29 +47,21 @@ export class SprintUpdateComponent implements OnInit {
     .subscribe(data=>{
       console.log(data)
       this.sprint=data;
-   
-
     this.projetservice.findAllProjets().subscribe(
       data => {console.log("data from find all projets:"+JSON.stringify(data));   
-      
                   this.projetArray.push(...data);}
                   );
-
                   this.sprint.dateDebut = new Date(new Date(this.sprint.dateDebut));
                   this.sprint.dateFin = new Date(new Date(this.sprint.dateFin));
-            
-      console.log("projetUpdate: "+JSON.stringify(this.sprint))
     }, error=>console.log(error));
     } 
     
 updateSprint(){
   this.sprintservice.updateSprint(this.id , this.sprint )
-  .subscribe(data=>this.onSuccess(this.messageS),
-  error=>this.onErorr(this.messageE)),
-  
-  
-    this.reloadData();
+  .subscribe(data=> this.onSuccess(this.messageS)
+  ,error=>this.onErorr(this.messageE));
 }
+
 onSubmit(){
   this.updateSprint();
 }

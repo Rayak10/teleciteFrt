@@ -58,6 +58,10 @@ export class EmployeUpdatComponent implements OnInit {
      private bureauservice:BureauService, private _service: NotificationsService) { }
   
   ngOnInit() {
+    this.employeservice.refresh.subscribe(()=>{
+      this.reloadData();
+          });
+          
     this.exform = new FormGroup({
       'prenom' : new FormControl(null,Validators.required),
       'naissance' : new FormControl(null,Validators.required),
