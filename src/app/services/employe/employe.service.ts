@@ -76,6 +76,15 @@ return this.http.get<Employe[]>(AppSettings.APP_URL+"/employes/AllActives/"+acti
   );
 }
 
+updateProfilRoleScrummaster (idEmploye:number,value:any){
+   
+  return this.http.put<Employe>(AppSettings.APP_URL+"/employes/updateProfilRoleScrummaster/"+idEmploye,value)
+  .pipe(
+   tap(() =>  {
+     this._refresh.next();
+   })
+ );
+}
   updateEmploye (idEmploye:number,value:any){
    
    return this.http.put<Employe>(AppSettings.APP_URL+"/employes/update/"+idEmploye,value)

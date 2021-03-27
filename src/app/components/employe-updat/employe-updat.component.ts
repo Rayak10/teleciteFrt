@@ -154,20 +154,20 @@ export class EmployeUpdatComponent implements OnInit {
   
 
 updateEmploye(getCompteForm:NgForm){
-if (this.test==true){
+  if(localStorage.getItem('role')=='ROLE_SCRUM_MASTER'){
+    this.employeservice.updateProfilRoleScrummaster(this.id , this.employe )
+  .subscribe(data=> this.onSuccess(this.messageS),error=>this.onErorr(this.messageE));
+  }
+if ((this.test==true) && (localStorage.getItem('role')!='ROLE_SCRUM_MASTER')){
   this.employeservice.updateEmploye(this.id , this.employe )
   .subscribe(data=> this.onSuccess(this.messageS),error=>this.onErorr(this.messageE));
-
-  console.log("jikoooooooooooooo: ")
-
 }
 else{
   var formData = new FormData();
   formData.append('employee',JSON.stringify(this.employe))  ;
   formData.append('file',this.userFile);
   this.employeservice.updateProfil(formData).subscribe(data=> this.onSuccess(this.messageS),
-  error=>this.onErorr(this.messageE));
-  console.log("hajikoooooooooooooooooooooo: ")
+  error=>console.log(error));
 
 }
 
