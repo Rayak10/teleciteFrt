@@ -1,18 +1,9 @@
 
 <hr/>
-<hr/>
-
-
-
-<!-- FORM  -->	    
-<div class="col-md-16" *ngIf="roleE=='ROLE_DRH'">	       
-     
+<hr/>	    
+<div class="col-md-16" *ngIf="roleE=='ROLE_DRH'">	           
     <fieldset>
-    
-    <!-- Form Name -->
-    
     <legend  class="navbar-brand titre"  >Changer les informations </legend>
-
     <form #getCompteForm="ngForm" [formGroup]="exform" (ngSubmit)="onSubmit(getCompteForm)">
       <div class="row">
         <div class="col col-md-2">
@@ -31,8 +22,7 @@
         <small *ngIf="exform.get('prenom').invalid && exform.get('prenom').touched" class="textdanger">Prenom est obligatoire</small>
         <span class="help-block"></span>  
         </div>
-      </div>
-      
+      </div>     
       <div class="row">
         <div class="col col-md-2">
         <label class="control-label" >Date naissance :</label>  
@@ -65,8 +55,7 @@
            <small *ngIf="exform.get('embauche').invalid && exform.get('embauche').touched" class="textdanger"> Date d'embauche est obligatoire</small> 
         <span class="help-block"></span>  
         </div>
-      </div>
-      
+      </div>      
       <div class="row">
         <div class="col col-md-2">
         <label class="control-label">Post :</label>  
@@ -91,11 +80,9 @@
             </option>
           </select>
           <small *ngIf="exform.get('role').invalid && exform.get('role').touched" class="textdanger"> Role est obligatoire</small>  
-          <p class="help-block"></p>
-      
+          <p class="help-block"></p>     
           </div>
-      </div>
-      
+      </div>     
       <div class="row">
         <div class="col col-md-2">
         <label class="control-label">Matricule :</label>
@@ -115,8 +102,7 @@
           </div>
           <p class="help-block"></p>
         </div>
-      </div>
-      
+      </div>     
       <div class="row"> 
          <div class="col col-md-2">
             <label class="control-label">Bureau :</label>
@@ -126,8 +112,7 @@
            type="text" 
            class="form-control "
             id="field_bureau"
-              name="bureau" [(ngModel)]="employe.bureau.idBureau"
-              >
+              name="bureau" [(ngModel)]="employe.bureau.idBureau" >            
             <option  *ngFor="let b of bureauArray" [value]="b.idBureau">
               {{b.nomBureau}}
             </option>
@@ -143,8 +128,7 @@
              type="text" 
              class="form-control "
               id="field_departement"
-                name="departement" [(ngModel)]="employe.departement.idDepartement"
-                >
+                name="departement" [(ngModel)]="employe.departement.idDepartement"> 
               <option  *ngFor="let b of departementArray" [value]="b.idDepartement">
                 {{b.nomDepartement}}
               </option>
@@ -153,10 +137,6 @@
             <p class="help-block"></p>
       </div>
       </div>
-      
-      
-      
-      
       <div class="row"> 
         <div class="col col-md-2">
         <label class="control-label">Equipe :</label>
@@ -166,8 +146,7 @@
            type="text" 
            class="form-control "
             id="field_equipe"
-              name="equipe" [(ngModel)]="employe.equipe.idEquipe"
-            >
+              name="equipe" [(ngModel)]="employe.equipe.idEquipe">           
             <option  *ngFor="let e of equipeArray" [value]="e.idEquipe">
               {{e.nomEquipe}}
             </option>
@@ -175,8 +154,7 @@
           <small *ngIf="exform.get('equipe').invalid && exform.get('equipe').touched" class="textdanger"> Sélectionner une équipe</small>  
           <p class="help-block"></p>
           </div>
-          <div class="col col-md-2">
-      
+          <div class="col col-md-2">     
         <label class="control-label">Email :</label>
           </div>
           <div class="col col-md-4">
@@ -185,18 +163,11 @@
             <input id="employe-email" formControlName="email" [(ngModel)]="employe.email"  name="email" autocomplete="off"class="form-control" placeholder="tonnom@tondomain.tn" type="email">
             <small *ngIf="exform.get('email').errors?.required && exform.get('email').touched" class="textdanger">L'email est obligatoire</small>
             <small *ngIf="exform.get('email').errors?.pattern && exform.get('email').touched" class="textdanger">Veuillez fournir une adresse email valide</small>      
-          </div>
-          
+          </div>         
         </div>
-         
-        
       </div>
-      
-      <!-- Multiple Radios -->
       <div class="row"> 
-       
         <div class="col col-md-2">
-      
         <label class="control-label">Client status :</label>
         </div>
         <div class="col col-md-4">
@@ -207,10 +178,8 @@
       name="active"
        [(ngModel)]="defaultChoice"
        (change)="onEtatSelected($event)">
-       
       <option *ngFor='let etat of etatArray' [value]="etat.idEtat"> {{etat.nomEtat}}</option>
       <small  *ngIf="exform.get('status').errors?.required && exform.get('status').touched" class="textdanger">Status est obligatoire</small>
-
     </select>
     <p class="help-block"></p>
         </div>
@@ -221,9 +190,9 @@
           <div class="input-group">
             <span class="input-group-addon">*</span>         
            <input   type="password" autocomplete="off" id="employe-password" formControlName="password" [(ngModel)]="employe.password" name="password" autocomplete="off"  class="form-control" placeholder="tapez mot de passe" >
-           <small *ngIf="exform.get('password').errors?.minlength && exform.get('password').touched" class="textdanger">le mot de passe doit contenir au moins 8 caractères!</small>
-           <small  *ngIf="exform.get('password').errors?.required && exform.get('password').touched" class="textdanger">Mot de passe est obligatoire</small>
           </div>
+          <small *ngIf="exform.get('password').errors?.minlength && exform.get('password').touched" class="textdanger">le mot de passe doit contenir au moins 8 caractères!</small>
+          <small  *ngIf="exform.get('password').errors?.required && exform.get('password').touched" class="textdanger">Mot de passe est obligatoire</small>  
         </div>
         <div class="col col-md-2">
         <label class="control-label">Confirmation mot de passe :</label>
@@ -231,23 +200,16 @@
         <div class="col col-md-4">
           <div class="input-group">
             <span class="input-group-addon"> * </span>
-            <input   type="password"  formControlName="confirme" id="employe-confirmationpassword" autocomplete="off" name="password" class="form-control" placeholder="confirmez mot de passe" >
-            <small *ngIf="exform.get('confirme').errors?.required && exform.get('confirme').touched" class="textdanger">Confirmation mot de passe est obligatoire</small>  
-            <small *ngIf="exform.get('confirme').valid && exform.get('confirme').value !=exform.get('password').value" class="textdanger">Le mot de passe saisi ne correspond pas</small>  
-      
+            <input   type="password"  formControlName="confirme" id="employe-confirmationpassword" autocomplete="off" name="password" class="form-control" placeholder="confirmez mot de passe" >          
           </div>
-          
+          <small *ngIf="exform.get('confirme').errors?.required && exform.get('confirme').touched" class="textdanger">Confirmation mot de passe est obligatoire</small>  
+          <small *ngIf="exform.get('confirme').valid && exform.get('confirme').value !=exform.get('password').value" class="textdanger">Le mot de passe saisi ne correspond pas</small>  
         </div>
+        <br>
+        <br>
+      <br>
       </div>
-      
-      
-      
-      
-      
-       
-      <!-- Button -->
       <div class="row">
-        
         <div class="col col-md-2">
         <label class="control-label">Photo :</label>
         </div>
@@ -258,31 +220,19 @@
         <img class="topright" *ngIf="employe.photo!=null; else logo" [src]="urllink" src="http://localhost:8081/telecite/employes/photo/{{employe.idEmploye}}" name="photo" id="profileDisplay">
         <ng-template #logo>
          <img class="topright"  [src]="urllink" name="photo" id="profileDisplay">
-
         </ng-template>
       </div>
-      <label class="col-md-3 control-label" for="btn-save"></label>
-      
+      <label class="col-md-3 control-label" for="btn-save"></label>     
           <div class="col-md-2">
            <button id="btn-save" name="btn-save" [disabled]="exform.invalid || exform.get('confirme').value !=exform.get('password').value" class="btn btn-success" (click)="updateEmploye(getCompteForm)">Modifier les informations</button>
           </div>
       </div>
 </form>
 </fieldset>
-
-
-
 	   </div> 
-	    
-
      <div class="col-md-16" *ngIf="roleE=='ROLE_SCRUM_MASTER'">	       
-     
-      <fieldset>
-      
-      <!-- Form Name -->
-      
+      <fieldset>     
       <legend  class="navbar-brand titre"  >Changer les informations </legend>
-  
       <form #getCompteForm="ngForm"(ngSubmit)="onSubmit(getCompteForm)">
         <div class="row">
           <div class="col col-md-2">
@@ -301,7 +251,6 @@
           <span class="help-block"></span>  
           </div>
         </div>
-        
         <div class="row">
           <div class="col col-md-2">
           <label class="control-label" >Date naissance :</label>  
@@ -332,7 +281,6 @@
           <span class="help-block"></span>  
           </div>
         </div>
-        
         <div class="row">
           <div class="col col-md-2">
           <label class="control-label">Post :</label>  
@@ -356,10 +304,8 @@
               </option>
             </select>
             <p class="help-block">{{role | json}}</p>
-        
             </div>
         </div>
-        
         <div class="row">
           <div class="col col-md-2">
           <label class="control-label">Matricule :</label>
@@ -380,7 +326,6 @@
             <p class="help-block"></p>
           </div>
         </div>
-        
         <div class="row"> 
            <div class="col col-md-2">
               <label class="control-label">Bureau :</label>
@@ -391,8 +336,7 @@
              type="text" 
              class="form-control "
               id="field_bureau"
-                name="bureau" [(ngModel)]="employe.bureau.idBureau"
-                >
+                name="bureau" [(ngModel)]="employe.bureau.idBureau">
               <option  *ngFor="let b of bureauArray" [value]="b.idBureau">
                 {{b.nomBureau}}
               </option>
@@ -408,8 +352,7 @@
                type="text" 
                class="form-control "
                 id="field_departement"
-                  name="departement" [(ngModel)]="employe.departement.idDepartement"
-                  >
+                  name="departement" [(ngModel)]="employe.departement.idDepartement">                  
                 <option  *ngFor="let b of departementArray" [value]="b.idDepartement">
                   {{b.nomDepartement}}
                 </option>
@@ -417,22 +360,16 @@
               <p class="help-block">{{departement | json}}</p>
         </div>
         </div>
-        
-        
-        
-        
         <div class="row"> 
           <div class="col col-md-2">
           <label class="control-label">Equipe :</label>
           </div>
           <div class="col col-md-4">
             <select 
-            
              type="text" 
              class="form-control "
               id="field_equipe"
-                name="equipe" [(ngModel)]="employe.equipe.idEquipe"
-              >
+                name="equipe" [(ngModel)]="employe.equipe.idEquipe">              
               <option  *ngFor="let e of equipeArray" [value]="e.idEquipe">
                 {{e.nomEquipe}}
               </option>
@@ -440,8 +377,7 @@
             <p class="help-block">{{equipe | json}}</p>
             </div>
             <div class="col col-md-2">
-        
-          <label class="control-label">Email :</label>
+            <label class="control-label">Email :</label>
             </div>
             <div class="col col-md-4">
               <div class="input-group">
@@ -449,17 +385,10 @@
               <input disabled id="employe-email"
                [(ngModel)]="employe.email"  name="email" autocomplete="off"class="form-control" placeholder="tonnom@tondomain.tn" type="email">
             </div>
-            
-          </div>
-           
-          
+          </div> 
         </div>
-        
-        <!-- Multiple Radios -->
         <div class="row"> 
-         
           <div class="col col-md-2">
-        
           <label class="control-label">Client status :</label>
           </div>
           <div class="col col-md-4">
@@ -470,8 +399,7 @@
         id="field_active"
         name="active"
          [(ngModel)]="defaultChoice"
-         (change)="onEtatSelected($event)">
-         
+         (change)="onEtatSelected($event)">         
         <option *ngFor='let etat of etatArray' [value]="etat.idEtat"> {{etat.nomEtat}}</option>
       </select>
       <p class="help-block"></p>
@@ -487,8 +415,7 @@
             </div>
           </div>
           <hr>
-          <div class="col col-md-6">
-            
+          <div class="col col-md-6">           
           <label class="control-label"></label>
           </div>
           <div class="col col-md-4">
@@ -497,15 +424,8 @@
             
           </div>
         </div>
-        
-        
-        
-        
-        
          <br>
-        <!-- Button -->
         <div class="row">
-          
           <div class="col col-md-2">
           <label class="control-label">Photo :</label>
           </div>
@@ -516,19 +436,14 @@
           <img class="topright" *ngIf="employe.photo!=null; else logo" [src]="urllink" src="http://localhost:8081/telecite/employes/photo/{{employe.idEmploye}}" name="photo" id="profileDisplay">
           <ng-template #logo>
            <img class="topright"  [src]="urllink" name="photo" id="profileDisplay">
-  
           </ng-template>
         </div>
         <label class="col-md-3 control-label" for="btn-save"></label>
-        
             <div class="col-md-2">
              <button id="btn-save"  name="btn-save" class="btn btn-success" (click)="updateEmploye(getCompteForm)">Modifier les informations</button>
             </div>
         </div>
   </form>
   </fieldset>
-  
-  
-  
        </div> 
        <simple-notifications></simple-notifications>

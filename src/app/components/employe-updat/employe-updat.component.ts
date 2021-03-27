@@ -94,6 +94,9 @@ export class EmployeUpdatComponent implements OnInit {
     this.employeservice.findEmployeById(this.id)
     .subscribe(data=>{
       this.employe=data;
+      if(localStorage.getItem('role')=='ROLE_DRH'){
+      this.employe.password=''
+      }
       console.log("userrrrrrrrrrrrrrrr"+this.employe.fileName)
       if(this.employe.active==true){
       this.defaultChoice=1;}
@@ -154,13 +157,18 @@ updateEmploye(getCompteForm:NgForm){
 if (this.test==true){
   this.employeservice.updateEmploye(this.id , this.employe )
   .subscribe(data=> this.onSuccess(this.messageS),error=>this.onErorr(this.messageE));
+
+  console.log("jikoooooooooooooo: ")
+
 }
 else{
   var formData = new FormData();
   formData.append('employee',JSON.stringify(this.employe))  ;
   formData.append('file',this.userFile);
-  this.employeservice.saveEmployeProfile(formData).subscribe(data=> this.onSuccess(this.messageS),
+  this.employeservice.updateProfil(formData).subscribe(data=> this.onSuccess(this.messageS),
   error=>this.onErorr(this.messageE));
+  console.log("hajikoooooooooooooooooooooo: ")
+
 }
 
 

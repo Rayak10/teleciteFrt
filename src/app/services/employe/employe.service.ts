@@ -55,13 +55,17 @@ return this.http.get<Employe[]>(AppSettings.APP_URL+"/employes/AllActives/"+acti
     return this.http.get<Employe>(AppSettings.APP_URL+"/employes/email/"+email)
 
   }
-  saveEmployeProfile(formData: FormData): Observable<any> {
-  // let headers = createAuthorizationHeader();
-  let headers= new HttpHeaders({
-  'Authorization': "Bearer "+localStorage.getItem('token')
-});
-    return this.http.post(AppSettings.APP_URL+"/employes/"+localStorage.getItem('role')+"/saveEmployeProfile", formData, {headers: headers});
+  updateProfil(formData: FormData): Observable<any> {
+  
+    return this.http.put(AppSettings.APP_URL+"/employes/updateProfil", formData);
   }
+  saveEmployeProfile(formData: FormData): Observable<any> {
+    // let headers = createAuthorizationHeader();
+    let headers= new HttpHeaders({
+    'Authorization': "Bearer "+localStorage.getItem('token')
+  });
+      return this.http.post(AppSettings.APP_URL+"/employes/"+localStorage.getItem('role')+"/saveEmployeProfile", formData, {headers: headers});
+    }
   createEmploye(employe:Employe):Observable<Employe>{
     let headers = createAuthorizationHeader();
     return this.http.post<Employe>(AppSettings.APP_URL+"/employes/"+localStorage.getItem('role')+"/createEmploye",employe, {headers: headers})
@@ -71,6 +75,7 @@ return this.http.get<Employe[]>(AppSettings.APP_URL+"/employes/AllActives/"+acti
     })
   );
 }
+
   updateEmploye (idEmploye:number,value:any){
    
    return this.http.put<Employe>(AppSettings.APP_URL+"/employes/update/"+idEmploye,value)
