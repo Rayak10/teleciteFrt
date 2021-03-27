@@ -44,6 +44,7 @@ export class GestionReunionComponent implements OnInit {
   equipeArray= [];
   hd:string;
   hf:string;
+  verif:boolean=false;
   employeArray:Observable<Employe[]>;
   employesdep:Employe[]=[];
   departementArray= [];
@@ -206,7 +207,9 @@ this.employeservice.findAllEmployesDepartement(this.selectedDepartementId).subsc
    let checkedEmployeesIds = this.selectedItemsList.filter(emp=> emp.departement.idDepartement == this.selectedDepartementId);
      this.employesdep.forEach(
        emp=>{ if(checkedEmployeesIds.find(empChecked=>emp.idEmploye == empChecked.idEmploye))
-                 emp.isChecked = true; } );
+                 emp.isChecked = true;
+                this.verif=true; 
+              console.log("truuuuuuuuuueeeeeee")} );
     console.log(JSON.stringify("qqqqqqqqqqq"+this.employeArray));
   }
   

@@ -3,17 +3,11 @@
 
 }
 
-td,
-th {
-  border: 1px solid rgb(190, 190, 190);
-  padding: 10px;
-}
 
-td {
-  text-align: center;
-}
-th {
-  text-align: center;
+	
+.table{
+  border: 0;
+  border-collapse : collapse;
 }
 
 
@@ -50,4 +44,14 @@ table{
 }
 .orange {
   color: #f0790a;
+}
+td,
+th {
+  border: 0px solid rgb(190, 190, 190);
+  padding: 5px;
+  
+}
+
+.titre_tab{
+  text-align: center;
 }

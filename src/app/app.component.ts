@@ -14,7 +14,7 @@ export class AppComponent  implements OnInit {
   lien:string;
   title = 'telecite';
   child1Data: any;
-
+  linkRessource:string;
   logo:string =' ../../assets/telecite.webp ';
   constructor(private dataPass: DatapassService,private router:Router) {
   
@@ -49,9 +49,7 @@ export class AppComponent  implements OnInit {
     localStorage.removeItem('role')
     localStorage.removeItem('id')
     localStorage.removeItem('idEquipe')
-  //  if (localStorage.getItem('id')===null){
-//this.router.navigate(['/'])
-//}
+
   }
   
 }

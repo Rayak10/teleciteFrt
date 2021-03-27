@@ -36,6 +36,7 @@ import {
 import { AjoutSprintComponent } from './components/ajout-sprint/ajout-sprint.component';
 import { AjoutcommentaireComponent } from './components/ajoutcommentaire/ajoutcommentaire.component';
 import { UpdateCommentaireComponent } from './components/update-commentaire/update-commentaire.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 const routes: Routes = [
  
@@ -127,17 +128,10 @@ const routes: Routes = [
   {path: 'commentaire/update',component :UpdateCommentaireComponent,canActivate: [AuthGuard], data: { 
     expectedRole: 'ROLE_SCRUM_MASTER,ROLE_PRODUCT_OWNER,ROLE_SCRUM_TEAM_MEMBER'
   } },
-
-
-
-
-
-  
-
-
-  
-
-];
+  {path: '404', component: NotFoundComponent},
+  {path: '**', redirectTo: '/404'}
+   
+  ];
 
 
 

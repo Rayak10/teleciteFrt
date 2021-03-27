@@ -16,7 +16,7 @@
 				</button>
 				<div class="[ animbrand ]">
           <img  width="100" height="70" bind-src="logo">
-					<a class="[ navbar-brand ][ animate ]"  >Telecite</a>
+					<a href="http://localhost:5300/details/{{id}}" class="[ navbar-brand ][ animate ]"  >Telecite</a>
 				</div>
 			</div>
 
@@ -30,7 +30,7 @@
 				<ul class="[ nav navbar-nav navbar-right ]" [ngSwitch]="[role]">
 					<li *ngSwitchCase="role==='ROLE_SCRUM_MASTER'||role==='ROLE_DRH'||role==='ROLE_PRODUCT_OWNER'
 					||role==='ROLE_EMPLOYE'||role==='ROLE_SCRUM_TEAM_MEMBER'? role : ''">
-					<a *ngIf="role"  (click)="employeDetails()" class="animate" >Profil</a></li>
+					<a *ngIf="role" href="http://localhost:5300/details/{{id}}" (click)="employeDetails()" class="animate" >Profil</a></li>
 					
 					<li *ngSwitchCase="role==='ROLE_SCRUM_MASTER'||role==='ROLE_DRH'? role : ''">
 						<a *ngIf="role"  href="http://localhost:5300/gestionComptes" class="animate" >Comptes</a></li>
@@ -55,7 +55,7 @@
 					
 					<li *ngSwitchCase="role==='ROLE_SCRUM_MASTER'||role==='ROLE_PRODUCT_OWNER'
 					||role==='ROLE_SCRUM_TEAM_MEMBER'? role : ''">
-					<a *ngIf="role" class="animate" (click)="ressource()">Ressources</a></li>
+					<a *ngIf="role" class="animate" href="http://localhost:5300/affectationRessources/{{id}}" (click)="ressource()">Ressources</a></li>
 					
 					<li><a *ngIf="role" class="animate" href="" (click)="logout()">Déconnexion</a></li>
 				</ul>

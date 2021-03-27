@@ -163,7 +163,7 @@
         </div>
         <div class="col col-lg-2 pull-right">
 
-       <button    id="btn-save" name="btn-save" [disabled]="exform.invalid ||ctrl1.errors || ctrl2.errors || reunion.equipe==null" type="submit" class="btn btn-success">Enregistrer</button>
+       <button    id="btn-save" name="btn-save" [disabled]="(exform.invalid ||ctrl1.errors || ctrl2.errors || (reunion.equipe==null && verif==true)||(reunion.equipe!=null && verif==false))" type="submit" class="btn btn-success">Enregistrer</button>
     </div>
       </div>
 

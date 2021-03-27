@@ -3,30 +3,38 @@
 <legend  class="navbar-brand titre"  > Les informations du tache</legend>
 <hr/>
 <div >
-        <div>
-            <b style="color: dodgerblue;">Tâche :</b><label>{{tache.descriptionTache}}</label>
-        </div>
-        <div>
-            <b style="color: dodgerblue;">Durée :</b><label>{{tache.dureeTache}}</label>
-        </div>
-        <div>
-            <b style="color: dodgerblue;">Etat : </b><label>{{tache.etatTache}}</label>
-        </div>
-        <div *ngIf="tache.employe!=null">
-            <b style="color: dodgerblue;">Affectée à : </b><label> {{ tache.employe.nomEmploye }} {{ tache.employe.prenomEmploye }}</label>
-        </div>
-        <div *ngIf="tache.employe==null">
-            <b style="color: dodgerblue;">Affectée à : </b><label> N'est pas encore affectée</label>
-        </div>
-        <div>
-            <b style="color: dodgerblue;">Projet  : </b><label>{{tache.userStory.sprint.projet.nomProjet}}</label>
-        </div>
-        <div>
-            <b style="color: dodgerblue;">Sprint  : </b><label>{{tache.userStory.sprint.nomSprint}}</label>
-        </div>
+    <table class="table table-bordered table-condensed table-hover">
+        <tr>
+             <th style="color: dodgerblue;"  width=20%>Tâche :</th>
+             <td>{{tache.descriptionTache}}</td>
+        </tr>
+        <tr>
+             <th  style="color: dodgerblue;" width=20%>Durée :</th>
+             <td>{{tache.dureeTache}} jour(s)</td>
+        </tr>
+        <tr>
+             <th  style="color: dodgerblue;" width=20%>Etat :</th>
+             <td>{{tache.etatTache}}</td>
+        </tr>
+        <tr *ngIf="tache.employe!=null">
+              <th  style="color: dodgerblue;" width=20%>Affectée à :</th>
+              <td>{{ tache.employe.nomEmploye }} {{ tache.employe.prenomEmploye }}</td>
+        </tr>
+        <tr *ngIf="tache.employe==null">
+             <th style="color: dodgerblue;" width=20%>Affectée à :</th>
+             <td>N'est pas encore affectée</td>
+        </tr>
+        <tr>
+             <th style="color: dodgerblue;" width=20%>Projet  :</th>
+             <td>{{tache.userStory.sprint.projet.nomProjet}}</td>
+        </tr>
+        <tr>
+            <th style="color: dodgerblue;" width=20%>Sprint :</th>
+            <td>{{tache.userStory.sprint.nomSprint}}</td>
+        </tr>
+</table>
       
-       
-      
+</div>  
 <br>
 <br>
 <!-- Button-->

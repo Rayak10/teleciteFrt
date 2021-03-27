@@ -3,33 +3,42 @@
 <legend  class="navbar-brand titre"  > Les informations du projet</legend>
 <hr/>
 <div >
-        <div>
-            <b style="color: dodgerblue;"> Nom projet  :</b><label>{{projet.nomProjet}}</label>
-        </div>
-        <div>
-            <b style="color: dodgerblue;">Théme  :</b><label>{{projet.theme}}</label>
-        </div>
-        <div>
-            <b style="color: dodgerblue;">Description  :</b><label>{{projet.description}}</label>
-        </div>
 
-        <div>
-            <b style="color: dodgerblue;">Description technique  :</b><label>{{projet.descriptionTechnique}}</label>
-        </div>
-
-        <div>
-            <b style="color: dodgerblue;">Date debut projet  :</b><label>{{projet.dateDebut}}</label>
-        </div>
-       
-        <div>
-            <b style="color: dodgerblue;">Date Fin projet  :</b><label>{{projet.dateFin}}</label>
-        </div>
-        <div>
-            <b style="color: dodgerblue;">Equipe :</b><label *ngIf="projet.equipe!=null">{{projet.equipe.nomEquipe}}</label>
-        </div>
+    <table class="table   table-hover">
+        <tr>
+            <th style="color: dodgerblue;"  width=20%>Nom projet  :</th>
+            <td>{{projet.nomProjet}}</td>
+        </tr>
+        <tr>
+            <th style="color: dodgerblue;"  width=20%>Théme  :</th>
+            <td>{{projet.theme}}</td>
+        </tr>
+        <tr>
+            <th style="color: dodgerblue;"  width=20%>Description  :</th>
+            <td>{{projet.description}}</td>
+        </tr>
+        <tr>
+            <th style="color: dodgerblue;"  width=20%>Description technique  :</th>
+            <td>{{projet.descriptionTechnique}}</td>
+        </tr>
+        <tr>
+            <th style="color: dodgerblue;"  width=20%>Date debut projet  :</th>
+            <td>{{projet.dateDebut | date :'shortDate'}}</td>
+        </tr>
+        <tr>
+            <th style="color: dodgerblue;"  width=20%>Date Fin projet  :</th>
+            <td>{{projet.dateFin | date :'shortDate'}}</td>
+        </tr>
+        <tr>
+            <th style="color: dodgerblue;"  width=20%>Equipe :</th>
+            <td *ngIf="projet.equipe!=null">{{projet.equipe.nomEquipe}}</td>
+        </tr>
+    </table>
 </div>
 <br>
 <br>
+
+
 <!-- Button -->
 <div class="form-group">
     <label class="col-md-0 control-label" for="btn-save"></label>
@@ -47,26 +56,26 @@
         <a class="btn btn-default-btn-xs btn-primary"><i class="glyphicon glyphicon-refresh"></i> Refresh</a>
         <a class="btn btn-default-btn-xs btn-success"><i class="glyphicon glyphicon-plus"></i> New</a>
     </div>-->
-    <table class="table table-bordered table-condensed table-hover">
+    <table class=" table-bordered table-condensed table-hover">
         <thead>
             <tr>
-                <th scope="col" width=40%>Nom sprint</th>
-                <th scope="col" width=20%>Date Début</th>
-                <th scope="col" width=20%>Date Fin</th>
-                <th scope="col" width=10%>Statut</th>
-                <th scope="col" width=10%>Actions</th>
+                <th class="titre_tab" scope="col" width=40%>Nom sprint</th>
+                <th class="titre_tab" scope="col" width=20%>Date Début</th>
+                <th class="titre_tab" scope="col" width=20%>Date Fin</th>
+                <th class="titre_tab" scope="col" width=10%>Statut</th>
+                <th class="titre_tab"  scope="col" width=10%>Actions</th>
             </tr>
                 
         </thead>
         <ng-container *ngFor="let sprint of sprints | async">
             <tbody id="form-list-projets-body" *ngIf="sprint.nomSprint !='Backlog produit'">
             <tr>
-                <td>{{sprint.nomSprint}}</td>
-                <td>{{sprint.dateDebut}}</td>
-                <td>{{sprint.dateFin}}</td>
-                <td>{{sprint.etatSprint}}</td>
+                <td class="titre_tab">{{sprint.nomSprint}}</td>
+                <td class="titre_tab">{{sprint.dateDebut | date :'shortDate'}}</td>
+                <td class="titre_tab">{{sprint.dateFin | date :'shortDate'}}</td>
+                <td class="titre_tab">{{sprint.etatSprint}}</td>
 
-                <td>
+                <td class="titre_tab">
                   
                     <a title="les détails du projet" class="btn btn-default btn-sm "(click)="sprintDetails(sprint.idSprint)"> <i class="glyphicon glyphicon-eye-open text-primary"  ></i> </a> 
                     <a *ngIf="roleE=='ROLE_PRODUCT_OWNER'"  title="modifier le  projet" class="btn btn-default btn-sm "(click)="updateSprint(sprint.idSprint)"> <i class="glyphicon glyphicon-edit text-primary"></i> </a>

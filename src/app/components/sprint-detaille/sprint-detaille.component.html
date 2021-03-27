@@ -3,33 +3,36 @@
 <legend  class="navbar-brand titre"  > Les informations du {{sprint.nomSprint}}</legend>
 <hr/>
 <div >
-        <div>
-            <b *ngIf="sprint.nomSprint !='Backlog produit'" >Nom sprint  :</b><label>{{sprint.nomSprint}}</label>
-        </div>
-        <div *ngIf="sprint.nomSprint != 'Backlog produit'">
-            <b>Date debut  :</b><label>{{sprint.dateDebut | date :'shortDate'}}</label>
-        </div>
-        <div *ngIf="sprint.nomSprint != 'Backlog produit'">
-            <b>Date fin  :</b><label>{{sprint.dateFin | date :'shortDate'}}</label>
-        </div>
-
-        <div>
-            <b>Description   :</b><label>{{sprint.descriptionSprint}}</label>
-        </div>
-
-        
-        <div>
-            <b>Etat :</b><label>{{sprint.etatSprint}}</label>
-        </div>
-      
-        <div>
-            <b>Nom Projet :</b><label>{{sprint.projet.nomProjet}}</label>
-        </div>
-        <div>
-            <b>Nom equipe :</b><label>{{sprint.projet.equipe.nomEquipe}}</label>
-        </div>
-       
-      
+    <table class="table table-bordered table-condensed table-hover">
+        <tr>
+             <th style="color: dodgerblue;"  width=20%>Nom sprint  :</th>
+             <td>{{sprint.nomSprint}}</td>
+        </tr>
+        <tr  *ngIf="sprint.nomSprint != 'Backlog produit'">
+             <th  style="color: dodgerblue;" width=20%>Date debut :</th>
+             <td>{{sprint.dateDebut | date :'shortDate'}}</td>
+        </tr>
+        <tr *ngIf="sprint.nomSprint != 'Backlog produit'">
+             <th  style="color: dodgerblue;" width=20%>Date fin  :</th>
+             <td>{{sprint.dateFin | date :'shortDate'}}</td>
+        </tr>
+        <tr>
+              <th  style="color: dodgerblue;" width=20%>Description :</th>
+              <td>{{sprint.descriptionSprint}}</td>
+        </tr>
+        <tr>
+             <th style="color: dodgerblue;" width=20%>Etat :</th>
+             <td>{{sprint.etatSprint}}</td>
+        </tr>
+        <tr>
+             <th style="color: dodgerblue;" width=20%>Nom Projet : </th>
+             <td>{{sprint.projet.nomProjet}}</td>
+        </tr>
+        <tr>
+            <th style="color: dodgerblue;" width=20%>Nom equipe :</th>
+            <td>{{sprint.projet.equipe.nomEquipe}}</td>
+        </tr>
+</table>
 <br>
 <br>
 <!-- Button -->
@@ -42,36 +45,30 @@
     <div class="col col-lg-2">
         <button id="btn-save"  (click)="list()" name="btn-save" class="btn btn-success">Retour au liste des Sprints</button>
     </div>
-</div>
-    
+</div>  
     <form id="form-list-userstorySprint" >
             <legend id="leg1"class="navbar-brand titre " (click)="toogletag1()">  <a>Liste des UserStorys du {{sprint.nomSprint}}</a></legend>
-                
-              
                 <table  id="tab1" class="table table-bordered table-condensed table-hover">
                     <thead>
                         <tr>
-                            <th scope="col"  width=50%>UserStory</th>
-                            <th scope="col"  width=10%>Priorite</th>
-                            <th scope="col" width=10%>Complexite</th>
-                            <th scope="col" width=20%>Sprint</th>
-                            <th scope="col" width=10%>Actions</th>
+                            <th class="titre_tab"  scope="col"  width=50%>UserStory</th>
+                            <th class="titre_tab"  scope="col"  width=10%>Priorite</th>
+                            <th class="titre_tab"  scope="col" width=10%>Complexite</th>
+                            <th class="titre_tab"  scope="col" width=20%>Sprint</th>
+                            <th class="titre_tab"  scope="col" width=10%>Actions</th>
                         </tr>
                             
                     </thead>
                     <tbody id="form-list-projets-body"  *ngFor="let userstory of userstorys">
                         <tr>
-                            <td>{{userstory.libelleUserStory}}</td>
-                            <td>{{userstory.priorite}}</td>
-                            <td>{{userstory.complexite}}</td>
-                            <td >{{userstory.sprint.nomSprint}}</td>
-                            <td>
-                              
+                            <td class="titre_tab" >{{userstory.libelleUserStory}}</td>
+                            <td class="titre_tab" >{{userstory.priorite}}</td>
+                            <td class="titre_tab" >{{userstory.complexite}}</td>
+                            <td class="titre_tab" >{{userstory.sprint.nomSprint}}</td>
+                            <td class="titre_tab" >
                                 <a title="les détails du projet" class="btn btn-default btn-sm "(click)="userstoryDetails(userstory.idUserStory)"> <i class="glyphicon glyphicon-eye-open text-primary"  ></i> </a> 
                                 <a  *ngIf="roleE=='ROLE_PRODUCT_OWNER'" title="modifier le  projet" class="btn btn-default btn-sm "(click)="updateUserstory(userstory.idUserStory)"> <i class="glyphicon glyphicon-edit text-primary"></i> </a>
                                 <a *ngIf="roleE=='ROLE_PRODUCT_OWNER'" title="supprimer le projet " class="btn btn-default btn-sm " (click)="deleteUserstory(userstory.idUserStory)"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
-                                
-                               
                             </td>
                         </tr>
                     </tbody>
@@ -83,34 +80,24 @@
                 <table id="tab2" class="table table-bordered table-condensed table-hover">
                     <thead>
                         <tr>
-                          <th scope="col" width=15% >Membre d'equipe scrum </th>   
-                          <th scope="col" width=10% >Equipe scrum </th>   
-                            <th scope="col" width=64%>Commentaire</th>   
-                            <th scope="col" width=5%>Date</th> 
-                            <th scope="col" width=6%>Actions</th>
-
+                          <th class="titre_tab"  scope="col" width=15% >Membre d'equipe scrum </th>   
+                          <th class="titre_tab"  scope="col" width=10% >Equipe scrum </th>   
+                          <th class="titre_tab"  scope="col" width=64%>Commentaire</th>   
+                          <th class="titre_tab"  scope="col" width=5%>Date</th> 
+                          <th class="titre_tab"  scope="col" width=6%>Actions</th>
                         </tr>
-                            
-              
-                         
-              
                     </thead>
                       <tbody id="form-list-projets-body">
-                        
-                        <tr *ngFor="let com of commentaires">
-                                   
-                            <td>{{com.employe.nomEmploye}} {{com.employe.prenomEmploye}}</td>
-                            <td>{{com.employe.equipe.nomEquipe}}</td>
+                        <tr *ngFor="let com of commentaires">   
+                            <td class="titre_tab" >{{com.employe.nomEmploye}} {{com.employe.prenomEmploye}}</td>
+                            <td class="titre_tab" >{{com.employe.equipe.nomEquipe}}</td>
 
-                            <td>{{com.libelleCommentaire}}</td>
-                            <td>{{com.dateCommentaire| date :'shortDate'}}</td>
-                            <td>
-                
+                            <td class="titre_tab" >{{com.libelleCommentaire}}</td>
+                            <td class="titre_tab" >{{com.dateCommentaire| date :'shortDate'}}</td>
+                            <td class="titre_tab" >
                                 <a title="modifier le  commentaire" class="btn btn-default btn-sm "(click)="updateCommentaire(com.idCommentaire)"> <i class="glyphicon glyphicon-edit titre"></i> </a>
-                                
-                               
                             </td>
-                </tr>
-                  </tbody>
+                        </tr>
+                      </tbody>
                 </table>
-                </form>
+</form>

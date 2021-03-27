@@ -4,17 +4,16 @@
 <hr/>
 <div >
     <table class="table table-bordered table-condensed table-hover">
-        
             <tr>
-                <th style="color: dodgerblue;"  width=40%>User storie :</th>
+                <th style="color: dodgerblue;"  width=20%>User storie :</th>
                 <td>{{ userstory.libelleUserStory}}</td>
             </tr>
             <tr>
-                <th  style="color: dodgerblue;" width=5%>Complexité :</th>
+                <th  style="color: dodgerblue;" width=20%>Complexité :</th>
                 <td>{{ userstory.complexite}}</td>
             </tr>
             <tr>
-                <th  style="color: dodgerblue;" width=5%>Priorité :</th>
+                <th  style="color: dodgerblue;" width=20%>Priorité :</th>
                 <td>{{ userstory.priorite}}</td>
             </tr>
             <tr>
@@ -24,20 +23,11 @@
             <tr>
            <th style="color: dodgerblue;" width=20%>projet :</th>
            <td>{{ userstory.sprint.projet.nomProjet}}</td>
-
             </tr>
-                
-        
-    
-              
     </table>
-       
-</div>
-       
-      
+</div> 
 <br>
 <br>
-<!-- Button -->
 <label class="col-md-2 control-label" for="btn-save"></label>
 <div class="col col-lg-2">
     <button id="btn-save" name="btn-save" (click)="sprintDetails(userstory.sprint.idSprint)" class="btn btn-success">Retour au detail Sprint</button>
@@ -50,42 +40,33 @@
 </div>
 <!--LIST-->
 <div class=col-md-12 >
-    
     <form id="form-list-tache" >
             <legend class="navbar-brand titre">Liste taches de user story</legend>
-  
     <table class="table table-bordered table-condensed table-hover">
         <thead>
             <tr>
-                <th scope="col"  width=40%>Tâche</th>
-                <th scope="col" width=5%>Durée</th>
-                <th scope="col" width=5%>Etat</th>
-           <th scope="col" width=20%>Projet</th>
-           <th scope="col" width=20%>Sprint</th>
-
-                <th scope="col" width=10%>Actions</th>
-            </tr>
-                
+                <th class="titre_tab" scope="col"  width=40%>Tâche</th>
+                <th class="titre_tab" scope="col" width=5%>Durée</th>
+                <th class="titre_tab" scope="col" width=5%>Etat</th>
+                <th class="titre_tab" scope="col" width=20%>Projet</th>
+                <th class="titre_tab" scope="col" width=20%>Sprint</th>
+                <th class="titre_tab" scope="col" width=10%>Actions</th>
+            </tr>     
         </thead>
         <tbody id="form-list-projets-body"  *ngFor="let tache of taches|async">
             <tr>
                 <td>{{tache.descriptionTache}}</td>
-                <td>{{tache.dureeTache}}</td>
-                <td>{{tache.etatTache}}</td>
-                <td>{{tache.userStory.sprint.projet.nomProjet}}</td>
-                <td>{{tache.userStory.sprint.nomSprint}}</td>
-                <td>
-                  
+                <td class="titre_tab">{{tache.dureeTache}}</td>
+                <td class="titre_tab">{{tache.etatTache}}</td>
+                <td class="titre_tab">{{tache.userStory.sprint.projet.nomProjet}}</td>
+                <td class="titre_tab">{{tache.userStory.sprint.nomSprint}}</td>
+                <td class="titre_tab">
                     <a title="les détails du projet" class="btn btn-default btn-sm "(click)="tacheDetails(tache.idTache)"> <i class="glyphicon glyphicon-eye-open text-primary"  ></i> </a> 
                     <a *ngIf="roleE=='ROLE_SCRUM_TEAM_MEMBER'" title="modifier le  projet" class="btn btn-default btn-sm "(click)="updateTache(tache.idTache)"> <i class="glyphicon glyphicon-edit text-primary"></i> </a>
                     <a *ngIf="roleE=='ROLE_SCRUM_TEAM_MEMBER'" title="supprimer le projet " class="btn btn-default btn-sm " (click)="deleteTache(tache.idTache)"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
-                    
-                   
                 </td>
             </tr>
         </tbody>
     </table>
     </form>
-
-    
 </div>

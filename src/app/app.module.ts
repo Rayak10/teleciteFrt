@@ -59,6 +59,7 @@ import { UpdateCommentaireComponent } from './components/update-commentaire/upda
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import {MatButtonModule} from '@angular/material/button';
 import { SimpleNotificationsModule } from 'angular2-notifications';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -95,6 +96,7 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
     AjoutcommentaireComponent,
     UpdateCommentaireComponent,
     ConfirmDialogComponent,
+    NotFoundComponent,
     
   ],
   imports: [

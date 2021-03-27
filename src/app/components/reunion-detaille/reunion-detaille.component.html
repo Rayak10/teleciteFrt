@@ -1,82 +1,70 @@
 <hr/>
 <hr/>
-
 <legend  class="navbar-brand titre"  > Les informations du réunion </legend>
 <hr/>
 <div >
-        <div>
-            <b style="color: dodgerblue;">Nom Reunion  :</b><label>{{reunion.nomReunion}}</label>
-        </div>
-        <div>
-            <b style="color: dodgerblue;">Contexte  :</b><label>{{reunion.descriptionReunion}}</label>
-        </div>
-        <div>
-            <b style="color: dodgerblue;">Date début  :</b><label>{{reunion.dateDebut | date :'shortDate'}}</label>
-        </div>
-
-        <div>
-            <b style="color: dodgerblue;">Heure début  :</b><label>{{reunion.heurDeb}}</label>
-        </div>
-
-        <div>
-            <b style="color: dodgerblue;">Heure fin  :</b><label>{{reunion.heurFin}}</label>
-        </div>
-       
-        <div>
-            <b style="color: dodgerblue;">Type réunion  :</b><label>{{reunion.type}}</label>
-        </div>
-        <div *ngIf="reunion.equipe!=null">
-            <b style="color: dodgerblue;">Equipe :</b><label >{{reunion.equipe.nomEquipe}}</label>
-        </div>
+    <table class="table table-bordered table-condensed table-hover">
+        <tr>
+             <th style="color: dodgerblue;"  width=20%>Nom Reunion  :</th>
+             <td>{{reunion.nomReunion}}</td>
+        </tr>
+        <tr>
+             <th  style="color: dodgerblue;" width=20%>Contexte :</th>
+             <td>{{reunion.descriptionReunion}}</td>
+        </tr>
+        <tr>
+             <th  style="color: dodgerblue;" width=20%>Date début  :</th>
+             <td>{{reunion.dateDebut | date :'shortDate'}}</td>
+        </tr>
+        <tr>
+              <th  style="color: dodgerblue;" width=20%>Heure début  :</th>
+              <td>{{reunion.heurFin}}</td>
+        </tr>
+        <tr>
+             <th style="color: dodgerblue;" width=20%>Heure fin  :</th>
+             <td>{{reunion.heurFin}}</td>
+        </tr>
+        <tr>
+             <th style="color: dodgerblue;" width=20%>Type réunion  :</th>
+             <td>{{reunion.type}}</td>
+        </tr>
+        <tr *ngIf="reunion.equipe!=null">
+            <th style="color: dodgerblue;" width=20%>Nom equipe :</th>
+            <td>{{reunion.equipe.nomEquipe}}</td>
+        </tr>
+</table>
 </div>
 <br>
 <br>
-<!-- Button -->
 <div class="form-group">
     <label class="col-md-0 control-label" for="btn-save"></label>
     <div class="col-md-0">
      <button id="btn-save"  (click)="list()" name="btn-save" class="btn btn-success">Retour au liste des réunions</button>
     </div>
 </div>
-<!-- LIST -->
 <div class=col-md-12 >
-    
     <form id="form-list-sprintsProjet" >
             <legend class="navbar-brand titre">Liste des employes à réunir</legend>
-    
-   <!-- <div class="pull-right">
-        <a class="btn btn-default-btn-xs btn-primary"><i class="glyphicon glyphicon-refresh"></i> Refresh</a>
-        <a class="btn btn-default-btn-xs btn-success"><i class="glyphicon glyphicon-plus"></i> New</a>
-    </div>-->
     <table class="table table-bordered table-condensed table-hover">
         <thead>
             <tr>
-                <th scope="col" width=15%>Nom </th>
-                <th scope="col" width=15%>Preénom</th>
-                <th scope="col" width=20%>Email</th>
-                <th scope="col" width=15%>Post</th>
-                <th scope="col" width=25%>Role</th>
+                <th class="titre_tab" scope="col" width=15%>Nom </th>
+                <th class="titre_tab" scope="col" width=15%>Preénom</th>
+                <th class="titre_tab" scope="col" width=20%>Email</th>
+                <th class="titre_tab" scope="col" width=15%>Post</th>
+                <th class="titre_tab" scope="col" width=25%>Role</th>
             </tr>
-                
         </thead>
         <tbody id="form-list-projets-body"  *ngFor="let emp of employeArray | async">
             <tr>
-                <td>{{emp.nomEmploye}}</td>
-                <td>{{emp.prenomEmploye}}</td>
-                <td>{{emp.email}}</td>
-                <td>{{emp.post}}</td>
-                <td>{{emp.role.nomRole}}</td>
-                
-                  
-                  
+                <td class="titre_tab">{{emp.nomEmploye}}</td>
+                <td class="titre_tab">{{emp.prenomEmploye}}</td>
+                <td class="titre_tab">{{emp.email}}</td>
+                <td class="titre_tab">{{emp.post}}</td>
+                <td class="titre_tab">{{emp.role.nomRole}}</td>    
             </tr>
         </tbody>
     </table>
     </form>
-
-    
 </div>
-
-
-<br> 
 
