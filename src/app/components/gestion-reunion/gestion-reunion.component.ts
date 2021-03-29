@@ -56,6 +56,7 @@ export class GestionReunionComponent implements OnInit {
   selectedItemsList:Employe[] = [];
   checkedIDs:number[];
   exform:FormGroup;
+  loading: boolean = false;
   messageS:String="Réunion ajoutée avec succèes";
   messageE:String="Ajout du réunion est échouée";
   constructor(config: NgbTimepickerConfig ,private runionservice:ReunionService,private employeservice:EmployeService,
@@ -68,13 +69,8 @@ export class GestionReunionComponent implements OnInit {
       checkArray:this.formBuilder.array([])
     })
    }
-
+   reunionForm;
   ngOnInit()  {
-    
-    this.employeservice.refresh.subscribe(()=>{
-      this.employesdep=[]
-      this.reloadData();
-          });
 
 this.exform = new FormGroup({
     'type' : new FormControl(null,Validators.required),
@@ -105,7 +101,6 @@ this.exform = new FormGroup({
       if ( (this.h2)-(this.h1)<0) {
         return {probleme: true};
       }
-      
       
       return null;
 
@@ -147,24 +142,24 @@ newSprint(): void {
   this.reunion= new Reunion();
 }
 onSubmit(reunionForm:NgForm) {
+  this.loading = true;
   this.submitted = true;
   this.save(); 
-  reunionForm.reset()
+  this.reunionForm = reunionForm;
 }
 save() {
   this.reunion.dateDebut = new Date(new Date(this.reunion.dateDebut).getTime() - this.offset);
   this.reunion.dateFin = new Date(new Date(this.reunion.dateFin).getTime() - this.offset);
-  
-
   this.runionservice.createReunion(this.reunion)
-  .subscribe(resp=> console.log(resp),error=>console.log(error)
+  .subscribe(resp=> { this.onSuccess(this.messageS);
+    this.employesdep.forEach(item => item.isChecked = false);
+    this.selectedItemsList =[];
+    this.reunionForm.reset()
+  this.reunion.heureDeb={hour: 0, minute: 0,second:0};
+   this.reunion.heureFin={hour: 0, minute: 0,second:0};
+   this.loading = false;
+  },error=>{this.onErorr(this.messageE); this.loading = false;}
   )
- 
-  if((this.reunion.type!=null) && ((this.reunion.equipe!=null )||(this.reunion.employes!=null ))){  
-    this.onSuccess(this.messageS);
-  }
-  else {this.onErorr(this.messageE)}
- 
 }  
 
 onSuccess(messageS){
@@ -189,18 +184,13 @@ deleteSprints(id:number){
   .subscribe(
   data=>{
     console.log(data);
-   
-
    this.gotoList();
   },
   error=>console.log(error));
-  
 }
 onChange(event){
   this.reloadData();
 this.employesdep=[];
-
-
 }
 
 onChange1(event){
@@ -210,7 +200,6 @@ onChange1(event){
   onChange2(event){
     $("#leg1").hide(1000);
     $("#tab1").hide(1500);
-  this.employeArray=this.employeservice.findAllEmployesDepartement(this.selectedDepartementId)
 this.employeservice.findAllEmployesDepartement(this.selectedDepartementId).subscribe(
   resp=>{this.employesdep=resp;
    let checkedEmployeesIds = this.selectedItemsList.filter(emp=> emp.departement.idDepartement == this.selectedDepartementId);
@@ -219,7 +208,6 @@ this.employeservice.findAllEmployesDepartement(this.selectedDepartementId).subsc
                  emp.isChecked = true;
                 } );
   }
-  
 )
   $("#field_departement").click(function(){
     $("#leg1").show(1000);
@@ -236,9 +224,7 @@ this.employeservice.findAllEmployesDepartement(this.selectedDepartementId).subsc
       return value.isChecked
     }));
     this.fetchCheckedIDs();
-
   }
-
   fetchCheckedIDs() {
     this.checkedIDs = []
     this.selectedItemsList.forEach((value, index) => {
