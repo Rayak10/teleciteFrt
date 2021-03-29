@@ -156,7 +156,9 @@
       </div>
       <div class="col col-lg-1 pull-right">
         <button id="btn-save" name="btn-save" [disabled]=" exform.get('nom').invalid || exform.get('dateFin').invalid
-        || exform.get('dateDebut').invalid || exform.get('contexte').invalid"  type="submit" class="btn btn-success">Modifier</button>
+        || exform.get('dateDebut').invalid || exform.get('contexte').invalid ||(reunion.type=='Reunion_Scrum' && reunion.equipe==null) ||
+        (reunion.type=='Reunion_Administratif' && reunion.employes.length < 2)"
+          type="submit" class="btn btn-success">Modifier</button>
        </div>
       <div class="col col-lg-1 pull-right">
         <button id="btn-retour" name="btn-retour" (click)="gotoList()"class="btn btn-success">Retour</button>

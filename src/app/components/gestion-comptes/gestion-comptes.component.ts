@@ -79,7 +79,6 @@ this.reloadData();
     })
 
     this.roleE=localStorage.getItem('role')
-    this.reloadData();
   
     this.bureauservice.findAllBureaux().subscribe(
       data => {console.log("data from find all bureau:"+JSON.stringify(data));   
@@ -149,7 +148,7 @@ this.gotoList();
     this.employe = JSON.parse(localStorage.getItem('currentEmploye'));
   }
 reloadData(){
-  this.urllink
+  
   this.employes= this.employeservice.findAllEmployes();
   
 }
@@ -213,23 +212,19 @@ reloadData(){
  onChangeBureau(event){
    
   this.employe.bureau = {idBureau:this.selectedBureauId,nomBureau:''};
-  //console.log(JSON.stringify(this.employe.bureau.idBureau));
  
 }
 onChangeRole(event){
    
   this.employe.role = {idRole:this.selectedRoleId,nomRole:''};
-  //console.log(JSON.stringify(this.employe.bureau.idBureau));
  
 }
 onChangeDepartement(event){
   this.employe.departement = {idDepartement:this.selectedDepartementId,nomDepartement:''};
-  //console.log(JSON.stringify(this.employe.departement.idDepartement));
 }
 onChangeEquipe(event){
    
   this.employe.equipe = {idEquipe:this.selectedEquipeId,nomEquipe:'',specialite:''};
- // console.log(JSON.stringify(this.employe.equipe.idEquipe));
 
 }
 OnSelectFile(event){
@@ -246,11 +241,9 @@ OnSelectFile(event){
       return;
     }
   
-  
     var reader = new FileReader();
     this.imagePath=file;
     reader.readAsDataURL(file);
-
     reader.onload=(event:any)=>{
       this.urllink=event.target.result;
     }

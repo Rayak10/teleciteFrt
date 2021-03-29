@@ -71,6 +71,11 @@ export class GestionReunionComponent implements OnInit {
 
   ngOnInit()  {
     
+    this.employeservice.refresh.subscribe(()=>{
+      this.employesdep=[]
+      this.reloadData();
+          });
+
 this.exform = new FormGroup({
     'type' : new FormControl(null,Validators.required),
     'contexte' : new FormControl(null,Validators.required),
@@ -130,9 +135,13 @@ this.exform = new FormGroup({
       data => {      
                   this.departementArray.push(...data);}
     );
-this.typeArray=["Réunion administratif","Reunion Scrum"]
 }
-    
+reloadData(){
+  
+  this.employeservice.findAllEmployesDepartement(this.selectedDepartementId).subscribe(
+    resp=>this.employesdep=resp)
+  
+}
 newSprint(): void {
   this.submitted = false;
   this.reunion= new Reunion();
@@ -156,7 +165,6 @@ save() {
   }
   else {this.onErorr(this.messageE)}
  
-
 }  
 
 onSuccess(messageS){
@@ -189,28 +197,27 @@ deleteSprints(id:number){
   
 }
 onChange(event){
+  this.reloadData();
+this.employesdep=[];
 
 
 }
+
 onChange1(event){
-  
   this.reunion.equipe = {idEquipe:this.selectedEquipeId,nomEquipe:'',specialite:''};
-  console.log(JSON.stringify(this.reunion.equipe.idEquipe)); }
- 
+  console.log(JSON.stringify(this.reunion.equipe.idEquipe)); 
+}
   onChange2(event){
     $("#leg1").hide(1000);
     $("#tab1").hide(1500);
   this.employeArray=this.employeservice.findAllEmployesDepartement(this.selectedDepartementId)
 this.employeservice.findAllEmployesDepartement(this.selectedDepartementId).subscribe(
-
   resp=>{this.employesdep=resp;
    let checkedEmployeesIds = this.selectedItemsList.filter(emp=> emp.departement.idDepartement == this.selectedDepartementId);
      this.employesdep.forEach(
        emp=>{ if(checkedEmployeesIds.find(empChecked=>emp.idEmploye == empChecked.idEmploye))
                  emp.isChecked = true;
-                this.verif=true; 
-              console.log("truuuuuuuuuueeeeeee")} );
-    console.log(JSON.stringify("qqqqqqqqqqq"+this.employeArray));
+                } );
   }
   
 )

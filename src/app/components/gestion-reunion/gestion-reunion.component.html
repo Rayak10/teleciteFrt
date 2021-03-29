@@ -15,7 +15,7 @@
      type="text" 
      class="form-control "
       id="field_reunion"
-        name="reunion" [(ngModel)]="this.reunion.type"
+        name="reunion" [(ngModel)]="reunion.type"
         (change)="onChange($event)">
       <option *ngFor="let type of TypeReunion.values();" [value]="type" >
         {{type}}
@@ -163,13 +163,15 @@
         </div>
         <div class="col col-lg-2 pull-right">
 
-       <button    id="btn-save" name="btn-save" [disabled]="(exform.invalid ||ctrl1.errors || ctrl2.errors || (reunion.equipe==null && verif==true)||(reunion.equipe!=null && verif==false))" type="submit" class="btn btn-success">Enregistrer</button>
+       <button id="btn-save" name="btn-save" [disabled]="(exform.invalid ||ctrl1.errors ||
+        ctrl2.errors || (reunion.type=='Reunion_Scrum' && reunion.equipe==null) ||
+        (reunion.type=='Reunion_Administratif' && reunion.employes.length < 2))" type="submit" class="btn btn-success">Enregistrer</button>
     </div>
       </div>
 
   </form>
   
-     
+     <div *ngIf="reunion.type=='Reunion_Administratif'">
 
       <legend id="leg1" class="navbar-brand titre">Liste des employés de département </legend>
 
@@ -199,7 +201,7 @@
       </tr>
   </tbody>
 </table>
-
+</div>
 
 <simple-notifications></simple-notifications>
 

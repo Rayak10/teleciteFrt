@@ -78,10 +78,10 @@ employe:Employe=new Employe();
         if(error.status === 500) {
           this.errorMessage = "Aucun utilisateur n'a été trouvé avec ce e-mail / mot de passe ";
         }
-        if(error.status === 400) {
+        if(error.status === 404) {
           this.errorMessage = "L'email et / ou mot de passe incorrect(s)";
         }
-        if(error.status === 404) {
+        if(error.status === 403) {
           this.errorMessage = "Utilisateur n'est pas active";
         }
       });
