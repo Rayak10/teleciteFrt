@@ -1,13 +1,8 @@
 <hr/>
 <hr/>
-
-<!-- FORM  -->	    
  <div class="container">	  
-
  <form  [formGroup]="exform" #reunionForm="ngForm" (ngSubmit)="onSubmit(reunionForm)" >
-
 <legend  class="navbar-brand titre"  > Gestion des reunions </legend>
-<!-- Text input-->
 <div class="row">
   <label class="col-md-2 control-label">Type réunion :</label>
   <div class="col-md-4">
@@ -33,19 +28,13 @@
   <span class="help-block"></span>  
   </div>
 </div>
-
-
-
-
 <div class="row">
   <div class="col col-md-2">
   <label class=" control-label">Contexte du réunion :</label>
 </div>
-
   <div class="col-md-4">
     <textarea id="reunion-description" rows="2" cols="12" formControlName="contexte" [(ngModel)]="reunion.descriptionReunion" name="reunion-description" type="text" placeholder="tapez une description pour cette réunion ..." class="form-control input-md"></textarea>
     <small *ngIf="exform.get('contexte').invalid && exform.get('contexte').touched" class="textdanger">Contexte de réunion est obligatoire</small>
-
     <p class="help-block"></p>
     </div>
     <div class="col col-md-2">
@@ -63,14 +52,9 @@
     <span class="help-block"></span>  
     </div>  
 </div>
-
-
 <div class="row">
- 
   <div class="col col-md-6">
-    
     </div>
-    
   <div class="col col-md-2">
     <label class="control-label">Date fin réunion :</label>
   </div>  
@@ -86,13 +70,10 @@
     <span class="help-block"></span>  
     </div>  
   </div>
-
-
   <div class="row">
     <div class="col col-md-2">
       <label class="control-label">Heure début :</label> 
     </div>
-      
     <div class="col-md-4">
       <ngb-timepicker [formControl]="ctrl1" [(ngModel)]="reunion.heureDeb"></ngb-timepicker>
       <div *ngIf="ctrl1.valid" class="small form-text text-success">Bon choix</div>
@@ -105,7 +86,6 @@
      <div class="col col-md-2">
       <label class="control-label">Heure fin :</label> 
       </div>
-      
      <div class="col col-md-4">
       <ngb-timepicker [formControl]="ctrl2" [(ngModel)]="reunion.heureFin" ></ngb-timepicker>
       <div *ngIf="ctrl2.valid" class="small form-text text-success">Bon choix</div>
@@ -116,7 +96,6 @@
       </div>
      </div>
   </div>
-
   <div class="row" *ngIf="reunion.type=='Reunion_Scrum'">
     <div class="col col-md-2">
   <label class="control-label">Equipe :</label>
@@ -135,8 +114,6 @@
     <p class="help-block"></p>
     </div>
     </div>
-
-
     <div class="row" *ngIf="reunion.type == 'Reunion_Administratif'">
       <div class="col col-md-2">
     <label class="control-label">Departement :</label>
@@ -155,26 +132,20 @@
      <p class="help-block"></p>
      </div>
      </div>
-      <!-- Button -->
       <div class="row">
         <div class="col-md-4">
 
-       <button id="btn-save"  (click)="gotoList()" name="btn-save" class="btn btn-success">Retour au liste des réunions</button>
+       <button id="btn-retour"  (click)="gotoList()" [disabled]="loading"  name="btn-retour" class="btn btn-success">Retour au liste des réunions</button>
         </div>
         <div class="col col-lg-2 pull-right">
-
-       <button id="btn-save" name="btn-save" [disabled]="(exform.invalid ||ctrl1.errors ||
-        ctrl2.errors || (reunion.type=='Reunion_Scrum' && reunion.equipe==null) ||
-        (reunion.type=='Reunion_Administratif' && reunion.employes.length < 2))" type="submit" class="btn btn-success">
-        <span *ngIf="loading"> spinner</span>
-        Enregistrer</button>
+          <button mat-raised-button  [class.spinner]="loading" [disabled]="(exform.invalid ||
+          ctrl1.errors || ctrl2.errors || loading || (reunion.type=='Reunion_Scrum' && reunion.equipe==null) ||
+          (reunion.type=='Reunion_Administratif' && reunion.employes.length==1))" type="submit"
+           class="btn btn-success">Enregistrer</button>
     </div>
       </div>
-
   </form>
-  
      <div *ngIf="reunion.type=='Reunion_Administratif'">
-
       <legend id="leg1" class="navbar-brand titre">Liste des employés de département </legend>
 <table id="tab1"  class="table table-bordered table-condensed table-hover">
   <thead>
@@ -184,8 +155,7 @@
           <th scope="col" width=20%>Email</th>
           <th scope="col" width=20%>Status</th>
           <th scope="col" width=20%>Actions</th>
-      </tr>
-          
+      </tr>        
   </thead>
   <tbody id="form-list-employes-body"  *ngFor="let item of employesdep">
       <tr>
@@ -193,16 +163,13 @@
           <td>{{item.prenomEmploye}}</td>
           <td>{{item.email}}</td>
           <td>{{item.active}}</td> 
-          <td>
-            
-     <input type="checkbox"  [(ngModel)]="item.isChecked"  (change)="changeSelection()">
-             
+          <td>     
+     <input type="checkbox"  [(ngModel)]="item.isChecked"  (change)="changeSelection()">    
           </td>
       </tr>
   </tbody>
 </table>
 </div>
-
 <simple-notifications></simple-notifications>
 
 

@@ -81,7 +81,6 @@
     <p class="help-block"></p>
     </div>
 </div>
-
 <div class="row">
   <div class="col col-md-2">
   <label class="control-label">Matricule :</label>
@@ -102,7 +101,6 @@
     <p class="help-block"></p>
   </div>
 </div>
-
 <div class="row"> 
    <div class="col col-md-2">
       <label class="control-label">Bureau :</label>
@@ -158,28 +156,19 @@
     <p class="help-block"></p>
     </div>
     <div class="col col-md-2">
-
   <label class="control-label">Email :</label>
     </div>
     <div class="col col-md-4">
       <div class="input-group">
       <span class="input-group-addon">@</span>
       <input id="employe-email" formControlName="email" [(ngModel)]="employe.email"  name="email" autocomplete="off"class="form-control" placeholder="tonnom@tondomain.tn" type="email">
-     
       <small *ngIf="exform.get('email').errors?.required && exform.get('email').touched" class="textdanger">L'email est obligatoire</small>
       <small *ngIf="exform.get('email').errors?.pattern && exform.get('email').touched" class="textdanger">Veuillez fournir une adresse email valide</small>
       </div>
-    
   </div>
-   
-  
 </div>
-
-<!-- Multiple Radios -->
 <div class="row"> 
- 
   <div class="col col-md-2">
-
     <label class="control-label">Employe status :</label>
   </div>
   <div class="col col-md-4">
@@ -194,7 +183,6 @@
       <input type="radio"  [(ngModel)]="employe.active" [ngModelOptions]="{standalone: true}" name="active"   id="client-status-1" value="false">
       Inactive
     </label>
-
   </div>
   </div>
   <div class="col col-md-2">
@@ -205,13 +193,8 @@
       <span class="input-group-addon">*</span>
       <input   type="password"  formControlName="password"  [(ngModel)]="employe.password" class="form-control"
        placeholder="tapez mot de passe">
-
-
-      
-
        <small *ngIf="exform.get('password').errors?.minlength && exform.get('password').touched" class="textdanger">le mot de passe doit contenir au moins 8 caractères!</small>
        <small  *ngIf="exform.get('password').errors?.required && exform.get('password').touched" class="textdanger">Mot de passe est obligatoire</small>
-
       </div>
   </div>
   <div class="col col-md-2">
@@ -223,20 +206,10 @@
       <input   type="password"  formControlName="confirme" id="employe-confirmationpassword" autocomplete="off" name="password" class="form-control" placeholder="confirmez mot de passe" >
       <small *ngIf="exform.get('confirme').errors?.required && exform.get('confirme').touched" class="textdanger">Confirmation mot de passe est obligatoire</small>  
       <small *ngIf="exform.get('confirme').valid && exform.get('confirme').value !=exform.get('password').value" class="textdanger">Le mot de passe saisi ne correspond pas</small>  
-
-    </div>
-    
+    </div> 
   </div>
 </div>
-
-
-
-
-
- 
-<!-- Button -->
 <div class="row">
-  
   <div class="col col-md-2">
   <label class="control-label">Photo :</label>
   </div>
@@ -247,25 +220,13 @@
   <img class="topright"  [src]="urllink" name="photo" id="profileDisplay">
 </div>
 <label class="col-md-4 control-label" for="btn-save"></label>
-
     <div class="col-md-1">
      <button id="btn-save" [disabled]="exform.invalid || exform.get('confirme').value !=exform.get('password').value"  name="btn-save" class="btn btn-success" (click)="save(getCompteForm)">Créer</button>
     </div>
 </div>
-
-
 </div>
-
-<!-- LIST -->
 <div class=col-md-12 >
-    
- 
             <legend class="navbar-brand titre">Liste des employés</legend>
-    
-   <!-- <div class="pull-right">
-        <a class="btn btn-default-btn-xs btn-primary"><i class="glyphicon glyphicon-refresh"></i> Refresh</a>
-        <a class="btn btn-default-btn-xs btn-success"><i class="glyphicon glyphicon-plus"></i> New</a>
-    </div>-->
     <table class="table table-bordered table-condensed table-hover">
         <thead>
             <tr>
@@ -274,8 +235,7 @@
                 <th scope="col" width=20%>Email</th>
                 <th scope="col" width=20%>Status</th>
                 <th scope="col" width=20%>Actions</th>
-            </tr>
-                
+            </tr>  
         </thead>
         <tbody id="form-list-employes-body"  *ngFor="let employe of employes | async">
             <tr>
@@ -283,27 +243,16 @@
                 <td>{{employe.prenomEmploye}}</td>
                 <td>{{employe.email}}</td>
                 <td>{{employe.active}}</td>
-                
                 <td>
-           
                     <a title="Les détails de l'employé" class="btn btn-default btn-sm "(click)="employeDetails(employe.idEmploye)"> <i class="glyphicon glyphicon-eye-open text-primary"  ></i> </a> 
                     <a title="Modifier ces informations" class="btn btn-default btn-sm "(click)="updateEmploye(employe.idEmploye)"> <i class="glyphicon glyphicon-edit text-primary"></i> </a>                   
+                    <a *ngIf="roleE=='ROLE_DRH'" title="Changer mot de passe" class="btn btn-default btn-sm "(click)="updateMotPass(employe.idEmploye)"><i class="fas fa-user-lock text-warning"></i> </a>                   
                     <a  *ngIf="roleE=='ROLE_DRH'" title="Supprimer ce compte"  class="btn btn-default btn-sm " (click)="deleteEmploye(employe.idEmploye)"ng-change="gotoList()"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
-                    <a  *ngIf="roleE=='ROLE_SCRUM_MASTER'" disabled title="Vous n'avez pas le droit"   class="btn btn-default btn-sm " (click)="deleteEmploye(employe.idEmploye)"ng-change="gotoList()"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
-                  
+                    <a  *ngIf="roleE=='ROLE_SCRUM_MASTER'" disabled title="Vous n'avez pas le droit"   class="btn btn-default btn-sm " (click)="deleteEmploye(employe.idEmploye)"ng-change="gotoList()"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>                  
                   </td>
-
             </tr>
         </tbody>
     </table>
-    
-
-    
 </div>
-
-
- 
 </form>
-
-
 </div> <simple-notifications></simple-notifications>

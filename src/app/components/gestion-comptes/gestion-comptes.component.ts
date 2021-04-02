@@ -52,14 +52,12 @@ export class GestionComptesComponent implements OnInit {
   messageE:String="Ajout d'employe est échoué";
   constructor(private employeservice:EmployeService,private departementservice:DepartementService,
     private roleservice:RoleService,private equipeservice:EquipeService,private bureauservice:BureauService,
-     private router: Router,private formBuilder: FormBuilder,private dialogService:DialogConfirmService, private _service: NotificationsService) {}
-
+    private router: Router,private formBuilder: FormBuilder,private dialogService:DialogConfirmService, private _service: NotificationsService) {}
   ngOnInit() {
-
+    this.reloadData();
     this.employeservice.refresh.subscribe(()=>{
 this.reloadData();
     });
-  
     this.exform = new FormGroup({
       'prenom' : new FormControl(null,Validators.required),
       'naissance' : new FormControl(null,Validators.required),
@@ -77,27 +75,21 @@ this.reloadData();
       'password' : new FormControl('', [Validators.required,Validators.minLength(8)]),
       'confirme' : new FormControl(null,Validators.required),
     })
-
     this.roleE=localStorage.getItem('role')
-  
     this.bureauservice.findAllBureaux().subscribe(
       data => {console.log("data from find all bureau:"+JSON.stringify(data));   
-      
                   this.bureauArray.push(...data);}
     );
     this.roleservice.findAllRoles().subscribe(
       data => {console.log("data from find all bureau:"+JSON.stringify(data));   
-      
                   this.roleArray.push(...data);}
     );
     this.equipeservice.findAllEquipe().subscribe(
       data => {console.log("data from find all Equipe:"+JSON.stringify(data));   
-      
                   this.equipeArray.push(...data);}
     );
     this.departementservice.findAllDepartements().subscribe(
       data => {console.log("data from find all dep:"+JSON.stringify(data));  
-      
                   this.departementArray.push(...data);}
     );
     this.employe.departement=null;
@@ -105,10 +97,8 @@ this.reloadData();
     this.employe.equipe=null;
     this.employe.equipe=null;
     this.employe.role=null;
-
   }
   get password(){return this.exform.get('password')}
-
   newEmployee(): void {
     this.submitted = false;
     this.employe= new Employe();
@@ -118,7 +108,6 @@ this.reloadData();
     getCompteForm.reset();
      this.gotoList();
   }
-
   save() {
     var formData = new FormData();
     if(this.userFile==null){
@@ -132,14 +121,10 @@ this.reloadData();
     formData.append('employee',JSON.stringify(this.employe))  ;
     formData.append('file',this.userFile);
     this.employeservice.saveEmployeProfile(formData).subscribe(
-      
-      resp=> this.onSuccess(this.messageS),error=>this.onErorr(this.messageE))
+    resp=> this.onSuccess(this.messageS),error=>this.onErorr(this.messageE))
     }
 this.gotoList();
   }
-  
-  
-  
   checkEmploye() {
     if (localStorage.getItem('currentEmploye') === undefined || localStorage.getItem('currentEmploye') === null) {
       this.router.navigate(['/login']);
@@ -148,14 +133,10 @@ this.gotoList();
     this.employe = JSON.parse(localStorage.getItem('currentEmploye'));
   }
 reloadData(){
-  
   this.employes= this.employeservice.findAllEmployes();
-  
 }
 
   deleteEmploye(id:number){
-
-
     this.dialogService.openConfirmDialog('êtes-vous sûr de supprimer cet employe ?')
     .afterClosed().subscribe(res =>{
     if(res) {
@@ -171,9 +152,6 @@ reloadData(){
       
     }
   })}
-  
-
-
   onSuccess(messageS){
     this._service.success('Success',messageS, {
       position: ['bottom','right'],
@@ -188,51 +166,39 @@ reloadData(){
         animate: 'fade',
         showProgressBar: true
       })}
-
-    
-  
-
   employeDetails(id:number){
     this.router.navigate(['details',id]);
   }
   updateEmploye(id:number){
     this.router.navigate(['update',id]);
   }
+  updateMotPass(id:number){
+    this.router.navigate(['updatepwd',id]);
+
+  }
   gotoList(){
     this.router.navigate(['gestionComptes']);
   }
-
-
-
   setDefaultValues() {
     this.employe.active = true;
-   
  }
- 
- onChangeBureau(event){
-   
+ onChangeBureau(event){ 
   this.employe.bureau = {idBureau:this.selectedBureauId,nomBureau:''};
- 
 }
 onChangeRole(event){
-   
   this.employe.role = {idRole:this.selectedRoleId,nomRole:''};
- 
 }
 onChangeDepartement(event){
   this.employe.departement = {idDepartement:this.selectedDepartementId,nomDepartement:''};
 }
 onChangeEquipe(event){
-   
   this.employe.equipe = {idEquipe:this.selectedEquipeId,nomEquipe:'',specialite:''};
-
 }
 OnSelectFile(event){
   if (event.target.files.length > 0)
   {
     const file = event.target.files[0];
  console.log(file);
-
     this.userFile=file;
     console.log(this.userFile);
     var mineType = event.target.files[0].type;
@@ -240,7 +206,6 @@ OnSelectFile(event){
       this.message="on supporte que les images";
       return;
     }
-  
     var reader = new FileReader();
     this.imagePath=file;
     reader.readAsDataURL(file);

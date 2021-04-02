@@ -36,11 +36,7 @@ export class ReunionService {
     return this.http.get<Reunion[]>(AppSettings.APP_URL+"/reunions/reunionsType/"+type)
 
   }
-  /*findAllTachesprint(idSprint:number){
-    return this.http.get<Tache[]>(AppSettings.APP_URL+"/taches/sprint/"+idSprint)
-  }*/
-  
-  
+   
   createReunion(reunion:Reunion){
     return this.http.post<Reunion>(AppSettings.APP_URL+"/reunions/",reunion)
     .pipe(
@@ -53,11 +49,16 @@ export class ReunionService {
   updateRieunion(idReunion:number,value:any){
    
    return this.http.put<Reunion>(AppSettings.APP_URL+"/reunions/updateReunion/"+idReunion,value)
+   .pipe(
+    tap(() =>  {
+      this._refresh.next();
+    })
+  );
+
   }
   deleteReunion(idReunion:number){
     return this.http.delete(AppSettings.APP_URL+"/reunions/"+idReunion)
     
   }
-
 
 }

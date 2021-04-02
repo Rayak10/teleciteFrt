@@ -59,6 +59,7 @@ export class GestionReunionComponent implements OnInit {
   loading: boolean = false;
   messageS:String="Réunion ajoutée avec succèes";
   messageE:String="Ajout du réunion est échouée";
+  reunionForm;
   constructor(config: NgbTimepickerConfig ,private runionservice:ReunionService,private employeservice:EmployeService,
     private equipeservice:EquipeService,private departementservive:DepartementService,
     private formBuilder:FormBuilder,private router:Router, private _service: NotificationsService) {
@@ -69,7 +70,7 @@ export class GestionReunionComponent implements OnInit {
       checkArray:this.formBuilder.array([])
     })
    }
-   reunionForm;
+   
   ngOnInit()  {
 
 this.exform = new FormGroup({

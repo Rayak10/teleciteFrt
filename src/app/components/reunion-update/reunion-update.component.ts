@@ -13,6 +13,7 @@ import { Observable } from 'rxjs';
 import { Employe } from 'src/app/models/employe';
 import { NotificationsService } from 'angular2-notifications';
 import { Validators } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-reunion-update',
@@ -50,7 +51,9 @@ export class ReunionUpdateComponent implements OnInit {
   heurfin:NgbTimeStruct;
   form: FormGroup;
   exform:FormGroup;
-
+  loading: boolean = false;
+  reunionForm;
+  submitted = false;
   constructor(private reunionservice:ReunionService,config: NgbTimepickerConfig ,
     private employeservice:EmployeService,private equipeservice:EquipeService,
     private departementservive:DepartementService,private route: ActivatedRoute,
@@ -141,26 +144,30 @@ this.mnt2=control1.value.minute;
       
                   this.departementArray.push(...data);}
     );
-    console.log("efsef'rttttttttttttttttttttttttttttttttt"+JSON.stringify(this.departementArray)); 
 this.typeArray=["Réunion administratif","Reunion Scrum"]
 
   }
 
+  onSubmit(reunionForm:NgForm){
+    this.loading = true;
+    this.submitted = true;
+    this.updateReunion();
+}
 
-
-  updateReunion(){
-    console.log("efsef'rttttttttttttttttttttttttttttttttt"+JSON.stringify(this.reunion.employes)); 
+  updateReunion(){ 
     this.reunion.dateDebut = new Date(new Date(this.reunion.dateDebut).getTime() - this.offset);
     this.reunion.dateFin = new Date(new Date(this.reunion.dateFin).getTime() - this.offset);
     this.reunionservice.updateRieunion(this.id,this.reunion)
-    .subscribe(data=> this.onSuccess(this.messageS)
-  ,error=>this.onErorr(this.messageE));
+    .subscribe(data=> {this.onSuccess(this.messageS);
+      this.loading = false;
+      }
+        ,error=>{this.onErorr(this.messageE);
+           this.loading = false;})
+        
     
   }
 
-  onSubmit(){
-this.updateReunion()
-}
+ 
 onSuccess(messageS){
   this._service.success('Success',messageS, {
     position: ['bottom','right'],
@@ -186,8 +193,6 @@ onChange1(event){
 
  
   onChange2(event){
-   //// this.fetchCheckedIDs()
-
     $("#leg1").hide(1000);
     $("#tab1").hide(1500);
 this.employeservice.findAllEmployesDepartement(this.selectedDepartementId).subscribe(

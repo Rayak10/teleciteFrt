@@ -183,31 +183,11 @@
     </select>
     <p class="help-block"></p>
         </div>
-        <div class="col col-md-2">
-        <label class="control-label">Mot de passe :</label>
-        </div>
-        <div class="col col-md-4">
-          <div class="input-group">
-            <span class="input-group-addon">*</span>         
-           <input   type="password" autocomplete="off" id="employe-password" formControlName="password" [(ngModel)]="employe.password" name="password" autocomplete="off"  class="form-control" placeholder="tapez mot de passe" >
-          </div>
-          <small *ngIf="exform.get('password').errors?.minlength && exform.get('password').touched" class="textdanger">le mot de passe doit contenir au moins 8 caractères!</small>
-          <small  *ngIf="exform.get('password').errors?.required && exform.get('password').touched" class="textdanger">Mot de passe est obligatoire</small>  
-        </div>
-        <div class="col col-md-2">
-        <label class="control-label">Confirmation mot de passe :</label>
-        </div>
-        <div class="col col-md-4">
-          <div class="input-group">
-            <span class="input-group-addon"> * </span>
-            <input   type="password"  formControlName="confirme" id="employe-confirmationpassword" autocomplete="off" name="password" class="form-control" placeholder="confirmez mot de passe" >          
-          </div>
-          <small *ngIf="exform.get('confirme').errors?.required && exform.get('confirme').touched" class="textdanger">Confirmation mot de passe est obligatoire</small>  
-          <small *ngIf="exform.get('confirme').valid && exform.get('confirme').value !=exform.get('password').value" class="textdanger">Le mot de passe saisi ne correspond pas</small>  
-        </div>
         <br>
         <br>
-      <br>
+        <br>
+        <br>
+        <br>
       </div>
       <div class="row">
         <div class="col col-md-2">
@@ -224,7 +204,7 @@
       </div>
       <label class="col-md-3 control-label" for="btn-save"></label>     
           <div class="col-md-2">
-           <button id="btn-save" name="btn-save" [disabled]="exform.invalid || exform.get('confirme').value !=exform.get('password').value" class="btn btn-success" (click)="updateEmploye(getCompteForm)">Modifier les informations</button>
+           <button id="btn-save" name="btn-save" [disabled]="exform.invalid" class="btn btn-success" (click)="updateEmploye(getCompteForm)">Modifier les informations</button>
           </div>
       </div>
 </form>

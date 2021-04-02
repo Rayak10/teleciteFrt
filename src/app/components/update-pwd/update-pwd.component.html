@@ -1,0 +1,40 @@
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="col-md-16" *ngIf="roleE=='ROLE_DRH'">	           
+    <fieldset>
+    <legend  class="navbar-brand titre"  >Changer mot de passe </legend>
+    <form #getpwdForm="ngForm" [formGroup]="exform" (ngSubmit)="onSubmit(getpwdForm)">
+        <div class="col col-md-2">
+            <label class="control-label">Mot de passe :</label>
+            </div>
+            <div class="col col-md-4">
+              <div class="input-group">
+                <span class="input-group-addon">*</span>
+                <input   type="password"  formControlName="password"  [(ngModel)]="employe.password" class="form-control"
+                 placeholder="tapez mot de passe">
+                 <small *ngIf="exform.get('password').errors?.minlength && exform.get('password').touched" class="textdanger">le mot de passe doit contenir au moins 8 caractères!</small>
+                 <small  *ngIf="exform.get('password').errors?.required && exform.get('password').touched" class="textdanger">Mot de passe est obligatoire</small>
+                </div>
+            </div>
+            <div class="col col-md-2">
+            <label class="control-label">Confirmation mot de passe :</label>
+            </div>
+            <div class="col col-md-4">
+              <div class="input-group">
+                <span class="input-group-addon"> * </span>
+                <input   type="password"  formControlName="confirme" id="employe-confirmationpassword" autocomplete="off" name="password" class="form-control" placeholder="confirmez mot de passe" >
+                <small *ngIf="exform.get('confirme').errors?.required && exform.get('confirme').touched" class="textdanger">Confirmation mot de passe est obligatoire</small>  
+                <small *ngIf="exform.get('confirme').valid && exform.get('confirme').value !=exform.get('password').value" class="textdanger">Le mot de passe saisi ne correspond pas</small>  
+              </div> 
+            </div>
+    <label class="col-md-10 control-label" for="btn-save"></label>     
+    <div class="col-md-1">
+     <button id="btn-save" name="btn-save" [disabled]="exform.invalid || exform.get('confirme').value !=exform.get('password').value" class="btn btn-success" (click)="updateEmploye(getCompteForm)"> Modifier mot de passe </button>
+    </div>
+    </form>
+    </fieldset>
+    </div>

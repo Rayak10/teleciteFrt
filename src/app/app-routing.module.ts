@@ -37,6 +37,7 @@ import { AjoutSprintComponent } from './components/ajout-sprint/ajout-sprint.com
 import { AjoutcommentaireComponent } from './components/ajoutcommentaire/ajoutcommentaire.component';
 import { UpdateCommentaireComponent } from './components/update-commentaire/update-commentaire.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { UpdatePWDComponent } from './components/update-pwd/update-pwd.component';
 
 const routes: Routes = [
  
@@ -46,6 +47,9 @@ const routes: Routes = [
   } },
   {path: 'update/:id', component: EmployeUpdatComponent, canActivate: [RoleGuard], data: { 
     expectedRole: 'ROLE_DRH,ROLE_SCRUM_MASTER'
+  } },
+  {path: 'updatepwd/:id', component: UpdatePWDComponent, canActivate: [RoleGuard], data: { 
+    expectedRole: 'ROLE_DRH'
   } },
   {path: 'details/:id', component: EmployeDetailleComponent, canActivate: [RoleGuard], data: { 
     expectedRole: 'ROLE_SCRUM_MASTER,ROLE_DRH,ROLE_PRODUCT_OWNER,ROLE_EMPLOYE,ROLE_SCRUM_TEAM_MEMBER'

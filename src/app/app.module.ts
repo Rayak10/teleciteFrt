@@ -60,6 +60,9 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
 import {MatButtonModule} from '@angular/material/button';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { UpdatePWDComponent } from './components/update-pwd/update-pwd.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -97,6 +100,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     UpdateCommentaireComponent,
     ConfirmDialogComponent,
     NotFoundComponent,
+    UpdatePWDComponent,
     
   ],
   imports: [
@@ -122,7 +126,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     NgApexchartsModule,
     ReactiveFormsModule,
     MatButtonModule,
-    SimpleNotificationsModule .forRoot()
+    SimpleNotificationsModule .forRoot(),
+    MatProgressSpinnerModule
     
   ],
   providers: [

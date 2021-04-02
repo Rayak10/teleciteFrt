@@ -4,7 +4,7 @@
 <!-- FORM  -->	    
  <div class="container">	  
 
- <form   [formGroup]="exform"  (ngSubmit)="onSubmit()" >
+ <form   [formGroup]="exform" #reunionForm="ngForm"  (ngSubmit)="onSubmit()" >
 
 <legend  class="navbar-brand titre"  > Gestion des reunions </legend>
 <!-- Text input-->
@@ -155,31 +155,16 @@
       </div>
       </div>
       <div class="col col-lg-1 pull-right">
-        <button id="btn-save" name="btn-save" [disabled]=" exform.get('nom').invalid || exform.get('dateFin').invalid
-        || exform.get('dateDebut').invalid || exform.get('contexte').invalid ||(reunion.type=='Reunion_Scrum' && reunion.equipe==null) ||
-        (reunion.type=='Reunion_Administratif' && reunion.employes.length < 2)"
+        <button mat-raised-button  [class.spinner]="loading" [disabled]=" exform.get('nom').invalid || exform.get('dateFin').invalid
+        || exform.get('dateDebut').invalid  || exform.get('contexte').invalid ||(reunion.type=='Reunion_Scrum' && reunion.equipe==null) ||
+        (reunion.type=='Reunion_Administratif' && reunion.employes.length==1) || loading"
           type="submit" class="btn btn-success">Modifier</button>
        </div>
       <div class="col col-lg-1 pull-right">
-        <button id="btn-retour" name="btn-retour" (click)="gotoList()"class="btn btn-success">Retour</button>
+        <button id="btn-retour" name="btn-retour" [disabled]="loading" (click)="gotoList()"class="btn btn-success">Retour</button>
       </div>
   </form>
-<!--
-    
-    <hr>
 
-
-
-
-    
-
-<hr>
--->
-
-<!-- Button -->
-
-
- 
      
      
 

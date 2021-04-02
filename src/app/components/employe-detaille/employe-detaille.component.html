@@ -18,7 +18,6 @@
           </div>
           </div>
 <form>
-        <!-- Text input-->
         <div class="row">
           <div class="col col-md-2">
           <label class="control-label" >Nom :</label> 
@@ -34,8 +33,7 @@
           <input id="employe-prenom" disabled required [(ngModel)]="employe.prenomEmploye" autocomplete="off" name="prenomEmploye" type="text" placeholder="tapez le prenom de l'employé" class="form-control input-md">
           <span class="help-block"></span>  
           </div>
-        </div>
-        
+        </div>        
         <div class="row">
           <div class="col col-md-2">
           <label class="control-label" >Date naissance :</label>  
@@ -67,8 +65,7 @@
              [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" >
           <span class="help-block"></span>  
           </div>
-        </div>
-        
+        </div>       
         <div class="row">
           <div class="col col-md-2">
           <label class="control-label">Post :</label>  
@@ -92,11 +89,9 @@
                 {{r.nomRole}}
               </option>
             </select>
-            <p class="help-block">{{role | json}}</p>
-        
+            <p class="help-block">{{role | json}}</p>        
             </div>
         </div>
-        
         <div class="row">
           <div class="col col-md-2">
           <label class="control-label">Matricule :</label>
@@ -115,7 +110,6 @@
             <p class="help-block"></p>
           </div>
         </div>
-        
         <div class="row"> 
            <div class="col col-md-2">
               <label class="control-label">Bureau :</label>
@@ -126,8 +120,7 @@
              class="form-control "
               id="field_bureau"
               disabled
-                name="bureau" [(ngModel)]="employe.bureau.idBureau"
-                >
+                name="bureau" [(ngModel)]="employe.bureau.idBureau">
               <option  *ngFor="let b of bureauArray" [value]="b.idBureau">
                 {{b.nomBureau}}
               </option>
@@ -144,8 +137,7 @@
                 id="field_departement"
                   name="departement" 
                   disabled
-                  [(ngModel)]="employe.departement.idDepartement"
-                  >
+                  [(ngModel)]="employe.departement.idDepartement">
                 <option  *ngFor="let b of departementArray" [value]="b.idDepartement">
                   {{b.nomDepartement}}
                 </option>
@@ -153,10 +145,6 @@
               <p class="help-block">{{departement | json}}</p>
         </div>
         </div>
-        
-        
-        
-        
         <div class="row"> 
           <div class="col col-md-2">
           <label class="control-label">Equipe :</label>
@@ -167,33 +155,25 @@
              class="form-control "
               id="field_equipe"
               disabled
-                name="equipe" [(ngModel)]="employe.equipe.idEquipe"
-              >
+                name="equipe" [(ngModel)]="employe.equipe.idEquipe">
               <option  *ngFor="let e of equipeArray" [value]="e.idEquipe">
                 {{e.nomEquipe}}
               </option>
             </select>
             <p class="help-block">{{equipe | json}}</p>
             </div>
-            <div class="col col-md-2">
-        
+            <div class="col col-md-2">       
           <label class="control-label">Email :</label>
             </div>
             <div class="col col-md-4">
               <div class="input-group">
               <span class="input-group-addon">@</span>
               <input id="employe-email" disabled required [(ngModel)]="employe.email"  name="email" autocomplete="off"class="form-control" placeholder="tonnom@tondomain.tn" type="email">
-            </div>
-            
-          </div>
-           
-          
-        </div>
-        
-        <div class="row"> 
-         
-          <div class="col col-md-2">
-        
+            </div>            
+          </div>                    
+        </div>       
+        <div class="row">          
+          <div class="col col-md-2">       
           <label class="control-label">Client status :</label>
           </div>
           <div class="col col-md-4">
@@ -204,21 +184,15 @@
         name="active"
          [(ngModel)]="defaultChoice"
          disabled
-         (change)="onEtatSelected($event)">
-         
+         (change)="onEtatSelected($event)">       
         <option *ngFor='let etat of etatArray' [value]="etat.idEtat"> {{etat.nomEtat}}</option>
       </select>
       <p class="help-block"></p>
           </div>
           <div class="col col-md-5">
             <label class="control-label">  </label>
-
-          </div>
-          <div class="col-md-1">
-            <button id="btn-retour" name="btn-retour" class="btn btn-success" (click)="gotoList()">Retour</button>
-           </div>
+          </div>         
         </div>
-        
     </form>
 </fieldset>
 </div> 

@@ -61,7 +61,7 @@ export class EmployeUpdatComponent implements OnInit {
     this.employeservice.refresh.subscribe(()=>{
       this.reloadData();
           });
-          
+           
     this.exform = new FormGroup({
       'prenom' : new FormControl(null,Validators.required),
       'naissance' : new FormControl(null,Validators.required),
@@ -77,8 +77,6 @@ export class EmployeUpdatComponent implements OnInit {
       'salaire' : new FormControl(null,Validators.required),
       'status' : new FormControl(null,Validators.required),
       'equipe' : new FormControl(null,Validators.required),
-      'password' : new FormControl('', [Validators.required,Validators.minLength(8)]),
-      'confirme' : new FormControl(null,Validators.required),
     })
     
     this.roleE=localStorage.getItem('role')

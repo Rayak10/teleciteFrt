@@ -60,7 +60,6 @@ return this.http.get<Employe[]>(AppSettings.APP_URL+"/employes/AllActives/"+acti
     return this.http.put(AppSettings.APP_URL+"/employes/updateProfil", formData);
   }
   saveEmployeProfile(formData: FormData): Observable<any> {
-    // let headers = createAuthorizationHeader();
     let headers= new HttpHeaders({
     'Authorization': "Bearer "+localStorage.getItem('token')
   });
@@ -86,7 +85,6 @@ updateProfilRoleScrummaster (idEmploye:number,value:any){
  );
 }
   updateEmploye (idEmploye:number,value:any){
-   
    return this.http.put<Employe>(AppSettings.APP_URL+"/employes/update/"+idEmploye,value)
    .pipe(
     tap(() =>  {
@@ -94,7 +92,15 @@ updateProfilRoleScrummaster (idEmploye:number,value:any){
     })
   );
 }
-  
+updatepwd (idEmploye:number,value:any){
+   
+  return this.http.put<Employe>(AppSettings.APP_URL+"/employes/updatepwd/"+idEmploye,value)
+  .pipe(
+   tap(() =>  {
+     this._refresh.next();
+   })
+ );
+}
 
   login(email:string,password:string){
     return this.http.post<Employe>(AppSettings.APP_URL + "/employes/login?email=" + email + "&password=" + password, null);
