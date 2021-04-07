@@ -162,7 +162,8 @@
           <td>{{item.nomEmploye}}</td>
           <td>{{item.prenomEmploye}}</td>
           <td>{{item.email}}</td>
-          <td>{{item.active}}</td> 
+          <td *ngIf="item.active==true">Active</td> 
+          <td *ngIf="item.active==false">Inactive</td>
           <td>     
      <input type="checkbox"  [(ngModel)]="item.isChecked"  (change)="changeSelection()">    
           </td>

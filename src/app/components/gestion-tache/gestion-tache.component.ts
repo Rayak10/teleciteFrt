@@ -28,6 +28,7 @@ export class GestionTacheComponent implements OnInit {
   successMessage: string;
   etatArray= [];
   tache:Tache=new Tache();
+  userstorie:Userstory=new Userstory();
   userstory:Userstory=new Userstory();
   id:number;
   tacheArray= [];
@@ -45,6 +46,11 @@ export class GestionTacheComponent implements OnInit {
       'etat' : new FormControl(),
          })
       this.id=this.route.snapshot.params['id'];
+      this.userstoryservice.findUserstoryById(this.id).subscribe(
+        resp=>{this.userstorie = resp},
+        error => alert('problem!!!')
+
+      )
     this.etatArray=["","To do","Doing","Done"]
     this.userstoryservice.findUserstoryById(this.id).subscribe(
       response =>{

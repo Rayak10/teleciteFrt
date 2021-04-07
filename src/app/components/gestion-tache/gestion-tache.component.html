@@ -9,8 +9,21 @@
 <!-- Form Name -->
 
 <legend  class="navbar-brand titre"  > Gestion des tâches </legend>
+<div class="row">
+  <div class="col col-md-2">
+
+<label class="control-label">User Storie :</label>
+</div>
+<div class="col col-md-8">
+    <input  id="tache-description" disabled [(ngModel)]="userstorie.libelleUserStory" name="userStory-name" type="text"  class="form-control input-md"> 
+    <p class="help-block"></p>
+    </div>
+
+</div>
 <form #tacheForm="ngForm" [formGroup]="exform"  (ngSubmit)="onSubmit(tacheForm)">
 <!-- Text input-->
+
+
 <div class="row">
   <div class="col col-md-2">
 

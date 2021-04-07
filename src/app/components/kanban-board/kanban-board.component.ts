@@ -182,7 +182,7 @@ if(todo.etatrow=="Todo"){
       this.userstoryservice.updateSprintUserStory(todo.idUserStory,this.selectedSprintId,null) .subscribe(
            data=> console.log(data),error=>console.log(error))   
 
-           this.tacheservice.findAllTachesStoriesEtat(todo.idUserStory,"Todo")
+           this.tacheservice.findAllTachesStoriesEtat(todo.idUserStory,"To do")
            .subscribe(data=>{
              this.todos.push(...data);  
            }, error=>console.log(error));  

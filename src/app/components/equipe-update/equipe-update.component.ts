@@ -39,13 +39,10 @@ export class EquipeUpdateComponent implements OnInit {
     } 
   
     updateEquipe(){
-  this.equipeservice.updateEquipe(this.id , this.equipe )
+  this.equipeservice.updateEquipe(this.id , this.equipe)
   .subscribe(data => this.onSuccess(this.messageS));
-  
-   // this.userstory=new Userstory();
-    console.log("aaaaaaaaaaaaaa"+this.equipe)
-   
-}
+  console.log("aaaaaaaaaaaaaa"+this.equipe)
+   }
 onSubmit(){
   this.updateEquipe();
 }

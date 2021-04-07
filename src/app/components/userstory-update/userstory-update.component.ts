@@ -33,7 +33,7 @@ export class UserstoryUpdateComponent implements OnInit {
     this.exform = new FormGroup({
       'userStory' : new FormControl('',Validators.required),
       'priorite' : new FormControl('',[Validators.required,Validators.pattern("^(1|2|3|4)$")]),
-      'complexite' : new FormControl('',[Validators.required,Validators.pattern("^(1|2|3|4|5|8|13|40|100)$")]),
+      'complexite' : new FormControl('',[Validators.required,Validators.pattern("^(1|2|3|4|5|8|13|20|40|100)$")]),
       'nomProjet' : new FormControl('',Validators.required),
 
     })

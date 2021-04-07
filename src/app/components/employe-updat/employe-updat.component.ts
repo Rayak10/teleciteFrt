@@ -58,6 +58,7 @@ export class EmployeUpdatComponent implements OnInit {
      private bureauservice:BureauService, private _service: NotificationsService) { }
   
   ngOnInit() {
+    this.reloadData();
     this.employeservice.refresh.subscribe(()=>{
       this.reloadData();
           });

@@ -242,7 +242,8 @@
                 <td>{{employe.nomEmploye}}</td>
                 <td>{{employe.prenomEmploye}}</td>
                 <td>{{employe.email}}</td>
-                <td>{{employe.active}}</td>
+                <td *ngIf="employe.active==true">Active</td> 
+          <td *ngIf="employe.active==false">Inactive</td>
                 <td>
                     <a title="Les détails de l'employé" class="btn btn-default btn-sm "(click)="employeDetails(employe.idEmploye)"> <i class="glyphicon glyphicon-eye-open text-primary"  ></i> </a> 
                     <a title="Modifier ces informations" class="btn btn-default btn-sm "(click)="updateEmploye(employe.idEmploye)"> <i class="glyphicon glyphicon-edit text-primary"></i> </a>                   
