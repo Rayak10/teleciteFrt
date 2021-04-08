@@ -62,7 +62,6 @@ export class ProjetUpdateComponent implements OnInit {
                   this.projet.dateDebut = new Date(new Date(this.projet.dateDebut));
                   this.projet.dateFin = new Date(new Date(this.projet.dateFin));
             
-      console.log("projetUpdate: "+JSON.stringify(this.projet))
     }, error=>console.log(error));
     } 
   

@@ -10,6 +10,7 @@ import { FormGroup } from '@angular/forms';
 import { FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { NotificationsService } from 'angular2-notifications';
+import { DialogvalidationService } from 'src/app/services/validation/dialogvalidation.service';
 
 @Component({
   selector: 'app-ajout-sprint',
@@ -35,7 +36,7 @@ export class AjoutSprintComponent implements OnInit {
   messageS:String="Sprint ajouté avec succès";
   messageE:String="Ajout du projet est échoué";
   constructor(private sprintservice:SprintService,private projetservice:ProjetService,private formBuilder:FormBuilder,
-    private router:Router, private _service: NotificationsService) { }
+    private router:Router, private _service: NotificationsService ,private dialogValidation:DialogvalidationService) { }
 
   ngOnInit()  { 
     
@@ -58,7 +59,7 @@ export class AjoutSprintComponent implements OnInit {
     
     
   
-this.etatArray=["","Non terminé","Terminé"]
+this.etatArray=["Non terminé","Terminé"];
 this.projetservice.findAllProjets().subscribe(
   data => {console.log("data from find all projet:"+JSON.stringify(data));   
   
@@ -143,8 +144,9 @@ onChange1(event){
   );
 }
 
-/*toggleBPList(){
-  this.showBPList = ! this.showBPList;
-  console.log(this.showBPList+"*****");
-}*/
+onChangeEtat(event){
+  if(this.sprint.etatSprint=='Terminé'){
+  this.dialogValidation.openConfirmDialog()
+}
+}
 }

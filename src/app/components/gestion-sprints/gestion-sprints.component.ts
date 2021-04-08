@@ -10,6 +10,7 @@ import { AffectationTachesComponent } from '../affectation-taches/affectation-ta
 import { AjoutcommentaireComponent } from '../ajoutcommentaire/ajoutcommentaire.component';
 import { MatDialog } from '@angular/material';
 import { DialogConfirmService } from 'src/app/services/confirm/dialog-confirm.service';
+import { DialogvalidationService } from 'src/app/services/validation/dialogvalidation.service';
 
 @Component({
   selector: 'app-gestion-sprints',

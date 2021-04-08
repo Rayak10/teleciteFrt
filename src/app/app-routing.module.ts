@@ -38,6 +38,7 @@ import { AjoutcommentaireComponent } from './components/ajoutcommentaire/ajoutco
 import { UpdateCommentaireComponent } from './components/update-commentaire/update-commentaire.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { UpdatePWDComponent } from './components/update-pwd/update-pwd.component';
+import { ValidationSprintComponent } from './components/validation-sprint/validation-sprint.component';
 
 const routes: Routes = [
  
@@ -126,6 +127,7 @@ const routes: Routes = [
   {path: 'ajoutSprint',component :AjoutSprintComponent ,canActivate: [AuthGuard], data: { 
     expectedRole: 'ROLE_PRODUCT_OWNER'
   } },
+  
   {path: 'ajoutCommentaire',component :AjoutcommentaireComponent,canActivate: [AuthGuard], data: { 
     expectedRole: 'ROLE_SCRUM_MASTER,ROLE_PRODUCT_OWNER,ROLE_SCRUM_TEAM_MEMBER'
   } },

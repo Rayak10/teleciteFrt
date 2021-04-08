@@ -1,0 +1,29 @@
+
+<div>
+    <form [formGroup]="exform" >
+<div class="content-container form-group">
+    <mat-icon id="close-icon" (click)="closeDialog()"> close</mat-icon>
+<p>répondre à toutes les questions ?</p>
+</div>
+<div class="content-container">
+
+  <input type="checkbox" formControlName="q1" id="atteint" name="atteint"
+         >
+  <label for="atteint">l'objective de ce sprint est atteint ?</label><hr>
+  <small *ngIf="exform.get('q1').errors?.required" class="textdanger"> Réponse obligatoire</small>
+
+</div>
+
+<div class="content-container">
+
+  <input type="checkbox" formControlName="q2" id="review" name="review">
+  <label for="review">Réunion sprint review est faite ? </label><hr>
+  
+  <small *ngIf="exform.get('q2').errors?.required " class="textdanger"> Réponse obligatoire</small>
+
+</div>
+    
+<button mat-flat-button id="no-button"[mat-dialog-close]="false">Non</button>
+    <button mat-flat-button [disabled]="exform.invalid" id="yes-button"[mat-dialog-close]="true">Oui</button>
+</form>
+</div>

@@ -62,6 +62,7 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { UpdatePWDComponent } from './components/update-pwd/update-pwd.component';
+import { ValidationSprintComponent } from './components/validation-sprint/validation-sprint.component';
 
 @NgModule({
   declarations: [
@@ -101,6 +102,7 @@ import { UpdatePWDComponent } from './components/update-pwd/update-pwd.component
     ConfirmDialogComponent,
     NotFoundComponent,
     UpdatePWDComponent,
+    ValidationSprintComponent,
     
   ],
   imports: [
@@ -135,6 +137,7 @@ import { UpdatePWDComponent } from './components/update-pwd/update-pwd.component
 
   ],
   bootstrap: [AppComponent],
-  entryComponents:[AffectationTachesComponent,AjoutcommentaireComponent,UpdateCommentaireComponent,ConfirmDialogComponent]
+  entryComponents:[AffectationTachesComponent,AjoutcommentaireComponent,UpdateCommentaireComponent,
+    ConfirmDialogComponent,ValidationSprintComponent]
 })
 export class AppModule { }

@@ -9,6 +9,7 @@ import { FormGroup } from '@angular/forms';
 import { FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { NotificationsService } from 'angular2-notifications';
+import { DialogvalidationService } from 'src/app/services/validation/dialogvalidation.service';
 
 @Component({
   selector: 'app-sprint-update',
@@ -26,7 +27,7 @@ export class SprintUpdateComponent implements OnInit {
   messageS:String="Sprint modifié avec succès";
   messageE:String="Modification du sprint est échoué";
   constructor(private sprintservice:SprintService,private route: ActivatedRoute, private router: Router,
-    private projetservice:ProjetService,private _service: NotificationsService) { }
+    private projetservice:ProjetService,private _service: NotificationsService ,private dialogValidation:DialogvalidationService) { }
   
   ngOnInit() {
     this.exform = new FormGroup({
@@ -38,7 +39,8 @@ export class SprintUpdateComponent implements OnInit {
       'projet' : new FormControl(null,Validators.required)
     
     })
-    this.etatArray=["","Non terminé","Terminé"]
+    this.etatArray=["Non terminé","Terminé"]
+    
     this.sprint=new Sprint();
     
     this.id=this.route.snapshot.params['id'];
@@ -58,18 +60,16 @@ export class SprintUpdateComponent implements OnInit {
     
 updateSprint(){
   this.sprintservice.updateSprint(this.id , this.sprint )
-  .subscribe(data=> this.onSuccess(this.messageS)
+  .subscribe(data=>{this.onSuccess(this.messageS)}
   ,error=>this.onErorr(this.messageE));
 }
 
 onSubmit(){
-  this.updateSprint();
 }
 gotoList(){
   this.router.navigate(['gestionSprints']);
 }
 projetDetails(id:number){
-  this.updateSprint();
 
   this.router.navigate(['projets/details',id]);
 }
@@ -90,6 +90,12 @@ onSuccess(messageS){
       animate: 'fade',
       showProgressBar: true
     })}
-
+    onChangeEtat(event){
+      if(this.sprint.etatSprint=='Terminé'){
+      this.dialogValidation.openConfirmDialog()
+    }
+   
+  
+    }
 
 }

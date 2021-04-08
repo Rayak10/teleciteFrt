@@ -17,7 +17,8 @@
          type="text" 
          class="form-control "
           id="field_sprint"
-            name="sprintEtat" [(ngModel)]="sprint.etatSprint">
+            name="sprintEtat" [(ngModel)]="sprint.etatSprint"
+            (change)="onChangeEtat($event.target.selectedIndex)">
           <option *ngFor='let etat of etatArray'> {{etat}} </option>
         </select>
         <small *ngIf="exform.get('etat').invalid && exform.get('etat').touched" class="textdanger">Sélectionner une état</small>
