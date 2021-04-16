@@ -9,7 +9,7 @@
 
   <input type="checkbox" formControlName="q1" id="atteint" name="atteint"
          >
-  <label for="atteint">Réunion  Sprint planing faite ?</label><hr>
+  <label for="atteint">UserStorie développer ?</label><hr>
   <small *ngIf="exform.get('q1').errors?.required" class="textdanger"> Réponse obligatoire</small>
 
 </div>
@@ -17,7 +17,7 @@
 <div class="content-container">
 
   <input type="checkbox" formControlName="q2" id="review" name="review">
-  <label for="review">Réunion Sprint review faite ? </label><hr>
+  <label for="review">UserStorie docummenter ? </label><hr>
   
   <small *ngIf="exform.get('q2').errors?.required " class="textdanger"> Réponse obligatoire</small>
 
@@ -25,11 +25,19 @@
 <div class="content-container">
 
   <input type="checkbox" formControlName="q3" id="pers" name="pers">
-  <label for="pers">Réunion Sprint rétrospective faite ? </label><hr>
+  <label for="pers">UserStorie tester ? </label><hr>
   
   <small *ngIf="exform.get('q3').errors?.required " class="textdanger"> Réponse obligatoire</small>
 
 </div>
+<div class="content-container">
+
+    <input type="checkbox" formControlName="q4" id="pers" name="pers">
+    <label for="pers">UserStorie intégrer ? </label><hr>
+    
+    <small *ngIf="exform.get('q4').errors?.required " class="textdanger"> Réponse obligatoire</small>
+  
+  </div>
 <button mat-flat-button id="no-button"[mat-dialog-close]="false">Non</button>
     <button mat-flat-button [disabled]="exform.invalid" id="yes-button"[mat-dialog-close]="true">Oui</button>
 </form>

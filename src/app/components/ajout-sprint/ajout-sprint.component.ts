@@ -42,7 +42,6 @@ export class AjoutSprintComponent implements OnInit {
     
     this.exform = new FormGroup({
       'nom' : new FormControl(null,Validators.required),
-      'etat' : new FormControl(null,Validators.required),
       'dateDebut' : new FormControl(null,Validators.required),
       'dateFin' : new FormControl(null,Validators.required),
       'description' : new FormControl(null,Validators.required),
@@ -96,6 +95,7 @@ save() {
   console.log("sprint: "+JSON.stringify(this.sprint));
   this.sprint.dateDebut = new Date(new Date(this.sprint.dateDebut).getTime() - this.offset);
   this.sprint.dateFin = new Date(new Date(this.sprint.dateFin).getTime() - this.offset);
+  this.sprint.etatSprint='Non terminé';
   this.sprintservice.createSprint(this.sprint)
     .subscribe(data =>this.onSuccess(this.messageS), error => this.onErorr(this.messageE));
   this.sprint= new Sprint();

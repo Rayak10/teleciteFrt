@@ -94,7 +94,7 @@
                 <th scope="col" width=10%>Priorite</th>
                 <th scope="col" width=10%>Complexite</th>
                 <th scope="col" width=10%>Sprint</th>
-                <th scope="col" width=10%>Projet</th>
+                <th scope="col" width=10%>Etat</th>
                 <th *ngIf="roleE=='ROLE_SCRUM_TEAM_MEMBER'" scope="col" width=10%> tâches </th>
                 <th scope="col" width=10%>Actions</th>
             </tr>      
@@ -105,7 +105,7 @@
                 <td>{{userstory.priorite}}</td>
                 <td>{{userstory.complexite}}</td>
                 <td>{{userstory.sprint.nomSprint}}</td>
-                <td>{{userstory.sprint.projet.nomProjet}}</td>
+                <td>{{userstory.etat}}</td>
                 <td *ngIf="roleE=='ROLE_SCRUM_TEAM_MEMBER'" >
                   <a   title="ajouter les tâches pour un user Story" class="btn btn-default btn-sm "(click)="gestionTaches(userstory.idUserStory)"><i class="fas fa-tasks lime"></i> </a> 
                 </td>

@@ -21,17 +21,30 @@
 
 <div class="form-group">
   <label class="col-md-2 control-label">Priorité :</label>
-  <div class="col-md-4">
+  <div class="col-md-2">
     <input id="priorite-name" formControlName="priorite"  [(ngModel)]="userstory.priorite" type="number" placeholder="choisir un nembre sur 5" class="form-control input-md" >
     <small *ngIf="exform.get('priorite').errors?.required && exform.get('priorite').touched" class="textdanger">Sélectionner la  priorité</small>
     <small *ngIf="exform.get('priorite').errors?.pattern && exform.get('priorite').touched" class="textdanger">La valeur entre 1 et 4</small>
     <p class="help-block"></p>
     </div>
   <label class="col-md-2 control-label" >Complexité  :</label>  
-  <div class="col-md-4">
+  <div class="col-md-2">
     <input id="complexite-name" formControlName="complexite"  [(ngModel)]="userstory.complexite"  type="number" placeholder="choisir un nembre sur 5" class="form-control input-md" >
     <small *ngIf="exform.get('complexite').errors?.required && exform.get('complexite').touched" class="textdanger">Sélectionner taux de complexité</small>
     <small *ngIf="exform.get('complexite').errors?.pattern && exform.get('complexite').touched" class="textdanger">La valeur doit appartient à la suite fibonacci</small>
+
+    <span class="help-block"></span>  
+  </div>
+  <label class="col-md-2 control-label" >Etat  :</label>  
+  <div class="col-md-2">
+    <select  formControlName="etat"
+    type="text" 
+    class="form-control "
+     id="field_userstory"
+       name="userstoryEtat" [(ngModel)]="userstory.etat"
+       (change)="onChangeEtat($event.target.selectedIndex)">
+     <option *ngFor='let etat of etatArray'> {{etat}} </option>
+   </select>    <small *ngIf="exform.get('etat').errors?.required && exform.get('etat').touched" class="textdanger">Sélectionner l'état </small>
 
     <span class="help-block"></span>  
   </div>

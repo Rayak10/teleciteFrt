@@ -20,6 +20,8 @@ export class ValidationSprintComponent implements OnInit {
     this.exform = new FormGroup({
       'q1' : new FormControl(null,Validators.requiredTrue),
       'q2' : new FormControl(null,Validators.requiredTrue),
+      'q3' : new FormControl(null,Validators.requiredTrue),
+
       
     
     })

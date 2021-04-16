@@ -9,5 +9,6 @@ export class Userstory{
         libelleUserStory:string;
         priorite:number;
         complexite:number;
+        etat:String;
         sprint: Sprint = new Sprint();
              }

@@ -8,6 +8,8 @@ import { Sprint } from 'src/app/models/sprint';
 import { UserstoryService } from 'src/app/services/userstory/userstory.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NotificationsService } from 'angular2-notifications';
+import { ValidationUserStoryComponent } from '../validation-user-story/validation-user-story.component';
+import { DialogvalidationUserStoryService } from 'src/app/services/validationUserStory/dialogvalidation-user-story.service';
 
 @Component({
   selector: 'app-userstory-update',
@@ -24,7 +26,7 @@ export class UserstoryUpdateComponent implements OnInit {
   messageS:String="User storie modifiée avec succèes";
   messageE:String="Modification du user storie est échouée";
   constructor(private sprintservice:SprintService,private route: ActivatedRoute, private router: Router,
-    private userstoryservice:UserstoryService, private _service: NotificationsService) { }
+    private userstoryservice:UserstoryService, private _service: NotificationsService, private dialogValidationuserstory:DialogvalidationUserStoryService) { }
   
   
   ngOnInit() {
@@ -35,9 +37,10 @@ export class UserstoryUpdateComponent implements OnInit {
       'priorite' : new FormControl('',[Validators.required,Validators.pattern("^(1|2|3|4)$")]),
       'complexite' : new FormControl('',[Validators.required,Validators.pattern("^(1|2|3|4|5|8|13|20|40|100)$")]),
       'nomProjet' : new FormControl('',Validators.required),
+      'etat' : new FormControl('',Validators.required),
 
     })
-    
+    this.etatArray=["Non terminé","Terminé"]
     this.id=this.route.snapshot.params['id'];
     this.userstoryservice.findUserstoryById(this.id)
     .subscribe(data=>{
@@ -82,6 +85,11 @@ reloadData(){
 sprintDetails(id:number){
   
   this.router.navigate(['sprints/details',id]);
+}
+onChangeEtat(event){
+  if(this.userstory.etat=='Terminé'){
+  this.dialogValidationuserstory.openConfirmDialogStory()
+}
 }
 
 }

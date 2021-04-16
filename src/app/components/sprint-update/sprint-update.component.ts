@@ -94,8 +94,6 @@ onSuccess(messageS){
       if(this.sprint.etatSprint=='Terminé'){
       this.dialogValidation.openConfirmDialog()
     }
-   
-  
     }
 
 }

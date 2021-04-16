@@ -63,6 +63,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { UpdatePWDComponent } from './components/update-pwd/update-pwd.component';
 import { ValidationSprintComponent } from './components/validation-sprint/validation-sprint.component';
+import { ValidationUserStoryComponent } from './components/validation-user-story/validation-user-story.component';
 
 @NgModule({
   declarations: [
@@ -103,6 +104,7 @@ import { ValidationSprintComponent } from './components/validation-sprint/valida
     NotFoundComponent,
     UpdatePWDComponent,
     ValidationSprintComponent,
+    ValidationUserStoryComponent,
     
   ],
   imports: [
@@ -138,6 +140,6 @@ import { ValidationSprintComponent } from './components/validation-sprint/valida
   ],
   bootstrap: [AppComponent],
   entryComponents:[AffectationTachesComponent,AjoutcommentaireComponent,UpdateCommentaireComponent,
-    ConfirmDialogComponent,ValidationSprintComponent]
+    ConfirmDialogComponent,ValidationSprintComponent,ValidationUserStoryComponent]
 })
 export class AppModule { }
